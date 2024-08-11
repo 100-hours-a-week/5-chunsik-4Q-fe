@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from 'react';
-import styles from './Demo.module.css';
+import styles from './demo.module.css';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { IoArrowBackSharp, IoArrowForwardSharp } from "react-icons/io5";
 
