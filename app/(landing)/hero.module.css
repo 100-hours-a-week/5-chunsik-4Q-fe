@@ -1,0 +1,74 @@
+@font-face {
+    font-family: 'TTHakgyoansimSamulhamR';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2402_keris@1.0/TTHakgyoansimSamulhamR.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.container {
+    width: 100%;
+    height: 100vh;
+    background-image: url('../../../assets/hero_bg8.svg');
+    background-size: 100% 100%;
+    background-position: center;
+    display: flex;
+    /*justify-content: center;*/
+    position: relative;
+    align-items: flex-start;
+
+    justify-content: flex-start;
+    /*background-color: red;*/
+    /*background-color: red;*/
+}
+
+.heading {
+    /*background-color: red;*/
+    /*position: absolute;*/
+    /*left: 40px;*/
+    /*top: 40px;*/
+    display: flex;
+    flex-direction: column;
+    padding: 35px;
+
+}
+
+.heading h1 {
+    font-size: calc(2.5rem + 1.5vw);
+    font-family: 'TTHakgyoansimSamulhamR', sans-serif;
+}
+
+.heading h2 {
+    font-size: calc(1.8rem + 1.5vw);
+    font-family: 'TTHakgyoansimSamulhamR', sans-serif;
+    color: white;
+    -webkit-text-stroke: 0.8px black;
+}
+
+.heading button {
+    width: 130px;
+    height: 40px;
+    color: white;
+    background-color: black;
+    font-size: 16px;
+    border-radius: 8px;
+    margin-top: 7px;
+
+}
+
+
+.buttonContainer {
+    position: absolute;
+    left: 40px;
+    top: 180px;
+}
+
+.buttonContainer button {
+    width: 150px;
+    height: 50px;
+    color: white;
+    background-color: black;
+    font-size: 18px;
+    border-radius: 8px;
+
+}
+

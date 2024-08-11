@@ -1,0 +1,118 @@
+/* Demo.module.css */
+.container {
+    max-width: 600px;
+    width: auto;
+    height: 100vh;
+    padding-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /*background-color: green;*/
+    position: relative;
+}
+
+.mockUpContainer {
+    position: absolute;
+    top: 47%;
+    transform: translateY(-50%);
+
+    z-index: 2
+}
+
+.mockUpContainer img {
+    height: 550px;
+
+}
+
+/*.swiper {*/
+/*    width: 100%;*/
+/*    height: 300px;*/
+/*}*/
+
+
+.swiper {
+    width: 260px;
+    /*여기서 세로 크기 조정하기*/
+    height: 530px;
+    border-radius: 50px;
+
+}
+
+.slideContainer {
+    /*width: 400px;*/
+    height: 800px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: grey;
+}
+
+.slideContainer2 {
+    /*width: 400px;*/
+    height: 800px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: red;
+}
+
+.slideContainer3 {
+    /*width: 400px;*/
+    height: 800px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: blue;
+}
+
+
+
+.navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+/*.navButton {*/
+/*    background-color: #007bff;*/
+/*    color: #fff;*/
+/*    border: none;*/
+/*    padding: 10px 20px;*/
+/*    cursor: pointer;*/
+/*    margin: 0 10px;*/
+/*    border-radius: 5px;*/
+/*}*/
+
+/*.pagination {*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*}*/
+
+
+
+
+.btnContainer {
+    width: 220px;
+    height: 60px;
+    display: flex;
+    background-color: #ffffff;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 30px;
+    border-radius: 30px;
+    padding:  0 10px;
+}
+
+.arrowBtn {
+    font-size: 20px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: #333333;
+}
