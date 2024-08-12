@@ -57,7 +57,7 @@ export default function Page() {
             <div ref={heroRef} className={styles.hero}>
                 <Hero />
             </div>
-            <div ref={introRef} className={styles.intro}>
+            <div ref={introRef} className={styles.intro}>ㅋ
                 {/*<Intro/>*/}
             </div>
             <div ref={demoRef} className={styles.demo}>

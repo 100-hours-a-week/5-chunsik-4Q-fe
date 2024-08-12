@@ -1,0 +1,32 @@
+.container {
+    /*width: 80%;*/
+    padding: 20px;
+    margin-top: 10px;
+}
+
+.btnContainer {
+    width: 100%;
+    /*background-color: red;*/
+    justify-content: center;
+    /*align-items: center;*/
+    padding-left: 30px;
+    margin-top: 20px;
+    position: relative;
+    /*justify-content: space-around;*/
+    /*justify-content: space-between;*/
+    /*align-content:space-between ;*/
+
+
+
+}
+
+/*.leftBtn {*/
+/*    position: fixed;*/
+/*    left: 10px;*/
+/*}*/
+
+/*.rightBtn {*/
+/*    position: fixed;*/
+/*    right: -200px;*/
+/*    background-color: #000;*/
+/*}*/

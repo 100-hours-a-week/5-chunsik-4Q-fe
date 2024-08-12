@@ -27,7 +27,7 @@ export default function Demo() {
     return (
         <div className={styles.container}>
             <div className={styles.mockUpContainer}>
-                <img src={mockup.src} alt="mockup" className={styles.mockup} />
+                <img src={mockup.src} alt="mockup" />
             </div>
             <Swiper
                 slidesPerView={1}

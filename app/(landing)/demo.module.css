@@ -14,8 +14,8 @@
 
 .mockUpContainer {
     position: absolute;
-    top: 46%;
-    transform: translateY(-46%);
+    top: 280px;
+    /*transform: translateY(-44%);*/
     z-index: 2
 }
 

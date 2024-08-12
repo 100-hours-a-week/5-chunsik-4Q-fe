@@ -1,36 +1,90 @@
 "use client"
 
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import Link from "next/link";
 import styles from './header.module.css'
 import logo from '../../public/images/logo.svg'
 import logo_white from '../../public/images/logo_white.svg'
 import { Slant as Hamburger } from 'hamburger-react';
+import { useRouter, usePathname } from "next/navigation";
+import { IoIosArrowBack } from "react-icons/io";
+
 
 export default function Header(){
     const [isOpen, setOpen] = useState<boolean>(false);
+    const [isBack, setBack] = useState<boolean>(false);
+    const [title, setTitle] = useState<string>('홈');
+    const router = useRouter();
+    const path = usePathname();
+
+    const titles = [
+        // { path: '/login', title: '로그인' },
+        { path: '/4q-create', title: '4Q 생성하기' },
+        { path: '/4q-gallery', title: '4Q 갤러리' },
+        { path: '/help-faq', title: '도움말/FAQ' },
+    ];
+
+
+    const handleBack = () => {
+        router.back();
+    };
+
+    const closeMenu = () => {
+        setOpen(false);
+    }
+
+    const checkBackPath = () => {
+        if (path === "/4q-create") {
+            setBack(true);
+        } else {
+            setBack(false);
+        }
+    }
+
+    const getTitleForPath = () => {
+        const matchedTitle = titles.find(item => item.path === path);
+        if (matchedTitle) {
+            setTitle(matchedTitle.title);
+        } else {
+            setTitle(''); // Default title if no match found
+        }
+    };
+
+    useEffect(() => {
+        checkBackPath();
+        getTitleForPath();
+    }, [path]);
 
     return (
         <div className={styles.container}>
-            <Link href="/">
-                <img src={logo.src} alt="Logo" className={styles.logo}/>
-            </Link>
+            {!isBack ?
+                <Link href="/">
+                    <img src={logo.src} alt="Logo" className={styles.logo}/>
+                </Link> :
+                <div className={styles.backBtn}>
+                    <a onClick={handleBack}><IoIosArrowBack/></a>
+                </div>
+            }
+            <div className={styles.title}>
+                {title}
+            </div>
             <div className={styles.hamburgerMenu}>
                 <div className={styles.hamburgerBorder}></div>
                 <Hamburger
                     toggled={isOpen}
                     size={20}
                     toggle={setOpen}
+                    // onToggle={handleClick}
                 />
             </div>
             <div className={`${styles.menu} ${isOpen ? styles.open : ''}`}>
                 <img src={logo_white.src} alt="Logo"/>
                 <ul>
-                    <li><Link href="/" data-replace="홈"><span>홈</span></Link></li>
-                    <li><Link href="/login" data-replace="로그인"><span>로그인</span></Link></li>
-                    <li><Link href="/4q-create" data-replace="4Q 생성하기"><span>4Q 생성하기</span></Link></li>
-                    <li><Link href="/4q-gallery" data-replace="4Q 갤러리"><span>4Q 갤러리</span></Link></li>
-                    <li><Link href="/help-faq" data-replace="도움말/FAQ"><span>도움말/FAQ</span></Link></li>
+                    <li><Link href="/" data-replace="홈" onClick={closeMenu}><span>홈</span></Link></li>
+                    <li><Link href="/login" data-replace="로그인" onClick={closeMenu}><span>로그인</span></Link></li>
+                    <li><Link href="/4q-create" data-replace="4Q 생성하기" onClick={closeMenu}><span>4Q 생성하기</span></Link></li>
+                    <li><Link href="/4q-gallery" data-replace="4Q 갤러리" onClick={closeMenu}><span>4Q 갤러리</span></Link></li>
+                    <li><Link href="/help-faq" data-replace="도움말/FAQ" onClick={closeMenu}><span>도움말/FAQ</span></Link></li>
                 </ul>
             </div>
         </div>
