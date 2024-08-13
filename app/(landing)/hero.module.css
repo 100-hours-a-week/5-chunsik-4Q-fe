@@ -32,8 +32,9 @@
 }
 
 .heading h1 {
-    font-size: calc(2.5rem + 1.5vw);
+    font-size: calc(2.8rem + 1.5vw);
     font-family: 'TTHakgyoansimSamulhamR', sans-serif;
+    margin: 0;
 }
 
 .heading h2 {
@@ -41,6 +42,7 @@
     font-family: 'TTHakgyoansimSamulhamR', sans-serif;
     color: white;
     -webkit-text-stroke: 0.8px black;
+    margin: 0;
 
 
 }

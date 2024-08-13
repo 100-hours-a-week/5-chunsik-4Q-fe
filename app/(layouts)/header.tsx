@@ -19,6 +19,8 @@ export default function Header(){
 
     const titles = [
         { path: '/login', title: '로그인' },
+        { path: '/login/email', title: '로그인' },
+        { path: '/signup/email', title: '회원가입' },
         { path: '/4q-create', title: '4Q 생성하기' },
         { path: '/4q-gallery', title: '4Q 갤러리' },
         { path: '/help-faq', title: '도움말/FAQ' },

@@ -1,41 +1,68 @@
-import Image from 'next/image';
-import Link from 'next/link';
+"use client";
+
+import React from 'react';
+import { Button, Checkbox, Form, Input} from 'antd';
+import type { FormProps } from 'antd';
 import styles from './page.module.css';
-import logo from '../../../public/images/logo.svg';
+
+type FieldType = {
+    username?: string;
+    password?: string;
+    remember?: boolean; // Make sure remember is a boolean since it relates to the checkbox
+};
+
+const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
+    console.log('Success:', values);
+};
+
+const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = (errorInfo) => {
+    console.log('Failed:', errorInfo);
+};
+const LoginForm: React.FC = () => {
+    return (
+        <Form
+            name="login"
+            style={{ maxWidth: 600 }}
+            initialValues={{ remember: true }}
+            onFinish={onFinish}
+            onFinishFailed={onFinishFailed}
+            autoComplete="off"
+        >
+            <Form.Item<FieldType>
+                name="username"
+                rules={[{ required: true, message: 'Please input your username!' }]}
+
+            >
+                <Input  variant="filled" placeholder="Username"  />
+            </Form.Item>
+
+            <Form.Item<FieldType>
+                name="password"
+                rules={[{ required: true, message: 'Please input your password!' }]}
+            >
+                <Input.Password  variant="filled" placeholder="Password"  />
+            </Form.Item>
+
+            <Form.Item<FieldType>
+                name="remember"
+                valuePropName="checked"
+            >
+                <Checkbox>Remember me</Checkbox>
+            </Form.Item>
+
+            <Form.Item>
+                <Button type="primary" htmlType="submit" >
+                    Submit
+                </Button>
+            </Form.Item>
+        </Form>
+    );
+};
 
 export default function Page() {
     return (
         <div className={styles.container}>
-            <div className={styles.logoContainer}>
-                <Image src={logo} alt="logo_black" className={styles.logoImg} />
-            </div>
-            <div className={styles.signupContainer}>
-                <div className={styles.fastBuble}>
-                    <div className={styles.fastSignup}>
-                        5초만에 빠른 회원가입
-                    </div>
-                    <div className={styles.polygon}></div>
-                </div>
-
-
-                <button className={styles.kakaoButton}>
-
-                    {/*<span className={styles.kakaoIcon}></span>*/}
-                    카카오톡으로 시작하기
-                </button>
-                <div className={styles.emailOptions}>
-                    <Link href="/login" className={styles.emailLink}>
-                        이메일로 로그인
-                    </Link>
-                    <span className={styles.separator}>|</span>
-                    <Link href="/signup" className={styles.emailLink}>
-                        이메일로 회원가입
-                    </Link>
-                </div>
-                <div className={styles.laterSignup}>
-                    나중에 가입할래요
-                </div>
-            </div>
+            <LoginForm />
         </div>
     );
 }

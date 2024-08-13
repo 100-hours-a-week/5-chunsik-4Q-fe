@@ -162,3 +162,7 @@ button {
 li  {
   list-style-type: none;
 }
+
+h1, h2 {
+  margin-top: 0;
+}

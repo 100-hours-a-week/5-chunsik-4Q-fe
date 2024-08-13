@@ -15,11 +15,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 60px;
+    margin: 70px;
 }
 
 .logoImg {
-    width: 60%;
+    width: 50%;
 }
 
 
@@ -43,8 +43,14 @@
     flex-direction: column;
     align-items: center;
     margin-bottom: 5px;
+    animation: bounce 2s ease infinite;
 }
 
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+    40% {transform: translateY(-15px);}
+    60% {transform: translateY(-10px);}
+}
 
 .fastSignup {
     background-color: #ff7f50;
@@ -76,18 +82,21 @@
     justify-content: center;
     margin-bottom: 20px;
     cursor: pointer;
+    position: relative;
 }
 
 .kakaoIcon {
-    width: 24px;
-    height: 24px;
+    width: 22px;
+    height: 22px;
     margin-right: 8px;
+    position: absolute;
+    left: 5%;
 }
 
 .emailOptions {
     display: flex;
     justify-content: center;
-    margin-bottom: 20px;
+    margin-top: 15px;
     font-size: 13px;
 
 
@@ -95,13 +104,14 @@
 
 .emailLink {
     color: #000;
-    margin: 0 10px;
+    margin: 0 15px;
     text-decoration: underline;
     text-underline-position: under;
 }
 
 .separator {
     margin: 0 10px;
+    color: #b0b0b0;
 }
 
 .laterSignup {
