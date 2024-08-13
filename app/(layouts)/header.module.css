@@ -39,7 +39,7 @@
     width: 100%;
     justify-content: flex-start;
     align-items: flex-start;
-    background-color: red;
+    /*background-color: red;*/
 }
 
 .logo:hover {

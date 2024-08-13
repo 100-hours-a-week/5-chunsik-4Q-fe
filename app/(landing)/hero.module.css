@@ -29,7 +29,6 @@
     display: flex;
     flex-direction: column;
     padding: 35px;
-
 }
 
 .heading h1 {
@@ -42,6 +41,8 @@
     font-family: 'TTHakgyoansimSamulhamR', sans-serif;
     color: white;
     -webkit-text-stroke: 0.8px black;
+
+
 }
 
 .heading button {
@@ -88,4 +89,60 @@
 
 .tryBtn:hover {
     text-decoration: none;
+}
+
+
+/*hero images =============>*/
+.imgContainer {
+
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+/*메뉴판 ===========>*/
+.img1 {
+    padding: 12px;
+    position: absolute;
+    top: 16%;
+    right: 8%;
+    z-index: 1;
+    border-radius: 16px;
+}
+
+.img1 img{
+    /*width: 160px;*/
+    width: calc(5rem + 6.2vw);
+
+
+}
+
+/*콘서트 ===========>*/
+.img2 {
+    padding: 15px;
+    position: absolute;
+    top: 30%;
+    left: 30%;
+}
+
+.img2 img{
+    /*width: 200px;*/
+    width: calc(10rem + 7vw);
+    height: auto;
+
+}
+
+/*청첩장 =============>*/
+.img3 {
+    padding: 12px;
+    position: absolute;
+    top: 44%;
+    left: 12%;
+}
+
+.img3 img{
+    /*width: 200px;*/
+    width: calc(4rem + 4vw);
+    height: auto;
+
 }

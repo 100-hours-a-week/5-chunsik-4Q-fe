@@ -37,6 +37,10 @@ export default function Demo() {
             {/*<div className={styles.mockUpContainer}>*/}
             {/*<img src={mockup.src} alt="mockup" />*/}
             {/*</div>*/}
+            <div className={styles.subTitle}>
+                <span>포토큐알</span>
+                <div className={styles.highliter}>예시</div>
+            </div>
 
             <Swiper
                 slidesPerView={1}

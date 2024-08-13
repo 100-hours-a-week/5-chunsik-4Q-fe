@@ -11,6 +11,10 @@ img {
   background-color: black;
 } */
 
+:root {
+  --primary-color: #FF5B0F;
+}
+
 button {
   border: none;
   outline: none;

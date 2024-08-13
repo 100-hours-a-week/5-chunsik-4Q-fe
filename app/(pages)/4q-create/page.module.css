@@ -11,32 +11,26 @@
 
 .btnContainer {
     width: 100%;
-    /*background-color: red;*/
+    height: 80px;
     align-items: center;
-    padding-left: 30px;
+    /*padding-left: 30px;*/
     margin-top: 20px;
-    /*position: relative;*/
-    justify-content: center;
-    /*justify-content: space-around;*/
+    justify-content: flex-start;
+    text-align: center;
 
+    display: flex;
+    flex-direction: column;
 }
 
-.leftBtn {
-    margin-right: auto; /* 왼쪽 버튼은 왼쪽 정렬 */
+.nextBtn {
+    background-color: #000 !important;
+    color: #fff !important;
+    width: 80px;
+    /*height: 70px;*/
 }
 
-.rightBtn {
-    background-color: #000 !important; /* 버튼 배경을 검정색으로 */
-    color: #fff !important; /* 텍스트 색상을 흰색으로 */
+.prevBtn {
+    color: #bdbdbd !important;
+    font-size: 12px;
+    margin-top: 5px;
 }
-
-/*.leftBtn {*/
-/*    position: fixed;*/
-/*    left: 10px;*/
-/*}*/
-
-/*.rightBtn {*/
-/*    position: fixed;*/
-/*    right: -200px;*/
-/*    background-color: #000;*/
-/*}*/

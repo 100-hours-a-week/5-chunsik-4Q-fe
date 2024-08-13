@@ -32,7 +32,7 @@ export default function Page() {
                             setBgColor('#ffffff');
                             break;
                         case demoRef.current:
-                            setBgColor('#EBE7E0');
+                            setBgColor('#F5F6F4');
                             break;
                         case introRef2.current:  // Added condition for the second intro section
                             setBgColor('lightblue');

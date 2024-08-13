@@ -12,13 +12,13 @@ import { IoIosArrowBack } from "react-icons/io";
 
 export default function Header(){
     const [isOpen, setOpen] = useState<boolean>(false);
-    const [isBack, setBack] = useState<boolean>(false);
+    const [isLogo, setLogo] = useState<boolean>(false);
     const [title, setTitle] = useState<string>('홈');
     const router = useRouter();
     const path = usePathname();
 
     const titles = [
-        // { path: '/login', title: '로그인' },
+        { path: '/login', title: '로그인' },
         { path: '/4q-create', title: '4Q 생성하기' },
         { path: '/4q-gallery', title: '4Q 갤러리' },
         { path: '/help-faq', title: '도움말/FAQ' },
@@ -33,11 +33,19 @@ export default function Header(){
         setOpen(false);
     }
 
-    const checkBackPath = () => {
-        if (path === "/4q-create") {
-            setBack(true);
-        } else {
-            setBack(false);
+    // const checkBackPath = () => {
+    //     if (path === "/4q-create") {
+    //         setBack(true);
+    //     } else {
+    //         setBack(false);
+    //     }
+    // }
+
+    const checkLogo = () => {
+        if (path === "/") {
+            setLogo(true);
+        }else {
+            setLogo(false);
         }
     }
 
@@ -51,19 +59,19 @@ export default function Header(){
     };
 
     useEffect(() => {
-        checkBackPath();
+        checkLogo();
         getTitleForPath();
     }, [path]);
 
     return (
         <div className={styles.container}>
-            {!isBack ?
-                <Link href="/">
-                    <img src={logo.src} alt="Logo" className={styles.logo}/>
-                </Link> :
+            {!isLogo ?
                 <div className={styles.backBtn}>
                     <a onClick={handleBack}><IoIosArrowBack/></a>
-                </div>
+                </div> :
+                <Link href="/">
+                    <img src={logo.src} alt="Logo" className={styles.logo}/>
+                </Link>
             }
             <div className={styles.title}>
                 {title}

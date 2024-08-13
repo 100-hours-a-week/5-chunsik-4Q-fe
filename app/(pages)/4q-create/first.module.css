@@ -9,3 +9,11 @@
     text-align: left;
     padding-left: 10px;
 }
+
+.formItem .ant-form-item-explain {
+    text-align: left !important;
+}
+
+.field {
+    width: 100%;
+}

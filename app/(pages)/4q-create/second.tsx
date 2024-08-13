@@ -3,6 +3,7 @@ import useEmblaCarousel from 'embla-carousel-react';
 import styles from './second.module.css';
 import mock from '../../../public/images/mock_4q.png';
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import { FaDice } from "react-icons/fa6";
 
 export default function Second() {
     const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, skipSnaps: false });
@@ -29,12 +30,10 @@ export default function Second() {
 
     return (
         <div className={styles.container}>
-
-
             <div className={styles.sliderContainer} ref={emblaRef}>
 
                 <div className={styles.emblaContainer}>
-                    {[...Array(3)].map((_, idx) => (
+                    {[...Array(4)].map((_, idx) => (
                         <div
                             key={idx}
                             className={`${styles.emblaSlide} ${idx === selectedIndex ? styles.activeSlide : styles.inactiveSlide}`}
@@ -54,6 +53,11 @@ export default function Second() {
                 {/*        />*/}
                 {/*    ))}*/}
                 {/*</div>*/}
+            </div>
+            <div className={styles.randomBtnContainer}>
+                <button className={styles.randomBtn}>
+                    <FaDice /><span>3</span>
+                </button>
             </div>
 
         </div>

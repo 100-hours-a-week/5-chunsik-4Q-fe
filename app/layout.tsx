@@ -13,6 +13,9 @@ export const metadata: Metadata = {
     default: "4Q",
   },
   description: '포토 큐알 자동 생성 서비스',
+    icons: {
+        icon: "/favicon.png",
+    },
 }
 
 const config: ThemeConfig = {

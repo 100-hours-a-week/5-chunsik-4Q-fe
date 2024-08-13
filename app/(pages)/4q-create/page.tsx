@@ -11,12 +11,17 @@ export default function Page() {
     const [current, setCurrent] = useState(0);
     const formRef = useRef<any>(null);
 
-    // Define the next function first
+    // Function to move to the next step
     const next = () => {
         setCurrent(current + 1);
     };
 
-    // Define the steps array after declaring the next function
+    // Function to move to the previous step
+    const prev = () => {
+        setCurrent(current - 1);
+    };
+
+    // Define the steps array
     const steps = [
         {
             title: '정보입력',
@@ -34,10 +39,6 @@ export default function Page() {
             buttonText: '4Q 생성',
         },
     ];
-
-    const onChange = (value: number) => {
-        setCurrent(value);
-    };
 
     const handleButtonClick = () => {
         if (current === 0 && formRef.current) {
@@ -63,7 +64,6 @@ export default function Page() {
         <div className={styles.container}>
             <Steps
                 current={current}
-                onChange={onChange}
                 items={items}
                 responsive={false}
                 size='small'
@@ -76,10 +76,19 @@ export default function Page() {
                 <Button
                     type="primary"
                     onClick={handleButtonClick}
-                    className={styles.rightBtn}
+                    className={styles.nextBtn}
                 >
                     {steps[current].buttonText}
                 </Button>
+                {current > 0 && (
+                    <Button
+                        type="link"
+                        onClick={prev}
+                        className={styles.prevBtn}
+                    >
+                        이전 단계로
+                    </Button>
+                )}
             </div>
         </div>
     );
