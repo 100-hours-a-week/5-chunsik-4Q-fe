@@ -2,7 +2,7 @@
 .container {
     max-width: 600px;
     width: auto;
-    height: 100vh;
+    height: 800px;
     padding-top: 30px;
     display: flex;
     flex-direction: column;
@@ -12,16 +12,24 @@
     position: relative;
 }
 
-.mockUpContainer {
+/*.mockUpContainer {*/
+/*    position: absolute;*/
+/*    top: 60px;*/
+/*    !*transform: translateY(-44%);*!*/
+/*    z-index: 2*/
+/*}*/
+
+/*.mockUpContainer img {*/
+
+/*    top: 60px;*/
+/*}*/
+
+.mockupImg {
+    /*height: 550px;*/
     position: absolute;
-    top: 280px;
-    /*transform: translateY(-44%);*/
-    z-index: 2
-}
-
-.mockUpContainer img {
+    top: -30%;
     height: 550px;
-
+    z-index: 2
 }
 
 /*.swiper {*/
@@ -33,18 +41,23 @@
 .swiper {
     width: 260px;
     /*여기서 세로 크기 조정하기*/
-    height: 530px;
+    height: 540px;
     border-radius: 50px;
+    position: absolute;
+    top: -49%;
+    background-color: red;
+
 
 }
 
 .slideContainer {
     /*width: 400px;*/
-    height: 800px;
+    /*height: 800px;*/
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: grey;
+    height: 600px;
 }
 
 .slideContainer2 {
@@ -93,15 +106,18 @@
 
 
 .btnContainer {
+    position: absolute;
+    top: 350px;
     width: 220px;
     height: 60px;
     display: flex;
     background-color: #ffffff;
     align-items: center;
     justify-content: space-between;
-    margin-top: 30px;
+    /*margin-top: 30px;*/
     border-radius: 30px;
     padding:  0 10px;
+    /*margin-bottom: 120px;*/
 }
 
 .arrowBtn {
