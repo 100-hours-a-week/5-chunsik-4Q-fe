@@ -1,0 +1,64 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    /*align-items: center;*/
+    justify-content: flex-start;
+    height: 100%;
+    position: relative;
+    /*margin-top: 20px;*/
+    padding: 50px;
+    /*background-color: red;*/
+}
+
+.bold {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.normal {
+    font-size: 22px;
+    font-weight: 400;
+}
+
+.nickname {
+    margin-bottom: 10px;
+}
+
+.email {
+    margin: 20px 0 10px 0;
+}
+
+.linkList {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    font-size: 20px;
+}
+
+
+
+.icon {
+    margin-right: 5px;
+}
+
+.arrowContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.arrowIcon {
+    font-size: 28px;
+}
+
+.logoutContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: 15%;
+    left:50%;
+    transform:translateX(-50%);
+
+}

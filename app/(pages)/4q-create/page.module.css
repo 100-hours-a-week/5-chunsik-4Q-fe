@@ -25,7 +25,7 @@
 .nextBtn {
     background-color: #000 !important;
     color: #fff !important;
-    width: 80px;
+    /*width: 80px !important;*/
     /*height: 70px;*/
 }
 

@@ -1,0 +1,28 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    /*height: 100vh;*/
+    /*position: relative;*/
+    margin-top: 20px;
+}
+
+.inputField {
+    height: 50px;
+    width: 100%;
+}
+
+.emailValidationContainer {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    /*background-color: red;*/
+    justify-content: space-between;
+    /*align-items: flex-end;*/
+}
+
+.submitBtn {
+    background-color: #000 !important;
+    width: 100%;
+}

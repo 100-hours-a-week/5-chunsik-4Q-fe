@@ -3,8 +3,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    height: 100vh;
-    background-color: #ffffff;
+    /*height: 100vh;*/
     position: relative;
     margin-top: 150px;
 }

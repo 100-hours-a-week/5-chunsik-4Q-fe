@@ -77,6 +77,7 @@ export default function Page() {
                     type="primary"
                     onClick={handleButtonClick}
                     className={styles.nextBtn}
+                    style={{ height: '40px', width: '140px' }}
                 >
                     {steps[current].buttonText}
                 </Button>

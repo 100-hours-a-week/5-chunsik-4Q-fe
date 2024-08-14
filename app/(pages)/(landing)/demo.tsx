@@ -11,12 +11,12 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-import mockup from '../../public/images/mockup.svg'
-import concert from '../../public/images/mock/concert.png'
-import entrance from '../../public/images/mock/entrance.png'
-import restaurant from '../../public/images/mock/restaurant.png'
-import exhibition from '../../public/images/mock/exhibition.png'
-import wedding from '../../public/images/mock/wedding.png'
+import mockup from '../../../public/images/mockup.svg'
+import concert from '../../../public/images/mock/concert.png'
+import entrance from '../../../public/images/mock/entrance.png'
+import restaurant from '../../../public/images/mock/restaurant.png'
+import exhibition from '../../../public/images/mock/exhibition.png'
+import wedding from '../../../public/images/mock/wedding.png'
 
 
 export default function Demo() {

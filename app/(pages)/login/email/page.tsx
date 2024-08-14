@@ -54,7 +54,7 @@ export default function Page() {
                 </Form.Item>
 
                 <Form.Item>
-                    <Button type="primary" htmlType="submit" className={styles.submitBtn}>
+                    <Button type="primary" htmlType="submit" className={styles.submitBtn}  style={{ height: '50px' }} >
                         로그인
                     </Button>
                 </Form.Item>

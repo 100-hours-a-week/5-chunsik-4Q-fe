@@ -24,6 +24,9 @@ export default function Header(){
         { path: '/4q-create', title: '4Q 생성하기' },
         { path: '/4q-gallery', title: '4Q 갤러리' },
         { path: '/help-faq', title: '도움말/FAQ' },
+        { path: '/mypage', title: '마이페이지' },
+        { path: '/mypage/my-4q', title: '나의 4Q' },
+        { path: '/mypage/liked-4q', title: '좋아요한 4Q' },
     ];
 
 

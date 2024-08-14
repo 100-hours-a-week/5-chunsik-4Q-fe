@@ -15,7 +15,7 @@
 .subTitle {
     /*width: 100%;*/
     position: absolute;
-    font-size: 26px;
+    font-size: 24px;
     top: 4%;
     z-index: 10;
     display: flex;
