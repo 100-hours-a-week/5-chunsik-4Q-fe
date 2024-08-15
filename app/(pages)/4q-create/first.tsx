@@ -1,8 +1,15 @@
-import React from 'react';
-import { Form, Select, Input } from 'antd';
+"use client";
+
+import React, {useRef, useState} from 'react';
+import { Form, Select, Input, Modal } from 'antd';
+import { DownOutlined } from '@ant-design/icons';
 import styles from './first.module.css';
+import type { InputRef } from 'antd';
+import TagSelector from './tagSelectModal';
 
 const { Option } = Select;
+
+const MAX_COUNT = 3;
 
 interface FirstProps {
     formRef: React.RefObject<any>;
@@ -10,9 +17,39 @@ interface FirstProps {
 }
 
 export default function First({ formRef, onSubmit }: FirstProps) {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [value, setValue] = useState<string[]>([]);
+    const inputRef = useRef<InputRef>(null);
+
+    const suffix = (
+        <>
+            <span>
+                {value.length} / {MAX_COUNT}
+            </span>
+            <DownOutlined />
+        </>
+    );
+
     const handleFinish = (values: any) => {
         console.log('Form values:', values);
         onSubmit();  // Trigger the callback to move to the next step
+    };
+
+    const handleOpenModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+    };
+
+    const handleTagSelection = (selectedTags: string[]) => {
+        setValue(selectedTags);
+        handleCloseModal();
+    };
+
+    const handleTagDeselect = (tag: string) => {
+        setValue(value.filter(t => t !== tag));
     };
 
     return (
@@ -50,14 +87,36 @@ export default function First({ formRef, onSubmit }: FirstProps) {
                 >
                     <Input placeholder="URL 입력" variant="filled" className={styles.field} />
                 </Form.Item>
+                <Form.Item>
+                    <Select
+                        mode="multiple"
+                        value={value}
+                        style={{ width: '100%' }}
+                        onClick={handleOpenModal}
+                        onDeselect={handleTagDeselect} // Handle tag deselection
+                        suffixIcon={suffix}
+                        variant="filled"
+                        className={styles.field}
+                        placeholder="태그를 선택해주세요."
+                        dropdownRender={() => <></>} // Disable the default dropdown
+                    >
+                        {value.map(tag => (
+                            <Option key={tag} value={tag}>
+                                {tag}
+                            </Option>
+                        ))}
+                    </Select>
+                </Form.Item>
             </Form>
+
+            <Modal
+                title=""
+                visible={isModalOpen}
+                onCancel={handleCloseModal}
+                footer={null}
+            >
+                <TagSelector selectedTags={value} onSelect={handleTagSelection} />
+            </Modal>
         </div>
     );
 }
-
-
-{/*<Form.Item>*/}
-{/*    <Button type="primary" htmlType="submit">*/}
-{/*        생성하기*/}
-{/*    </Button>*/}
-{/*</Form.Item>*/}
