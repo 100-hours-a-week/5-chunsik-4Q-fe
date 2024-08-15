@@ -22,6 +22,7 @@ export default function Header(){
         { path: '/login/email', title: '로그인' },
         { path: '/signup/email', title: '회원가입' },
         { path: '/4q-create', title: '4Q 생성하기' },
+        { path: '/4q-create/download', title: '4Q 다운로드' },
         { path: '/4q-gallery', title: '4Q 갤러리' },
         { path: '/help-faq', title: '도움말/FAQ' },
         { path: '/mypage', title: '마이페이지' },
@@ -97,7 +98,7 @@ export default function Header(){
                     <li><Link href="/login" data-replace="로그인" onClick={closeMenu}><span>로그인</span></Link></li>
                     <li><Link href="/4q-create" data-replace="4Q 생성하기" onClick={closeMenu}><span>4Q 생성하기</span></Link></li>
                     <li><Link href="/4q-gallery" data-replace="4Q 갤러리" onClick={closeMenu}><span>4Q 갤러리</span></Link></li>
-                    <li><Link href="/help-faq" data-replace="도움말/FAQ" onClick={closeMenu}><span>도움말/FAQ</span></Link></li>
+                    <li><Link href="/help-faq" data-replace="피드백주기" onClick={closeMenu}><span>피드백주기</span></Link></li>
                 </ul>
             </div>
         </div>

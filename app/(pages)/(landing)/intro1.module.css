@@ -1,0 +1,40 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 20px 0;
+    align-items: center;
+}
+
+.title {
+    font-size: calc(1rem + 0.8vw);
+    margin-bottom: 25px;
+}
+
+.subTitle {
+    font-size: calc(0.7rem + 0.4vw);
+    color: var(--grey-color);
+    word-break:break-all;
+    line-height: 1.6;
+}
+
+.tryBtn {
+    width: 140px;
+    height: 38px;
+    color: white;
+    background-color: black;
+    font-size: 16px;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+
+@media (min-width: 800px) {
+    .container {
+        margin-top: 100px;
+    }
+}

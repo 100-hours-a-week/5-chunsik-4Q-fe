@@ -1,4 +1,5 @@
 .container {
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -6,11 +7,13 @@
     /*height: 100vh;*/
     /*position: relative;*/
     margin-top: 20px;
+
 }
 
 .inputField {
     height: 50px;
     width: 100%;
+
 }
 
 .emailValidationContainer {
@@ -20,9 +23,16 @@
     /*background-color: red;*/
     justify-content: space-between;
     /*align-items: flex-end;*/
+
+}
+
+.btnContainer {
+    width: 100%;
+
 }
 
 .submitBtn {
     background-color: #000 !important;
     width: 100%;
 }
+

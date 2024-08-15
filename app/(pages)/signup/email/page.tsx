@@ -105,9 +105,11 @@ const SignupForm: React.FC = () => {
                     <Divider/>
 
                     <Form.Item wrapperCol={{span: 18}}>
-                        <Button type="primary" htmlType="submit" style={{height: '50px', width: '100%'}} className={styles.submitBtn}>
+                        <div className={styles.btnContainer}>
+                        <Button type="primary" htmlType="submit" style={{height: '50px'}} className={styles.submitBtn}>
                             동의하고 가입하기
                         </Button>
+                        </div>
                     </Form.Item>
             </Form>
         </div>

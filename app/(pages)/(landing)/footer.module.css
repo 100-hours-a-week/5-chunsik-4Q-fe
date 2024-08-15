@@ -1,0 +1,14 @@
+.container {
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.logo {
+    width: 60px;
+    filter:grayscale(100%) opacity(0.8);
+}

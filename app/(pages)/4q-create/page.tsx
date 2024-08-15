@@ -2,14 +2,20 @@
 
 import React, { useRef, useState } from 'react';
 import { Button, Steps, message, theme } from 'antd';
+import { useRouter } from 'next/navigation'
 import styles from './page.module.css';
 import First from './first';
 import Second from "./second";
+import Third from "./third";
+
+
+import {router} from "next/client";
 
 export default function Page() {
     const { token } = theme.useToken();
     const [current, setCurrent] = useState(0);
     const formRef = useRef<any>(null);
+    const router = useRouter();
 
     // Function to move to the next step
     const next = () => {
@@ -35,7 +41,7 @@ export default function Page() {
         },
         {
             title: 'QR 위치조정',
-            content: 'Last-content',
+            content: <Third />,
             buttonText: '4Q 생성',
         },
     ];
@@ -46,7 +52,8 @@ export default function Page() {
         } else if (current < steps.length - 1) {
             next();
         } else {
-            message.success('Processing complete!');
+            message.success('포큐 생성 완료!');
+            router.push('/4q-create/download');
         }
     };
 
