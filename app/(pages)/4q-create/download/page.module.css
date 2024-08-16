@@ -42,6 +42,10 @@
 
 .mainBtn {
     color: #bdbdbd !important;
-    font-size: 12px;
+    font-size: 14px;
     margin-top: 40px
+}
+
+.mainBtn:hover {
+    text-decoration: none;
 }

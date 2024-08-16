@@ -87,10 +87,10 @@ export default function Page() {
                     style={{ height: '40px', width: '140px' }}
                 >
                     {steps[current].buttonText}
-                </Button>
+                </Button >
                 {current > 0 && (
                     <Button
-                        type="link"
+                        type="text"
                         onClick={prev}
                         className={styles.prevBtn}
                     >

@@ -3,9 +3,9 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    height: 100vh;
+    /*height: 100vh;*/
     background-color: #ffffff;
-    position: relative;
+    /*position: relative;*/
 }
 
 
@@ -117,7 +117,7 @@
 .laterSignup {
     color: #b0b0b0;
     font-size: 14px;
-    /*margin-top: 180px;*/
-    position: absolute;
-    bottom: 20%;
+    margin-top: 180px;
+    /*position: absolute;*/
+    /*bottom: 20%;*/
 }

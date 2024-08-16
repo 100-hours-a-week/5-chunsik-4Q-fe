@@ -1,11 +1,29 @@
-import styles from './page.module.css'
-import { Image, Button } from 'antd';
+"use client";
+
+import styles from './page.module.css';
+import { Image, Button, Modal } from 'antd';
 import { LuDownload } from "react-icons/lu";
 import { BiSolidShareAlt } from "react-icons/bi";
-import result from '../../../../public/images/mock/exhibition.png'
+import result from '../../../../public/images/mock/exhibition.png';
+import { useState } from "react";
+import ShareModal from '../(modals)/shareModal';
 
 
-export default function page() {
+export default function Page() {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const showModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const handleOk = () => {
+        setIsModalOpen(false);
+    };
+
+    const handleCancel = () => {
+        setIsModalOpen(false);
+    };
+
     return (
         <div className={styles.container}>
             <div className={styles.photoContainer}>
@@ -23,15 +41,24 @@ export default function page() {
                 <Button type="primary" icon={<LuDownload />} size="large" className={styles.downloadBtn}>
                     다운로드
                 </Button>
-                <Button type="primary" icon={<BiSolidShareAlt />} size="large" className={styles.shareBtn}/>
+                <Button onClick={showModal} type="primary" icon={<BiSolidShareAlt />} size="large" className={styles.shareBtn}>
+                    공유하기
+                </Button>
             </div>
             <Button
-                type="link"
+                type="text"
                 href="/"
                 className={styles.mainBtn}
             >
                 메인으로 가기
             </Button>
+
+            {/* Include the ShareModal component */}
+            <ShareModal
+                isModalOpen={isModalOpen}
+                handleOk={handleOk}
+                handleCancel={handleCancel}
+            />
         </div>
     );
 }

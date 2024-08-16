@@ -48,7 +48,7 @@ export default function Header(){
     // }
 
     const checkLogo = () => {
-        if (path === "/") {
+        if (path === "/" || "/feeback") {
             setLogo(true);
         }else {
             setLogo(false);
@@ -98,7 +98,7 @@ export default function Header(){
                     <li><Link href="/login" data-replace="로그인" onClick={closeMenu}><span>로그인</span></Link></li>
                     <li><Link href="/4q-create" data-replace="4Q 생성하기" onClick={closeMenu}><span>4Q 생성하기</span></Link></li>
                     <li><Link href="/4q-gallery" data-replace="4Q 갤러리" onClick={closeMenu}><span>4Q 갤러리</span></Link></li>
-                    <li><Link href="/help-faq" data-replace="피드백주기" onClick={closeMenu}><span>피드백주기</span></Link></li>
+                    <li><Link href="/feedback" data-replace="피드백주기" onClick={closeMenu}><span>피드백주기</span></Link></li>
                 </ul>
             </div>
         </div>

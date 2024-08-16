@@ -1,0 +1,17 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+
+}
+
+.container img {
+    margin-top: 40px;
+    width: 200px;
+}
+
+.container div {
+    margin-top: 20px;
+}

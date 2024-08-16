@@ -8,7 +8,7 @@ import styles from './page.module.css';
 const plainOptions = ['(필수) 본인은 만 14세 이상입니다', '(필수) 서비스 이용약관 동의', '(필수) 개인정보 수집 및 이용 동의'];
 const defaultCheckedList = ['(필수) 본인은 만 14세 이상입니다'];
 
-const SignupForm: React.FC = () => {
+export default function Signup() {
     const [checkedList, setCheckedList] = useState<string[]>(defaultCheckedList);
 
     const checkAll = plainOptions.length === checkedList.length;
@@ -42,7 +42,7 @@ const SignupForm: React.FC = () => {
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
                 autoComplete="off"
-                layout="vertical" // input 위에 label이 위치하도록 설정
+                layout="vertical"
             >
 
                 <Form.Item
@@ -56,13 +56,15 @@ const SignupForm: React.FC = () => {
 
                 <div className={styles.emailValidationContainer}>
                     <Form.Item
-                        // label="이메일 인증번호"
                         name="emailVerification"
                         rules={[{required: true, message: '이메일 인증 번호를 입력해주세요.'}]}
                     >
-                        <Input placeholder="이메일 인증 번호를 입력해주세요." className={styles.inputField}/>
+                        <Input
+                            placeholder="인증 번호 (6자리)"
+                            className={styles.inputField}
+                        />
                     </Form.Item>
-                    <Button type="default" style={{marginLeft: '10px', height: '50px'}}>
+                    <Button type="default" style={{marginLeft: '10px', height: '50px', width: '120px'}}>
                         이메일 인증하기
                     </Button>
                 </div>
@@ -103,12 +105,13 @@ const SignupForm: React.FC = () => {
                     <Divider/>
                     <Checkbox.Group options={plainOptions} value={checkedList} onChange={onChange}/>
                     <Divider/>
+                <Button type="primary" htmlType="submit" style={{height: '50px'}} className={styles.submitBtn}>
+                    동의하고 가입하기
+                </Button>
 
                     <Form.Item wrapperCol={{span: 18}}>
                         <div className={styles.btnContainer}>
-                        <Button type="primary" htmlType="submit" style={{height: '50px'}} className={styles.submitBtn}>
-                            동의하고 가입하기
-                        </Button>
+
                         </div>
                     </Form.Item>
             </Form>
@@ -116,4 +119,3 @@ const SignupForm: React.FC = () => {
 );
 };
 
-export default SignupForm;

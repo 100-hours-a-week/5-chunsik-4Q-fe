@@ -12,3 +12,9 @@
     width: 60px;
     filter:grayscale(100%) opacity(0.8);
 }
+
+.text {
+    font-size: 14px;
+    color: #CCCCCC;
+    margin: 10px;
+}

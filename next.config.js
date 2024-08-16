@@ -13,7 +13,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     reactStrictMode: true,
-    // swcMinify: true,
+    swcMinify: true,
     assetPrefix: '',
     experimental: { esmExternals: true },
     transpilePackages: ["antd", "@ant-design"], // Uncomment if needed
