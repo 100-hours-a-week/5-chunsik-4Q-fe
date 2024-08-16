@@ -5,7 +5,6 @@ import styles from './third.module.css';
 import mock from '../../../public/images/mock_4q.png';
 import qr from '../../../public/images/qr.png';
 import Konva from "konva";
-import isDragging = Konva.isDragging;
 
 export default function Third() {
     const [qrPosition, setQrPosition] = useState({ x: 50, y: 50 });
@@ -41,7 +40,6 @@ export default function Third() {
         }
     }, [qrImage, isSelected]);
 
-
     return (
         <div className={styles.container} >
             <div className={styles.subTitle}>
@@ -69,14 +67,22 @@ export default function Third() {
                                 onDragEnd={handleDragEnd}
                                 onClick={() => setSelected(!isSelected)}
                                 ref={qrImageRef}
-                                // scaleX={isDragging ? 1.2 : 1}
-                                // scaleY={isDragging ? 1.2 : 1}
+                                onMouseEnter={() => {
+                                    if (stageRef.current) {
+                                        stageRef.current.container().style.cursor = 'move';
+                                    }
+                                }}
+                                onMouseLeave={() => {
+                                    if (stageRef.current) {
+                                        stageRef.current.container().style.cursor = 'default';
+                                    }
+                                }}
                             />
                             {isSelected && (
                                 <Transformer
-                                    enabledAnchors={['top-left', 'top-right', 'bottom-left',  'bottom-right']}
+                                    enabledAnchors={['top-left', 'top-right', 'bottom-left', 'bottom-right']}
                                     ref={transformerRef}
-                                    rotateEnabled={false} // 회전 불가능하게 설정
+                                    rotateEnabled={false}
                                     keepRatio={true}
                                     boundBoxFunc={(oldBox, newBox) => {
                                         const boxSize = Math.max(newBox.width, newBox.height);
@@ -100,5 +106,3 @@ export default function Third() {
         </div>
     );
 }
-
-
