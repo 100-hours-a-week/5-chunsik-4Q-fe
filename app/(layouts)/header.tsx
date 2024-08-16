@@ -28,6 +28,7 @@ export default function Header(){
         { path: '/mypage', title: '마이페이지' },
         { path: '/mypage/my-4q', title: '나의 4Q' },
         { path: '/mypage/liked-4q', title: '좋아요한 4Q' },
+        { path: '/feedback', title: '피드백' },
     ];
 
 
@@ -48,7 +49,7 @@ export default function Header(){
     // }
 
     const checkLogo = () => {
-        if (path === "/" || "/feeback") {
+        if (path === "/" ) {
             setLogo(true);
         }else {
             setLogo(false);

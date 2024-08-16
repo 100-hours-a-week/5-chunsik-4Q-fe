@@ -42,7 +42,7 @@ export default function Page() {
                     showCount
                     maxLength={200}
                     // onChange={onChange}
-                    placeholder="추가로 4Q에게 하고 싶은 말씀이 있으신가요?"
+                    placeholder="추가로 하고 싶은 말씀이 있으신가요?"
                     style={{ height: 120, width: '80%', resize: 'none' }}
                 />
                 <Button type="primary" className={styles.submitBtn} size="middle">제출하기</Button>
