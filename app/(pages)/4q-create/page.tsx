@@ -74,7 +74,7 @@ export default function Page() {
                 items={items}
                 responsive={false}
                 size='small'
-                className={styles.steps}
+                // className={styles.steps}
             />
             <div style={contentStyle} className={styles.contentContainer}>
                 {steps[current].content}

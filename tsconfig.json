@@ -25,6 +25,9 @@
         "name": "next"
       }
     ],
+    "paths": {
+      "@/*": ["./src/*"] 
+    },
     "strictNullChecks": true
   },
   "ts-node": {

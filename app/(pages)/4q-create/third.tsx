@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useRef, useState, useEffect } from 'react';
 import { Stage, Layer, Image, Transformer, Text } from 'react-konva';
 import { ColorPicker, Button } from 'antd';

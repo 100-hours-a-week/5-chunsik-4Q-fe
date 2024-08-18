@@ -16,36 +16,20 @@ const nextConfig = {
     swcMinify: true,
     assetPrefix: '',
     experimental: { esmExternals: true },
-    transpilePackages: ["antd", "@ant-design"], // Uncomment if needed
-    // webpack(config, { dev, isServer }) {
-    //     config.module.rules.push({
-    //         test: /\.(ts|tsx)$/,
-    //         exclude: /node_modules/,
-    //         use: [
-    //             {
-    //                 loader: 'babel-loader',
-    //                 options: {
-    //                     presets: [
-    //                         'next/babel',
-    //                         '@babel/preset-typescript',
-    //                         '@wyw-in-js/babel-preset' // Ensure this is correctly installed
-    //                     ],
-    //                 },
-    //             },
-    //             {
-    //                 loader: '@wyw-in-js/webpack-loader', // Ensure this is correctly installed
-    //                 options: {
-    //                     sourceMap: dev,
-    //                 },
-    //             },
-    //         ],
-    //     });
-    //
-    //     return config;
-    // },
+    transpilePackages: [ 'antd', '@ant-design', 'rc-util', 'rc-pagination', 'rc-picker', 'rc-notification', 'rc-tooltip' ],
+    webpack: (config) => {
+        config.resolve.alias.canvas = false;
+        config.module.rules.push({
+            test: /\.node$/,
+            use: 'raw-loader',
+        });
+
+        return config;
+    },
 };
 
 export default nextConfig;
+
 
 // export default nextConfig;
 // const nextConfig = {

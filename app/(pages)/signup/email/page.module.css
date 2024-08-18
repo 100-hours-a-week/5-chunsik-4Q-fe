@@ -16,6 +16,53 @@
 
 }
 
+.emailcontainer {
+    position: relative;
+}
+
+.emailValiContainer {
+    position: relative;
+}
+
+.emailBtn {
+    height: 30px;
+    font-size: 12px;
+    background-color: #e3e3e3;
+    border-radius: 8px;
+    padding: 0 12px;
+    position: absolute;
+    top: 10px;
+    right: 14px;
+}
+
+.timerContainer {
+    position: absolute;
+    top: 16px;
+    right: 66px;
+    font-size: 12px;
+    color: #b0b0b0;
+}
+
+.emailValiBtn {
+    height: 30px;
+    font-size: 12px;
+    background-color: #e3e3e3;
+    border-radius: 8px;
+    padding: 0 12px;
+    position: absolute;
+    top: 10px;
+    right: 14px;
+}
+
+.emailBtn:hover{
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
+}
+
+.emailValiBtn:hover{
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
+}
+
+
 .emailValidationContainer {
     display: flex;
     flex-direction: row;
