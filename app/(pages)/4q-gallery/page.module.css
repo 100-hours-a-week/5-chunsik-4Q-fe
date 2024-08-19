@@ -9,9 +9,25 @@
 
 .container img {
     margin-top: 40px;
-    width: 200px;
+    width: 300px;
 }
 
 .container div {
     margin-top: 20px;
+}
+
+.title {
+    font-size: 18px;
+    color: var(--grey-color);
+}
+
+.orange {
+    color: var(--primary-color);
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.subTitle {
+    font-size: 16x;
+    color: rgb(116, 116, 116);
 }

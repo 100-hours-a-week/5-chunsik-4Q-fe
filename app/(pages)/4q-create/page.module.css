@@ -1,4 +1,5 @@
 .container {
+    height: 100vh;
     /*width: 80%;*/
     padding: 20px;
     margin-top: 10px;
@@ -15,15 +16,13 @@
     height: 80px;
     align-items: center;
     /*padding-left: 30px;*/
-    margin-top: 40px;
+    /* margin-top: 40px; */
     justify-content: flex-start;
     text-align: center;
-
     display: flex;
     flex-direction: column;
-
     position: fixed;
-    bottom: 16%;
+    bottom: 20%;
     left: 50%;
     transform: translateX(-50%);
 }
