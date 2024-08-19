@@ -4,7 +4,7 @@ import styles from './page.module.css';
 import { Image, Button, Modal } from 'antd';
 import { LuDownload } from "react-icons/lu";
 import { BiSolidShareAlt } from "react-icons/bi";
-import result from '../../../../public/images/mock/exhibition.png';
+import result from '../../../../public/images/mock/concert.png';
 import { useState } from "react";
 import ShareModal from '../(modals)/shareModal';
 

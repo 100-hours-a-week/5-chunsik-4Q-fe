@@ -53,7 +53,7 @@ export default function Third() {
     const addText = () => {
         const newText: TextNode = {
             id: textNodes.length ? Math.max(...textNodes.map(node => node.id)) + 1 : 1,
-            text: 'Edit Me',
+            text: ' 챈 잘생겼다',
             x: 50,
             y: 50,
             fontSize: 20,

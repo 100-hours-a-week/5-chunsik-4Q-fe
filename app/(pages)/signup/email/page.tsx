@@ -20,7 +20,7 @@ export default function Signup() {
     const [timerCount, setTimerCount] = useState(180);
     const [buttonText, setButtonText] = useState("이메일 인증");
     const [verificationCode, setVerificationCode] = useState("");
-    const [verifyButtonColor, setVerifyButtonColor] = useState("gray");
+    const [verifyButtonColor, setVerifyButtonColor] = useState("");
 
     const checkAll = plainOptions.length === checkedList.length;
     const indeterminate =
