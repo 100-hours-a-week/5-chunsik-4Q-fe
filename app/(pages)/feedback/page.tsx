@@ -84,15 +84,14 @@ export default function Page() {
           name="feedback_form"
           onFinish={onFinish}
           initialValues={{
-            frequency: "하루에 한 번",
-            easeOfUse: "보통이다",
-            designSatisfaction: "보통",
-            performanceSatisfaction: "보통",
-            functionProperly: "네",
-            recommend: "네",
-            continueUse: "네",
-            ageGroup: "20대",
-            gender: "남성",
+            easeOfUse: "",
+            designSatisfaction: "",
+            performanceSatisfaction: "",
+            functionProperly: "",
+            recommend: "",
+            continueUse: "",
+            ageGroup: "",
+            gender: "",
           }}
           style={{ marginTop: 20, width: '80%' }}
         >
@@ -149,6 +148,7 @@ export default function Page() {
           <Form.Item
             name="recommend"
             label="이 제품을 다른 사람에게 추천하시겠습니까?"
+            
           >
             <Radio.Group>
               <Radio.Button value="네">네</Radio.Button>
@@ -194,14 +194,13 @@ export default function Page() {
         />
           </Form.Item>
 
-          <Form.Item >
-            <Space>
+          <div className={styles.btnContainer}>
               <Button type="primary" htmlType="submit">
                 제출하기
               </Button>
-              <Button htmlType="reset">초기화</Button>
-            </Space>
-          </Form.Item>
+              <Button htmlType="reset" style={{marginLeft: '10px'}}>초기화</Button>
+              </div>
+          
         </Form>
         <Link href="/" className={styles.navigateHome}>
           홈으로 이동

@@ -55,7 +55,11 @@
 
     position: absolute;
     top: 114px;
+
+    cursor: pointer;
 }
+
+
 
 .mockupImg {
     /*height: 550px;*/

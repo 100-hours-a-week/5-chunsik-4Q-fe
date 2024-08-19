@@ -6,6 +6,7 @@
     /*height: 100vh;*/
     background-color: #ffffff;
     /*position: relative;*/
+    overflow: hidden;
 }
 
 
@@ -121,4 +122,10 @@
     margin-top: 180px;
     /*position: absolute;*/
     /*bottom: 20%;*/
+}
+
+@media (max-width: 410px) {
+    .laterSignup {
+        margin-top: 70px;
+    }
 }

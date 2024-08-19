@@ -5,6 +5,7 @@ import styles from './demo.module.css';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import type { Swiper as SwiperType } from 'swiper';
 import { IoArrowBackSharp, IoArrowForwardSharp } from "react-icons/io5";
+import Link from 'next/link';
 
 import { Navigation } from 'swiper/modules';
 import 'swiper/css';
@@ -41,9 +42,10 @@ export default function Demo() {
                 <span>포토큐알</span>
                 <div className={styles.highliter}>예시</div>
             </div>
-            <button className={styles.allBtn}>
-                전체보기
-            </button>
+            <Link href="/about" className={styles.allBtn}>
+            전체보기
+            {/* <a className={styles.allBtn}>전체보기</a> */}
+            </Link>
 
 
             <Swiper
