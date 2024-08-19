@@ -2,6 +2,7 @@
     /*width: 80%;*/
     padding: 20px;
     margin-top: 10px;
+    /* position: relative; */
 }
 
 .contentContainer {
@@ -14,12 +15,17 @@
     height: 80px;
     align-items: center;
     /*padding-left: 30px;*/
-    margin-top: 30px;
+    margin-top: 40px;
     justify-content: flex-start;
     text-align: center;
 
     display: flex;
     flex-direction: column;
+
+    position: fixed;
+    bottom: 16%;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .nextBtn {
@@ -34,3 +40,9 @@
     font-size: 12px;
     margin-top: 5px;
 }
+
+@media (min-width: 800px) {
+    .btnContainer {
+        bottom: 38%;
+    }
+  }

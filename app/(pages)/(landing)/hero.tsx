@@ -29,5 +29,3 @@ export default function Hero() {
     );
 }
 
-
-// <Link href="/about"><a>About me</a></Link>

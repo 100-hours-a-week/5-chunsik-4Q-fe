@@ -95,12 +95,12 @@ export default function Third() {
             </div>
             <div className={styles.canvasContainer}>
                 <div className={styles.backgroundContainer}>
-                    <Stage width={240} height={360} ref={stageRef} x={-5} y={-2}>
+                    <Stage width={300} height={300} ref={stageRef} >
                         <Layer>
                             <Image
                                 image={backgroundImage}
-                                width={250}
-                                height={360}
+                                width={300}
+                                height={300}
                                 // x={30}
                                 // y={20}
                                 onClick={() => setSelected(!isSelected)}

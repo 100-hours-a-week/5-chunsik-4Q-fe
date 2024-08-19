@@ -8,11 +8,6 @@ import step1_icon from '../../../public/images/icon/step1_icon.png';
 import step2_icon from '../../../public/images/icon/step2_icon.png';
 import step3_icon from '../../../public/images/icon/step3_icon.png';
 
-// import gsap from 'gsap';
-// import { ScrollTrigger } from 'gsap/ScrollTrigger';
-//
-// gsap.registerPlugin(ScrollTrigger);
-
 export default function Intro() {
 
     return (
