@@ -62,3 +62,9 @@
     transform:translateX(-50%);
 
 }
+
+@media (max-width: 410px) {
+    .linkList {
+        padding: 16px 2px;
+    }
+}

@@ -3,8 +3,10 @@ import 'antd/dist/reset.css';
 import { AntdRegistry } from '@ant-design/nextjs-registry';
 import {ConfigProvider, ThemeConfig} from 'antd';  // ConfigProvider 추가
 import { Metadata } from "next"
+import Head from 'next/head';
 import Header from './(layouts)/header'
 import styles from './layout.module.css'
+
 
 export const metadata: Metadata = {
   title: {
@@ -32,6 +34,9 @@ export default function RootLayout({
 }) {
   return (
       <html lang="en">
+        <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+      </Head>
       <body className={styles.container}>
       <AntdRegistry>
           <ConfigProvider

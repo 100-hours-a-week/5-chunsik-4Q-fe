@@ -5,7 +5,7 @@ import { Form, Select, Input, Modal } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 import styles from './first.module.css';
 import type { InputRef } from 'antd';
-import TagSelector from './(modals)/tagSelectModal';
+import TagSelector from '../(modals)/tagSelectModal';
 
 const { Option } = Select;
 

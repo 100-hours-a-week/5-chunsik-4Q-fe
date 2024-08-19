@@ -1,27 +1,18 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Form, Input, Button, Checkbox, Divider, AutoComplete } from "antd";
-import type { CheckboxChangeEvent } from "antd/es/checkbox";
+import { Form, Input, Button, AutoComplete, message } from "antd";
 import type { AutoCompleteProps } from "antd";
 import styles from "./page.module.css";
-
-const plainOptions = [
-    "(필수) 본인은 만 14세 이상입니다",
-    "(필수) 서비스 이용약관 동의",
-    "(필수) 개인정보 수집 및 이용 동의",
-];
-const defaultCheckedList = ["(필수) 본인은 만 14세 이상입니다"];
+import { requestEmailVerification } from "../../../../service/api";
 
 export default function Signup() {
-    const [checkedList, setCheckedList] = useState<string[]>(defaultCheckedList);
     const [email, setEmail] = useState("");
     const [isEmailValid, setIsEmailValid] = useState(false);
     const [isTimerActive, setIsTimerActive] = useState(false);
     const [timerCount, setTimerCount] = useState(180);
     const [buttonText, setButtonText] = useState("이메일 인증");
     const [verificationCode, setVerificationCode] = useState("");
-    const [verifyButtonColor, setVerifyButtonColor] = useState("");
     const [options, setOptions] = useState<AutoCompleteProps['options']>([]);
 
     const handleSearch = (value: string) => {
@@ -36,49 +27,25 @@ export default function Signup() {
         });
     };
 
-    const checkAll = plainOptions.length === checkedList.length;
-    const indeterminate =
-        checkedList.length > 0 && checkedList.length < plainOptions.length;
-
-    const onChange = (list: string[]) => {
-        setCheckedList(list);
-    };
-
-    const onCheckAllChange = (e: CheckboxChangeEvent) => {
-        setCheckedList(e.target.checked ? plainOptions : []);
-    };
-
-    const onFinish = (values: any) => {
-        console.log("Success:", values);
-    };
-
-    const onFinishFailed = (errorInfo: any) => {
-        console.log("Failed:", errorInfo);
-    };
-
     const handleEmailChange = (value: string) => {
         setEmail(value);
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         setIsEmailValid(emailPattern.test(value));
     };
 
-    const handleEmailVerification = () => {
+    const handleEmailVerification = async () => {
         if (isEmailValid) {
-            setButtonText("이메일 재전송");
-            setIsTimerActive(true);
-            setTimerCount(180); // Reset timer to 3 minutes
-        }
-    };
-
-    const handleVerificationCodeChange = (
-        e: React.ChangeEvent<HTMLInputElement>
-    ) => {
-        const code = e.target.value;
-        setVerificationCode(code);
-        if (/^\d{6}$/.test(code)) {
-            setVerifyButtonColor("var(--primary-color)"); // Change button color to primary color if code is 6 digits
+            try {
+                await requestEmailVerification(email);
+                message.success("이메일 인증 요청이 전송되었습니다.");
+                setButtonText("이메일 재전송");
+                setIsTimerActive(true);
+                setTimerCount(180); // 타이머를 3분으로 초기화
+            } catch (error) {
+                message.error(error.message || "이메일 인증 요청에 실패했습니다.");
+            }
         } else {
-            setVerifyButtonColor("#e3e3e3"); // Reset color if it's not 6 digits
+            message.error("유효한 이메일을 입력해주세요.");
         }
     };
 
@@ -100,6 +67,14 @@ export default function Signup() {
         return `${minutes.toString().padStart(2, "0")}:${seconds
             .toString()
             .padStart(2, "0")}`;
+    };
+
+    const onFinish = (values: any) => {
+        console.log("Success:", values);
+    };
+
+    const onFinishFailed = (errorInfo: any) => {
+        console.log("Failed:", errorInfo);
     };
 
     return (
@@ -126,7 +101,7 @@ export default function Signup() {
                         onSearch={handleSearch}
                         onChange={handleEmailChange}
                         value={email}
-                        style={{ width: '100%' }}
+                        style={{ width: '100%', height: '50px' }}
                     >
                         <Input
                             placeholder="example@example.com"
@@ -151,26 +126,29 @@ export default function Signup() {
                     rules={[{ required: true, message: "이메일 인증 번호를 입력해주세요." }]}
                     className={styles.emailValiContainer}
                 >
-                    <Input
-                        placeholder="인증번호 6자리를 입력해주세요."
-                        className={styles.inputField}
+                    <div className={styles.valiTitle}><span className={styles.red}>*</span> 이메일 인증번호</div>
+                    <Input.OTP
+                    
+                        length={6}
                         value={verificationCode}
-                        onChange={handleVerificationCodeChange}
+                        onChange={setVerificationCode}
+                        className={styles.inputField}
                     />
-                    {isTimerActive && (
-                        <div className={styles.timerContainer}>
-                            <span>{formatTime(timerCount)}</span>
-                        </div>
-                    )}
+                    
                     <button
                         className={styles.emailValiBtn}
                         style={{
-                            backgroundColor: verifyButtonColor,
-                            color: verifyButtonColor === "var(--primary-color)" ? "white" : "",
+                            backgroundColor: verificationCode.length === 6 ? "var(--primary-color)" : "#e3e3e3",
+                            color: verificationCode.length === 6 ? "white" : "",
                         }}
                     >
                         확인
                     </button>
+                    {isTimerActive && (
+                        <span className={styles.timerContainer}>
+                          {formatTime(timerCount)}
+                        </span>
+                    )}
                 </Form.Item>
 
                 <Form.Item
@@ -206,18 +184,6 @@ export default function Signup() {
                     />
                 </Form.Item>
 
-                <Checkbox
-                    indeterminate={indeterminate}
-                    onChange={onCheckAllChange}
-                    checked={checkAll}
-                    style={{ margin: "10px 0" }}
-                >
-                    약관 전체 동의
-                </Checkbox>
-
-                <Divider />
-                <Checkbox.Group options={plainOptions} value={checkedList} onChange={onChange} />
-                <Divider />
                 <Button
                     type="primary"
                     htmlType="submit"

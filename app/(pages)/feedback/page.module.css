@@ -4,21 +4,14 @@
     align-items: center;
     position: relative;
     justify-content: center;
-    padding: 40px;
-
-
-}
-
-.container img {
-    margin-top: 20px;
-    width: 50%;
+    padding: 15px;
 
 }
 
 .feedbackForm {
     position: absolute;
     top: 80%;
-    padding: 30px 10px;
+    padding: 20px 5px;
     width: 88%;
     background-color: #fff;
     border-radius: 16px;
@@ -32,7 +25,7 @@
 
 .title {
     font-size: 15px;
-    margin: 20px;
+    margin: 15px;
 }
 
 .rateForm {

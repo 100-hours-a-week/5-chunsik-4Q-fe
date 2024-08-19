@@ -4,12 +4,12 @@ import React, { useRef, useState } from 'react';
 import { Button, Steps, message, theme } from 'antd';
 import { useRouter } from 'next/navigation'
 import styles from './page.module.css';
-import First from './first';
-import Second from "./second";
-import Third from "./third";
+import First from './_components/first';
+import Second from "./_components/second";
+import Third from "./_components/third";
 
 
-import {router} from "next/client";
+// import {router} from "next/client";
 
 export default function Page() {
     const { token } = theme.useToken();
@@ -69,6 +69,7 @@ export default function Page() {
 
     return (
         <div className={styles.container}>
+           
             <Steps
                 current={current}
                 items={items}

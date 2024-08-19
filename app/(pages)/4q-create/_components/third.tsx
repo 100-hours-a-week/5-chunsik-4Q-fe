@@ -5,11 +5,12 @@ import { Stage, Layer, Image, Transformer, Text } from 'react-konva';
 import { ColorPicker, Button } from 'antd';
 import { useImage } from 'react-konva-utils';
 import styles from './third.module.css';
-import mock from '../../../public/images/mock_4q.png';
-import qr from '../../../public/images/qr.png';
+import mock from '../../../../public/images/mock_4q.png';
+import qr from '../../../../public/images/qr.png';
 import Konva from "konva";
 import { PiTextT, PiTextTBold } from "react-icons/pi";
 import { HiTrash } from "react-icons/hi";
+
 
 interface TextNode {
     id: number;
