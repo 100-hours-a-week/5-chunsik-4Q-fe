@@ -39,7 +39,9 @@
     "sharp": "^0.33.4",
     "slick-carousel": "^1.8.1",
     "styled-components": "^6.1.12",
-    "swiper": "^11.1.9"
+    "swiper": "^11.1.9",
+    "vite": "^5.4.1",
+    "zustand": "^4.5.5"
   },
   "devDependencies": {
     "@svgr/webpack": "^8.1.0",

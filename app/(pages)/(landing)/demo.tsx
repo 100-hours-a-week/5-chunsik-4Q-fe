@@ -41,6 +41,10 @@ export default function Demo() {
                 <span>포토큐알</span>
                 <div className={styles.highliter}>예시</div>
             </div>
+            <button className={styles.allBtn}>
+                전체보기
+            </button>
+
 
             <Swiper
                 slidesPerView={1}
@@ -57,30 +61,30 @@ export default function Demo() {
 
                 <SwiperSlide>
                     <div className={styles.slideContainer}>
-                        <img src={concert.src} alt="concertExample" className={styles.exampleImg}/>
+                        <img src={concert.src} alt="concertExample" />
                         {/*<div className={styles.slideImg}></div>*/}
                     </div>
                 </SwiperSlide>
                 <SwiperSlide>
                     <div className={styles.slideContainer}>
-                        <img src={entrance.src} alt="entranceExample" className={styles.exampleImg}/>
+                        <img src={entrance.src} alt="entranceExample"/>
                         {/*<div className={styles.slideImg}></div>*/}
                     </div>
                 </SwiperSlide>
                 <SwiperSlide>
                     <div className={styles.slideContainer}>
-                        <img src={restaurant.src} alt="restaurantExample" className={styles.exampleImg}/>
+                        <img src={restaurant.src} alt="restaurantExample"/>
                         {/*<div className={styles.slideImg}></div>*/}
                     </div>
                 </SwiperSlide>
                 <SwiperSlide>
                     <div className={styles.slideContainer}>
-                        <img src={exhibition.src} alt="exhibitionExample" className={styles.exampleImg}/>
+                        <img src={exhibition.src} alt="exhibitionExample"/>
                     </div>
                 </SwiperSlide>
                 <SwiperSlide>
                     <div className={styles.slideContainer}>
-                        <img src={wedding.src} alt="weddingExample" className={styles.exampleImg}/>
+                        <img src={wedding.src} alt="weddingExample"/>
                     </div>
                 </SwiperSlide>
 

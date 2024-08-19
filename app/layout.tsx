@@ -1,4 +1,3 @@
-
 import './global.css'
 import 'antd/dist/reset.css';
 import { AntdRegistry } from '@ant-design/nextjs-registry';
