@@ -103,7 +103,7 @@ export default function Second() {
                 {/*</div>*/}
             </div>
             <div className={styles.randomBtnContainer}>
-                <Button
+                {/* <Button
                     type="primary"
                     icon={<FaDice style={{ fontSize: '20px' }} />}
                     loading={loadings[1]}
@@ -111,7 +111,7 @@ export default function Second() {
                     className={styles.randomBtn}
                 >
                     3
-                </Button>
+                </Button> */}
             </div>
         </div>
     );

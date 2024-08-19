@@ -8,6 +8,9 @@ import step1_icon from '../../../public/images/icon/step1_icon.png';
 import step2_icon from '../../../public/images/icon/step2_icon.png';
 import step3_icon from '../../../public/images/icon/step3_icon.png';
 
+import Link from 'next/link';
+
+
 export default function Intro() {
 
     return (
@@ -19,9 +22,9 @@ export default function Intro() {
                 바로 사용할 수 있는 포토큐알, 1분이면 충분해요. <br />
                 AI가 어울리는 이미지를 제작해줄거에요.
             </div>
-            <button className={styles.tryBtn}>
+            <Link href="/4q-create" className={styles.tryBtn}>
                 4Q 생성하러가기
-            </button>
+            </Link>
 
             <div className={styles.stepsContainer}>
                 <div className={styles.title}>

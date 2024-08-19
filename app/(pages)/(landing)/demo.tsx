@@ -42,7 +42,7 @@ export default function Demo() {
                 <span>포토큐알</span>
                 <div className={styles.highliter}>예시</div>
             </div>
-            <Link href="/about" className={styles.allBtn}>
+            <Link href="/4q-gallery" className={styles.allBtn}>
             전체보기
             {/* <a className={styles.allBtn}>전체보기</a> */}
             </Link>

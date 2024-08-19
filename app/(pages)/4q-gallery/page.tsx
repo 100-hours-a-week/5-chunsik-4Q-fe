@@ -1,5 +1,5 @@
 import styles from './page.module.css'
-import construction from '../../../../public/images/construction.png'
+import construction from '../../../public/images/construction.png'
 
 export default function Page() {
     return (
