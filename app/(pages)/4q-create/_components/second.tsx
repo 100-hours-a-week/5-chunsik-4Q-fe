@@ -68,7 +68,7 @@ export default function Second() {
                     style={{ width: 400, height: 400 }}
                 />
                 <div className={styles.loadingText}>
-                    잠시만 기다려주세요. 4Q가 생성중입니다.
+                    잠시만 기다려주세요. 배경이미지가 생성중입니다.
                 </div>
             </div>
         );
@@ -77,7 +77,7 @@ export default function Second() {
     return (
         <div className={styles.container}>
             <div className={styles.subTitle}>
-                QR의 위치를 선택해주세요.
+                배경 이미지를 선택해주세요.
             </div>
             <div className={styles.sliderContainer} ref={emblaRef}>
                 <div className={styles.emblaContainer}>

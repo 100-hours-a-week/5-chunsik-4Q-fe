@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { Form, Input, Button, AutoComplete, message } from "antd";
 import type { AutoCompleteProps } from "antd";
 import styles from "./page.module.css";
-import { requestEmailVerification } from "../../../../service/api";
+import { requestEmailVerification, verifyEmailCode } from "../../../../service/auth_api";
 
 export default function Signup() {
     const [email, setEmail] = useState("");
@@ -48,6 +48,21 @@ export default function Signup() {
             message.error("유효한 이메일을 입력해주세요.");
         }
     };
+
+    const handleCodeVerification = async () => {
+        if (verificationCode.length === 6) {
+            try {
+                const result = await verifyEmailCode(email, verificationCode);
+                message.success("이메일 인증이 완료되었습니다.");
+                setIsTimerActive(false); // Stop the timer
+            } catch (error) {
+                message.error(error.message || "이메일 인증에 실패했습니다.");
+            }
+        } else {
+            message.error("6자리 인증번호를 입력해주세요.");
+        }
+    };
+
 
     useEffect(() => {
         if (isTimerActive && timerCount > 0) {
@@ -141,6 +156,8 @@ export default function Signup() {
                             backgroundColor: verificationCode.length === 6 ? "var(--primary-color)" : "#e3e3e3",
                             color: verificationCode.length === 6 ? "white" : "",
                         }}
+                        onClick={handleCodeVerification}
+                        type="button"
                     >
                         확인
                     </button>

@@ -69,7 +69,6 @@ export default function Page() {
 
     return (
         <div className={styles.container}>
-           
             <Steps
                 current={current}
                 items={items}
