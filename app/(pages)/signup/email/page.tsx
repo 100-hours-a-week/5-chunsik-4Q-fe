@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Form, Input, Button, Checkbox, Divider } from "antd";
+import { Form, Input, Button, Checkbox, Divider, AutoComplete } from "antd";
 import type { CheckboxChangeEvent } from "antd/es/checkbox";
+import type { AutoCompleteProps } from "antd";
 import styles from "./page.module.css";
 
 const plainOptions = [
@@ -21,6 +22,19 @@ export default function Signup() {
     const [buttonText, setButtonText] = useState("이메일 인증");
     const [verificationCode, setVerificationCode] = useState("");
     const [verifyButtonColor, setVerifyButtonColor] = useState("");
+    const [options, setOptions] = useState<AutoCompleteProps['options']>([]);
+
+    const handleSearch = (value: string) => {
+        setOptions(() => {
+            if (!value || value.includes('@')) {
+                return [];
+            }
+            return ['gmail.com', 'naver.com', 'daum.net', 'nate.com', 'outlook.com'].map((domain) => ({
+                label: `${value}@${domain}`,
+                value: `${value}@${domain}`,
+            }));
+        });
+    };
 
     const checkAll = plainOptions.length === checkedList.length;
     const indeterminate =
@@ -42,11 +56,10 @@ export default function Signup() {
         console.log("Failed:", errorInfo);
     };
 
-    const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const emailValue = e.target.value;
-        setEmail(emailValue);
+    const handleEmailChange = (value: string) => {
+        setEmail(value);
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        setIsEmailValid(emailPattern.test(emailValue));
+        setIsEmailValid(emailPattern.test(value));
     };
 
     const handleEmailVerification = () => {
@@ -108,12 +121,18 @@ export default function Signup() {
                     rules={[{ required: true, message: "이메일을 입력해주세요." }]}
                     className={styles.emailcontainer}
                 >
-                    <Input
-                        placeholder="example@example.com"
-                        className={styles.inputField}
-                        value={email}
+                    <AutoComplete
+                        options={options}
+                        onSearch={handleSearch}
                         onChange={handleEmailChange}
-                    />
+                        value={email}
+                        style={{ width: '100%' }}
+                    >
+                        <Input
+                            placeholder="example@example.com"
+                            className={styles.inputField}
+                        />
+                    </AutoComplete>
                     <button
                         className={styles.emailBtn}
                         style={{

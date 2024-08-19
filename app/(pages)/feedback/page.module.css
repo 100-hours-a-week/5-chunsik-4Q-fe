@@ -4,6 +4,7 @@
     align-items: center;
     position: relative;
     justify-content: center;
+    padding: 40px;
 
 
 }
@@ -31,7 +32,7 @@
 
 .title {
     font-size: 15px;
-    margin-bottom: 12px;
+    margin: 20px;
 }
 
 .rateForm {
@@ -55,7 +56,31 @@
 
 .submitBtn {
     background-color: #000 !important;
+    margin-top: 30px;
+}
+
+
+.checkIcon {
+    font-size: 100px;
+    color: var(--primary-color);
+}
+
+/* .homeBtn {
+    background-color: #000 !important;
+    margin-top: 10px;
+} */
+
+.homeBtn {
+    padding: 10px 14px;
+    background-color: #000;
     margin-top: 20px;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.homeBtn:hover {
+    color: grey;
+
 }
 
 

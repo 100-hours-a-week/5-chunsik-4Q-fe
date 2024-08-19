@@ -1,13 +1,20 @@
 "use client"
 
-import styles from './page.module.css'
-import feedback from '../../../public/images/feedback.png'
-// import { FrownOutlined, MehOutlined, SmileOutlined } from '@ant-design/icons';
+import { useState } from 'react';
+import styles from './page.module.css';
+// import feedback from '../../../public/images/feedback.png';
 import { FaRegFaceAngry, FaRegFaceFrown, FaRegFaceMeh, FaRegFaceSmile, FaRegFaceKissWinkHeart } from "react-icons/fa6";
-import { Rate, Input, Button  } from 'antd';
+// import { IoIosCheckmarkCircle } from "react-icons/io";
+import { Rate, Input, Button, Modal, Result } from 'antd';
 import Link from "next/link";
 
 const { TextArea } = Input;
+
+const modalSubTitle = (
+    <p>
+        시간을 내어 의견을 보내주셔서 감사합니다. <br /> 더 나은 4Q 개선을 위해 최선을 다하겠습니다.
+    </p>
+);
 
 const customIcons: Record<number, React.ReactNode> = {
     1: <FaRegFaceAngry />,
@@ -17,17 +24,31 @@ const customIcons: Record<number, React.ReactNode> = {
     5: <FaRegFaceKissWinkHeart />,
 };
 
-
 export default function Page() {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const showModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const handleOk = () => {
+        setIsModalOpen(false);
+    };
+
+    const handleCancel = () => {
+        setIsModalOpen(false);
+    };
+
     return (
-        <div className={styles.container}>
-            <img src={feedback.src} alt="feedback_image" />
-            <div className={styles.feedbackForm}>
+        <>
+            <div className={styles.container}>
+                {/* <img src={feedback.src} alt="feedback_image" /> */}
+                {/* <div className={styles.feedbackForm}> */}
                 <div className={styles.title}>
                     4Q 서비스 이용에 얼마나 만족하셨나요?
                 </div>
                 <div className={styles.rateForm}>
-                <Rate defaultValue={3} character={({ index = 0 }) => customIcons[index + 1]} style={{ fontSize: 34 }}/>
+                    <Rate defaultValue={3} character={({ index = 0 }) => customIcons[index + 1]} style={{ fontSize: 34 }} />
                     <div className={styles.rateText}>
                         <div className={styles.rateScore}>
                             매우 불만족
@@ -36,7 +57,6 @@ export default function Page() {
                             매우 만족
                         </div>
                     </div>
-
                 </div>
                 <TextArea
                     showCount
@@ -45,12 +65,26 @@ export default function Page() {
                     placeholder="추가로 하고 싶은 말씀이 있으신가요?"
                     style={{ height: 120, width: '80%', resize: 'none' }}
                 />
-                <Button type="primary" className={styles.submitBtn} size="middle">제출하기</Button>
+                <Button type="primary" onClick={showModal} className={styles.submitBtn} size="middle">제출하기</Button>
                 <Link href="/" className={styles.navigateHome}>
                     홈으로 이동
                 </Link>
+                {/* </div> */}
             </div>
-
-        </div>
+            <Modal open={isModalOpen} onOk={handleOk} onCancel={handleCancel} footer={null}>
+                <Result
+                    status="success"
+                    title="피드백이 성공적으로 제출되었습니다!"
+                    subTitle={modalSubTitle}
+                    // icon={<IoIosCheckmarkCircle className={styles.checkIcon}/>}
+                    extra={[
+                        // <Button type="primary" key="console"  onClick={handleOk} className={styles.homeBtn}>
+                        //     홈으로 이동
+                        // </Button>,
+                        <Link href="/" className={styles.homeBtn}>홈으로 이동</Link>
+                    ]}
+                />
+            </Modal>
+        </>
     );
 }
