@@ -13,8 +13,6 @@ export default function Footer() {
                 </div>
             <div className={styles.text}>Copyright &#9426; qqqq.world</div>
             </div>
-            
-            
         </div>
     );
 }
