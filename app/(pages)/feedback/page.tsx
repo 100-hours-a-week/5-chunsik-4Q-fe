@@ -18,10 +18,9 @@ import {
   Form,
   Select,
   Radio,
-  Space,
 } from 'antd';
 import Link from "next/link";
-import { feedbackSubmit } from "../../../../service/feedback_api";
+import { feedbackSubmit } from "../../../service/feedback_api";
 
 const { TextArea } = Input;
 const { Option } = Select;
@@ -55,9 +54,28 @@ export default function Page() {
     setIsModalOpen(false);
   };
 
-  const onFinish = (values: any) => {
-    console.log('Received values of form: ', values);
-    showModal();
+  const onSubmit = async (values: any) => {
+    const feedbackData = {
+      starRate: values.starRate,
+      comment: values.comment,
+      ease: values.ease,
+      design: values.design,
+      performance: values.performance,
+      feature: values.feature,
+      recommendation: values.recommendation,
+      reuse: values.reuse,
+      gender: values.gender,
+      ageGroup: parseInt(values.ageGroup),
+    };
+
+    console.log('Submitting feedback:', JSON.stringify(feedbackData, null, 2));
+
+    try {
+      await feedbackSubmit(feedbackData);
+      showModal();
+    } catch (error) {
+      console.error('Failed to submit feedback: ', error);
+    }
   };
 
   return (
@@ -66,36 +84,33 @@ export default function Page() {
         <div className={styles.title}>
           4Q 서비스 이용에 얼마나 만족하셨나요?
         </div>
-        <div className={styles.rateForm}>
-          <Rate
-            defaultValue={3}
-            character={({ index = 0 }) => customIcons[index + 1]}
-            style={{ fontSize: 34 }}
-          />
-          <div className={styles.rateText}>
-            <div className={styles.rateScore}>
-              매우 불만족
-            </div>
-            <div className={styles.rateScore}>
-              매우 만족
-            </div>
-          </div>
-        </div>
         <Form
           name="feedback_form"
-          onFinish={onFinish}
+          onFinish={onSubmit}
           initialValues={{
-            easeOfUse: "",
-            designSatisfaction: "",
-            performanceSatisfaction: "",
-            functionProperly: "",
-            recommend: "",
-            continueUse: "",
+            starRate: "",
+            ease: "",
+            design: "",
+            performance: "",
+            feature: "",
+            recommendation: "",
+            reuse: "",
             ageGroup: "",
             gender: "",
+            comment: "",
           }}
           style={{ marginTop: 20, width: '80%' }}
         >
+          <Form.Item
+            name="starRate"
+            label="별점을 선택해주세요"
+            initialValue={3}
+          >
+            <Rate
+              character={({ index = 0 }) => customIcons[index + 1]}
+              style={{ fontSize: 34 }}
+            />
+          </Form.Item>
 
           <Form.Item
             name="ease"
@@ -128,7 +143,7 @@ export default function Page() {
             label="성능에 대한 만족도는 어떠셨나요?"
           >
             <Select placeholder="선택해 주세요">
-            <Option value="5">매우 만족</Option>
+              <Option value="5">매우 만족</Option>
               <Option value="4">만족</Option>
               <Option value="3">보통</Option>
               <Option value="2">불만족</Option>
@@ -151,7 +166,7 @@ export default function Page() {
             label="이 제품을 다른 사람에게 추천하시겠습니까?"
           >
             <Radio.Group>
-            <Radio.Button value="true">네</Radio.Button>
+              <Radio.Button value="true">네</Radio.Button>
               <Radio.Button value="false">아니요</Radio.Button>
             </Radio.Group>
           </Form.Item>
@@ -161,7 +176,7 @@ export default function Page() {
             label="향후 이 제품을 계속 사용하실 의향이 있으신가요?"
           >
             <Radio.Group>
-            <Radio.Button value="true">네</Radio.Button>
+              <Radio.Button value="true">네</Radio.Button>
               <Radio.Button value="false">아니요</Radio.Button>
             </Radio.Group>
           </Form.Item>
@@ -178,6 +193,7 @@ export default function Page() {
               <Option value="60">60대</Option>
             </Select>
           </Form.Item>
+
           <Form.Item
             name="gender"
             label="성별"
@@ -186,21 +202,28 @@ export default function Page() {
               <Radio value="MALE">남성</Radio>
               <Radio value="FEMALE">여성</Radio>
             </Radio.Group>
+          </Form.Item>
+          <div className={styles.label}>
+            추가로 하고 싶은 말씀이 있으신가요?
+            </div>
+          <Form.Item
+            name="comment"
+            // label=""
+          >
             <TextArea
-          showCount
-          maxLength={200}
-          placeholder="추가로 하고 싶은 말씀이 있으신가요?"
-          style={{ height: 120, width: '100%', resize: 'none', marginTop: '10px' }}
-        />
+              showCount
+              maxLength={200}
+              placeholder="추가 의견을 작성해주세요"
+              style={{ height: 120, width: '100%', resize: 'none', marginTop: '10px' }}
+            />
           </Form.Item>
 
           <div className={styles.btnContainer}>
-              <Button type="primary" htmlType="submit">
-                제출하기
-              </Button>
-              <Button htmlType="reset" style={{marginLeft: '10px'}}>초기화</Button>
-              </div>
-          
+            <Button type="primary" htmlType="submit">
+              제출하기
+            </Button>
+            <Button htmlType="reset" style={{ marginLeft: '10px' }}>초기화</Button>
+          </div>
         </Form>
         <Link href="/" className={styles.navigateHome}>
           홈으로 이동

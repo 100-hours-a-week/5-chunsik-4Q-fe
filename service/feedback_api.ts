@@ -1,22 +1,24 @@
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
-export const feedbackSubmit = async (starRate: string) => {
+export const feedbackSubmit = async (feedbackData: any) => {
     try {
         const response = await fetch(`${BASE_URL}/feedback`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ email }),
+            body: JSON.stringify(feedbackData),
         });
 
         if (!response.ok) {
-            throw new Error("이메일 인증 요청에 실패했습니다.");
+            
+            throw new Error("Failed to submit feedback");
         }
-
-        return response.json(); // 필요한 경우 반환할 데이터를 수정
+        const data = await response.json();
+        console.log(data);
+        return data;
     } catch (error) {
-        console.error("Error in requestEmailVerification:", error);
+        console.error("Error submitting feedback:", error);
         throw error;
     }
 };
