@@ -14,6 +14,7 @@ export default function Signup() {
     const [buttonText, setButtonText] = useState("이메일 인증");
     const [verificationCode, setVerificationCode] = useState("");
     const [options, setOptions] = useState<AutoCompleteProps['options']>([]);
+    const [isButtonDisabled, setIsButtonDisabled] = useState(false);  // 추가된 상태
 
     const handleSearch = (value: string) => {
         setOptions(() => {
@@ -36,9 +37,18 @@ export default function Signup() {
     const handleEmailVerification = async () => {
         if (isEmailValid) {
             try {
-                await requestEmailVerification(email);
-                message.success("이메일 인증 요청이 전송되었습니다.");
+                const successMessage = await requestEmailVerification(email); // 성공 메시지 받기
+                message.success(successMessage); // 성공 메시지 표시
+
                 setButtonText("이메일 재전송");
+                setIsButtonDisabled(true);  // 버튼 비활성화
+
+                // 5초 후 버튼을 다시 활성화하고 텍스트 변경
+                setTimeout(() => {
+                    setIsButtonDisabled(false);
+                    setButtonText("이메일 재전송");
+                }, 5000);
+
                 setIsTimerActive(true);
                 setTimerCount(180); // 타이머를 3분으로 초기화
             } catch (error) {
@@ -62,7 +72,6 @@ export default function Signup() {
             message.error("6자리 인증번호를 입력해주세요.");
         }
     };
-
 
     useEffect(() => {
         if (isTimerActive && timerCount > 0) {
@@ -131,18 +140,17 @@ export default function Signup() {
                         }}
                         onClick={handleEmailVerification}
                         type="button"
+                        disabled={isButtonDisabled}  // 버튼 비활성화 상태 반영
                     >
                         {buttonText}
                     </button>
                 </Form.Item>
-
 
                 <Form.Item
                     name="emailVerification"
                     rules={[{ required: true, message: "이메일 인증 번호를 입력해주세요." }]}
                     className={styles.emailValiContainer}
                 >
-                    {/* <div className={styles.valiTitle}><span className={styles.red}>*</span> 이메일 인증번호</div> */}
                     <div className={styles.valiContainer}>
                         {isTimerActive && (
                             <span className={styles.timerContainer}>
@@ -150,7 +158,6 @@ export default function Signup() {
                             </span>
                         )}
                         <Input
-                            // type="number"
                             placeholder="인증번호 6자리를 입력해주세요."
                             maxLength={6}
                             value={verificationCode}

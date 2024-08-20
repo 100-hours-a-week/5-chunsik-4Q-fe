@@ -69,18 +69,18 @@
     margin-top: 20px;
     color: #fff;
     border-radius: 5px;
+    font-size: 20px;
 }
 
 .homeBtn:hover {
     color: grey;
-
 }
 
 
 .navigateHome {
     color: #b0b0b0;
-    font-size: 12px;
-    margin-top: 15px;
+    font-size: 15px;
+    margin-top: 25px;
 }
 
 .inputField {

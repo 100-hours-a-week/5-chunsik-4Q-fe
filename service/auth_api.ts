@@ -14,12 +14,13 @@ export const requestEmailVerification = async (email: string) => {
             throw new Error("이메일 인증 요청에 실패했습니다.");
         }
 
-        return response.json(); // 필요한 경우 반환할 데이터를 수정
+        return "이메일이 전송되었습니다."; // 메시지 반환
     } catch (error) {
         console.error("Error in requestEmailVerification:", error);
         throw error;
     }
 };
+
 
 export const verifyEmailCode = async (email: string, code: string) => {
     try {

@@ -17,7 +17,7 @@
     align-items: flex-start;
 
     justify-content: flex-start;
-    /*background-color: red;*/
+    /* background-color: red; */
     /*background-color: red;*/
 }
 
@@ -34,28 +34,28 @@
 .words {
     overflow: hidden;
     /* background-color: red; */
-    height: 160px;
+    height: 130px;
 }   
 
 .words span{
     display: block;
     height: 100%;
     padding: 45px 20px;
-    border: 1px solid orange;
+    /* border: 1px solid orange; */
     animation: spin_words 6s infinite;
 }
 
 .words_qr {
     overflow: hidden;
     /* background-color: red; */
-    height: 180px;
+    height: 130px;
 }   
 
 .words_qr span{
     display: block;
-    height: 65%;
-    padding: 45px 20px;
-    border: 1px solid orange;
+    height: 75%;
+    padding: 35px 30px;
+    /* border: 1px solid orange; */
     animation: spin_words_qr 6s infinite;
 }
 
@@ -71,19 +71,22 @@
         transform: translateY(-90%);
     }
     35% {
-        transform: translateY(-200%);
+        transform: translateY(-220%);
     }
 }
 
 
 @keyframes spin_words_qr {
     10%{
-        transform: translateY(-112%);
+        transform: translateY(-20%);
     }
     25% {
-        transform: translateY(-92%);
+        transform: translateY(-100%);
     }
     35% {
-        transform: translateY(-202%);
+        transform: translateY(-190%);
+    }
+    50% {
+        transform: translateY(-240%);
     }
 }
