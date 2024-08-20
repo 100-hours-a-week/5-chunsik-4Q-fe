@@ -68,7 +68,9 @@ export default function Second() {
                     style={{ width: 400, height: 400 }}
                 />
                 <div className={styles.loadingText}>
-                    잠시만 기다려주세요. 배경이미지가 생성중입니다.
+                    <p>잠시만 기다려주세요.</p>
+                    <p>잠시만 기다려주세요. 배경이미지가 생성중입니다.</p>
+                    {/* <p>배경이미지가 생성중입니다.</p> */}
                 </div>
             </div>
         );

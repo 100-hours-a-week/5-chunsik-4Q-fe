@@ -9,12 +9,12 @@ import { requestEmailVerification, verifyEmailCode } from "../../../../service/a
 export default function Signup() {
     const [email, setEmail] = useState("");
     const [isEmailValid, setIsEmailValid] = useState(false);
+    const [isBtnDisable, setIsBtnDisable] = useState(false);
     const [isTimerActive, setIsTimerActive] = useState(false);
     const [timerCount, setTimerCount] = useState(180);
     const [buttonText, setButtonText] = useState("이메일 인증");
     const [verificationCode, setVerificationCode] = useState("");
     const [options, setOptions] = useState<AutoCompleteProps['options']>([]);
-    const [isButtonDisabled, setIsButtonDisabled] = useState(false);  // 추가된 상태
 
     const handleSearch = (value: string) => {
         setOptions(() => {
@@ -35,27 +35,22 @@ export default function Signup() {
     };
 
     const handleEmailVerification = async () => {
+        setIsBtnDisable(true);
         if (isEmailValid) {
             try {
                 const successMessage = await requestEmailVerification(email); // 성공 메시지 받기
                 message.success(successMessage); // 성공 메시지 표시
 
                 setButtonText("이메일 재전송");
-                setIsButtonDisabled(true);  // 버튼 비활성화
-
-                // 5초 후 버튼을 다시 활성화하고 텍스트 변경
-                setTimeout(() => {
-                    setIsButtonDisabled(false);
-                    setButtonText("이메일 재전송");
-                }, 5000);
-
                 setIsTimerActive(true);
                 setTimerCount(180); // 타이머를 3분으로 초기화
             } catch (error) {
                 message.error(error.message || "이메일 인증 요청에 실패했습니다.");
+                setIsBtnDisable(false); // 실패 시 다시 버튼 활성화
             }
         } else {
             message.error("유효한 이메일을 입력해주세요.");
+            setIsBtnDisable(false); // 유효하지 않은 이메일일 경우 다시 버튼 활성화
         }
     };
 
@@ -137,10 +132,11 @@ export default function Signup() {
                         style={{
                             backgroundColor: isEmailValid ? "var(--primary-color)" : "",
                             color: isEmailValid ? "white" : "",
+                            cursor: isBtnDisable ? "not-allowed" : "pointer"
                         }}
                         onClick={handleEmailVerification}
                         type="button"
-                        disabled={isButtonDisabled}  // 버튼 비활성화 상태 반영
+                        disabled={isBtnDisable}
                     >
                         {buttonText}
                     </button>
@@ -167,11 +163,13 @@ export default function Signup() {
                         <button
                             className={styles.emailValiBtn}
                             style={{
-                                backgroundColor: verificationCode.length === 6 ? "var(--primary-color)" : "#e3e3e3",
+                                backgroundColor: verificationCode.length === 6 && isBtnDisable ? "var(--primary-color)" : "#e3e3e3",
                                 color: verificationCode.length === 6 ? "white" : "",
+                                cursor: isBtnDisable ? "not-allowed" : "pointer"
                             }}
                             onClick={handleCodeVerification}
                             type="button"
+                            disabled={isBtnDisable}
                         >
                             확인
                         </button>

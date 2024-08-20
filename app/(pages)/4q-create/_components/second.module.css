@@ -21,8 +21,12 @@
 
 .loadingText {
     position: absolute;
-    bottom: -220px;
+    bottom: -100px;
     color: #000;
+    width: 100%;
+    height: 100px;
+    z-index: 9;
+    
 }
 
 /*.subTitle {*/
