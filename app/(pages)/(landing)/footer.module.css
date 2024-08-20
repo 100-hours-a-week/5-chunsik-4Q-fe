@@ -3,9 +3,10 @@
     height: 100%;
     background-color: #000;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    padding: 20px;
+    padding: 40px;
+    justify-content: center;
 }
 
 .logo {
@@ -14,6 +15,12 @@
 }
 
 .text {
+    font-size: 14px;
+    color: #CCCCCC;
+    margin: 10px;
+}
+
+.information {
     font-size: 14px;
     color: #CCCCCC;
     margin: 10px;

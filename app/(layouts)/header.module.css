@@ -187,3 +187,13 @@
 /*.menu li:hover {*/
 /*    color: #FF501C;*/
 /*}*/
+
+
+@media(min-width: 410px) {
+    .menu li {
+        font-weight: normal;
+    }
+    .menu li a {
+        font-weight: normal;
+    }
+}
