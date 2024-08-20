@@ -77,7 +77,7 @@ export default function Second() {
     return (
         <div className={styles.container}>
             <div className={styles.subTitle}>
-                배경 이미지를 선택해주세요.
+                배경이미지를 선택해주세요.
             </div>
             <div className={styles.sliderContainer} ref={emblaRef}>
                 <div className={styles.emblaContainer}>

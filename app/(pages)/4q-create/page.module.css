@@ -25,9 +25,13 @@
     display: flex;
     flex-direction: column;
     position: fixed;
-    bottom: 25%;
+    bottom: 20%;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%)
+    /* position: fixed; */
+    /* bottom: 25%;
+    left: 50%;
+    transform: translateX(-50%); */
 }
 
 .nextBtn {
@@ -43,8 +47,9 @@
     margin-top: 5px;
 }
 
-/* @media (min-width: 800px) {
+@media (min-width: 800px) {
     .btnContainer {
         bottom: 38%;
     }
-  } */
+  }
+

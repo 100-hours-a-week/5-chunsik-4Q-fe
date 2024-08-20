@@ -1,6 +1,6 @@
 "use client";
 
-import React, {useRef, useState} from 'react';
+import React, {useRef, useState, useEffect} from 'react';
 import { Form, Select, Input, Modal } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 import styles from './first.module.css';
@@ -10,6 +10,7 @@ import TagSelector from '../(modals)/tagSelectModal';
 const { Option } = Select;
 
 const MAX_COUNT = 3;
+const STORAGE_KEY = 'form_data';
 
 interface FirstProps {
     formRef: React.RefObject<any>;
@@ -21,18 +22,31 @@ export default function First({ formRef, onSubmit }: FirstProps) {
     const [value, setValue] = useState<string[]>([]);
     const inputRef = useRef<InputRef>(null);
 
-    const suffix = (
-        <>
-            <span>
-                {value.length} / {MAX_COUNT}
-            </span>
-            <DownOutlined />
-        </>
-    );
+    useEffect(() => {
+        // Load saved data from localStorage on mount
+        const savedData = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+        if (savedData) {
+            formRef.current?.setFieldsValue(savedData);
+            setValue(savedData.tags || []);
+        }
+
+        // Save data to localStorage on unmount or when form values change
+        return () => {
+            localStorage.removeItem(STORAGE_KEY);
+        };
+    }, []);
 
     const handleFinish = (values: any) => {
         console.log('Form values:', values);
         onSubmit();  // Trigger the callback to move to the next step
+    };
+
+    const handleValuesChange = (changedValues: any, allValues: any) => {
+        const dataToSave = {
+            ...allValues,
+            tags: value
+        };
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(dataToSave));
     };
 
     const handleOpenModal = () => {
@@ -45,11 +59,16 @@ export default function First({ formRef, onSubmit }: FirstProps) {
 
     const handleTagSelection = (selectedTags: string[]) => {
         setValue(selectedTags);
+        const currentValues = formRef.current?.getFieldsValue();
+        handleValuesChange(null, { ...currentValues, tags: selectedTags });
         handleCloseModal();
     };
 
     const handleTagDeselect = (tag: string) => {
-        setValue(value.filter(t => t !== tag));
+        const updatedTags = value.filter(t => t !== tag);
+        setValue(updatedTags);
+        const currentValues = formRef.current?.getFieldsValue();
+        handleValuesChange(null, { ...currentValues, tags: updatedTags });
     };
 
     return (
@@ -58,6 +77,7 @@ export default function First({ formRef, onSubmit }: FirstProps) {
                 onFinish={handleFinish}
                 ref={formRef}
                 style={{ maxWidth: 600 }}
+                onValuesChange={handleValuesChange}
             >
                 <Form.Item
                     name="category"
@@ -93,8 +113,8 @@ export default function First({ formRef, onSubmit }: FirstProps) {
                         value={value}
                         style={{ width: '100%' }}
                         onClick={handleOpenModal}
-                        onDeselect={handleTagDeselect} // Handle tag deselection
-                        suffixIcon={suffix}
+                        onDeselect={handleTagDeselect}
+                        // suffixIcon={suffix}
                         variant="filled"
                         className={styles.field}
                         placeholder="태그를 선택해주세요."
@@ -111,7 +131,7 @@ export default function First({ formRef, onSubmit }: FirstProps) {
 
             <Modal
                 title=""
-                visible={isModalOpen}
+                open={isModalOpen}
                 onCancel={handleCloseModal}
                 footer={null}
             >

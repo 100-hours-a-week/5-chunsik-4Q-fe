@@ -54,7 +54,7 @@ export default function Signup() {
             try {
                 const result = await verifyEmailCode(email, verificationCode);
                 message.success("이메일 인증이 완료되었습니다.");
-                setIsTimerActive(false); // Stop the timer
+                setIsTimerActive(false); // 타이머 중지
             } catch (error) {
                 message.error(error.message || "이메일 인증에 실패했습니다.");
             }
@@ -136,36 +136,39 @@ export default function Signup() {
                     </button>
                 </Form.Item>
 
+
                 <Form.Item
                     name="emailVerification"
                     rules={[{ required: true, message: "이메일 인증 번호를 입력해주세요." }]}
                     className={styles.emailValiContainer}
                 >
-                    <div className={styles.valiTitle}><span className={styles.red}>*</span> 이메일 인증번호</div>
-                    <Input.OTP
-                    
-                        length={6}
-                        value={verificationCode}
-                        onChange={setVerificationCode}
-                        className={styles.inputField}
-                    />
-                    
-                    <button
-                        className={styles.emailValiBtn}
-                        style={{
-                            backgroundColor: verificationCode.length === 6 ? "var(--primary-color)" : "#e3e3e3",
-                            color: verificationCode.length === 6 ? "white" : "",
-                        }}
-                        onClick={handleCodeVerification}
-                        type="button"
-                    >
-                        확인
-                    </button>
-                    {isTimerActive && (
-                        <span className={styles.timerContainer}>
-                          {formatTime(timerCount)}
-                        </span>
-                    )}
+                    {/* <div className={styles.valiTitle}><span className={styles.red}>*</span> 이메일 인증번호</div> */}
+                    <div className={styles.valiContainer}>
+                        {isTimerActive && (
+                            <span className={styles.timerContainer}>
+                                {formatTime(timerCount)}
+                            </span>
+                        )}
+                        <Input
+                            // type="number"
+                            placeholder="인증번호 6자리를 입력해주세요."
+                            maxLength={6}
+                            value={verificationCode}
+                            onChange={(e) => setVerificationCode(e.target.value)}
+                            className={styles.inputField}
+                        />
+                        <button
+                            className={styles.emailValiBtn}
+                            style={{
+                                backgroundColor: verificationCode.length === 6 ? "var(--primary-color)" : "#e3e3e3",
+                                color: verificationCode.length === 6 ? "white" : "",
+                            }}
+                            onClick={handleCodeVerification}
+                            type="button"
+                        >
+                            확인
+                        </button>
+                    </div>
                 </Form.Item>
 
                 <Form.Item

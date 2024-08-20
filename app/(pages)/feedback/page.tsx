@@ -21,6 +21,7 @@ import {
   Space,
 } from 'antd';
 import Link from "next/link";
+import { feedbackSubmit } from "../../../../service/feedback_api";
 
 const { TextArea } = Input;
 const { Option } = Select;
@@ -97,72 +98,71 @@ export default function Page() {
         >
 
           <Form.Item
-            name="easeOfUse"
+            name="ease"
             label="제품 사용이 얼마나 쉬웠나요?"
           >
             <Select placeholder="선택해 주세요">
-              <Option value="매우 쉬웠다">매우 쉬웠다</Option>
-              <Option value="쉬웠다">쉬웠다</Option>
-              <Option value="보통이다">보통이다</Option>
-              <Option value="어려웠다">어려웠다</Option>
-              <Option value="매우 어려웠다">매우 어려웠다</Option>
+              <Option value="5">매우 쉬웠다</Option>
+              <Option value="4">쉬웠다</Option>
+              <Option value="3">보통이다</Option>
+              <Option value="2">어려웠다</Option>
+              <Option value="1">매우 어려웠다</Option>
             </Select>
           </Form.Item>
 
           <Form.Item
-            name="designSatisfaction"
+            name="design"
             label="제품의 디자인은 얼마나 만족스러웠나요?"
           >
             <Select placeholder="선택해 주세요">
-              <Option value="매우 만족">매우 만족</Option>
-              <Option value="만족">만족</Option>
-              <Option value="보통">보통</Option>
-              <Option value="불만족">불만족</Option>
-              <Option value="매우 불만족">매우 불만족</Option>
+              <Option value="5">매우 만족</Option>
+              <Option value="4">만족</Option>
+              <Option value="3">보통</Option>
+              <Option value="2">불만족</Option>
+              <Option value="1">매우 불만족</Option>
             </Select>
           </Form.Item>
 
           <Form.Item
-            name="performanceSatisfaction"
+            name="performance"
             label="성능에 대한 만족도는 어떠셨나요?"
           >
             <Select placeholder="선택해 주세요">
-              <Option value="매우 만족">매우 만족</Option>
-              <Option value="만족">만족</Option>
-              <Option value="보통">보통</Option>
-              <Option value="불만족">불만족</Option>
-              <Option value="매우 불만족">매우 불만족</Option>
+            <Option value="5">매우 만족</Option>
+              <Option value="4">만족</Option>
+              <Option value="3">보통</Option>
+              <Option value="2">불만족</Option>
+              <Option value="1">매우 불만족</Option>
             </Select>
           </Form.Item>
 
           <Form.Item
-            name="functionProperly"
+            name="feature"
             label="기능들이 제대로 작동했나요?"
           >
             <Radio.Group>
-              <Radio.Button value="네">네</Radio.Button>
-              <Radio.Button value="아니요">아니요</Radio.Button>
+              <Radio.Button value="true">네</Radio.Button>
+              <Radio.Button value="false">아니요</Radio.Button>
             </Radio.Group>
           </Form.Item>
 
           <Form.Item
-            name="recommend"
+            name="recommendation"
             label="이 제품을 다른 사람에게 추천하시겠습니까?"
-            
           >
             <Radio.Group>
-              <Radio.Button value="네">네</Radio.Button>
-              <Radio.Button value="아니요">아니요</Radio.Button>
+            <Radio.Button value="true">네</Radio.Button>
+              <Radio.Button value="false">아니요</Radio.Button>
             </Radio.Group>
           </Form.Item>
 
           <Form.Item
-            name="continueUse"
+            name="reuse"
             label="향후 이 제품을 계속 사용하실 의향이 있으신가요?"
           >
             <Radio.Group>
-              <Radio.Button value="네">네</Radio.Button>
-              <Radio.Button value="아니요">아니요</Radio.Button>
+            <Radio.Button value="true">네</Radio.Button>
+              <Radio.Button value="false">아니요</Radio.Button>
             </Radio.Group>
           </Form.Item>
 
@@ -171,11 +171,11 @@ export default function Page() {
             label="나이대"
           >
             <Select placeholder="선택해 주세요">
-              <Option value="20대">20대</Option>
-              <Option value="30대">30대</Option>
-              <Option value="40대">40대</Option>
-              <Option value="50대">50대</Option>
-              <Option value="60대">60대</Option>
+              <Option value="20">20대</Option>
+              <Option value="30">30대</Option>
+              <Option value="40">40대</Option>
+              <Option value="50">50대</Option>
+              <Option value="60">60대</Option>
             </Select>
           </Form.Item>
           <Form.Item
@@ -183,8 +183,8 @@ export default function Page() {
             label="성별"
           >
             <Radio.Group>
-              <Radio value="남성">남성</Radio>
-              <Radio value="여성">여성</Radio>
+              <Radio value="MALE">남성</Radio>
+              <Radio value="FEMALE">여성</Radio>
             </Radio.Group>
             <TextArea
           showCount
