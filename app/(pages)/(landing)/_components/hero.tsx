@@ -1,16 +1,18 @@
 "use client"
 
 import styles from './hero.module.css';
-import bg from '../../../public/images/hero_bg.svg';
+import bg from '../../../../public/images/hero_bg.svg';
 import Link from "next/link";
-import hero1 from "../../../public/images/hero/hero1.png";
-import hero2 from "../../../public/images/hero/hero2.png";
-import hero3 from "../../../public/images/hero/hero3.png";
+import hero1 from "../../../../public/images/hero/hero1.png";
+import hero2 from "../../../../public/images/hero/hero2.png";
+import hero3 from "../../../../public/images/hero/hero3.png";
 
 export default function Hero() {
     return (
         <div className={styles.container} style={{backgroundImage: `url(${bg.src})`}}>
             <div className={styles.heading}>
+                <p className={styles.introTitle}>AI기반 포토큐알 이미지 생성 서비스</p>
+                
                 <h1>Photo QR</h1>
                 <h2>WITH 4Q</h2>
                 {/*<button>지금 체험하기</button>*/}

@@ -1,9 +1,9 @@
 import styles from './page.module.css'
-import Hero from "./hero";
+import Hero from "./_components/hero";
 // import Hero2 from "./hero2";
-import Demo from "./demo";
-import Footer from "./footer";
-import Intro from "./Intro";
+import Demo from "./_components/demo";
+import Footer from "./_components/footer";
+import Intro from "./_components/Intro";
 
 export default function Page() {
     return (

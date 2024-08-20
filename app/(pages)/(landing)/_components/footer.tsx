@@ -1,5 +1,5 @@
 import styles from './footer.module.css'
-import logo from '../../../public/images/logo_white.svg'
+import logo from '../../../../public/images/logo_white.svg'
 
 export default function Footer() {
     return (

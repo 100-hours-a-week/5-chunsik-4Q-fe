@@ -1,7 +1,7 @@
 "use client";
 
 import styles from './hero2.module.css';
-import bg from '../../../public/images/hero_bg.svg';
+import bg from '../../../../public/images/hero_bg.svg';
 
 export default function Hero() {
     return (

@@ -1,10 +1,11 @@
 .container {
-    /* height: 100vh; */
+    height: 80vh;
     /*width: 80%;*/
     padding: 20px;
     margin-top: 10px;
-    /* position: relative; */
+    position: relative;
     overflow: hidden;
+    /* background-color: red; */
 
 }
 
@@ -25,7 +26,7 @@
     display: flex;
     flex-direction: column;
     position: absolute;
-    bottom: 22%;
+    bottom: 5%;
     left: 50%;
     transform: translateX(-50%)
     /* position: fixed; */
