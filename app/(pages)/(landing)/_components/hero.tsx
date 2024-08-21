@@ -7,6 +7,9 @@ import hero1 from "../../../../public/images/hero/hero1.png";
 import hero2 from "../../../../public/images/hero/hero2.png";
 import hero3 from "../../../../public/images/hero/hero3.png";
 
+import Lottie from 'react-lottie-player';
+import arrowLottie from '../../../../public/rotties/'
+
 export default function Hero() {
     return (
         <div className={styles.container} style={{backgroundImage: `url(${bg.src})`}}>
@@ -28,6 +31,7 @@ export default function Hero() {
             <div className={`${styles.imgContainer} ${styles.img3}`}>
                 <img src={hero3.src} alt="concertExample" className={styles.heroImg}/>
             </div>
+
         </div>
     );
 }

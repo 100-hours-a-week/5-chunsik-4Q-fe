@@ -50,7 +50,7 @@ export default function Demo() {
 
 
             <Swiper
-                slidesPerView={1}
+                slidesPerView={1}   
                 centeredSlides={true}
                 spaceBetween={20}
                 loop={true}

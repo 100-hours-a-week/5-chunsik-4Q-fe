@@ -17,13 +17,16 @@ type FieldType = {
 export default function Page() {
     const router = useRouter(); // Correctly use useRouter from 'next/navigation'
 
-    const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
+    const onFinish = async (values) => {
         try {
-            const { email, password } = values;
-            const result = await requestLogin(email!, password!); // Call the login function
+            const response = await requestLogin(values.email, values.password);
+            if(response.success) {
+                message.success("로그인에 성공했습니다.");
+                router.push('/'); 
+            }
+
+            // const result = await requestLogin(email!, password!); // Call the login function
             
-            message.success("로그인에 성공했습니다.");
-            router.push('/'); 
         } catch (error) {
             message.error("로그인에 실패했습니다. 다시 시도해주세요.");
             console.error('Login failed:', error);

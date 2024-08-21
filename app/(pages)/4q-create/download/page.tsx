@@ -1,23 +1,30 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import styles from './page.module.css';
 import { Image, Button, Modal } from 'antd';
 import { LuDownload } from "react-icons/lu";
 import { BiSolidShareAlt } from "react-icons/bi";
 import result from '../../../../public/images/mock/concert.png';
-import { useState } from "react";
 import ShareModal from '../(modals)/shareModal';
 
-const storedFormDataString = sessionStorage.getItem('form_data');
-let storedFormData;
-
-if (storedFormDataString) {
-    storedFormData = JSON.parse(storedFormDataString);
+interface FormData {
+    title: string;
+    // Add any other properties that are part of your form data
 }
-
 
 export default function Page() {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [storedFormData, setStoredFormData] = useState<FormData | null>(null);
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            const storedFormDataString = sessionStorage.getItem('form_data');
+            if (storedFormDataString) {
+                setStoredFormData(JSON.parse(storedFormDataString));
+            }
+        }
+    }, []);
 
     const showModal = () => {
         setIsModalOpen(true);
@@ -42,7 +49,7 @@ export default function Page() {
                 />
             </div>
             <div className={styles.title}>
-                {storedFormData.title}
+                {storedFormData?.title || "No title available"}
             </div>
             <div className={styles.btnContainer}>
                 <Button type="primary" icon={<LuDownload />} size="large" className={styles.downloadBtn}>
