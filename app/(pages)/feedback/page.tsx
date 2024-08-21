@@ -156,8 +156,8 @@ export default function Page() {
             label="기능들이 제대로 작동했나요?"
           >
             <Radio.Group>
-              <Radio.Button value="true">네</Radio.Button>
-              <Radio.Button value="false">아니요</Radio.Button>
+            <Radio.Button value={true}>네</Radio.Button>
+              <Radio.Button value={false}>아니요</Radio.Button>
             </Radio.Group>
           </Form.Item>
 
@@ -166,8 +166,8 @@ export default function Page() {
             label="이 제품을 다른 사람에게 추천하시겠습니까?"
           >
             <Radio.Group>
-              <Radio.Button value="true">네</Radio.Button>
-              <Radio.Button value="false">아니요</Radio.Button>
+              <Radio.Button value={true}>네</Radio.Button>
+              <Radio.Button value={false}>아니요</Radio.Button>
             </Radio.Group>
           </Form.Item>
 
@@ -176,8 +176,8 @@ export default function Page() {
             label="향후 이 제품을 계속 사용하실 의향이 있으신가요?"
           >
             <Radio.Group>
-              <Radio.Button value="true">네</Radio.Button>
-              <Radio.Button value="false">아니요</Radio.Button>
+            <Radio.Button value={true}>네</Radio.Button>
+              <Radio.Button value={false}>아니요</Radio.Button>
             </Radio.Group>
           </Form.Item>
 

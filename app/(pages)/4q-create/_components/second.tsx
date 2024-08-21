@@ -2,7 +2,8 @@ import { useState, useEffect, useCallback } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import styles from './second.module.css';
 import mock from '../../../../public/images/mock_4q.png';
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+// import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import { ArrowLeftOutlined, ArrowRightOutlined } from '@ant-design/icons';
 import { FaDice } from "react-icons/fa6";
 import { Button } from 'antd';
 import Lottie from 'react-lottie-player';
@@ -42,12 +43,11 @@ export default function Second() {
     }, [emblaApi, onSelect]);
 
     useEffect(() => {
-        // Timer to hide the loading after 3 seconds
         const timer = setTimeout(() => {
             setLoading(false);
         }, 6000);
 
-        return () => clearTimeout(timer); // Cleanup the timer
+        return () => clearTimeout(timer); 
     }, []);
 
     const scrollPrev = useCallback(() => {
@@ -70,7 +70,6 @@ export default function Second() {
                 <div className={styles.loadingText}>
                     <p>잠시만 기다려주세요.</p>
                     <p>잠시만 기다려주세요. 배경이미지가 생성중입니다.</p>
-                    {/* <p>배경이미지가 생성중입니다.</p> */}
                 </div>
             </div>
         );
@@ -92,28 +91,10 @@ export default function Second() {
                         </div>
                     ))}
                 </div>
-                <button className={styles.prevButton} onClick={scrollPrev}><IoIosArrowBack /></button>
-                <button className={styles.nextButton} onClick={scrollNext}><IoIosArrowForward /></button>
-                {/*<div className={styles.dots}>*/}
-                {/*    {[...Array(5)].map((_, idx) => (*/}
-                {/*        <button*/}
-                {/*            key={idx}*/}
-                {/*            className={`${styles.dot} ${idx === selectedIndex ? styles.activeDot : ''}`}*/}
-                {/*            onClick={() => emblaApi && emblaApi.scrollTo(idx)}*/}
-                {/*        />*/}
-                {/*    ))}*/}
-                {/*</div>*/}
+                <button className={styles.prevButton} onClick={scrollPrev}><ArrowLeftOutlined /></button>
+                <button className={styles.nextButton} onClick={scrollNext}><ArrowRightOutlined /></button>
             </div>
             <div className={styles.randomBtnContainer}>
-                {/* <Button
-                    type="primary"
-                    icon={<FaDice style={{ fontSize: '20px' }} />}
-                    loading={loadings[1]}
-                    onClick={() => enterLoading(1)}
-                    className={styles.randomBtn}
-                >
-                    3
-                </Button> */}
             </div>
         </div>
     );

@@ -4,7 +4,8 @@ import { useState } from 'react';
 import styles from './demo.module.css';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import type { Swiper as SwiperType } from 'swiper';
-import { IoArrowBackSharp, IoArrowForwardSharp } from "react-icons/io5";
+// import { IoArrowBackSharp, IoArrowForwardSharp } from "react-icons/io5";
+import { ArrowLeftOutlined, ArrowRightOutlined } from '@ant-design/icons';
 import Link from 'next/link';
 
 import { Navigation } from 'swiper/modules';
@@ -93,12 +94,12 @@ export default function Demo() {
             </Swiper>
 
             <div className={styles.btnContainer}>
-                <button onClick={handlePrev} className={styles.arrowBtn}><IoArrowBackSharp/></button>
+                <button onClick={handlePrev} className={styles.arrowBtn}><ArrowLeftOutlined /></button>
                 <div>
                     {/*<span>{swiperIndex + 1}</span>*/}
                     <span>{titles[swiperIndex]}</span>
                 </div>
-                <button onClick={handleNext} className={styles.arrowBtn}><IoArrowForwardSharp/></button>
+                <button onClick={handleNext} className={styles.arrowBtn}><ArrowRightOutlined /></button>
             </div>
             <img src={mockup.src} alt="mockup" className={styles.mockupImg}/>
         </div>

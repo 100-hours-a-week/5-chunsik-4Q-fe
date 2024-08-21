@@ -2,7 +2,7 @@
 
 import React, { useRef, useState, useEffect } from 'react';
 import { Stage, Layer, Image, Transformer, Text } from 'react-konva';
-import { ColorPicker, Button } from 'antd';
+import { ColorPicker, Button, Tooltip  } from 'antd';
 import { useImage } from 'react-konva-utils';
 import styles from './third.module.css';
 import mock from '../../../../public/images/mock_4q.png';
@@ -40,6 +40,7 @@ export default function Third() {
             x: e.target.x(),
             y: e.target.y(),
         });
+        
     };
 
     const handleColorChange = (color: string) => {
@@ -58,7 +59,6 @@ let storedFormData;
 if (storedFormDataString) {
     storedFormData = JSON.parse(storedFormDataString);
 }
-
 
 
     const addText = () => {
@@ -173,8 +173,12 @@ if (storedFormDataString) {
                     </Stage>
                 </div>
                 <div className={styles.btnContainer}>
+                <Tooltip title="title 추가">
                     <Button onClick={addText} type="primary" icon={<PiTextTBold />} size="small" />
+                    </Tooltip>
+                    <Tooltip title="텍스트를 더블클릭하면 삭제버튼이 활성화됩니다.">
                     <Button onClick={deleteText} type="primary" icon={<HiTrash />} size="small" disabled={selectedId === null} />
+                    </Tooltip>
                     <ColorPicker value={selectedColor} onChange={(color) => handleColorChange(color.toHexString())}
                                  size="small" />
                 </div>

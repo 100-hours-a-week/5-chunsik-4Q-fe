@@ -32,6 +32,12 @@ export default function Header() {
 
     const handleBack = () => {
         router.back();
+        
+        const storageKey = 'form_data'; // The key as a string
+    
+        if(sessionStorage.getItem(storageKey)) {
+            sessionStorage.removeItem(storageKey);
+        }
     };
 
     const closeMenu = () => {

@@ -37,7 +37,7 @@ export default function First({ formRef, onSubmit }: FirstProps) {
     };
 
     const handleFinish = (values: any) => {
-        console.log('Form values:', values);
+        // console.log('Form values:', values);
         onSubmit(); 
     };
 

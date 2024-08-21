@@ -30,9 +30,9 @@
     position: relative;
 }
 
-.tagItem:hover {
+/* .tagItem:hover {
     background-color: #d9d9d9;
-}
+} */
 
 .hotMark {
     width: 23px;
