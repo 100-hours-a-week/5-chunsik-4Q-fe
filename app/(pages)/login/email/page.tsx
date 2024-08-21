@@ -5,8 +5,8 @@ import { Button, Checkbox, Form, Input, message } from 'antd';
 import type { FormProps } from 'antd';
 import styles from './page.module.css';
 import Link from "next/link";
-import { login } from "../../../../service/auth_api"
-import type { Metadata } from 'next';
+import { requestLogin } from "../../../../service/auth_api"
+import { useRouter } from 'next/navigation';
 
 type FieldType = {
     email?: string;
@@ -14,24 +14,26 @@ type FieldType = {
     remember?: boolean;
 };
 
-const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
-    try {
-        const { email, password } = values;
-        const result = await login(email!, password!); // Call the login function
-        message.success("로그인에 성공했습니다.");
-        // Handle success (e.g., navigate to another page, store token, etc.)
-        console.log('Login success:', result);
-    } catch (error) {
-        message.error("로그인에 실패했습니다. 다시 시도해주세요.");
-        console.error('Login failed:', error);
-    }
-};
-
-const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = (errorInfo) => {
-    console.log('Failed:', errorInfo);
-};
-
 export default function Page() {
+    const router = useRouter(); // Correctly use useRouter from 'next/navigation'
+
+    const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
+        try {
+            const { email, password } = values;
+            const result = await requestLogin(email!, password!); // Call the login function
+            
+            message.success("로그인에 성공했습니다.");
+            router.push('/'); 
+        } catch (error) {
+            message.error("로그인에 실패했습니다. 다시 시도해주세요.");
+            console.error('Login failed:', error);
+        }
+    };
+
+    const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = (errorInfo) => {
+        console.log('Failed:', errorInfo);
+    };
+
     return (
         <div className={styles.container}>
             <Form

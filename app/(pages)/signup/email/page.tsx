@@ -4,8 +4,8 @@ import { useState, useEffect } from "react";
 import { Form, Input, Button, message } from "antd";
 
 import styles from "./page.module.css";
-import { redirect } from 'next/navigation';
 import { requestEmailVerification, verifyEmailCode, requestRegister } from "../../../../service/auth_api";
+import { useRouter } from 'next/navigation';
 
 export default function Signup() {
     const [email, setEmail] = useState("");
@@ -16,12 +16,15 @@ export default function Signup() {
     const [buttonText, setButtonText] = useState("이메일 인증");
     const [valiButtonText, setValiButtonText] = useState("확인");
     const [verificationCode, setVerificationCode] = useState("");
+    const router = useRouter(); 
 
-    const handleEmailChange = (value: string) => {
+    const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
         setEmail(value);
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         setIsEmailValid(emailPattern.test(value));
     };
+    
 
     const handleEmailVerification = async () => {
         setIsBtnDisable(true);
@@ -94,7 +97,7 @@ export default function Signup() {
             const response = await requestRegister(values.email, values.password, values.nickname);
             if (response.success) {
                 message.success("회원가입이 완료되었습니다.");
-                redirect('/mypage');
+                router.push('/login/email'); 
             }
         } catch (error) {
             message.error("회원가입에 실패했습니다.");
@@ -126,11 +129,11 @@ export default function Signup() {
                     className={styles.emailcontainer}
                 >
                     <Input
-                    placeholder="이메일을 입력해주세요."
-                    // value={email}
-                    // onChange={(e) => setEmail(e.target.value)}
-                    className={styles.inputField}
-                />
+    placeholder="이메일을 입력해주세요."
+    onChange={handleEmailChange}
+    value={email}
+    className={styles.inputField}
+/>
                  </Form.Item>
                     <button
                         className={styles.emailBtn}
