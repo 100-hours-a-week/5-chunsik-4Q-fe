@@ -5,6 +5,8 @@ import logo from '../../../public/images/login_logo.png';
 import kakao_icon from '../../../public/images/kakao.svg';
 
 export default function Page() {
+    const kakaoOauth = "https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=a8a84270703466b91728cc7df1b03fbb&redirect_uri=https://localhost:8080/auth/kakao/callback";
+
     return (
         <div className={styles.container}>
             <div className={styles.logoContainer}>
@@ -17,10 +19,10 @@ export default function Page() {
                     </div>
                     <div className={styles.polygon}></div>
                 </div>
-                    <button className={styles.kakaoButton}>
+                    <Link href={kakaoOauth} className={styles.kakaoButton}>
                         <img src={kakao_icon.src} alt="kakao_logo" className={styles.kakaoIcon}/>
                         카카오톡으로 시작하기
-                    </button>
+                    </Link>
 
                 <div className={styles.emailOptions}>
                     <Link href="/login/email" className={styles.emailLink}>

@@ -88,6 +88,10 @@
     position: relative;
 }
 
+.kakaoButton:hover {
+    text-decoration: none;
+}
+
 .kakaoIcon {
     width: 22px;
     height: 22px;

@@ -36,12 +36,13 @@ export default function Signup() {
 
     const handleEmailVerification = async () => {
         setIsBtnDisable(true);
+        setButtonText("이메일 재전송");
         if (isEmailValid) {
             try {
-                const successMessage = await requestEmailVerification(email); // 성공 메시지 받기
+                const successMessage = await requestEmailVerification(email); 
+                setIsBtnDisable(true);// 성공 메시지 받기
                 message.success(successMessage); // 성공 메시지 표시
-
-                setButtonText("이메일 재전송");
+                
                 setIsTimerActive(true);
                 setTimerCount(180); // 타이머를 3분으로 초기화
             } catch (error) {
@@ -127,12 +128,14 @@ export default function Signup() {
                             className={styles.inputField}
                         />
                     </AutoComplete>
+                    {/* 이메일 전송 버튼 ==============> */}
                     <button
                         className={styles.emailBtn}
                         style={{
-                            backgroundColor: isEmailValid ? "var(--primary-color)" : "",
-                            color: isEmailValid ? "white" : "",
-                            cursor: isBtnDisable ? "not-allowed" : "pointer"
+                            backgroundColor: isBtnDisable ? "#e3e3e3" : "var(--primary-color)",
+                            // backgroundColor: isEmailValid ? "var(--primary-color)" : "",
+                            // color: isEmailValid ? "white" : "",
+                            // cursor: isBtnDisable ? "not-allowed" : "pointer"
                         }}
                         onClick={handleEmailVerification}
                         type="button"
@@ -148,6 +151,7 @@ export default function Signup() {
                     className={styles.emailValiContainer}
                 >
                     <div className={styles.valiContainer}>
+                        {/* 타이머 ==========> */}
                         {isTimerActive && (
                             <span className={styles.timerContainer}>
                                 {formatTime(timerCount)}
@@ -160,18 +164,21 @@ export default function Signup() {
                             onChange={(e) => setVerificationCode(e.target.value)}
                             className={styles.inputField}
                         />
+                        
+                       
+                        {/* 인증번호 확인 버튼 ============> */}
                         <button
                             className={styles.emailValiBtn}
                             style={{
-                                backgroundColor: verificationCode.length === 6 && isBtnDisable ? "var(--primary-color)" : "#e3e3e3",
-                                color: verificationCode.length === 6 ? "white" : "",
-                                cursor: isBtnDisable ? "not-allowed" : "pointer"
+                                // color: verificationCode.length === 6 ? "white" : "",
+                                // cursor: isBtnDisable ? "not-allowed" : "pointer"
                             }}
                             onClick={handleCodeVerification}
                             type="button"
                             disabled={isBtnDisable}
                         >
                             확인
+                            
                         </button>
                     </div>
                 </Form.Item>
