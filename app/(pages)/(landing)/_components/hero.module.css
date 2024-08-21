@@ -61,7 +61,7 @@
   background-position: 0 0;
   background-size: auto;
   pointer-events: none;
-  opacity: 0.12;
+  opacity: 0.22;
   transition: opacity .4s cubic-bezier(.445, .05, .55, .95); 
   visibility: visible;
   z-index: 4;
