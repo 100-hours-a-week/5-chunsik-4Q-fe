@@ -16,6 +16,12 @@
 
 }
 
+.emailFormContainer {
+    /* background-color: rebeccapurple; */
+    position: relative;
+    /* height: 110px; */
+}
+
 .emailcontainer {
     position: relative;
 }
@@ -35,7 +41,7 @@
     display: flex;
     align-items: center;
     /* justify-content: center; */
-    position: relative;
+    /* position: relative; */
 
 }
 
@@ -50,10 +56,11 @@
     border-radius: 8px;
     padding: 0 12px;
     position: absolute;
-    top: 10px;
+    top: 40px;
     right: 14px;
     background-color: var(--primary-color);
     color: #fff;
+    z-index: 5;
 }
 
 .timerContainer {
@@ -81,6 +88,7 @@
     /* right: 14px; */
     margin-left: 10px;
     position: absolute;
+    top: 10px;
     right: 14px;
     color: #fff;
 

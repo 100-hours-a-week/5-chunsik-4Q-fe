@@ -11,14 +11,12 @@
     border-bottom: 1px solid #F2F2F2;
     /*overflow: hidden;*/
     z-index: 100;
-
-     background: rgba(255, 255, 255, 0.67);
+    background: rgba(255, 255, 255, 0.67);
     /*background-color: red;*/
     /*border-radius: 16px;*/
     /*box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);*/
     backdrop-filter: blur(11.2px);
     -webkit-backdrop-filter: blur(11.2px);
-
 }
 
 

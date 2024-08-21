@@ -1,10 +1,11 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Form, Input, Button, AutoComplete, message } from "antd";
-import type { AutoCompleteProps } from "antd";
+import { Form, Input, Button, message } from "antd";
+
 import styles from "./page.module.css";
-import { requestEmailVerification, verifyEmailCode } from "../../../../service/auth_api";
+import { redirect } from 'next/navigation';
+import { requestEmailVerification, verifyEmailCode, requestRegister } from "../../../../service/auth_api";
 
 export default function Signup() {
     const [email, setEmail] = useState("");
@@ -13,20 +14,8 @@ export default function Signup() {
     const [isTimerActive, setIsTimerActive] = useState(false);
     const [timerCount, setTimerCount] = useState(180);
     const [buttonText, setButtonText] = useState("이메일 인증");
+    const [valiButtonText, setValiButtonText] = useState("확인");
     const [verificationCode, setVerificationCode] = useState("");
-    const [options, setOptions] = useState<AutoCompleteProps['options']>([]);
-
-    const handleSearch = (value: string) => {
-        setOptions(() => {
-            if (!value || value.includes('@')) {
-                return [];
-            }
-            return ['gmail.com', 'naver.com', 'daum.net', 'nate.com', 'outlook.com'].map((domain) => ({
-                label: `${value}@${domain}`,
-                value: `${value}@${domain}`,
-            }));
-        });
-    };
 
     const handleEmailChange = (value: string) => {
         setEmail(value);
@@ -36,22 +25,22 @@ export default function Signup() {
 
     const handleEmailVerification = async () => {
         setIsBtnDisable(true);
-        setButtonText("이메일 재전송");
+
         if (isEmailValid) {
             try {
                 const successMessage = await requestEmailVerification(email); 
-                setIsBtnDisable(true);// 성공 메시지 받기
-                message.success(successMessage); // 성공 메시지 표시
-                
+                message.success(successMessage); 
+                setButtonText("이메일 재전송");
+                setIsBtnDisable(false);
                 setIsTimerActive(true);
-                setTimerCount(180); // 타이머를 3분으로 초기화
+                setTimerCount(180); 
             } catch (error) {
                 message.error(error.message || "이메일 인증 요청에 실패했습니다.");
                 setIsBtnDisable(false); // 실패 시 다시 버튼 활성화
             }
         } else {
             message.error("유효한 이메일을 입력해주세요.");
-            setIsBtnDisable(false); // 유효하지 않은 이메일일 경우 다시 버튼 활성화
+            setIsBtnDisable(false); 
         }
     };
 
@@ -59,8 +48,13 @@ export default function Signup() {
         if (verificationCode.length === 6) {
             try {
                 const result = await verifyEmailCode(email, verificationCode);
-                message.success("이메일 인증이 완료되었습니다.");
-                setIsTimerActive(false); // 타이머 중지
+                if (result.success) {
+                    if (valiButtonText !== "인증 성공") {
+                        message.success("이메일 인증이 완료되었습니다.");
+                    }
+                    setIsTimerActive(false); 
+                    setValiButtonText("인증 성공");  
+                }
             } catch (error) {
                 message.error(error.message || "이메일 인증에 실패했습니다.");
             }
@@ -68,6 +62,7 @@ export default function Signup() {
             message.error("6자리 인증번호를 입력해주세요.");
         }
     };
+    
 
     useEffect(() => {
         if (isTimerActive && timerCount > 0) {
@@ -89,8 +84,21 @@ export default function Signup() {
             .padStart(2, "0")}`;
     };
 
-    const onFinish = (values: any) => {
-        console.log("Success:", values);
+    const onFinish = async (values: any) => {
+        if (valiButtonText !== "인증 성공") {
+            message.error("이메일 인증을 해주세요.");
+            return;
+        }
+
+        try {
+            const response = await requestRegister(values.email, values.password, values.nickname);
+            if (response.success) {
+                message.success("회원가입이 완료되었습니다.");
+                redirect('/mypage');
+            }
+        } catch (error) {
+            message.error("회원가입에 실패했습니다.");
+        }
     };
 
     const onFinishFailed = (errorInfo: any) => {
@@ -110,32 +118,25 @@ export default function Signup() {
                 autoComplete="off"
                 layout="vertical"
             >
+                <div className={styles.emailFormContainer}>
                 <Form.Item
                     label="이메일"
                     name="email"
                     rules={[{ required: true, message: "이메일을 입력해주세요." }]}
                     className={styles.emailcontainer}
                 >
-                    <AutoComplete
-                        options={options}
-                        onSearch={handleSearch}
-                        onChange={handleEmailChange}
-                        value={email}
-                        style={{ width: '100%', height: '50px' }}
-                    >
-                        <Input
-                            placeholder="example@example.com"
-                            className={styles.inputField}
-                        />
-                    </AutoComplete>
-                    {/* 이메일 전송 버튼 ==============> */}
+                    <Input
+                    placeholder="이메일을 입력해주세요."
+                    // value={email}
+                    // onChange={(e) => setEmail(e.target.value)}
+                    className={styles.inputField}
+                />
+                 </Form.Item>
                     <button
                         className={styles.emailBtn}
                         style={{
                             backgroundColor: isBtnDisable ? "#e3e3e3" : "var(--primary-color)",
-                            // backgroundColor: isEmailValid ? "var(--primary-color)" : "",
-                            // color: isEmailValid ? "white" : "",
-                            // cursor: isBtnDisable ? "not-allowed" : "pointer"
+                            cursor: isBtnDisable ? "not-allowed" : "pointer"
                         }}
                         onClick={handleEmailVerification}
                         type="button"
@@ -143,15 +144,17 @@ export default function Signup() {
                     >
                         {buttonText}
                     </button>
-                </Form.Item>
+                    </div>
 
+                    
+                    
+                    <div className={styles.emailFormContainer}>
                 <Form.Item
                     name="emailVerification"
                     rules={[{ required: true, message: "이메일 인증 번호를 입력해주세요." }]}
                     className={styles.emailValiContainer}
                 >
                     <div className={styles.valiContainer}>
-                        {/* 타이머 ==========> */}
                         {isTimerActive && (
                             <span className={styles.timerContainer}>
                                 {formatTime(timerCount)}
@@ -166,23 +169,19 @@ export default function Signup() {
                         />
                         
                        
-                        {/* 인증번호 확인 버튼 ============> */}
-                        <button
+                    </div>
+                </Form.Item>
+                 <button
                             className={styles.emailValiBtn}
                             style={{
-                                // color: verificationCode.length === 6 ? "white" : "",
-                                // cursor: isBtnDisable ? "not-allowed" : "pointer"
+                                cursor: valiButtonText === "인증 성공" ? "not-allowed" : "pointer"
                             }}
                             onClick={handleCodeVerification}
                             type="button"
-                            disabled={isBtnDisable}
                         >
-                            확인
-                            
+                            {valiButtonText}
                         </button>
-                    </div>
-                </Form.Item>
-
+</div>
                 <Form.Item
                     label="비밀번호"
                     name="password"

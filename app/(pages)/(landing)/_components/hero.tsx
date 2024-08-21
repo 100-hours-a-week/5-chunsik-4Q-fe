@@ -10,6 +10,7 @@ import hero3 from "../../../../public/images/hero/hero3.png";
 export default function Hero() {
     return (
         <div className={styles.container} style={{backgroundImage: `url(${bg.src})`}}>
+            <div className={styles.noise}></div>
             <div className={styles.heading}>
                 <p className={styles.introTitle}>AI기반 포토큐알 이미지 생성 서비스</p>
                 
