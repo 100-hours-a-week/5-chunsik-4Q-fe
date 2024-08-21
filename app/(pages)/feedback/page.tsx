@@ -56,14 +56,14 @@ export default function Page() {
 
   const onSubmit = async (values: any) => {
     const feedbackData = {
-      starRate: values.starRate,
+      starRate: parseInt(values.starRate),
       comment: values.comment,
-      ease: values.ease,
-      design: values.design,
-      performance: values.performance,
-      feature: values.feature,
-      recommendation: values.recommendation,
-      reuse: values.reuse,
+      ease: parseInt(values.ease),
+      design: parseInt(values.design),
+      performance: parseInt(values.performance),
+      feature: values.feature === 'true', 
+      recommendation: values.feature === 'true', 
+      reuse: values.feature === 'true', 
       gender: values.gender,
       ageGroup: parseInt(values.ageGroup),
     };
