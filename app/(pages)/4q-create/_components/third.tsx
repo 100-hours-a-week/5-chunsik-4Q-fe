@@ -106,20 +106,20 @@ if (storedFormDataString) {
             </div>
             <div className={styles.canvasContainer}>
                 <div className={styles.backgroundContainer}>
-                    <Stage width={300} height={300} ref={stageRef} >
+                    <Stage width={280} height={280} ref={stageRef} >
                         <Layer>
                             <Image
                                 image={backgroundImage}
-                                width={300}
-                                height={300}
+                                width={280}
+                                height={280}
                                 // x={30}
                                 // y={20}
                                 onClick={() => setSelected(!isSelected)}
                             />
                             <Image
                                 image={qrImage}
-                                width={100}
-                                height={100}
+                                width={80}
+                                height={80}
                                 x={qrPosition.x}
                                 y={qrPosition.y}
                                 draggable
@@ -179,8 +179,10 @@ if (storedFormDataString) {
                     <Tooltip title="텍스트를 더블클릭하면 삭제버튼이 활성화됩니다.">
                     <Button onClick={deleteText} type="primary" icon={<HiTrash />} size="small" disabled={selectedId === null} />
                     </Tooltip>
+                    <Tooltip title="텍스트를 더블클릭하고 색상을 변경할 수 있어요.">
                     <ColorPicker value={selectedColor} onChange={(color) => handleColorChange(color.toHexString())}
                                  size="small" />
+                                 </Tooltip>
                 </div>
             </div>
         </div>

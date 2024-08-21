@@ -4,8 +4,8 @@ import styles from './second.module.css';
 import mock from '../../../../public/images/mock_4q.png';
 // import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { ArrowLeftOutlined, ArrowRightOutlined } from '@ant-design/icons';
-import { FaDice } from "react-icons/fa6";
-import { Button } from 'antd';
+// import { FaDice } from "react-icons/fa6";
+// import { Button } from 'antd';
 import Lottie from 'react-lottie-player';
 import loadingLottie from '../../../../public/rotties/image-loading.json';
 

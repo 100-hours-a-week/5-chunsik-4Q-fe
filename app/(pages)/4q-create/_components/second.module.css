@@ -47,13 +47,13 @@
 
 
 .subTitle {
-    height: 30px;
+    height: 20px;
     /*background-color: black;*/
     display: flex;
     justify-content: center;
     align-items: center;
     /*display: inline;*/
-    margin: 10px 0 10px 0;
+    margin: 6px 0;
     font-size: 15px;
     color: #000;
 

@@ -14,13 +14,13 @@
 }
 
 .subTitle {
-    height: 30px;
+    height: 20px;
     /*background-color: black;*/
     display: flex;
     justify-content: center;
     align-items: center;
     /*display: inline;*/
-    margin: 10px 0;
+    margin: 5px 0;
     font-size: 15px;
     color: #000;
 }
@@ -35,8 +35,8 @@
 }
 
 .backgroundContainer {
-    width: 335px;
-    height: 335px;
+    width: 315px;
+    height: 315px;
     background-color: #fff;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
     border-radius: 10px;

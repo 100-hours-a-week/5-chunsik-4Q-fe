@@ -8,6 +8,13 @@ import result from '../../../../public/images/mock/concert.png';
 import { useState } from "react";
 import ShareModal from '../(modals)/shareModal';
 
+const storedFormDataString = sessionStorage.getItem('form_data');
+let storedFormData;
+
+if (storedFormDataString) {
+    storedFormData = JSON.parse(storedFormDataString);
+}
+
 
 export default function Page() {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -28,14 +35,14 @@ export default function Page() {
         <div className={styles.container}>
             <div className={styles.photoContainer}>
                 <Image
-                    width={250}
-                    height={370}
+                    width={300}
+                    height={300}
                     src={result.src}
                     placeholder="미리보기"
                 />
             </div>
             <div className={styles.title}>
-                전시회 안내포토
+                {storedFormData.title}
             </div>
             <div className={styles.btnContainer}>
                 <Button type="primary" icon={<LuDownload />} size="large" className={styles.downloadBtn}>
