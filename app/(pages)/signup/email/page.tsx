@@ -213,6 +213,7 @@ export default function Signup() {
                     <Input
                         placeholder="2~16자 이내로 입력해주세요"
                         className={styles.inputField}
+                        maxLength={16}
                     />
                 </Form.Item>
 
