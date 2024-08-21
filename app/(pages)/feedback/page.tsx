@@ -61,9 +61,9 @@ export default function Page() {
       ease: parseInt(values.ease),
       design: parseInt(values.design),
       performance: parseInt(values.performance),
-      feature: values.feature === 'true', 
-      recommendation: values.feature === 'true', 
-      reuse: values.feature === 'true', 
+      feature: Boolean(values.feature), 
+      recommendation: Boolean(values.recommendation), 
+      reuse: Boolean(values.reuse), 
       gender: values.gender,
       ageGroup: parseInt(values.ageGroup),
     };

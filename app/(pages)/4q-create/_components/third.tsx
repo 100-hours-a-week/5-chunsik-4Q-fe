@@ -22,6 +22,7 @@ interface TextNode {
     color: string;
 }
 
+
 export default function Third() {
     const [qrPosition, setQrPosition] = useState({ x: 50, y: 50 });
     const [textNodes, setTextNodes] = useState<TextNode[]>([]);
@@ -51,10 +52,19 @@ export default function Third() {
         }
     };
 
+    const storedFormDataString = sessionStorage.getItem('form_data');
+let storedFormData;
+
+if (storedFormDataString) {
+    storedFormData = JSON.parse(storedFormDataString);
+}
+
+
+
     const addText = () => {
         const newText: TextNode = {
             id: textNodes.length ? Math.max(...textNodes.map(node => node.id)) + 1 : 1,
-            text: ' 챈 잘생겼다',
+            text: storedFormData.title,
             x: 50,
             y: 50,
             fontSize: 20,

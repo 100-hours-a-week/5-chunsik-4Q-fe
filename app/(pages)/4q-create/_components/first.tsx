@@ -21,7 +21,6 @@ export default function First({ formRef, onSubmit }: FirstProps) {
     const inputRef = useRef<InputRef>(null);
 
     useEffect(() => {
-        // Load saved data from sessionStorage on mount
         const savedData = JSON.parse(sessionStorage.getItem(STORAGE_KEY) || '{}');
         if (savedData) {
             formRef.current?.setFieldsValue(savedData);
@@ -39,7 +38,7 @@ export default function First({ formRef, onSubmit }: FirstProps) {
 
     const handleFinish = (values: any) => {
         console.log('Form values:', values);
-        onSubmit();  // Trigger the callback to move to the next step
+        onSubmit(); 
     };
 
     const handleValuesChange = (changedValues: any, allValues: any) => {
@@ -57,7 +56,7 @@ export default function First({ formRef, onSubmit }: FirstProps) {
     const handleTagSelection = (selectedTags: string[]) => {
         setValue(selectedTags);
         const currentValues = formRef.current?.getFieldsValue();
-        updateSessionStorage(selectedTags, currentValues); // Update session storage immediately
+        updateSessionStorage(selectedTags, currentValues); 
         handleCloseModal();
     };
 
@@ -65,7 +64,7 @@ export default function First({ formRef, onSubmit }: FirstProps) {
         const updatedTags = value.filter(t => t !== tag);
         setValue(updatedTags);
         const currentValues = formRef.current?.getFieldsValue();
-        updateSessionStorage(updatedTags, currentValues); // Update session storage immediately
+        updateSessionStorage(updatedTags, currentValues); 
     };
 
     return (
