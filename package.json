@@ -28,6 +28,7 @@
     "next": "^14.2.5",
     "next-plugin-antd-less": "^1.8.0",
     "next-transpile-modules": "^10.0.1",
+    "qrcode": "^1.5.4",
     "rc-dialog": "^9.5.2",
     "rc-pagination": "^3.7.0",
     "react": "^18.3.1",
