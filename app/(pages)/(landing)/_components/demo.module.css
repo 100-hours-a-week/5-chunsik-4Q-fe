@@ -41,7 +41,7 @@
     width: 140px;
     height: 36px;
     color: black;
-    background-color: white;
+    /* background-color: white; */
     font-size: 15px;
     border-radius: 4px;
     display: flex;
@@ -50,12 +50,17 @@
     justify-content: center;
     /* margin-top: 2px; */
     /* z-index: 100; */
-    border: 1px solid black;
+    border: 1px solid #fff;
 
     position: absolute;
     top: 114px;
 
     cursor: pointer;
+
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
+
+    
 }
 
 
@@ -77,6 +82,7 @@
     position: absolute;
     top: -5%;
     background-color: black;
+    
 
 }
 

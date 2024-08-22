@@ -16,7 +16,6 @@ export default function Hero() {
             <div className={styles.noise}></div>
             <div className={styles.heading}>
                 <p className={styles.introTitle}>AI기반 포토큐알 이미지 생성 서비스</p>
-                
                 <h1>Photo QR</h1>
                 <h2>WITH 4Q</h2>
                 {/*<button>지금 체험하기</button>*/}
