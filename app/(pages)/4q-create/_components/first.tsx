@@ -79,7 +79,7 @@ export default function First({ formRef, onSubmit }: FirstProps) {
                     name="category"
                     rules={[{ required: true, message: '카테고리를 선택해주세요!' }]}
                 >
-                    <Select placeholder="카테고리 선택" variant="filled" className={styles.field} style={{ height: '50px' }}>
+                    <Select placeholder="카테고리 선택" variant="filled" className={styles.cate_field} style={{ height: '50px' }}>
                         <Option value="메뉴">메뉴</Option>
                         <Option value="전시회">전시회</Option>
                         <Option value="콘서트">콘서트</Option>

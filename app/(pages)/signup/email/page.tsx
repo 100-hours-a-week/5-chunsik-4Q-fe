@@ -150,6 +150,7 @@ export default function Signup() {
                         name="email"
                         rules={[{ required: true, message: "이메일을 입력해주세요." }]}
                         className={styles.emailcontainer}
+                        
                     >
                         <AutoComplete
                             options={options}
@@ -157,7 +158,7 @@ export default function Signup() {
                             onSearch={handleSearch}
                             placeholder="이메일을 입력해주세요."
                             value={email}
-                            style={{height: '50px'}}
+                            style={{height: '50px', fontSize: '16px'}}
                             className={styles.inputField}
                         />
                     </Form.Item>

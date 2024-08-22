@@ -53,6 +53,11 @@ export default function Page() {
             next();
         } else {
             message.success('포큐 생성 완료!');
+            // const storageKey = 'form_data'; 
+    
+            // if(sessionStorage.getItem(storageKey)) {
+            //     sessionStorage.removeItem(storageKey);
+            // }
             router.push('/4q-create/download');
         }
     };
