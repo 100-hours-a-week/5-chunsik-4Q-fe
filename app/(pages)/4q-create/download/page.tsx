@@ -2,11 +2,13 @@
 
 import { useState, useEffect } from "react";
 import styles from './page.module.css';
-import { Image, Button, Modal } from 'antd';
+import { Image, Button, Typography } from 'antd';
 import { LuDownload } from "react-icons/lu";
 import { BiSolidShareAlt } from "react-icons/bi";
 import result from '../../../../public/images/mock/concert.png';
 import ShareModal from '../(modals)/shareModal';
+
+const { Paragraph, Text } = Typography;
 
 interface FormData {
     title: string;
@@ -48,8 +50,13 @@ export default function Page() {
                     placeholder="미리보기"
                 />
             </div>
+
             <div className={styles.title}>
                 {storedFormData?.title || "No title available"}
+            </div>
+            <div className={styles.shortenUrlContainer}>
+                <p>단축 URL: </p><Paragraph copyable style={{margin: '1px'}}>{storedFormData?.url}</Paragraph>
+                {/* {storedFormData?.url} */}
             </div>
             <div className={styles.btnContainer}>
                 <Button type="primary" icon={<LuDownload />} size="large" className={styles.downloadBtn}>

@@ -148,6 +148,7 @@ export default function Signup() {
                     <Form.Item
                         label="이메일"
                         name="email"
+                        style={{fontSize: '16px'}}
                         rules={[{ required: true, message: "이메일을 입력해주세요." }]}
                         className={styles.emailcontainer}
                         

@@ -28,6 +28,7 @@ export default function Third() {
   const qrImageRef = useRef<Konva.Image>(null);
   const transformerRef = useRef<Konva.Transformer>(null);
 
+
   const convertQRCode = () => {
     const canvas = document
       .getElementById("myqrcode")
@@ -216,7 +217,7 @@ export default function Third() {
         </div>
         <QRCode
           id="myqrcode"
-          value="https://www.naver.com"
+          value={storedFormData.url}
           bgColor="#fff"
           style={{ margin: 16, display: 'none' }}
         />
