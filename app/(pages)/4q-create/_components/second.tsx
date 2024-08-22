@@ -61,16 +61,18 @@ export default function Second() {
     if (loading) {
         return (
             <div className={styles.loadingContainer}>
+               <div className={styles.loadingTextContainer}>
+               <p>잠시만 기다려주세요.</p>
+               <p>배경 이미지가 생성중입니다.</p>
+               </div>
+            
                 <Lottie
                     loop
                     animationData={loadingLottie}
                     play
                     style={{ width: 400, height: 400 }}
                 />
-                <div className={styles.loadingText}>
-                    <p>잠시만 기다려주세요.</p>
-                    <p>잠시만 기다려주세요. 배경이미지가 생성중입니다.</p>
-                </div>
+        
             </div>
         );
     }

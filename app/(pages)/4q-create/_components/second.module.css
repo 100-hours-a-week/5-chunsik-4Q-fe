@@ -9,16 +9,35 @@
 
 .loadingContainer {
     width: 100%;
-    height: 80%;
-    /* background-color: red; */
+    height: 100%;
+    /* background-color: green; */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     position: relative;
-    
     /* padding-bottom: 30px; */
+    padding-top: 50px;
 }
+
+.loadingTextContainer {
+    position: absolute;
+    top: 60px;
+    /* margin-top: 80px; */
+    font-size: 16px;
+}
+
+.loadingContainer p {
+    /* background-color: aqua; */
+    color: #000;
+    height: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+
 
 .loadingText {
     /* position: absolute;

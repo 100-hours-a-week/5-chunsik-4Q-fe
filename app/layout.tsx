@@ -11,7 +11,7 @@ import styles from './layout.module.css'
 export const metadata: Metadata = {
   title: {
     template: "4Q | %s",
-    default: "4Q",
+    default: "4Q | 포토 큐알 생성 서비스",
   },
   description: '포토 큐알 자동 생성 서비스',
     icons: {
