@@ -11,12 +11,12 @@ export const feedbackSubmit = async (feedbackData: any) => {
         });
 
         if (!response.ok) {
-            
             throw new Error("Failed to submit feedback");
         }
-        const data = await response.json();
-        console.log(data);
-        return data;
+        return { success: true };  
+        // const data = await response.json();
+        // console.log(data);
+        // return data;
     } catch (error) {
         console.error("Error submitting feedback:", error);
         throw error;

@@ -72,10 +72,13 @@ export default function Page() {
     console.log('Submitting feedback:', JSON.stringify(feedbackData, null, 2));
 
     try {
-      await feedbackSubmit(feedbackData);
-      showModal();
+      const response = await feedbackSubmit(feedbackData);
+      if(response.success) {
+        showModal();
+      } else {
+        message.error("피드백 작성에 실패했습니다. 다시 시도해주세요.");
+      }
     } catch (error) {
-      message.error("피드백 작성에 실패했습니다. 다시 시도해주세요.");
       console.error('Failed to submit feedback: ', error);
     }
   };
