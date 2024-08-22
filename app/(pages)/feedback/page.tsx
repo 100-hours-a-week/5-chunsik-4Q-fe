@@ -18,6 +18,7 @@ import {
   Form,
   Select,
   Radio,
+  message,
 } from 'antd';
 import Link from "next/link";
 import { feedbackSubmit } from "../../../service/feedback_api";
@@ -74,6 +75,7 @@ export default function Page() {
       await feedbackSubmit(feedbackData);
       showModal();
     } catch (error) {
+      message.error("피드백 작성에 실패했습니다. 다시 시도해주세요.");
       console.error('Failed to submit feedback: ', error);
     }
   };
