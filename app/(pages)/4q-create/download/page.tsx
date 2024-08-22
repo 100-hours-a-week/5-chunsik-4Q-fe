@@ -12,6 +12,7 @@ const { Paragraph, Text } = Typography;
 
 interface FormData {
     title: string;
+    url: string;
     // Add any other properties that are part of your form data
 }
 
