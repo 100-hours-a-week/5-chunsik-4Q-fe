@@ -7,6 +7,11 @@ import mock from "../../../../public/images/mock_4q.png";
 import Konva from "konva";
 import { PiTextTBold } from "react-icons/pi";
 import { HiTrash } from "react-icons/hi";
+import { getShortenUrl } from "../../../../service/shorten_api";
+
+interface QrUrl {
+  shorten_url: string;
+}
 
 interface TextNode {
   id: number;
@@ -18,16 +23,56 @@ interface TextNode {
   color: string;
 }
 
+interface FormData {
+    url: string;
+    shorten_url?: string; 
+    title: string;
+}
+
 export default function Third() {
   const [qrPosition, setQrPosition] = useState({ x: 50, y: 50 });
   const [textNodes, setTextNodes] = useState<TextNode[]>([]);
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const [selectedColor, setSelectedColor] = useState<string>("#000000");
   const [qrImageUrl, setQrImageUrl] = useState<string>("");
+  const [storedFormData, setStoredFormData] = useState<FormData | null>(null);
+  const [shortenUrl, setShortenUrl] = useState<QrUrl[]>([]);
   const stageRef = useRef<Konva.Stage>(null);
   const qrImageRef = useRef<Konva.Image>(null);
   const transformerRef = useRef<Konva.Transformer>(null);
+  const [isSelected, setSelected] = useState(false);
 
+  useEffect(() => {
+    const fetchShortenUrl = async () => {
+        if (typeof window !== 'undefined') {
+            const storedFormDataString = sessionStorage.getItem('form_data');
+            if (storedFormDataString) {
+                const parsedFormData = JSON.parse(storedFormDataString);
+                setStoredFormData(parsedFormData);
+
+                if (parsedFormData.url) {
+                    try {
+                        const shorten_url = await getShortenUrl(parsedFormData.url);
+                        
+                        
+                  
+                        const updatedFormData = { ...parsedFormData, shorten_url };
+                        sessionStorage.setItem('form_data', JSON.stringify(updatedFormData));
+                        setShortenUrl(shorten_url);
+                        console.log('shorten:', shortenUrl);
+                        
+                        
+                      } catch (error) {
+                        console.error('Failed to shorten URL:', error);
+                    }
+                    
+                }
+            }
+        }
+    };
+
+    fetchShortenUrl();
+}, []);
 
   const convertQRCode = () => {
     const canvas = document
@@ -42,8 +87,6 @@ export default function Third() {
   const mockImageUrl = mock.src;
   const [backgroundImage] = useImage(mockImageUrl);
   const [qrImage] = useImage(qrImageUrl);
-
-  const [isSelected, setSelected] = useState(false);
 
   const handleDragEnd = (e: Konva.KonvaEventObject<DragEvent>) => {
     setQrPosition({
@@ -62,26 +105,21 @@ export default function Third() {
     }
   };
 
-  const storedFormDataString = sessionStorage.getItem("form_data");
-  let storedFormData;
-
-  if (storedFormDataString) {
-    storedFormData = JSON.parse(storedFormDataString);
-  }
-
   const addText = () => {
-    const newText: TextNode = {
-      id: textNodes.length
-        ? Math.max(...textNodes.map((node) => node.id)) + 1
-        : 1,
-      text: storedFormData.title,
-      x: 50,
-      y: 50,
-      fontSize: 20,
-      isEditing: false,
-      color: selectedColor,
-    };
-    setTextNodes([...textNodes, newText]);
+    if (storedFormData) {
+      const newText: TextNode = {
+        id: textNodes.length
+          ? Math.max(...textNodes.map((node) => node.id)) + 1
+          : 1,
+        text: storedFormData.title,
+        x: 50,
+        y: 50,
+        fontSize: 20,
+        isEditing: false,
+        color: selectedColor,
+      };
+      setTextNodes([...textNodes, newText]);
+    }
   };
 
   const deleteText = () => {
@@ -217,7 +255,8 @@ export default function Third() {
         </div>
         <QRCode
           id="myqrcode"
-          value={storedFormData.url}
+          value={shortenUrl || ""} 
+          // value="https://developer.mozilla.org/ko/docs/Web/API/Document_Object_Model/Whitespace"
           bgColor="#fff"
           style={{ margin: 16, display: 'none' }}
         />

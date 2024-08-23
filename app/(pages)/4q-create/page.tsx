@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useRef, useState } from 'react';
+import React, {  useEffect, useRef, useState } from 'react';
 import { Button, Steps, message, theme } from 'antd';
 import { useRouter } from 'next/navigation'
 import styles from './page.module.css';
@@ -8,14 +8,15 @@ import First from './_components/first';
 import Second from "./_components/second";
 import Third from "./_components/third";
 
-
-// import {router} from "next/client";
-
 export default function Page() {
     const { token } = theme.useToken();
     const [current, setCurrent] = useState(0);
     const formRef = useRef<any>(null);
     const router = useRouter();
+
+    // useEffect(() => {
+    //     sessionStorage.clear();
+    // }, []);
 
     // Function to move to the next step
     const next = () => {

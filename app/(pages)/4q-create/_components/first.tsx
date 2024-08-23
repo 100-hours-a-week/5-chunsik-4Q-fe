@@ -19,6 +19,10 @@ export default function First({ formRef, onSubmit }: FirstProps) {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [value, setValue] = useState<string[]>([]);
     const inputRef = useRef<InputRef>(null);
+    
+    // useEffect(() => {
+    //     sessionStorage.clear();
+    // }, []);
 
     useEffect(() => {
         const savedData = JSON.parse(sessionStorage.getItem(STORAGE_KEY) || '{}');

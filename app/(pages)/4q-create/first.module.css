@@ -1,0 +1,19 @@
+.container {
+    padding: 20px;
+}
+
+.field {
+    height: 50px;
+    font-size: 14px;
+    /*border-radius: 50px;*/
+    text-align: left;
+    /*padding-left: 10px;*/
+}
+
+.formItem .ant-form-item-explain {
+    text-align: left !important;
+}
+
+.field {
+    width: 100%;
+}

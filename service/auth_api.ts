@@ -36,7 +36,7 @@ export const verifyEmailCode = async (email, code) => {
             throw new Error("이메일 인증에 실패했습니다.");
         }
 
-        return { success: true };  // Return a specific success response
+        return { success: true };  
     } catch (error) {
         console.error("Error in verifyEmailCode:", error);
         throw error;

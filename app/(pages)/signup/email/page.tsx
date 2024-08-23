@@ -159,7 +159,7 @@ export default function Signup() {
                             onSearch={handleSearch}
                             placeholder="이메일을 입력해주세요."
                             value={email}
-                            style={{height: '50px', fontSize: '16px'}}
+                            style={{height: '50px'}}
                             className={styles.inputField}
                         />
                     </Form.Item>

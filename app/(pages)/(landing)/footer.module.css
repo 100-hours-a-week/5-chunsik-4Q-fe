@@ -1,0 +1,27 @@
+.container {
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 40px;
+    justify-content: center;
+}
+
+.logo {
+    width: 60px;
+    filter:grayscale(100%) opacity(0.8);
+}
+
+.text {
+    font-size: 14px;
+    color: #CCCCCC;
+    margin: 10px;
+}
+
+.information {
+    font-size: 14px;
+    color: #CCCCCC;
+    margin: 10px;
+}

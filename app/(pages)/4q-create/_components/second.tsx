@@ -9,11 +9,44 @@ import { ArrowLeftOutlined, ArrowRightOutlined } from '@ant-design/icons';
 import Lottie from 'react-lottie-player';
 import loadingLottie from '../../../../public/rotties/image-loading.json';
 
+
 export default function Second() {
     const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, skipSnaps: false });
     const [selectedIndex, setSelectedIndex] = useState(0);
     const [loadings, setLoadings] = useState<boolean[]>([]);
     const [loading, setLoading] = useState(true); // State to manage the loading visibility
+    // const [storedFormData, setStoredFormData] = useState<FormData | null>(null);
+   
+    // interface FormData {
+    //     url: string;
+    //     shorten_url?: string; 
+    // }
+
+    // useEffect(() => {
+    //     const fetchShortenUrl = async () => {
+    //         if (typeof window !== 'undefined') {
+    //             const storedFormDataString = sessionStorage.getItem('form_data');
+    //             if (storedFormDataString) {
+    //                 const parsedFormData = JSON.parse(storedFormDataString);
+    //                 setStoredFormData(parsedFormData);
+
+    //                 if (parsedFormData.url) {
+    //                     try {
+    //                         const shorten_url = await getShortenUrl(parsedFormData.url);
+    //                         const updatedFormData = { ...parsedFormData, shorten_url };
+    //                         setStoredFormData(updatedFormData);
+    //                         sessionStorage.setItem('form_data', JSON.stringify(updatedFormData));
+    //                     } catch (error) {
+    //                         console.error('Failed to shorten URL:', error);
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     };
+
+    //     fetchShortenUrl();
+    // }, []);
+
 
     const onSelect = useCallback(() => {
         if (!emblaApi) return;
