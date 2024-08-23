@@ -217,7 +217,7 @@ export default function Third() {
               size="small"
             />
           </Tooltip>
-          <Tooltip title="텍스트를 더블클릭하면 삭제버튼이 활성화됩니다.">
+          <Tooltip title="텍스트를 더블클릭하고 삭제버튼이 활성화">
             <Button
               onClick={deleteText}
               type="primary"
@@ -226,7 +226,7 @@ export default function Third() {
               disabled={selectedId === null}
             />
           </Tooltip>
-          <Tooltip title="텍스트를 더블클릭하고 색상을 변경할 수 있어요.">
+          <Tooltip title="텍스트를 더블클릭하고 색상을 변경">
             <ColorPicker
               value={selectedColor}
               onChange={(color) => handleColorChange(color.toHexString())}
