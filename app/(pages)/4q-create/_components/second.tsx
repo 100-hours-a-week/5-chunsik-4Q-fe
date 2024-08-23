@@ -5,10 +5,13 @@ import { ArrowLeftOutlined, ArrowRightOutlined } from '@ant-design/icons';
 import Lottie from 'react-lottie-player';
 import loadingLottie from '../../../../public/rotties/image-loading.json';
 import { generatePhotoImg } from '../../../../service/photo_api';
+import { getShortenUrl } from "../../../../service/shorten_api";
 
 interface FormData {
     category: string;
     tags: string;
+    url: string;
+    shorten_url?: string;
 }
 
 export default function Second() {
@@ -25,6 +28,22 @@ export default function Second() {
             setStoredFormData(parsedData);
         }
     }, []);
+
+    useEffect(() => {
+        const fetchShortenUrl = async () => {
+          if (storedFormData?.url) {
+            try {
+              const shorten_url = await getShortenUrl(storedFormData.url);
+            //   console.log(storedFormData.url);
+              const updatedFormData = { ...storedFormData, shorten_url };
+              sessionStorage.setItem('form_data', JSON.stringify(updatedFormData));
+            } catch (error) {
+              console.error('Failed to shorten URL:', error);
+            }
+          }
+        };
+        fetchShortenUrl();
+      }, [storedFormData]);
 
     useEffect(() => {
         const fetchImages = async () => {

@@ -18,7 +18,9 @@ const nextConfig = {
     experimental: { esmExternals: true },
     transpilePackages: [ 'antd', '@ant-design', 'rc-util', 'rc-pagination', 'rc-picker', 'rc-notification', 'rc-tooltip' ],
     webpack: (config) => {
+        config.infrastructureLogging = { debug: /PackFileCache/ }
         config.resolve.alias.canvas = false;
+        config.cache = false;
         config.module.rules.push({
             test: /\.node$/,
             use: 'raw-loader',

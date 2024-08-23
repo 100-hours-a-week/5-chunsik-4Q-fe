@@ -7,11 +7,6 @@ import mock from "../../../../public/images/mock_4q.png";
 import Konva from "konva";
 import { PiTextTBold } from "react-icons/pi";
 import { HiTrash } from "react-icons/hi";
-import { getShortenUrl } from "../../../../service/shorten_api";
-
-// interface QrUrl {
-//   shorten_url: string;
-// }
 
 interface TextNode {
   id: number;
@@ -24,9 +19,9 @@ interface TextNode {
 }
 
 interface FormData {
-    url: string;
-    shorten_url?: string; 
-    title: string;
+  url: string;
+  shorten_url: string;
+  title: string;
 }
 
 export default function Third() {
@@ -35,7 +30,11 @@ export default function Third() {
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const [selectedColor, setSelectedColor] = useState<string>("#000000");
   const [qrImageUrl, setQrImageUrl] = useState<string>("");
-  const [storedFormData, setStoredFormData] = useState<FormData | null>(null);
+  const [storedFormData, setStoredFormData] = useState<FormData>({
+    url: "",
+    title: "",
+    shorten_url: "",
+  });
   const [shortenUrl, setShortenUrl] = useState<string>("");
   const stageRef = useRef<Konva.Stage>(null);
   const qrImageRef = useRef<Konva.Image>(null);
@@ -43,34 +42,22 @@ export default function Third() {
   const [isSelected, setSelected] = useState(false);
 
   useEffect(() => {
-    const fetchShortenUrl = async () => {
-        if (typeof window !== 'undefined') {
-            const storedFormDataString = sessionStorage.getItem('form_data');
-            if (storedFormDataString) {
-                const parsedFormData = JSON.parse(storedFormDataString);
-                setStoredFormData(parsedFormData);
+    if (typeof window !== 'undefined') {
+      const storedFormDataString = sessionStorage.getItem('form_data');
+      if (storedFormDataString) {
+        const parsedFormData = JSON.parse(storedFormDataString);
+        setStoredFormData(parsedFormData);
+      }
+    }
+  }, []);
 
-                if (parsedFormData.url) {
-                    try {
-                        const shorten_url = await getShortenUrl(parsedFormData.url);
-                    
-                        const updatedFormData = { ...parsedFormData, shorten_url };
-                        sessionStorage.setItem('form_data', JSON.stringify(updatedFormData));
-                        setShortenUrl(shorten_url);
-                        console.log('shorten:', shortenUrl);
-                        
-                        
-                      } catch (error) {
-                        console.error('Failed to shorten URL:', error);
-                    }
-                    
-                }
-            }
-        }
-    };
+  useEffect(() => {
+    setShortenUrl(storedFormData.shorten_url);
+  }, [storedFormData]);
 
-    fetchShortenUrl();
-}, []);
+  useEffect(() => {
+    convertQRCode();
+  }, [shortenUrl]);
 
   const convertQRCode = () => {
     const canvas = document
@@ -146,10 +133,6 @@ export default function Third() {
       transformerRef.current.getLayer()?.batchDraw();
     }
   }, [qrImage, isSelected]);
-
-  useEffect(() => {
-    convertQRCode();
-  }, []);
 
   return (
     <div className={styles.container}>
@@ -254,7 +237,6 @@ export default function Third() {
         <QRCode
           id="myqrcode"
           value={shortenUrl}
-          // value="https://developer.mozilla.org/ko/docs/Web/API/Document_Object_Model/Whitespace"
           bgColor="#fff"
           style={{ margin: 16, display: 'none' }}
         />
