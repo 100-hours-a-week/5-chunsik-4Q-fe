@@ -40,9 +40,25 @@ export default function RootLayout({
       </Head>
       <body className={styles.container}>
       <AntdRegistry>
-          <ConfigProvider
-              theme={config}
-          >
+      <ConfigProvider
+    theme={{
+      components: {
+        Select: {
+          fontSize: 16,
+        },
+      },
+      token: {
+        // Seed Token
+        colorPrimary: '#FF5B0F',
+      
+        // borderRadius: 2,
+
+        // Alias Token
+        // colorBgContainer: '#f6ffed',
+      },
+      
+    }}
+  >
         <Header />
         <div className={styles.bodyContainer}>
 

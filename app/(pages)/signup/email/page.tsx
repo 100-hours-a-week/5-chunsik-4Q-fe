@@ -31,10 +31,6 @@ export default function Signup() {
             setOptions([]);
         } else {
             const [localPart, domainPart] = value.split("@");
-            // const filteredDomains = emailDomains
-            //     .filter(domain => domain.startsWith(domainPart))
-            //     .map(domain => ({ value: `${localPart}@${domain}` }));
-            // setOptions(filteredDomains);
         }
     };
 
@@ -159,7 +155,7 @@ export default function Signup() {
                             onSearch={handleSearch}
                             placeholder="이메일을 입력해주세요."
                             value={email}
-                            style={{height: '50px'}}
+                            style={{ height: '50px', fontSize: '16px' }}
                             className={styles.inputField}
                         />
                     </Form.Item>

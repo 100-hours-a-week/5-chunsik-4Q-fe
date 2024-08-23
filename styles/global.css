@@ -158,3 +158,8 @@ li  {
     list-style-type: none;
 }
 
+.css-1yys5uz .ant-select-single .ant-select-selector {
+    background-color: #f0f0f0;
+    font-size: 20px;
+}
+
