@@ -28,3 +28,13 @@
 .field {
     width: 100%;
 }
+
+.urlHelperMessage {
+/* background-color: rebeccapurple; */
+height: 20px;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 11px;
+color: black;
+}

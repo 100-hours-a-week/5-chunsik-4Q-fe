@@ -1,73 +1,54 @@
 import { useState, useEffect, useCallback } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import styles from './second.module.css';
-import mock from '../../../../public/images/mock_4q.png';
-// import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { ArrowLeftOutlined, ArrowRightOutlined } from '@ant-design/icons';
-// import { FaDice } from "react-icons/fa6";
-// import { Button } from 'antd';
 import Lottie from 'react-lottie-player';
 import loadingLottie from '../../../../public/rotties/image-loading.json';
+import { generatePhotoImg } from '../../../../service/photo_api';
 
+interface FormData {
+    category: string;
+    tags: string;
+}
 
 export default function Second() {
     const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, skipSnaps: false });
     const [selectedIndex, setSelectedIndex] = useState(0);
-    const [loadings, setLoadings] = useState<boolean[]>([]);
-    const [loading, setLoading] = useState(true); // State to manage the loading visibility
-    // const [storedFormData, setStoredFormData] = useState<FormData | null>(null);
-   
-    // interface FormData {
-    //     url: string;
-    //     shorten_url?: string; 
-    // }
+    const [loading, setLoading] = useState(true); 
+    const [storedFormData, setStoredFormData] = useState<FormData | null>(null);
+    const [imageUrls, setImageUrls] = useState<string[]>([]);
 
-    // useEffect(() => {
-    //     const fetchShortenUrl = async () => {
-    //         if (typeof window !== 'undefined') {
-    //             const storedFormDataString = sessionStorage.getItem('form_data');
-    //             if (storedFormDataString) {
-    //                 const parsedFormData = JSON.parse(storedFormDataString);
-    //                 setStoredFormData(parsedFormData);
+    useEffect(() => {
+        const storedData = sessionStorage.getItem('form_data');
+        if (storedData) {
+            const parsedData: FormData = JSON.parse(storedData);
+            setStoredFormData(parsedData);
+        }
+    }, []);
 
-    //                 if (parsedFormData.url) {
-    //                     try {
-    //                         const shorten_url = await getShortenUrl(parsedFormData.url);
-    //                         const updatedFormData = { ...parsedFormData, shorten_url };
-    //                         setStoredFormData(updatedFormData);
-    //                         sessionStorage.setItem('form_data', JSON.stringify(updatedFormData));
-    //                     } catch (error) {
-    //                         console.error('Failed to shorten URL:', error);
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //     };
-
-    //     fetchShortenUrl();
-    // }, []);
-
+    useEffect(() => {
+        const fetchImages = async () => {
+            if (storedFormData) {
+                try {
+                    const response = await generatePhotoImg(
+                        storedFormData.category,
+                        storedFormData.tags,
+                    );
+                    setImageUrls(response.url); 
+                } catch (error) {
+                    console.error('Error fetching images:', error);
+                }
+            } else {
+                console.log('No form data found in sessionStorage');
+            }
+        };
+        fetchImages();
+    }, [storedFormData]);
 
     const onSelect = useCallback(() => {
         if (!emblaApi) return;
         setSelectedIndex(emblaApi.selectedScrollSnap());
     }, [emblaApi]);
-
-    const enterLoading = (index: number) => {
-        setLoadings((prevLoadings) => {
-            const newLoadings = [...prevLoadings];
-            newLoadings[index] = true;
-            return newLoadings;
-        });
-
-        setTimeout(() => {
-            setLoadings((prevLoadings) => {
-                const newLoadings = [...prevLoadings];
-                newLoadings[index] = false;
-                return newLoadings;
-            });
-        }, 6000);
-    };
 
     useEffect(() => {
         if (!emblaApi) return;
@@ -91,38 +72,33 @@ export default function Second() {
         if (emblaApi) emblaApi.scrollNext();
     }, [emblaApi]);
 
-    if (loading) {
-        return (
-            <div className={styles.loadingContainer}>
+    return (
+        <div className={styles.container}>
+            {/* <div className={styles.loadingContainer}>
                <div className={styles.loadingTextContainer}>
                <p>잠시만 기다려주세요.</p>
                <p>배경 이미지가 생성중입니다.</p>
                </div>
-            
+                <div className={styles.lottieLoadingContainer}>
                 <Lottie
                     loop
                     animationData={loadingLottie}
                     play
                     style={{ width: 400, height: 400 }}
                 />
-        
-            </div>
-        );
-    }
-
-    return (
-        <div className={styles.container}>
+                </div>
+            </div> */}
             <div className={styles.subTitle}>
                 배경이미지를 선택해주세요.
             </div>
             <div className={styles.sliderContainer} ref={emblaRef}>
                 <div className={styles.emblaContainer}>
-                    {[...Array(4)].map((_, idx) => (
+                    {imageUrls.map((url, idx) => (
                         <div
                             key={idx}
                             className={`${styles.emblaSlide} ${idx === selectedIndex ? styles.activeSlide : styles.inactiveSlide}`}
                         >
-                            <img src={mock.src} alt={`Slide ${idx + 1}`} />
+                            <img src={url} alt={`Slide ${idx + 1}`} />
                         </div>
                     ))}
                 </div>

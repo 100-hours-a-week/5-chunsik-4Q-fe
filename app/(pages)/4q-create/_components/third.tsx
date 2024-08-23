@@ -9,9 +9,9 @@ import { PiTextTBold } from "react-icons/pi";
 import { HiTrash } from "react-icons/hi";
 import { getShortenUrl } from "../../../../service/shorten_api";
 
-interface QrUrl {
-  shorten_url: string;
-}
+// interface QrUrl {
+//   shorten_url: string;
+// }
 
 interface TextNode {
   id: number;
@@ -36,7 +36,7 @@ export default function Third() {
   const [selectedColor, setSelectedColor] = useState<string>("#000000");
   const [qrImageUrl, setQrImageUrl] = useState<string>("");
   const [storedFormData, setStoredFormData] = useState<FormData | null>(null);
-  const [shortenUrl, setShortenUrl] = useState<QrUrl[]>([]);
+  const [shortenUrl, setShortenUrl] = useState<string>("");
   const stageRef = useRef<Konva.Stage>(null);
   const qrImageRef = useRef<Konva.Image>(null);
   const transformerRef = useRef<Konva.Transformer>(null);
@@ -53,9 +53,7 @@ export default function Third() {
                 if (parsedFormData.url) {
                     try {
                         const shorten_url = await getShortenUrl(parsedFormData.url);
-                        
-                        
-                  
+                    
                         const updatedFormData = { ...parsedFormData, shorten_url };
                         sessionStorage.setItem('form_data', JSON.stringify(updatedFormData));
                         setShortenUrl(shorten_url);
@@ -255,7 +253,7 @@ export default function Third() {
         </div>
         <QRCode
           id="myqrcode"
-          value={shortenUrl || ""} 
+          value={shortenUrl}
           // value="https://developer.mozilla.org/ko/docs/Web/API/Document_Object_Model/Whitespace"
           bgColor="#fff"
           style={{ margin: 16, display: 'none' }}

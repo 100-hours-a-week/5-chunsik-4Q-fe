@@ -99,14 +99,21 @@ export default function First({ formRef, onSubmit }: FirstProps) {
                     <Input placeholder="제목 입력" variant="filled" className={styles.field} />
                 </Form.Item>
                 <Form.Item
-                    name="url"
-                    rules={[
-                        { required: true, message: 'URL을 입력해주세요!' },
-                        { type: 'url', message: '유효한 URL을 입력해주세요!' },
-                    ]}
-                >
-                    <Input placeholder="URL 입력" variant="filled" className={styles.field} />
-                </Form.Item>
+    name="url"
+    rules={[
+        { required: true, message: '유효한 URL을 입력해주세요!' },
+        { 
+            validator: (_, value) => {
+                if (!value || /^(https?:\/\/)/.test(value)) {
+                    return Promise.resolve();
+                }
+                return Promise.reject(new Error('유효한 URL을 입력해주세요!'));
+            }
+        },
+    ]}
+>
+    <Input placeholder="URL 입력" variant="filled" className={styles.field} />
+</Form.Item>
                 <Form.Item>
                     <Select
                         mode="multiple"
@@ -127,6 +134,9 @@ export default function First({ formRef, onSubmit }: FirstProps) {
                     </Select>
                 </Form.Item>
             </Form>
+            <div className={styles.urlHelperMessage}>
+                <span>*URL에는 주소에는 http:// 또는 https://를 포함해야 합니다</span>
+            </div>
 
             <Modal
                 title=""
