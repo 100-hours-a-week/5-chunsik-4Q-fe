@@ -5,7 +5,8 @@ import logo from '../../../public/images/login_logo.png';
 import kakao_icon from '../../../public/images/kakao.svg';
 
 export default function Page() {
-    const kakaoOauth = process.env.NEXT_PUBLIC_KAKAO_OAUTH;
+    // const kakaoOauth = process.env.NEXT_PUBLIC_KAKAO_OAUTH;
+    const kakaoOauth = "https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=a8a84270703466b91728cc7df1b03fbb&redirect_uri=https://api.qqqq.world/auth/kakao/callback"
 
     return (
         <div className={styles.container}>
