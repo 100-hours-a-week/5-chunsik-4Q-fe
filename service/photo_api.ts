@@ -12,7 +12,7 @@ export const generatePhotoImg = async (category: string, tags: string) => {
 
         if (response.ok) {
             const data = await response.json();
-            return data.url;
+            return data;
         } else {
             throw new Error("이미지 생성에 실패했습니다.");
         }
