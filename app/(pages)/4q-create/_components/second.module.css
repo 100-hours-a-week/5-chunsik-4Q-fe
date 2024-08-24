@@ -6,10 +6,12 @@
     /*background-color: red;*/
     overflow-y: hidden;
     position: relative;
+    display: flex;
+    justify-content: center;
 }
 
 .loadingContainer {
-    width: 100%;
+    width: 500px;
     height: 3000px;
     /* background-color: green; */
     display: flex;
@@ -95,6 +97,10 @@
 .emblaContainer {
     display: flex;
     flex-direction: row;
+    /* align-items: center; */
+    /* justify-content: center; */
+    padding-left: 100px;
+    background-color: red;
 
 }
 
@@ -158,7 +164,7 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    margin-top: 5px;
+    margin-top: 10px;
 }
 
 /*.randomBtn {*/

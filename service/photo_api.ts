@@ -2,7 +2,7 @@ const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export const generatePhotoImg = async (category: string, tags: string) => {
     try {
-        const response = await fetch(`${BASE_URL}/image`, {
+        const response = await fetch(`${BASE_URL}/image2`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

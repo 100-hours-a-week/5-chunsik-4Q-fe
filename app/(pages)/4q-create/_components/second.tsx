@@ -13,7 +13,8 @@ interface FormData {
     category: string;
     tags: string;
     url: string;
-    shorten_url?: string;
+    shortenUrl?: string;
+    shortenUrlId?: number;
 }
 
 export default function Second() {
@@ -34,19 +35,29 @@ export default function Second() {
 
     useEffect(() => {
         const fetchShortenUrl = async () => {
-          if (storedFormData?.url) {
-            try {
-              const shorten_url = await getShortenUrl(storedFormData.url);
-              const updatedFormData = { ...storedFormData, shorten_url };
-              sessionStorage.setItem('form_data', JSON.stringify(updatedFormData));
-            } catch (error) {
-              console.error('Failed to shorten URL:', error);
+            if (storedFormData?.url) {
+                try {
+                    const result = await getShortenUrl(storedFormData.url);
+    
+                    // Check if the result is an object containing the shortenUrl and shortenUrlId
+                    if (typeof result === 'object' && result.shortenUrl && result.shortenUrlId) {
+                        const updatedFormData = { 
+                            ...storedFormData, 
+                            shortenUrl: result.shortenUrl, 
+                            shortenUrlId: result.shortenUrlId 
+                        };
+                        sessionStorage.setItem('form_data', JSON.stringify(updatedFormData));
+                    } else {
+                        console.error('Unexpected result format:', result);
+                    }
+                } catch (error) {
+                    console.error('Failed to shorten URL:', error);
+                }
             }
-          }
         };
         fetchShortenUrl();
     }, [storedFormData]);
-
+    
     const fetchImages = useCallback(async () => {
         if (storedFormData) {
             try {

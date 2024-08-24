@@ -11,7 +11,10 @@ export const getShortenUrl = async (srcUrl: string) => {
         });
         if (response.ok) {
             const data = await response.json();
-            return data.destUrl;
+            return {
+                shortenUrl: data.destUrl,
+                shortenUrlId: data.id
+            };
         } else {
             return srcUrl;
         }

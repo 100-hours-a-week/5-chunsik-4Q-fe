@@ -20,7 +20,7 @@ interface TextNode {
 
 interface FormData {
   url: string;
-  shorten_url: string;
+  shortenUrl: string;
   title: string;
 }
 
@@ -33,7 +33,7 @@ export default function Third() {
   const [storedFormData, setStoredFormData] = useState<FormData>({
     url: "",
     title: "",
-    shorten_url: "",
+    shortenUrl: "",
   });
   const [shortenUrl, setShortenUrl] = useState<string>("");
   const stageRef = useRef<Konva.Stage>(null);
@@ -52,7 +52,7 @@ export default function Third() {
   }, []);
 
   useEffect(() => {
-    setShortenUrl(storedFormData.shorten_url);
+    setShortenUrl(storedFormData.shortenUrl);
   }, [storedFormData]);
 
   useEffect(() => {
