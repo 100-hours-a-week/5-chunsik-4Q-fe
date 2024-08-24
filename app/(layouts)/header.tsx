@@ -21,7 +21,7 @@ export default function Header() {
         { path: '/login/email', title: '로그인' },
         { path: '/signup/email', title: '회원가입' },
         { path: '/4q-create', title: '4Q 생성하기' },
-        { path: '/4q-create/download', title: '4Q 다운로드' },
+        { path: '/4q-create/download/', title: '4Q 다운로드' },
         { path: '/4q-gallery', title: '4Q 갤러리' },
         { path: '/help-faq', title: '도움말/FAQ' },
         { path: '/mypage', title: '마이페이지' },
@@ -29,6 +29,7 @@ export default function Header() {
         { path: '/mypage/liked-4q', title: '좋아요한 4Q' },
         { path: '/feedback', title: '피드백' },
     ];
+
 
     const handleBack = () => {
         router.back();
