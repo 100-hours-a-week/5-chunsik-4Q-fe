@@ -56,7 +56,7 @@ export default function Page() {
     const items = steps.map((item) => ({ key: item.title, title: item.title }));
 
     const contentStyle: React.CSSProperties = {
-        lineHeight: '550px',
+        // lineHeight: '550px',
         textAlign: 'center',
         color: token.colorPrimary,
         borderRadius: token.borderRadiusLG,

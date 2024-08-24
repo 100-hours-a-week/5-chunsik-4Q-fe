@@ -13,6 +13,7 @@ export default function Header() {
     const [isOpen, setOpen] = useState<boolean>(false);
     const [isLogo, setLogo] = useState<boolean>(false);
     const [title, setTitle] = useState<string>('홈');
+    const [isAuthenticated, setAuthenticated] = useState<boolean>(false);
     const router = useRouter();
     const path = usePathname();
 
@@ -30,13 +31,12 @@ export default function Header() {
         { path: '/feedback', title: '피드백' },
     ];
 
-
     const handleBack = () => {
         router.back();
         
         const storageKey = 'form_data'; // The key as a string
     
-        if(sessionStorage.getItem(storageKey)) {
+        if (sessionStorage.getItem(storageKey)) {
             sessionStorage.removeItem(storageKey);
         }
     };
@@ -62,9 +62,15 @@ export default function Header() {
         }
     };
 
+    const checkAuth = () => {
+        const token = localStorage.getItem('AccessToken');
+        setAuthenticated(!!token);
+    };
+
     useEffect(() => {
         checkLogo();
         getTitleForPath();
+        checkAuth(); // Check authentication status on load
     }, [path]);
 
     return (
@@ -93,9 +99,13 @@ export default function Header() {
                 <img src={logo_white.src} alt="Logo"/>
                 <ul>
                     <li><Link href="/" data-replace="홈" onClick={closeMenu}><span>홈</span></Link></li>
-                    <li><Link href="/login" data-replace="로그인" onClick={closeMenu}><span>로그인</span></Link></li>
+                    {!isAuthenticated && (
+                        <li><Link href="/login" data-replace="로그인" onClick={closeMenu}><span>로그인</span></Link></li>
+                    )}
                     <li><Link href="/4q-create" data-replace="4Q 생성하기" onClick={closeMenu}><span>4Q 생성하기</span></Link></li>
-                    <li><Link href="/mypage" data-replace="마이페이지" onClick={closeMenu}><span>마이페이지</span></Link></li>
+                    {isAuthenticated && (
+                        <li><Link href="/mypage" data-replace="마이페이지" onClick={closeMenu}><span>마이페이지</span></Link></li>
+                    )}
                     <li><Link href="/feedback" data-replace="피드백주기" onClick={closeMenu}><span>피드백주기</span></Link></li>
                 </ul>
             </div>

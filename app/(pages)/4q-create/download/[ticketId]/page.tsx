@@ -72,7 +72,7 @@ export default function Page() {
                 {title || "No title available"}
             </div>
             <div className={styles.shortenUrlContainer}>
-                <p>단축 URL: </p>
+                {/* <p>단축 URL: </p> */}
                 <Paragraph copyable style={{margin: '1px'}}>{shortenUrl || "No URL available"}</Paragraph>
             </div>
             <div className={styles.btnContainer}>

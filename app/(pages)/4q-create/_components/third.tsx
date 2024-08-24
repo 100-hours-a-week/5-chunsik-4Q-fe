@@ -165,6 +165,7 @@ export default function Third() {
         if (responseMessage?.ticketId) {
           console.log('id:', responseMessage?.ticketId);
           window.location.href = `/4q-create/download/${responseMessage.ticketId}`;
+          sessionStorage.clear();
         } else {
           alert("티켓 생성에 실패했습니다.");
         }

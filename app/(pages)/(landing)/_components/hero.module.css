@@ -84,7 +84,7 @@
     center/contain;
   /* background-color: red; */
   visibility: visible;
-  z-index: 7;
+  z-index: 4;
 }
 
 .arrowLottie {
@@ -113,6 +113,7 @@
   top: 90%;
   left: 50%;
   transform: translateX(-50%);
+  z-index: 10;
 }
 
 .heading {
@@ -186,7 +187,7 @@
   align-items: center;
   justify-content: center;
   margin-top: 10px;
-  z-index: 5;
+  z-index: 10;
   background: rgb(0, 0, 0);
   /* background: linear-gradient(
     0deg,

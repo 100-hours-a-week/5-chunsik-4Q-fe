@@ -1,14 +1,25 @@
+"use client"
+
 import styles from './page.module.css'
-import { Button, Divider } from 'antd';
+import { Button, Divider, message } from 'antd';
 import Link from "next/link";
 import { IoIosArrowDropright } from "react-icons/io";
 import { IoLogOutOutline } from "react-icons/io5";
+import { useRouter } from 'next/navigation';
 
 import myIcon from '../../../public/images/icon/my_4q_icon.svg'
 import likedIcon from '../../../public/images/icon/liked_4q_icon.svg'
 
-export default function page() {
-    return(
+export default function Page() {
+    const router = useRouter();
+
+    const handleLogout = () => {
+        localStorage.removeItem('AccessToken'); 
+        router.push('/login'); 
+        message.success('로그아웃 되었습니다');
+    };
+
+    return (
         <div className={styles.container}>
             <div className={styles.userInfoConatiner}>
                 <div className={styles.nickname}>
@@ -25,7 +36,6 @@ export default function page() {
                         <span>나의 4Q</span>
                     </div>
                     <Link href="/mypage/my-4q" className={styles.arrowContainer}><IoIosArrowDropright className={styles.arrowIcon}/></Link>
-
                 </div>
                 <div className={styles.linkList}>
                     <div className={styles.linkText}>
@@ -36,11 +46,17 @@ export default function page() {
                 </div>
             </div>
             <div className={styles.logoutContainer}>
-                <Button type="primary" shape="round" icon={<IoLogOutOutline />} size="large" style={{backgroundColor: "#D4D4D4", color: "#000"}}>
+                <Button
+                    type="primary"
+                    shape="round"
+                    icon={<IoLogOutOutline />}
+                    size="large"
+                    style={{ backgroundColor: "#D4D4D4", color: "#000" }}
+                    onClick={handleLogout} // Logout function
+                >
                     로그아웃
                 </Button>
             </div>
         </div>
-
     );
 }
