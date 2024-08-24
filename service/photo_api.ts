@@ -2,7 +2,7 @@ const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export const generatePhotoImg = async (category: string, tags: string) => {
     try {
-        const response = await fetch(`${BASE_URL}/image2`, {
+        const response = await fetch(`${BASE_URL}/image`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -17,6 +17,37 @@ export const generatePhotoImg = async (category: string, tags: string) => {
             throw new Error("이미지 생성에 실패했습니다.");
         }
     } catch(error) {
+        throw error;
+    }
+};
+
+export const generateTicket = async (
+    ticketImage: File,
+    backgroundImageUrl: string,
+    shortenUrlId: number,
+    title: string,
+    tags: string,
+    category: string
+) => {
+    try {
+        const formData = new FormData();
+        formData.append("ticketImage", ticketImage);
+        formData.append("backgroundImageUrl", backgroundImageUrl);
+        formData.append("shortenUrlId", shortenUrlId.toString());
+        formData.append("title", title);
+        formData.append("tags", tags); 
+        formData.append("category", category);
+
+        const response = await fetch(`${BASE_URL}/ticket`, {
+            method: "POST",
+            body: formData,
+        });
+
+        if (!response.ok) {
+            throw new Error("티켓 생성에 실패했습니다.");
+        }
+        return "티켓이 생성되었습니다.";
+    } catch (error) {
         throw error;
     }
 };

@@ -3,7 +3,6 @@ import { Stage, Layer, Image, Transformer, Text } from "react-konva";
 import { ColorPicker, Button, Tooltip, QRCode } from "antd";
 import { useImage } from "react-konva-utils";
 import styles from "./third.module.css";
-import mock from "../../../../public/images/mock_4q.png";
 import Konva from "konva";
 import { PiTextTBold } from "react-icons/pi";
 import { HiTrash } from "react-icons/hi";
@@ -22,6 +21,7 @@ interface FormData {
   url: string;
   shortenUrl: string;
   title: string;
+  backgroundImageUrl: string;
 }
 
 export default function Third() {
@@ -34,6 +34,7 @@ export default function Third() {
     url: "",
     title: "",
     shortenUrl: "",
+    backgroundImageUrl: "",
   });
   const [shortenUrl, setShortenUrl] = useState<string>("");
   const stageRef = useRef<Konva.Stage>(null);
@@ -69,8 +70,7 @@ export default function Third() {
     }
   };
 
-  const mockImageUrl = mock.src;
-  const [backgroundImage] = useImage(mockImageUrl);
+  const [backgroundImage] = useImage(storedFormData.backgroundImageUrl);
   const [qrImage] = useImage(qrImageUrl);
 
   const handleDragEnd = (e: Konva.KonvaEventObject<DragEvent>) => {
@@ -240,6 +240,14 @@ export default function Third() {
           bgColor="#fff"
           style={{ margin: 16, display: 'none' }}
         />
+      </div>
+      <div className={styles.submitBtnContainer}>
+        <Button
+        className={styles.submitBtn}
+        style={{ height: '40px', width: '140px' }}
+        >
+          생성하기
+        </Button>
       </div>
     </div>
   );

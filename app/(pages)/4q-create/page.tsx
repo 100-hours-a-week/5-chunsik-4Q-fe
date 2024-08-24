@@ -86,15 +86,17 @@ export default function Page() {
                 {steps[current].content}
             </div>
             <div className={styles.btnContainer}>
-                <Button
-                    type="primary"
-                    onClick={handleButtonClick}
-                    className={styles.nextBtn}
-                    style={{ height: '40px', width: '140px' }}
-                >
-                    {steps[current].buttonText}
-                </Button >
-                {current > 0 && (
+                {current < 2 && (
+                    <Button
+                        type="primary"
+                        onClick={handleButtonClick}
+                        className={styles.nextBtn}
+                        style={{ height: '40px', width: '140px' }}
+                    >
+                        {steps[current].buttonText}
+                    </Button>
+                )}
+                {current === 1 && (
                     <Button
                         type="text"
                         onClick={prev}

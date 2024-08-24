@@ -7,7 +7,9 @@
     overflow-y: hidden;
     position: relative;
     display: flex;
+    flex-direction: column;
     justify-content: center;
+
 }
 
 .loadingContainer {
@@ -76,6 +78,12 @@
 /*}*/
 
 
+.carouselContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+
 .subTitle {
     height: 20px;
     /*background-color: black;*/
@@ -89,18 +97,27 @@
 
 }
 
+.contentContainer {
+    display: flex;
+    flex-direction: column;
+}
+
 .sliderContainer {
     position: relative;
     overflow: hidden;
+    /* height: 200px; */
+    /* display: flex */
+    /* flex-; */
+    margin-top: 20px;
 }
 
 .emblaContainer {
     display: flex;
     flex-direction: row;
     /* align-items: center; */
-    /* justify-content: center; */
-    padding-left: 100px;
-    background-color: red;
+    /* justify-content: flex-start; */
+    /* padding-left: 100px; */
+    /* background-color: red; */
 
 }
 
@@ -165,6 +182,7 @@
     align-items: center;
     text-align: center;
     margin-top: 10px;
+    height: 35px;
 }
 
 /*.randomBtn {*/

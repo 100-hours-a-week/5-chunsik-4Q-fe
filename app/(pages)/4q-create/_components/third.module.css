@@ -11,6 +11,7 @@
     align-content: center;
     /*justify-content: center;*/
     overflow-y: hidden;
+    justify-content: center;
 }
 
 .subTitle {
@@ -63,4 +64,23 @@
     flex-direction: row;
     justify-content: space-around;
     padding: 15px;
+}
+
+.submitBtnContainer {
+    height: 50px;
+    width: 100%;
+    position: absolute;
+    left: 50%;
+    bottom: 6.5%;
+    transform: translateX(-50%);
+    /* background-color: red; */
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.submitBtn {
+    background-color: #000 !important;
+    color: #fff !important;
 }

@@ -3,7 +3,7 @@ import useEmblaCarousel from 'embla-carousel-react';
 import styles from './second.module.css';
 import { ArrowLeftOutlined, ArrowRightOutlined } from '@ant-design/icons';
 import { FaDice } from "react-icons/fa6";
-import { Button } from 'antd';
+import { Button, message } from 'antd';
 import Lottie from 'react-lottie-player';
 import loadingLottie from '../../../../public/rotties/image-loading.json';
 import { generatePhotoImg } from '../../../../service/photo_api';
@@ -13,8 +13,8 @@ interface FormData {
     category: string;
     tags: string;
     url: string;
-    shortenUrl?: string;
-    shortenUrlId?: number;
+    shorten_url?: string;
+    backgroundImageUrl?: string;
 }
 
 export default function Second() {
@@ -24,6 +24,7 @@ export default function Second() {
     const [storedFormData, setStoredFormData] = useState<FormData | null>(null);
     const [loadings, setLoadings] = useState<boolean[]>([]);
     const [imageUrls, setImageUrls] = useState<string[]>([]);
+    const [randomButtonCount, setRandomButtonCount] = useState(3);  // Random button click count
 
     useEffect(() => {
         const storedData = sessionStorage.getItem('form_data');
@@ -38,8 +39,7 @@ export default function Second() {
             if (storedFormData?.url) {
                 try {
                     const result = await getShortenUrl(storedFormData.url);
-    
-                    // Check if the result is an object containing the shortenUrl and shortenUrlId
+
                     if (typeof result === 'object' && result.shortenUrl && result.shortenUrlId) {
                         const updatedFormData = { 
                             ...storedFormData, 
@@ -84,10 +84,9 @@ export default function Second() {
         }
     }, [storedFormData]);
 
-    useEffect(() => {
-        fetchImages();
-    }, [fetchImages]);
-
+    // useEffect(() => {
+    //     fetchImages(); 
+    // }, []); 
     const onSelect = useCallback(() => {
         if (!emblaApi) return;
         setSelectedIndex(emblaApi.selectedScrollSnap());
@@ -97,7 +96,18 @@ export default function Second() {
         if (!emblaApi) return;
         emblaApi.on('select', onSelect);
         onSelect();
-    }, [emblaApi, onSelect]);
+
+        if (imageUrls[selectedIndex]) {
+            console.log(`Current image URL: ${imageUrls[selectedIndex]}`);
+
+            const updatedFormData = {
+                ...storedFormData,
+                backgroundImageUrl: imageUrls[selectedIndex]
+            };
+            // setStoredFormData(updatedFormData);
+            sessionStorage.setItem('form_data', JSON.stringify(updatedFormData));
+        }
+    }, [emblaApi, onSelect, selectedIndex, imageUrls]);
 
     const scrollPrev = useCallback(() => {
         if (emblaApi) emblaApi.scrollPrev();
@@ -108,22 +118,31 @@ export default function Second() {
     }, [emblaApi]);
 
     const handleRandomButtonClick = async () => {
+        if (randomButtonCount <= 0) {
+            message.error('더 이상 이미지를 생성할 수 없습니다.');
+            return;
+        }
+
         setLoadings(prevLoadings => {
             const newLoadings = [...prevLoadings];
             newLoadings[1] = true;
             return newLoadings;
         });
+
         await fetchImages();
+
         setLoadings(prevLoadings => {
             const newLoadings = [...prevLoadings];
             newLoadings[1] = false;
             return newLoadings;
         });
+
+        setRandomButtonCount(prevCount => prevCount - 1);
     };
 
     return (
         <div className={styles.container}>
-            {loading && (
+            {/* {loading && (
                 <div className={styles.loadingContainer}>
                     <div className={styles.loadingTextContainer}>
                         <p>잠시만 기다려주세요.</p>
@@ -138,27 +157,34 @@ export default function Second() {
                         />
                     </div>
                 </div>
-            )}
+            )} */}
             {!loading && (
-                <>
+                <div className={styles.contentContainer}>
                     <div className={styles.subTitle}>
                         배경이미지를 선택해주세요.
                     </div>
                     <div className={styles.sliderContainer} ref={emblaRef}>
-                        <div className={styles.emblaContainer}>
+                        <div className={styles.emblaContainer}
+                        style={{ justifyContent: imageUrls.length === 1 ? 'center' : 'flex-start' }}>
                             {imageUrls.map((url, idx) => (
                                 <div
                                     key={idx}
                                     className={`${styles.emblaSlide} ${idx === selectedIndex ? styles.activeSlide : styles.inactiveSlide}`}
+                                    
                                 >
                                     <img src={url} alt={`Slide ${idx + 1}`} />
                                 </div>
                             ))}
                         </div>
-                        <button className={styles.prevButton} onClick={scrollPrev}><ArrowLeftOutlined /></button>
-                        <button className={styles.nextButton} onClick={scrollNext}><ArrowRightOutlined /></button>
+
+                        {imageUrls.length > 1 && (
+                            <>
+                                <button className={styles.prevButton} onClick={scrollPrev}><ArrowLeftOutlined /></button>
+                                <button className={styles.nextButton} onClick={scrollNext}><ArrowRightOutlined /></button>
+                            </>
+                        )}
                     </div>
-                </>
+                </div>
             )}
             <div className={styles.randomBtnContainer}>
                 <Button
@@ -168,7 +194,7 @@ export default function Second() {
                     onClick={handleRandomButtonClick}
                     className={styles.randomBtn}
                 >
-                    3
+                    {randomButtonCount}
                 </Button>
             </div>
         </div>
