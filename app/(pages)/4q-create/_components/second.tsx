@@ -9,6 +9,7 @@ import loadingLottie from '../../../../public/rotties/image-loading.json';
 import { generatePhotoImg } from '../../../../service/photo_api';
 import { getShortenUrl } from "../../../../service/shorten_api";
 
+
 interface FormData {
     category: string;
     tags: string;
@@ -45,7 +46,9 @@ export default function Second() {
                             ...storedFormData, 
                             shortenUrl: result.shortenUrl, 
                             shortenUrlId: result.shortenUrlId 
+                            
                         };
+                        console.log('주소:', result.shortenUrl);
                         sessionStorage.setItem('form_data', JSON.stringify(updatedFormData));
                     } else {
                         console.error('Unexpected result format:', result);

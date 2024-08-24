@@ -7,6 +7,8 @@ import styles from './page.module.css';
 import First from './_components/first';
 import Second from "./_components/second";
 import Third from "./_components/third";
+import { getTicketInfo } from '../../../service/photo_api';
+
 
 export default function Page() {
     const { token } = theme.useToken();
@@ -14,21 +16,14 @@ export default function Page() {
     const formRef = useRef<any>(null);
     const router = useRouter();
 
-    // useEffect(() => {
-    //     sessionStorage.clear();
-    // }, []);
-
-    // Function to move to the next step
     const next = () => {
         setCurrent(current + 1);
     };
 
-    // Function to move to the previous step
     const prev = () => {
         setCurrent(current - 1);
     };
 
-    // Define the steps array
     const steps = [
         {
             title: '정보입력',
@@ -54,11 +49,6 @@ export default function Page() {
             next();
         } else {
             message.success('포큐 생성 완료!');
-            // const storageKey = 'form_data'; 
-    
-            // if(sessionStorage.getItem(storageKey)) {
-            //     sessionStorage.removeItem(storageKey);
-            // }
             router.push('/4q-create/download');
         }
     };

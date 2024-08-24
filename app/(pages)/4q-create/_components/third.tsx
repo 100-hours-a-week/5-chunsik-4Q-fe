@@ -6,6 +6,7 @@ import styles from "./third.module.css";
 import Konva from "konva";
 import { PiTextTBold } from "react-icons/pi";
 import { HiTrash } from "react-icons/hi";
+import { generateTicket } from '../../../../service/photo_api';
 
 interface TextNode {
   id: number;
@@ -22,6 +23,9 @@ interface FormData {
   shortenUrl: string;
   title: string;
   backgroundImageUrl: string;
+  shortenUrlId: number;
+  tags: string;
+  category: string;
 }
 
 export default function Third() {
@@ -35,6 +39,9 @@ export default function Third() {
     title: "",
     shortenUrl: "",
     backgroundImageUrl: "",
+    shortenUrlId: 0,
+    tags: "",
+    category: "",
   });
   const [shortenUrl, setShortenUrl] = useState<string>("");
   const stageRef = useRef<Konva.Stage>(null);
@@ -133,6 +140,35 @@ export default function Third() {
       transformerRef.current.getLayer()?.batchDraw();
     }
   }, [qrImage, isSelected]);
+
+  const handleSubmit = async () => {
+    try {
+      if (stageRef.current) {
+        const dataURL = stageRef.current.toDataURL();
+        const ticketImage = await fetch(dataURL)
+          .then(res => res.blob())
+          .then(blob => new File([blob], "ticket.png", { type: "image/png" }));
+
+        const responseMessage = await generateTicket(
+          ticketImage,
+          storedFormData.backgroundImageUrl,
+          storedFormData.shortenUrlId,
+          storedFormData.title,
+          storedFormData.tags,
+          storedFormData.category
+        );
+
+        if (responseMessage?.ticketId) {
+          console.log('id:', responseMessage?.ticketId);
+          window.location.href = `/4q-create/download/${responseMessage.ticketId}`;
+        } else {
+          alert("티켓 생성에 실패했습니다.");
+        }
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -243,8 +279,9 @@ export default function Third() {
       </div>
       <div className={styles.submitBtnContainer}>
         <Button
-        className={styles.submitBtn}
-        style={{ height: '40px', width: '140px' }}
+          className={styles.submitBtn}
+          style={{ height: '40px', width: '140px' }}
+          onClick={handleSubmit}
         >
           생성하기
         </Button>

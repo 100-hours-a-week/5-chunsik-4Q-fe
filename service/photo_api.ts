@@ -38,15 +38,43 @@ export const generateTicket = async (
         formData.append("tags", tags); 
         formData.append("category", category);
 
-        const response = await fetch(`${BASE_URL}/ticket`, {
+        const response = await fetch(`${BASE_URL}/ticket`, { 
             method: "POST",
             body: formData,
         });
 
-        if (!response.ok) {
+        if (response.ok) {
+            const data = await response.json();
+            return {
+                ticketId: data.id
+            };
+        } else {
             throw new Error("티켓 생성에 실패했습니다.");
         }
-        return "티켓이 생성되었습니다.";
+    } catch (error) {
+        throw error;
+    }
+};
+
+export const getTicketInfo = async (ticketId: number) => {
+    try {
+        const response = await fetch(`${BASE_URL}/ticket/${ticketId}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            return {
+                ticketUrl: data.ticketUrl,
+                title: data.title,
+                shortenUrl: data.shortenUrl
+            };
+        } else {
+            throw new Error("티켓 정보를 가져오는데 실패했습니다.");
+        }
     } catch (error) {
         throw error;
     }
