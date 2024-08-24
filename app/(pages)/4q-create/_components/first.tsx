@@ -67,6 +67,15 @@ export default function First({ formRef, onSubmit }: FirstProps) {
         updateSessionStorage(updatedTags, currentValues); 
     };
 
+    const validateUrl = (_: any, value: string) => {
+        if (!value || value.startsWith('http://') || value.startsWith('https://')) {
+            return Promise.resolve();
+        }
+        return Promise.reject(new Error('유효한 URL을 입력해주세요'));
+    };
+
+
+
     return (
         <div className={styles.container}>
             <Form
@@ -94,17 +103,16 @@ export default function First({ formRef, onSubmit }: FirstProps) {
                 >
                     <Input placeholder="제목 입력" variant="filled" className={styles.field} />
                 </Form.Item>
+                <Tooltip title="http:// 또는 https://를 포함해야 합니다">
                 <Form.Item
                     name="url"
-                    rules={[
-                        { required: true, message: 'URL을 입력해주세요!' },
-                        { type: 'url', message: '유효한 URL을 입력해주세요!' },
-                    ]}
+                    rules={[{ required: true, message: 'URL을 입력해주세요'  }, { validator: validateUrl },]}
                 >
-                   <Tooltip title="http:// 또는 https://를 포함해야 합니다">
+                   
                     <Input placeholder="URL 입력" variant="filled" className={styles.field} />
-                    </Tooltip>
+                   
                 </Form.Item>
+                </Tooltip>
                 <Form.Item>
                     <Select
                         mode="multiple"

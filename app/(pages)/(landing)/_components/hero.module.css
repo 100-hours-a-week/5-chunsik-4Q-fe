@@ -70,23 +70,40 @@
   /* max-width: 600px; */
 }
 
+
 .arrowContainer {
-  height: 80vh;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-
-  /* margin-top: 150%; */
-  /* position: absolute;
-    top: 70%; */
-  position: relative;
-
-  /* position: fixed;
-    top: 10vh;     /* 뷰포트 높이의 10% 아래 */
-  /* bottom: 60px; */
-  /* background-color: rebeccapurple; */
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  height: 100%;
+  /* background-color: red; */
+  /* border: 1px solid black; */
+  mask: url("../../../../public/images/hero_bg.svg") no-repeat center/contain;
+  -webkit-mask: url("../../../../public/images/hero_bg.svg") no-repeat
+    center/contain;
+  /* background-color: red; */
+  visibility: visible;
+  z-index: 7;
 }
+
+.arrowLottie {
+  position: absolute;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  height: 150px;
+  /* background-color: black; */
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+
 
 .arrow {
   width: 50px;
@@ -235,8 +252,22 @@
   height: auto;
 }
 
-@media (min-width: 600px) {
-  .arrow {
+@media (max-width: 600px) {
+  /* .arrow {
     top: 110%;
+  } */
+  .arrowLottie  {
+    bottom: 160px;
   }
 }
+
+
+@media (min-width: 800px) {
+  /* .arrow {
+    top: 110%;
+  } */
+  .arrowLottie  {
+    bottom: 40px;
+  }
+}
+

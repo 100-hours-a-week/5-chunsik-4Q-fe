@@ -8,12 +8,24 @@ import hero2 from "../../../../public/images/hero/hero2.png";
 import hero3 from "../../../../public/images/hero/hero3.png";
 
 import Lottie from 'react-lottie-player';
-import arrowLottie from '../../../../public/rotties/'
+import arrowLottie from '../../../../public/rotties/hero-arrow.json'
 
 export default function Hero() {
     return (
         <div className={styles.container} style={{backgroundImage: `url(${bg.src})`}}>
+         <div className={styles.arrowContainer}>
+            <div className={styles.arrowLottie}>
+            <Lottie
+                    loop
+                    animationData={arrowLottie}
+                    play
+                    style={{ width: 120, height: 120 }}
+                />
+            </div>
+         </div>
+            
             <div className={styles.noise}></div>
+            
             <div className={styles.heading}>
                 <p className={styles.introTitle}>AI기반 포토큐알 이미지 생성 서비스</p>
                 <h1>Photo QR</h1>
@@ -30,6 +42,7 @@ export default function Hero() {
             <div className={`${styles.imgContainer} ${styles.img3}`}>
                 <img src={hero3.src} alt="concertExample" className={styles.heroImg}/>
             </div>
+            
 
         </div>
     );

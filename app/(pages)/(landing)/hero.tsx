@@ -7,6 +7,8 @@ import hero1 from "../../../public/images/hero/hero1.png";
 import hero2 from "../../../public/images/hero/hero2.png";
 import hero3 from "../../../public/images/hero/hero3.png";
 
+
+
 export default function Hero() {
     return (
         <div className={styles.container} style={{backgroundImage: `url(${bg.src})`}}>
