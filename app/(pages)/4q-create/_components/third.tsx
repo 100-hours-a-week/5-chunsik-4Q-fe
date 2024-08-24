@@ -7,6 +7,8 @@ import Konva from "konva";
 import { PiTextTBold } from "react-icons/pi";
 import { HiTrash } from "react-icons/hi";
 import { generateTicket } from '../../../../service/photo_api';
+import Lottie from 'react-lottie-player';
+import loadingLottie from '../../../../public/rotties/image-loading.json';
 
 interface TextNode {
   id: number;
@@ -48,6 +50,7 @@ export default function Third() {
   const qrImageRef = useRef<Konva.Image>(null);
   const transformerRef = useRef<Konva.Transformer>(null);
   const [isSelected, setSelected] = useState(false);
+  const [isLoading, setLoading] = useState(false); // Add loading state
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -142,6 +145,7 @@ export default function Third() {
   }, [qrImage, isSelected]);
 
   const handleSubmit = async () => {
+    setLoading(true); // Show loading screen
     try {
       if (stageRef.current) {
         const dataURL = stageRef.current.toDataURL();
@@ -167,125 +171,146 @@ export default function Third() {
       }
     } catch (error) {
       alert(error.message);
+    } finally {
+      setLoading(false); // Hide loading screen
     }
   };
 
   return (
     <div className={styles.container}>
-      <div className={styles.subTitle}>QR의 위치를 선택해주세요.</div>
-      <div className={styles.canvasContainer}>
-        <div className={styles.backgroundContainer}>
-          <Stage width={280} height={280} ref={stageRef}>
-            <Layer>
-              <Image
-                image={backgroundImage}
-                width={280}
-                height={280}
-                onClick={() => setSelected(!isSelected)}
-              />
-              <Image
-                image={qrImage}
-                width={80}
-                height={80}
-                x={qrPosition.x}
-                y={qrPosition.y}
-                draggable
-                onClick={() => setSelected(!isSelected)}
-                onDragEnd={handleDragEnd}
-                ref={qrImageRef}
-                onMouseEnter={() => {
-                  if (stageRef.current) {
-                    stageRef.current.container().style.cursor = "move";
-                  }
-                }}
-                onMouseLeave={() => {
-                  if (stageRef.current) {
-                    stageRef.current.container().style.cursor = "default";
-                  }
-                }}
-              />
-              {isSelected && (
-                <Transformer
-                  enabledAnchors={[
-                    "top-left",
-                    "top-right",
-                    "bottom-left",
-                    "bottom-right",
-                  ]}
-                  ref={transformerRef}
-                  rotateEnabled={false}
-                  keepRatio={true}
-                  boundBoxFunc={(oldBox, newBox) => {
-                    const boxSize = Math.max(newBox.width, newBox.height);
-                    return {
-                      x: newBox.x,
-                      y: newBox.y,
-                      width: boxSize,
-                      height: boxSize,
-                      rotation: oldBox.rotation,
-                    };
-                  }}
-                />
-              )}
-              {textNodes.map((node) => (
-                <Text
-                  key={node.id}
-                  id={`text-${node.id}`}
-                  text={node.text}
-                  x={node.x}
-                  y={node.y}
-                  fontSize={node.fontSize}
-                  fill={node.color}
-                  draggable
-                  onClick={() => setSelectedId(node.id)}
-                  onDblClick={() => handleTextDblClick(node.id)}
-                />
-              ))}
-            </Layer>
-          </Stage>
+      {isLoading ? (
+        <div className={styles.loadingContainer}>
+          <div className={styles.loadingTextContainer}>
+            <p>잠시만 기다려주세요.</p>
+            <p>티켓이 생성중입니다.</p>
+          </div>
+          <div className={styles.lottieLoadingContainer}>
+            <Lottie
+              loop
+              animationData={loadingLottie}
+              play
+              style={{ width: 400, height: 400 }}
+            />
+          </div>
         </div>
-        <div className={styles.btnContainer}>
-          <Tooltip title="title 추가">
+      ) : (
+        <>
+          <div className={styles.subTitle}>QR의 위치를 선택해주세요.</div>
+          <div className={styles.canvasContainer}>
+            <div className={styles.backgroundContainer}>
+              <Stage width={280} height={280} ref={stageRef}>
+                <Layer>
+                  <Image
+                    image={backgroundImage}
+                    width={280}
+                    height={280}
+                    onClick={() => setSelected(!isSelected)}
+                  />
+                  <Image
+                    image={qrImage}
+                    width={80}
+                    height={80}
+                    x={qrPosition.x}
+                    y={qrPosition.y}
+                    draggable
+                    onClick={() => setSelected(!isSelected)}
+                    onDragEnd={handleDragEnd}
+                    ref={qrImageRef}
+                    onMouseEnter={() => {
+                      if (stageRef.current) {
+                        stageRef.current.container().style.cursor = "move";
+                      }
+                    }}
+                    onMouseLeave={() => {
+                      if (stageRef.current) {
+                        stageRef.current.container().style.cursor = "default";
+                      }
+                    }}
+                  />
+                  {isSelected && (
+                    <Transformer
+                      enabledAnchors={[
+                        "top-left",
+                        "top-right",
+                        "bottom-left",
+                        "bottom-right",
+                      ]}
+                      ref={transformerRef}
+                      rotateEnabled={false}
+                      keepRatio={true}
+                      boundBoxFunc={(oldBox, newBox) => {
+                        const boxSize = Math.max(newBox.width, newBox.height);
+                        return {
+                          x: newBox.x,
+                          y: newBox.y,
+                          width: boxSize,
+                          height: boxSize,
+                          rotation: oldBox.rotation,
+                        };
+                      }}
+                    />
+                  )}
+                  {textNodes.map((node) => (
+                    <Text
+                      key={node.id}
+                      id={`text-${node.id}`}
+                      text={node.text}
+                      x={node.x}
+                      y={node.y}
+                      fontSize={node.fontSize}
+                      fill={node.color}
+                      draggable
+                      onClick={() => setSelectedId(node.id)}
+                      onDblClick={() => handleTextDblClick(node.id)}
+                    />
+                  ))}
+                </Layer>
+              </Stage>
+            </div>
+            <div className={styles.btnContainer}>
+              <Tooltip title="title 추가">
+                <Button
+                  onClick={addText}
+                  type="primary"
+                  icon={<PiTextTBold />}
+                  size="small"
+                />
+              </Tooltip>
+              <Tooltip title="텍스트를 더블클릭하고 삭제버튼이 활성화">
+                <Button
+                  onClick={deleteText}
+                  type="primary"
+                  icon={<HiTrash />}
+                  size="small"
+                  disabled={selectedId === null}
+                />
+              </Tooltip>
+              <Tooltip title="텍스트를 더블클릭하고 색상을 변경">
+                <ColorPicker
+                  value={selectedColor}
+                  onChange={(color) => handleColorChange(color.toHexString())}
+                  size="small"
+                />
+              </Tooltip>
+            </div>
+            <QRCode
+              id="myqrcode"
+              value={shortenUrl}
+              bgColor="#fff"
+              style={{ margin: 16, display: 'none' }}
+            />
+          </div>
+          <div className={styles.submitBtnContainer}>
             <Button
-              onClick={addText}
-              type="primary"
-              icon={<PiTextTBold />}
-              size="small"
-            />
-          </Tooltip>
-          <Tooltip title="텍스트를 더블클릭하고 삭제버튼이 활성화">
-            <Button
-              onClick={deleteText}
-              type="primary"
-              icon={<HiTrash />}
-              size="small"
-              disabled={selectedId === null}
-            />
-          </Tooltip>
-          <Tooltip title="텍스트를 더블클릭하고 색상을 변경">
-            <ColorPicker
-              value={selectedColor}
-              onChange={(color) => handleColorChange(color.toHexString())}
-              size="small"
-            />
-          </Tooltip>
-        </div>
-        <QRCode
-          id="myqrcode"
-          value={shortenUrl}
-          bgColor="#fff"
-          style={{ margin: 16, display: 'none' }}
-        />
-      </div>
-      <div className={styles.submitBtnContainer}>
-        <Button
-          className={styles.submitBtn}
-          style={{ height: '40px', width: '140px' }}
-          onClick={handleSubmit}
-        >
-          생성하기
-        </Button>
-      </div>
+              className={styles.submitBtn}
+              style={{ height: '40px', width: '140px' }}
+              onClick={handleSubmit}
+            >
+              생성하기
+            </Button>
+          </div>
+        </>
+      )}
     </div>
   );
 }

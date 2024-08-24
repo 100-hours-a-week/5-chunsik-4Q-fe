@@ -17,7 +17,8 @@ interface FormData {
 }
 
 export default function Page() {
-    const { ticketId } = useParams(); // 현재 주소의 ticketId 파라미터 가져오기
+    const params = useParams();
+    const ticketId = params?.ticketId as string | undefined; 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [storedFormData, setStoredFormData] = useState<FormData | null>(null);
     const [ticketUrl, setTicketUrl] = useState<string>('');
@@ -42,7 +43,7 @@ export default function Page() {
                 }
             }
         }
-    }, [ticketId]); // ticketId가 변경될 때마다 useEffect 실행
+    }, [ticketId]); 
 
     const showModal = () => {
         setIsModalOpen(true);
@@ -89,8 +90,6 @@ export default function Page() {
             >
                 메인으로 가기
             </Button>
-
-            {/* Include the ShareModal component */}
             <ShareModal
                 isModalOpen={isModalOpen}
                 handleOk={handleOk}
