@@ -9,7 +9,7 @@ import { BiSolidShareAlt } from "react-icons/bi";
 import ShareModal from '../../(modals)/shareModal';
 import { getTicketInfo } from '../../../../../service/photo_api';
 
-const { Paragraph, Text } = Typography;
+const { Paragraph } = Typography;
 
 interface FormData {
     title: string;
@@ -35,6 +35,7 @@ export default function Page() {
                 if (ticketId) {
                     getTicketInfo(Number(ticketId)).then((data) => {
                         setTicketUrl(data.ticketUrl);
+                        console.log(ticketUrl);
                         setTitle(data.title);
                         setShortenUrl(data.shortenUrl);
                     }).catch((error) => {
@@ -63,7 +64,7 @@ export default function Page() {
                 <Image
                     width={300}
                     height={300}
-                    src={ticketUrl || '/path/to/default/image.png'} // 기본 이미지 제공
+                    src={ticketUrl} // 기본 이미지 제공
                     placeholder="미리보기"
                 />
             </div>
@@ -72,8 +73,7 @@ export default function Page() {
                 {title || "No title available"}
             </div>
             <div className={styles.shortenUrlContainer}>
-                {/* <p>단축 URL: </p> */}
-                <Paragraph copyable style={{margin: '1px'}}>{shortenUrl || "No URL available"}</Paragraph>
+                <Paragraph copyable style={{ margin: '1px' }}>{shortenUrl || "No URL available"}</Paragraph>
             </div>
             <div className={styles.btnContainer}>
                 <Button type="primary" icon={<LuDownload />} size="large" className={styles.downloadBtn}>

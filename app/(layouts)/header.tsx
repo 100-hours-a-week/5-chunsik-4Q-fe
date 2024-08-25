@@ -34,7 +34,7 @@ export default function Header() {
     const handleBack = () => {
         router.back();
         
-        const storageKey = 'form_data'; // The key as a string
+        const storageKey = 'form_data'; 
     
         if (sessionStorage.getItem(storageKey)) {
             sessionStorage.removeItem(storageKey);
@@ -58,7 +58,7 @@ export default function Header() {
         if (matchedTitle) {
             setTitle(matchedTitle.title);
         } else {
-            setTitle(''); // Default title if no match found
+            setTitle(''); 
         }
     };
 
@@ -70,7 +70,7 @@ export default function Header() {
     useEffect(() => {
         checkLogo();
         getTitleForPath();
-        checkAuth(); // Check authentication status on load
+        checkAuth(); 
     }, [path]);
 
     return (
@@ -103,9 +103,9 @@ export default function Header() {
                         <li><Link href="/login" data-replace="로그인" onClick={closeMenu}><span>로그인</span></Link></li>
                     )}
                     <li><Link href="/4q-create" data-replace="4Q 생성하기" onClick={closeMenu}><span>4Q 생성하기</span></Link></li>
-                    {isAuthenticated && (
+                    {/* {isAuthenticated && ( */}
                         <li><Link href="/mypage" data-replace="마이페이지" onClick={closeMenu}><span>마이페이지</span></Link></li>
-                    )}
+                    {/* )} */}
                     <li><Link href="/feedback" data-replace="피드백주기" onClick={closeMenu}><span>피드백주기</span></Link></li>
                 </ul>
             </div>

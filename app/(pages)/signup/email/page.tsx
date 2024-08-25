@@ -16,7 +16,7 @@ export default function Signup() {
     const [isBtnDisable, setIsBtnDisable] = useState(false);
     const [isTimerActive, setIsTimerActive] = useState(false);
     const [timerCount, setTimerCount] = useState(180);
-    const [buttonText, setButtonText] = useState("이메일 인증");
+    const [buttonText, setButtonText] = useState("인증");
     const [valiButtonText, setValiButtonText] = useState("확인");
     const [verificationCode, setVerificationCode] = useState("");
     const [options, setOptions] = useState<{ value: string }[]>([]);

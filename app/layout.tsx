@@ -38,7 +38,7 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, 
     user-scalable=0" />
       </Head>
-      <body className={styles.container}>
+      <body className={styles.container} suppressHydrationWarning >
       <AntdRegistry>
       <ConfigProvider
     theme={{

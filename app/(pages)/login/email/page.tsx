@@ -15,7 +15,7 @@ type FieldType = {
 };
 
 export default function Page() {
-    const router = useRouter(); // Correctly use useRouter from 'next/navigation'
+    const router = useRouter(); 
 
     const onFinish = async (values) => {
         try {
@@ -24,8 +24,6 @@ export default function Page() {
                 message.success("로그인에 성공했습니다.");
                 router.push('/'); 
             }
-
-            // const result = await requestLogin(email!, password!); // Call the login function
             
         } catch (error) {
             message.error("로그인에 실패했습니다. 다시 시도해주세요.");
@@ -51,7 +49,7 @@ export default function Page() {
                     name="email"
                     rules={[{ required: true, message: '이메일을 입력해주세요.' }]}
                 >
-                    <Input variant="filled" placeholder="이메일" className={styles.inputField} />
+                    <Input variant="filled" placeholder="이메일" className={styles.inputField}  />
                 </Form.Item>
 
                 <Form.Item<FieldType>
