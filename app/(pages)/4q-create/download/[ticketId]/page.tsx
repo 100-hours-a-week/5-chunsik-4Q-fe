@@ -20,6 +20,11 @@ export default function Page() {
     const [shortenUrl, setShortenUrl] = useState<string>('');
 
     useEffect(() => {
+        sessionStorage.removeItem('form_data');
+      }, []);
+    
+
+    useEffect(() => {
         if (ticketId) {
             getTicketInfo(Number(ticketId)).then((data) => {
                 setTicketUrl(data.ticketUrl);

@@ -143,7 +143,7 @@ export default function First({ formRef, onSubmit }: FirstProps) {
             onDeselect={handleTagDeselect}
             onChange={(selectedTags) => {
               setValue(selectedTags);
-              formRef.current?.setFieldsValue({ tags: selectedTags }); // 선택된 태그를 폼 필드에 반영
+              formRef.current?.setFieldsValue({ tags: selectedTags }); 
             }}
             variant="filled"
             className={styles.field}

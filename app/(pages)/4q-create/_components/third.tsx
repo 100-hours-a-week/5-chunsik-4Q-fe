@@ -160,16 +160,15 @@ export default function Third() {
 
         const responseMessage = await generateTicket(
           ticketImage,
-          // storedFormData.backgroundImageUrl,
           storedFormData.backgroundImageId,
           storedFormData.shortenUrlId,
           storedFormData.title,
-          // storedFormData.tags,
-          // storedFormData.category
         );
-
         if (responseMessage?.ticketId) {
-          console.log('id:', responseMessage?.ticketId);
+          setTimeout(() => {
+            setLoading(false);
+          }, 4000); 
+          // console.log('id:', responseMessage?.ticketId);
           window.location.href = `/4q-create/download/${responseMessage.ticketId}`;
         } else {
           alert("티켓 생성에 실패했습니다.");
@@ -178,7 +177,9 @@ export default function Third() {
     } catch (error) {
       alert(error.message);
     } finally {
-      setLoading(false);
+      setTimeout(() => {
+        setLoading(false);
+      }, 8000); 
     }
   };
 
