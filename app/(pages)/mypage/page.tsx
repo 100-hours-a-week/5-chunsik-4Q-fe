@@ -8,6 +8,7 @@ import { IoIosArrowDropright } from "react-icons/io";
 import { IoLogOutOutline } from "react-icons/io5";
 import { useRouter } from 'next/navigation';
 import { MdKeyboardArrowRight } from "react-icons/md";
+import { requestUserInfo } from '../../../service/auth_api';
 
 import myIcon from '../../../public/images/icon/my_4q_icon.svg';
 import likedIcon from '../../../public/images/icon/liked_4q_icon.svg';
@@ -15,11 +16,23 @@ import likedIcon from '../../../public/images/icon/liked_4q_icon.svg';
 export default function Page() {
     const router = useRouter();
     const [isAuthenticated, setAuthenticated] = useState<boolean>(false);
+    const [userInfo, setUserInfo] = useState<{ nickname: string; email: string } | null>(null);
 
     // Move the checkAuth function inside the component
-    const checkAuth = () => {
+    const checkAuth = async () => {
         const token = localStorage.getItem('AccessToken');
         setAuthenticated(!!token);
+        
+        if (token) {
+            try {
+                const data = await requestUserInfo();
+                if (data) {
+                    setUserInfo({ nickname: data.nickname, email: data.email });
+                }
+            } catch (error) {
+                console.error("Failed to fetch user info:", error);
+            }
+        }
     };
 
     useEffect(() => {
@@ -46,13 +59,13 @@ export default function Page() {
                 </div>
             )}
 
-            {isAuthenticated && (
+            {isAuthenticated && userInfo && (
                 <div className={styles.userInfoConatiner}>
                     <div className={styles.nickname}>
-                        <span className={styles.bold}>Chen</span>
+                        <span className={styles.bold}>{userInfo.nickname}</span>
                         <span className={styles.normal}>님, 안녕하세요!</span>
                     </div>
-                    <span className={styles.email}>chenbabo@gmail.com</span>
+                    <span className={styles.email}>{userInfo.email}</span>
                 </div>
             )}
             <Divider />
