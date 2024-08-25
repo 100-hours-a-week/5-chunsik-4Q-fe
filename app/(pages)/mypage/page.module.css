@@ -83,6 +83,7 @@
 
 
 
+
 .icon {
     margin-right: 5px;
 }
@@ -91,6 +92,8 @@
     display: flex;
     justify-content: center;
 }
+
+
 
 .arrowIcon {
     font-size: 28px;
@@ -120,4 +123,11 @@
     .unauthHelper {
         margin-left: 2px;
     }
+    .bold {
+        font-size: 23px;
+    }
+    .normal {
+        font-size: 18px;
+    }
+    
 }

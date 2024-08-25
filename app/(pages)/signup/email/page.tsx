@@ -233,9 +233,9 @@ export default function Signup() {
                     rules={[{ required: true, message: "닉네임을 입력해주세요." }]}
                 >
                     <Input
-                        placeholder="2~16자 이내로 입력해주세요"
+                        placeholder="1~10자 이내로 입력해주세요"
                         className={styles.inputField}
-                        maxLength={16}
+                        maxLength={10}
                     />
                 </Form.Item>
 
