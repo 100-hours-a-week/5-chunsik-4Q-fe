@@ -11,38 +11,24 @@ import { getTicketInfo } from '../../../../../service/photo_api';
 
 const { Paragraph } = Typography;
 
-interface FormData {
-    title: string;
-    url: string;
-}
-
 export default function Page() {
     const params = useParams();
     const ticketId = params?.ticketId as string | undefined; 
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [storedFormData, setStoredFormData] = useState<FormData | null>(null);
     const [ticketUrl, setTicketUrl] = useState<string>('');
     const [title, setTitle] = useState<string>('');
     const [shortenUrl, setShortenUrl] = useState<string>('');
 
     useEffect(() => {
-        if (typeof window !== 'undefined') {
-            const storedFormDataString = sessionStorage.getItem('form_data');
-            if (storedFormDataString) {
-                const formData = JSON.parse(storedFormDataString);
-                setStoredFormData(formData);
-
-                if (ticketId) {
-                    getTicketInfo(Number(ticketId)).then((data) => {
-                        setTicketUrl(data.ticketUrl);
-                        console.log(ticketUrl);
-                        setTitle(data.title);
-                        setShortenUrl(data.shortenUrl);
-                    }).catch((error) => {
-                        console.error("티켓 정보를 가져오는데 실패했습니다:", error);
-                    });
-                }
-            }
+        // Fetch ticket information using ticketId
+        if (ticketId) {
+            getTicketInfo(Number(ticketId)).then((data) => {
+                setTicketUrl(data.ticketUrl);
+                setTitle(data.title);
+                setShortenUrl(data.shortenUrl);
+            }).catch((error) => {
+                console.error("티켓 정보를 가져오는데 실패했습니다:", error);
+            });
         }
     }, [ticketId]); 
 
@@ -66,7 +52,7 @@ export default function Page() {
                 const url = window.URL.createObjectURL(blob);
                 const a = document.createElement('a');
                 a.href = url;
-                a.download = `photoQR_${title}.png`; // This will set the downloaded file's name
+                a.download = `photoQR_${title}.png`; 
                 document.body.appendChild(a);
                 a.click();
                 document.body.removeChild(a);
