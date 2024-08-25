@@ -148,21 +148,6 @@ export default function Third() {
     }
   }, [qrImage, isSelected]);
 
-  const downloadURI = (uri: string, name: string) => {
-    const link = document.createElement('a');
-    link.download = name;
-    link.href = uri;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
-
-  const handleSave = () => {
-    if (stageRef.current) {
-      const uri = stageRef.current.toDataURL({ pixelRatio: 3 });
-      downloadURI(uri, 'photoQr.png');
-    }
-  };
 
   const handleSubmit = async () => {
     setLoading(true);
@@ -328,13 +313,6 @@ export default function Third() {
               onClick={handleSubmit}
             >
               생성하기
-            </Button>
-            <Button
-              className={styles.submitBtn}
-              style={{ height: '40px', width: '140px' }}
-              onClick={handleSave}
-            >
-              Save as Image
             </Button>
           </div>
         </>

@@ -20,7 +20,6 @@ export default function Page() {
     const [shortenUrl, setShortenUrl] = useState<string>('');
 
     useEffect(() => {
-        // Fetch ticket information using ticketId
         if (ticketId) {
             getTicketInfo(Number(ticketId)).then((data) => {
                 setTicketUrl(data.ticketUrl);
