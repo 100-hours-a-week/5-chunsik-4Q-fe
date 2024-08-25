@@ -23,20 +23,16 @@ export const generatePhotoImg = async (category: string, tags: string[]) => {
 
 export const generateTicket = async (
     ticketImage: File,
-    backgroundImageUrl: string,
+    backgroundImageId: number,
     shortenUrlId: number,
     title: string,
-    tags: string,
-    category: string
 ) => {
     try {
         const formData = new FormData();
         formData.append("ticketImage", ticketImage);
-        formData.append("backgroundImageUrl", backgroundImageUrl);
-        formData.append("shortenUrlId", shortenUrlId.toString());
+        formData.append("backgroundImageId", backgroundImageId.toString());  // Convert number to string
+        formData.append("shortenUrlId", shortenUrlId.toString());  // Convert number to string
         formData.append("title", title);
-        formData.append("tags", tags); 
-        formData.append("category", category);
 
         const response = await fetch(`${BASE_URL}/ticket`, { 
             method: "POST",
@@ -55,6 +51,7 @@ export const generateTicket = async (
         throw error;
     }
 };
+
 
 export const getTicketInfo = async (ticketId: number) => {
     try {

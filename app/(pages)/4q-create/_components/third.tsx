@@ -26,6 +26,7 @@ interface FormData {
   shortenUrl: string;
   title: string;
   backgroundImageUrl: string;
+  backgroundImageId: number;  
   shortenUrlId: number;
   tags: string;
   category: string;
@@ -42,6 +43,7 @@ export default function Third() {
     title: "",
     shortenUrl: "",
     backgroundImageUrl: "",
+    backgroundImageId: 0,
     shortenUrlId: 0,
     tags: "",
     category: "",
@@ -173,11 +175,12 @@ export default function Third() {
 
         const responseMessage = await generateTicket(
           ticketImage,
-          storedFormData.backgroundImageUrl,
+          // storedFormData.backgroundImageUrl,
+          storedFormData.backgroundImageId,
           storedFormData.shortenUrlId,
           storedFormData.title,
-          storedFormData.tags,
-          storedFormData.category
+          // storedFormData.tags,
+          // storedFormData.category
         );
 
         if (responseMessage?.ticketId) {

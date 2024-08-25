@@ -13,7 +13,7 @@ interface FormData {
     shortenUrl: string;
     title: string;
     backgroundImageUrl: string;
-    backgroundImaged: string;  
+    backgroundImagId: number;  
     shortenUrlId: number;
     tags: string[];
     category: string;
