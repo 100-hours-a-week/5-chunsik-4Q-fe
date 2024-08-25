@@ -54,23 +54,26 @@ export default function Page() {
         },
     ];
 
-    const handleButtonClick = () => {
-        if (current === 0 && formRef.current) {
-            formRef.current.submit();
-        } else if (current === 1) {
-            const backgroundImageUrl = sessionStorage.getItem('backgroundImageUrl');
-            if (!backgroundImageUrl) {
-                message.error('선택된 배경이미지가 없습니다');
-            } else {
-                next();
-            }
-        } else if (current < steps.length - 1) {
-            next();
+const handleButtonClick = () => {
+    if (current === 0 && formRef.current) {
+        formRef.current.submit();
+    } else if (current === 1) {
+        const storedFormData = JSON.parse(sessionStorage.getItem('form_data') || '{}');
+        const backgroundImageUrl = storedFormData.backgroundImageUrl; 
+
+        if (!backgroundImageUrl) {
+            message.error('선택된 배경이미지가 없습니다');
         } else {
-            message.success('포큐 생성 완료!');
-            router.push('/4q-create/download');
+            next();
         }
-    };
+    } else if (current < steps.length - 1) {
+        next();
+    } else {
+        message.success('포큐 생성 완료!');
+        router.push('/4q-create/download');
+    }
+};
+
 
     const items = steps.map((item) => ({ key: item.title, title: item.title }));
 

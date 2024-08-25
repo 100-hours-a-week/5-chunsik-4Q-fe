@@ -9,6 +9,7 @@ import { HiTrash } from "react-icons/hi";
 import { generateTicket } from '../../../../service/photo_api';
 import Lottie from 'react-lottie-player';
 import loadingLottie from '../../../../public/rotties/image-loading.json';
+import type { Stage as StageType } from 'konva/lib/Stage';
 
 interface TextNode {
   id: number;
@@ -46,11 +47,11 @@ export default function Third() {
     category: "",
   });
   const [shortenUrl, setShortenUrl] = useState<string>("");
-  const stageRef = useRef<Konva.Stage>(null);
+  const stageRef = useRef<StageType>(null);
   const qrImageRef = useRef<Konva.Image>(null);
   const transformerRef = useRef<Konva.Transformer>(null);
   const [isSelected, setSelected] = useState(false);
-  const [isLoading, setLoading] = useState(false); // Add loading state
+  const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -80,8 +81,9 @@ export default function Third() {
     }
   };
 
-  const [backgroundImage] = useImage(storedFormData.backgroundImageUrl);
-  const [qrImage] = useImage(qrImageUrl);
+  const [backgroundImage] = useImage(storedFormData.backgroundImageUrl, 'anonymous');
+  const [qrImage] = useImage(qrImageUrl, 'anonymous');
+
 
   const handleDragEnd = (e: Konva.KonvaEventObject<DragEvent>) => {
     setQrPosition({
@@ -144,39 +146,53 @@ export default function Third() {
     }
   }, [qrImage, isSelected]);
 
-const handleSubmit = async () => {
-  setLoading(true); // Show loading screen
-  try {
+  const downloadURI = (uri: string, name: string) => {
+    const link = document.createElement('a');
+    link.download = name;
+    link.href = uri;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const handleSave = () => {
     if (stageRef.current) {
-      const dataURL = stageRef.current.toDataURL({ pixelRatio: 3 }); // Use pixelRatio for higher resolution
-      const ticketImage = await fetch(dataURL)
-        .then(res => res.blob())
-        .then(blob => new File([blob], "ticket.png", { type: "image/png" }));
-
-      const responseMessage = await generateTicket(
-        ticketImage,
-        storedFormData.backgroundImageUrl,
-        storedFormData.shortenUrlId,
-        storedFormData.title,
-        storedFormData.tags,
-        storedFormData.category
-      );
-
-      if (responseMessage?.ticketId) {
-        console.log('id:', responseMessage?.ticketId);
-        window.location.href = `/4q-create/download/${responseMessage.ticketId}`;
-        sessionStorage.clear();
-      } else {
-        alert("티켓 생성에 실패했습니다.");
-      }
+      const uri = stageRef.current.toDataURL({ pixelRatio: 3 });
+      downloadURI(uri, 'photoQr.png');
     }
-  } catch (error) {
-    alert(error.message);
-  } finally {
-    setLoading(false); // Hide loading screen
-  }
-};
+  };
 
+  const handleSubmit = async () => {
+    setLoading(true);
+    try {
+      if (stageRef.current) {
+        const dataURL = stageRef.current.toDataURL({ pixelRatio: 3 });
+        const ticketImage = await fetch(dataURL)
+          .then(res => res.blob())
+          .then(blob => new File([blob], "ticket.png", { type: "image/png" }));
+
+        const responseMessage = await generateTicket(
+          ticketImage,
+          storedFormData.backgroundImageUrl,
+          storedFormData.shortenUrlId,
+          storedFormData.title,
+          storedFormData.tags,
+          storedFormData.category
+        );
+
+        if (responseMessage?.ticketId) {
+          console.log('id:', responseMessage?.ticketId);
+          window.location.href = `/4q-create/download/${responseMessage.ticketId}`;
+        } else {
+          alert("티켓 생성에 실패했습니다.");
+        }
+      }
+    } catch (error) {
+      alert(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -309,6 +325,13 @@ const handleSubmit = async () => {
               onClick={handleSubmit}
             >
               생성하기
+            </Button>
+            <Button
+              className={styles.submitBtn}
+              style={{ height: '40px', width: '140px' }}
+              onClick={handleSave}
+            >
+              Save as Image
             </Button>
           </div>
         </>

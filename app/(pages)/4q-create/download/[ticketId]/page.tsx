@@ -58,13 +58,26 @@ export default function Page() {
         setIsModalOpen(false);
     };
 
+    const handleDownload = () => {
+        if (ticketUrl) {
+            const a = document.createElement('a');
+            a.href = ticketUrl;
+            a.download = `photoQR_${title}.png`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        } else {
+            console.error("Image URL is not available for download.");
+        }
+    };
+
     return (
         <div className={styles.container}>
             <div className={styles.photoContainer}>
                 <Image
                     width={300}
                     height={300}
-                    src={ticketUrl} // 기본 이미지 제공
+                    src={ticketUrl} 
                     placeholder="미리보기"
                 />
             </div>
@@ -76,7 +89,7 @@ export default function Page() {
                 <Paragraph copyable style={{ margin: '1px' }}>{shortenUrl || "No URL available"}</Paragraph>
             </div>
             <div className={styles.btnContainer}>
-                <Button type="primary" icon={<LuDownload />} size="large" className={styles.downloadBtn}>
+                <Button type="primary" icon={<LuDownload />} size="large" className={styles.downloadBtn} onClick={handleDownload}>
                     다운로드
                 </Button>
                 <Button onClick={showModal} type="primary" icon={<BiSolidShareAlt />} size="large" className={styles.shareBtn}>
