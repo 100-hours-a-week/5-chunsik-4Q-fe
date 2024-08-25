@@ -54,6 +54,7 @@ export default function First({ formRef, onSubmit }: FirstProps) {
 
   const handleTagSelection = (selectedTags: string[]) => {
     setValue(selectedTags);
+    formRef.current?.setFieldsValue({ tags: selectedTags }); // 폼의 'tags' 필드에 선택된 태그 업데이트
     const currentValues = formRef.current?.getFieldsValue();
     updateSessionStorage(selectedTags, currentValues);
     handleCloseModal();
@@ -62,6 +63,7 @@ export default function First({ formRef, onSubmit }: FirstProps) {
   const handleTagDeselect = (tag: string) => {
     const updatedTags = value.filter((t) => t !== tag);
     setValue(updatedTags);
+    formRef.current?.setFieldsValue({ tags: updatedTags }); // 폼의 'tags' 필드에 업데이트된 태그 반영
     const currentValues = formRef.current?.getFieldsValue();
     updateSessionStorage(updatedTags, currentValues);
   };
@@ -125,14 +127,11 @@ export default function First({ formRef, onSubmit }: FirstProps) {
           </Form.Item>
         </Tooltip>
         <Form.Item
+          name="tags"
           rules={[
             {
-              validator: (_, value) =>
-                value && value.length > 0
-                  ? Promise.resolve()
-                  : Promise.reject(
-                      new Error("태그를 최소 한개 이상 선택해주세요")
-                    ),
+              required: true,
+              message: "태그를 최소 한개 이상 선택해주세요.",
             },
           ]}
         >
@@ -142,6 +141,10 @@ export default function First({ formRef, onSubmit }: FirstProps) {
             style={{ width: "100%" }}
             onClick={handleOpenModal}
             onDeselect={handleTagDeselect}
+            onChange={(selectedTags) => {
+              setValue(selectedTags);
+              formRef.current?.setFieldsValue({ tags: selectedTags }); // 선택된 태그를 폼 필드에 반영
+            }}
             variant="filled"
             className={styles.field}
             placeholder="태그를 선택해주세요."

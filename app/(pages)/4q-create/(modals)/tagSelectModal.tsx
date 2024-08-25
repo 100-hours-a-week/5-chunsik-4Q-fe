@@ -20,21 +20,21 @@ export default function TagSelector({ selectedTags, onSelect }: TagSelectorProps
     const seasonTags = ['봄', '여름', '가을', '겨울'];
 
     const isHotTag = (tag: string) => {
-        const hotTags = ['고전', '봄', '그린', '밝은', '심플'];
+        const hotTags = ['네온', '겨울', '그린', '밝은', '심플', '화이트'];
         return hotTags.includes(tag);
     };
 
     useEffect(() => {
-        setLocalSelectedTags(selectedTags);  // Sync local state with prop
+        setLocalSelectedTags(selectedTags);  
     }, [selectedTags]);
 
     const handleTagClick = (tag: string) => {
         if (localSelectedTags.includes(tag)) {
             setLocalSelectedTags(localSelectedTags.filter(t => t !== tag));
-            setShowAlert(false); // Hide alert when a tag is deselected
+            setShowAlert(false); 
         } else if (localSelectedTags.length < MAX_TAGS) {
             setLocalSelectedTags([...localSelectedTags, tag]);
-            setShowAlert(false); // Hide alert when a tag is added within the limit
+            setShowAlert(false);
         } else {
             setShowAlert(true); // Show alert when the tag limit is reached
         }

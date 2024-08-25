@@ -26,7 +26,7 @@ export default function Second() {
     const [loadings, setLoadings] = useState<boolean[]>([]);
     const [imageUrls, setImageUrls] = useState<string[]>([]);
     const [imageIds, setImageIds] = useState<string[]>([]);
-    const [randomButtonCount, setRandomButtonCount] = useState(3);  // Random button click count
+    const [randomButtonCount, setRandomButtonCount] = useState(3);  
 
     useEffect(() => {
         const storedData = sessionStorage.getItem('form_data');
@@ -39,22 +39,17 @@ export default function Second() {
     const fetchImages = useCallback(async () => {
         if (storedFormData) {
             try {
-                // Step 1: Check if shortenUrl is missing
                 if (!storedFormData.shortenUrl) {
-                    // Step 2: Fetch the shortened URL
                     try {
                         const result = await getShortenUrl(storedFormData.url);
     
                         if (typeof result === 'object' && result.shortenUrl && result.shortenUrlId) {
-                            // Update the form data with the shortened URL
                             const updatedFormData = {
                                 ...storedFormData,
                                 shortenUrl: result.shortenUrl,
                                 shortenUrlId: result.shortenUrlId
                             };
-                            // Save updated form data to sessionStorage
                             sessionStorage.setItem('form_data', JSON.stringify(updatedFormData));
-                            // Update the local state with the new form data
                             setStoredFormData(updatedFormData);
                         } else {
                             console.error('Unexpected result format:', result);
@@ -64,7 +59,6 @@ export default function Second() {
                     }
                 }
     
-                // Step 3: Fetch the images based on the tags and category
                 const response = await generatePhotoImg(
                     storedFormData.category,
                     storedFormData.tags,

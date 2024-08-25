@@ -77,9 +77,8 @@ export const requestLogin = async (email: string, password: string) => {
 
         if (response.ok) {
             const data = await response.json();
-            // console.log(data);
-            const token = data.accessToken;  // Assuming the token is in the response
-            localStorage.setItem('AccessToken', token); // Use localStorage instead of LocalStorage
+            const token = data.accessToken;  
+            localStorage.setItem('AccessToken', token); 
             return { success: true };  
         } else {
             throw new Error("로그인에 실패했습니다.");

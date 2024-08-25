@@ -14,9 +14,6 @@ export const feedbackSubmit = async (feedbackData: any) => {
             throw new Error("Failed to submit feedback");
         }
         return { success: true };  
-        // const data = await response.json();
-        // console.log(data);
-        // return data;
     } catch (error) {
         console.error("Error submitting feedback:", error);
         throw error;

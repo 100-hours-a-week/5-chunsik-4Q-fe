@@ -30,8 +30,8 @@ export const generateTicket = async (
     try {
         const formData = new FormData();
         formData.append("ticketImage", ticketImage);
-        formData.append("backgroundImageId", backgroundImageId.toString());  // Convert number to string
-        formData.append("shortenUrlId", shortenUrlId.toString());  // Convert number to string
+        formData.append("backgroundImageId", backgroundImageId.toString());  
+        formData.append("shortenUrlId", shortenUrlId.toString());  
         formData.append("title", title);
 
         const response = await fetch(`${BASE_URL}/ticket`, { 
