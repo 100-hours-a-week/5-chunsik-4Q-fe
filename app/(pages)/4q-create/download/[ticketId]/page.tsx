@@ -58,14 +58,22 @@ export default function Page() {
         setIsModalOpen(false);
     };
 
-    const handleDownload = () => {
+    const handleDownload = async () => {
         if (ticketUrl) {
-            const a = document.createElement('a');
-            a.href = ticketUrl;
-            a.download = `photoQR_${title}.png`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
+            try {
+                const response = await fetch(ticketUrl, { mode: 'cors' });
+                const blob = await response.blob();
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `photoQR_${title}.png`; // This will set the downloaded file's name
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);
+            } catch (error) {
+                console.error("Failed to download image:", error);
+            }
         } else {
             console.error("Image URL is not available for download.");
         }
