@@ -144,38 +144,39 @@ export default function Third() {
     }
   }, [qrImage, isSelected]);
 
-  const handleSubmit = async () => {
-    setLoading(true); // Show loading screen
-    try {
-      if (stageRef.current) {
-        const dataURL = stageRef.current.toDataURL();
-        const ticketImage = await fetch(dataURL)
-          .then(res => res.blob())
-          .then(blob => new File([blob], "ticket.png", { type: "image/png" }));
+const handleSubmit = async () => {
+  setLoading(true); // Show loading screen
+  try {
+    if (stageRef.current) {
+      const dataURL = stageRef.current.toDataURL({ pixelRatio: 3 }); // Use pixelRatio for higher resolution
+      const ticketImage = await fetch(dataURL)
+        .then(res => res.blob())
+        .then(blob => new File([blob], "ticket.png", { type: "image/png" }));
 
-        const responseMessage = await generateTicket(
-          ticketImage,
-          storedFormData.backgroundImageUrl,
-          storedFormData.shortenUrlId,
-          storedFormData.title,
-          storedFormData.tags,
-          storedFormData.category
-        );
+      const responseMessage = await generateTicket(
+        ticketImage,
+        storedFormData.backgroundImageUrl,
+        storedFormData.shortenUrlId,
+        storedFormData.title,
+        storedFormData.tags,
+        storedFormData.category
+      );
 
-        if (responseMessage?.ticketId) {
-          console.log('id:', responseMessage?.ticketId);
-          window.location.href = `/4q-create/download/${responseMessage.ticketId}`;
-          sessionStorage.clear();
-        } else {
-          alert("티켓 생성에 실패했습니다.");
-        }
+      if (responseMessage?.ticketId) {
+        console.log('id:', responseMessage?.ticketId);
+        window.location.href = `/4q-create/download/${responseMessage.ticketId}`;
+        sessionStorage.clear();
+      } else {
+        alert("티켓 생성에 실패했습니다.");
       }
-    } catch (error) {
-      alert(error.message);
-    } finally {
-      setLoading(false); // Hide loading screen
     }
-  };
+  } catch (error) {
+    alert(error.message);
+  } finally {
+    setLoading(false); // Hide loading screen
+  }
+};
+
 
   return (
     <div className={styles.container}>

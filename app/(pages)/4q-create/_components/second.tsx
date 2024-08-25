@@ -9,12 +9,14 @@ import { getShortenUrl } from "../../../../service/shorten_api";
 import tagArrow from '../../../../public/images/tag_arrow.png'
 
 interface FormData {
-    category: string;
-    tags: string[];
     url: string;
-    shorten_url?: string;
-    backgroundImageUrl?: string;
-}
+    shortenUrl: string;
+    title: string;
+    backgroundImageUrl: string;
+    shortenUrlId: number;
+    tags: string[];
+    category: string;
+  }
 
 export default function Second() {
     const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, skipSnaps: false });
@@ -31,40 +33,41 @@ export default function Second() {
             setStoredFormData(parsedData);
         }
     }, []);
-
-    useEffect(() => {
-        const fetchShortenUrl = async () => {
-            if (storedFormData?.url) {
-                try {
-                    const result = await getShortenUrl(storedFormData.url);
-
-                    if (typeof result === 'object' && result.shortenUrl && result.shortenUrlId) {
-                        const updatedFormData = { 
-                            ...storedFormData, 
-                            shortenUrl: result.shortenUrl, 
-                            shortenUrlId: result.shortenUrlId 
-                        };
-                        console.log('주소:', result.shortenUrl);
-                        sessionStorage.setItem('form_data', JSON.stringify(updatedFormData));
-                    } else {
-                        console.error('Unexpected result format:', result);
-                    }
-                } catch (error) {
-                    console.error('Failed to shorten URL:', error);
-                }
-            }
-        };
-        fetchShortenUrl();
-    }, [storedFormData]);
     
     const fetchImages = useCallback(async () => {
         if (storedFormData) {
             try {
+                // Step 1: Check if shortenUrl is missing
+                if (!storedFormData.shortenUrl) {
+                    // Step 2: Fetch the shortened URL
+                    try {
+                        const result = await getShortenUrl(storedFormData.url);
+    
+                        if (typeof result === 'object' && result.shortenUrl && result.shortenUrlId) {
+                            // Update the form data with the shortened URL
+                            const updatedFormData = {
+                                ...storedFormData,
+                                shortenUrl: result.shortenUrl,
+                                shortenUrlId: result.shortenUrlId
+                            };
+                            // Save updated form data to sessionStorage
+                            sessionStorage.setItem('form_data', JSON.stringify(updatedFormData));
+                            // Update the local state with the new form data
+                            setStoredFormData(updatedFormData);
+                        } else {
+                            console.error('Unexpected result format:', result);
+                        }
+                    } catch (error) {
+                        console.error('Failed to shorten URL:', error);
+                    }
+                }
+    
+                // Step 3: Fetch the images based on the tags and category
                 const response = await generatePhotoImg(
                     storedFormData.category,
                     storedFormData.tags,
                 );
-
+    
                 if (Array.isArray(response.url)) {
                     setImageUrls(prevUrls => [...prevUrls, ...response.url]);
                 } else if (typeof response.url === 'string') {
@@ -72,13 +75,15 @@ export default function Second() {
                 } else {
                     console.error('Unexpected response format:', response.url);
                 }
+    
             } catch (error) {
                 console.error('Error fetching images:', error);
-            } 
+            }
         } else {
             console.log('No form data found in sessionStorage');
         }
     }, [storedFormData]);
+    
 
     const onSelect = useCallback(() => {
         if (!emblaApi) return;

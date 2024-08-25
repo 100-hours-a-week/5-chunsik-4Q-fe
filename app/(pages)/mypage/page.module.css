@@ -10,6 +10,50 @@
     /*background-color: red;*/
 }
 
+.unauthContainer {
+    /* background-color: red; */
+    position: absolute;
+    /* top: 30px;
+    left: 30px; */
+}
+
+.unauthTitle {
+    font-size: 40px;
+    font-weight: 500;
+    /* background-color: rebeccapurple; */
+}
+
+.unauthTitle p {
+    /* background-color: red; */
+    margin-bottom: 10px;
+}
+
+.unauthLoginContainer {
+    display: flex;
+    align-items: center;
+}
+
+.unauthUserInfoContainer {
+    padding: 10px;
+}
+
+.unauthHelper {
+    margin: 7px 0 0 10px;
+    font-size: 14px;
+}
+
+.loginArrow {
+    font-size: 24px;
+    margin-left: 8px;
+    color: #999999;
+}
+
+.unauthUserInfoContainer span {
+    font-size: 26px;
+    font-weight: 600;
+    margin-left: 10px;
+}
+
 .bold {
     font-size: 30px;
     font-weight: bold;
@@ -66,5 +110,14 @@
 @media (max-width: 410px) {
     .linkList {
         padding: 16px 2px;
+    }
+    .container {
+        padding: 35px;
+    }
+    .unauthUserInfoContainer span {
+        margin-left: 0;
+    }
+    .unauthHelper {
+        margin-left: 2px;
     }
 }
