@@ -13,6 +13,7 @@ interface FormData {
     shortenUrl: string;
     title: string;
     backgroundImageUrl: string;
+    backgroundImaged: string;  
     shortenUrlId: number;
     tags: string[];
     category: string;
@@ -24,6 +25,7 @@ export default function Second() {
     const [storedFormData, setStoredFormData] = useState<FormData | null>(null);
     const [loadings, setLoadings] = useState<boolean[]>([]);
     const [imageUrls, setImageUrls] = useState<string[]>([]);
+    const [imageIds, setImageIds] = useState<string[]>([]);
     const [randomButtonCount, setRandomButtonCount] = useState(3);  // Random button click count
 
     useEffect(() => {
@@ -70,8 +72,10 @@ export default function Second() {
     
                 if (Array.isArray(response.url)) {
                     setImageUrls(prevUrls => [...prevUrls, ...response.url]);
+                    setImageIds(prevUrls => [...prevUrls, ...response.backgroundImageId]);
                 } else if (typeof response.url === 'string') {
                     setImageUrls(prevUrls => [...prevUrls, response.url]);
+                    setImageIds(prevUrls => [...prevUrls, response.backgroundImageId]);
                 } else {
                     console.error('Unexpected response format:', response.url);
                 }
@@ -100,7 +104,8 @@ export default function Second() {
 
             const updatedFormData = {
                 ...storedFormData,
-                backgroundImageUrl: imageUrls[selectedIndex]
+                backgroundImageUrl: imageUrls[selectedIndex],
+                backgroundImageId: imageIds[selectedIndex]
             };
             sessionStorage.setItem('form_data', JSON.stringify(updatedFormData));
         }

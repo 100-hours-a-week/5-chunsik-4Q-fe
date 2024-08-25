@@ -12,7 +12,7 @@ const STORAGE_KEY = 'form_data';
 
 interface FirstProps {
     formRef: React.RefObject<any>;
-    onSubmit: () => void;  // Callback to handle form submission
+    onSubmit: () => void;  
 }
 
 export default function First({ formRef, onSubmit }: FirstProps) {
@@ -37,7 +37,6 @@ export default function First({ formRef, onSubmit }: FirstProps) {
     };
 
     const handleFinish = (values: any) => {
-        // console.log('Form values:', values);
         onSubmit(); 
     };
 
@@ -110,10 +109,19 @@ export default function First({ formRef, onSubmit }: FirstProps) {
                 >
                    
                     <Input placeholder="URL 입력" variant="filled" className={styles.field} />
-                   
                 </Form.Item>
                 </Tooltip>
-                <Form.Item>
+                <Form.Item
+    rules={[
+        {
+            validator: (_, value) =>
+                value && value.length > 0
+                    ? Promise.resolve()
+                    : Promise.reject(new Error('태그를 최소 한개 이상 선택해주세요')),
+        },
+    ]}
+>
+                
                     <Select
                         mode="multiple"
                         value={value}
@@ -123,7 +131,7 @@ export default function First({ formRef, onSubmit }: FirstProps) {
                         variant="filled"
                         className={styles.field}
                         placeholder="태그를 선택해주세요."
-                        dropdownRender={() => <></>} // Disable the default dropdown
+                        dropdownRender={() => <></>}
                     >
                         {value.map(tag => (
                             <Option key={tag} value={tag}>
