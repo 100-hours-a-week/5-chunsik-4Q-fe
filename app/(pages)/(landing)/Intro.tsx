@@ -1,9 +1,9 @@
 "use client"
 
 import styles from './intro.module.css';
-import step1 from '../../../public/images/step1.jpg';
-import step2 from '../../../public/images/step2.jpg';
-import step3 from '../../../public/images/step3.png';
+import step1 from '../../../public/images/step1.gif';
+import step2 from '../../../public/images/step2.gif';
+import step3 from '../../../public/images/step3.gif';
 import step1_icon from '../../../public/images/icon/step1_icon.png';
 import step2_icon from '../../../public/images/icon/step2_icon.png';
 import step3_icon from '../../../public/images/icon/step3_icon.png';

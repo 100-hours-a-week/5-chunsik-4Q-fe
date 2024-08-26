@@ -39,7 +39,7 @@ export default function Demo() {
             {/*<img src={mockup.src} alt="mockup" />*/}
             {/*</div>*/}
             <div className={styles.subTitle}>
-                <span>포토큐알</span>
+                <span>4Q 활용</span>
                 <div className={styles.highliter}>예시</div>
             </div>
             <Link href="/4q-gallery" className={styles.allBtn}>
