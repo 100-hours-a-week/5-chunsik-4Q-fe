@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import { Stage, Layer, Image, Transformer, Text } from "react-konva";
+import { Stage, Layer, Image, Text } from "react-konva";
 import { ColorPicker, Button, Tooltip, QRCode } from "antd";
 import { useImage } from "react-konva-utils";
 import styles from "./third.module.css";
@@ -10,6 +10,7 @@ import { generateTicket } from '../../../../service/photo_api';
 import Lottie from 'react-lottie-player';
 import loadingLottie from '../../../../public/rotties/image-loading.json';
 import type { Stage as StageType } from 'konva/lib/Stage';
+import { isMobile } from "react-device-detect";
 
 interface TextNode {
   id: number;
@@ -51,7 +52,6 @@ export default function Third() {
   const [shortenUrl, setShortenUrl] = useState<string>("");
   const stageRef = useRef<StageType>(null);
   const qrImageRef = useRef<Konva.Image>(null);
-  const transformerRef = useRef<Konva.Transformer>(null);
   const [isSelected, setSelected] = useState(false);
   const [isLoading, setLoading] = useState(false);
 
@@ -141,15 +141,8 @@ export default function Third() {
     setTextNodes(updatedTextNodes);
   };
 
-  useEffect(() => {
-    if (transformerRef.current && qrImageRef.current && isSelected) {
-      transformerRef.current.nodes([qrImageRef.current]);
-      transformerRef.current.getLayer()?.batchDraw();
-    }
-  }, [qrImage, isSelected]);
-
-
   const handleSubmit = async () => {
+    setSelected(false);
     setLoading(true);
     try {
       if (stageRef.current) {
@@ -168,7 +161,6 @@ export default function Third() {
           setTimeout(() => {
             setLoading(false);
           }, 4000); 
-          // console.log('id:', responseMessage?.ticketId);
           window.location.href = `/4q-create/download/${responseMessage.ticketId}`;
         } else {
           alert("티켓 생성에 실패했습니다.");
@@ -234,29 +226,6 @@ export default function Third() {
                       }
                     }}
                   />
-                  {isSelected && (
-                    <Transformer
-                      enabledAnchors={[
-                        "top-left",
-                        "top-right",
-                        "bottom-left",
-                        "bottom-right",
-                      ]}
-                      ref={transformerRef}
-                      rotateEnabled={false}
-                      keepRatio={true}
-                      boundBoxFunc={(oldBox, newBox) => {
-                        const boxSize = Math.max(newBox.width, newBox.height);
-                        return {
-                          x: newBox.x,
-                          y: newBox.y,
-                          width: boxSize,
-                          height: boxSize,
-                          rotation: oldBox.rotation,
-                        };
-                      }}
-                    />
-                  )}
                   {textNodes.map((node) => (
                     <Text
                       key={node.id}
@@ -274,6 +243,7 @@ export default function Third() {
                 </Layer>
               </Stage>
             </div>
+            { !isMobile ? 
             <div className={styles.btnContainer}>
               <Tooltip title="title 추가">
                 <Button
@@ -283,7 +253,7 @@ export default function Third() {
                   size="small"
                 />
               </Tooltip>
-              <Tooltip title="텍스트를 더블클릭하고 삭제버튼이 활성화">
+              <Tooltip title="텍스트를 더블클릭하고 삭제버튼 활성화">
                 <Button
                   onClick={deleteText}
                   type="primary"
@@ -292,7 +262,7 @@ export default function Third() {
                   disabled={selectedId === null}
                 />
               </Tooltip>
-              <Tooltip title="텍스트를 더블클릭하고 색상을 변경">
+              <Tooltip title="텍스트를 더블클릭하고 색상 변경">
                 <ColorPicker
                   value={selectedColor}
                   onChange={(color) => handleColorChange(color.toHexString())}
@@ -300,6 +270,7 @@ export default function Third() {
                 />
               </Tooltip>
             </div>
+            : null }
             <QRCode
               id="myqrcode"
               value={shortenUrl}

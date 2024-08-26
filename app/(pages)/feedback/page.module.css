@@ -4,7 +4,8 @@
     align-items: center;
     position: relative;
     justify-content: center;
-    padding: 15px;
+    padding: 15px 15px 100px 15px;
+    overflow-y: auto;
 
 }
 
