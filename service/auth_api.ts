@@ -124,6 +124,7 @@ export const requestAccessToken = async () => {
             headers: {
                 "Content-Type": "application/json",
             },
+            credentials: 'include'
         });
 
         if (response.ok) {
