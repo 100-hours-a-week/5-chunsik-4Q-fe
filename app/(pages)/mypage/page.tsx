@@ -85,7 +85,9 @@ export default function Page() {
                     <Link href="/mypage/liked-4q" className={styles.arrowContainer}><IoIosArrowDropright className={styles.arrowIcon} /></Link>
                 </div>
             </div>
-            <div className={styles.logoutContainer}>
+            
+            {isAuthenticated && (
+                <div className={styles.logoutContainer}>
                 <Button
                     type="primary"
                     shape="round"
@@ -97,6 +99,7 @@ export default function Page() {
                     로그아웃
                 </Button>
             </div>
+            )}
         </div>
     );
 }

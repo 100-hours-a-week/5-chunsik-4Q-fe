@@ -191,6 +191,13 @@
     transform: translate3d(-200%, 0, 0);
 }
 
+.logoutBtnContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+}
+
 /* Presentational Styles */
 
 /*.menu li:hover {*/
