@@ -14,8 +14,16 @@ import { requestAccessToken } from '../../../../service/auth_api';
 
 export default function Hero() {
     useEffect(() => {
-        // 페이지가 마운트될 때 requestAccessToken 실행
-        requestAccessToken();
+        // 쿠키에서 refreshToken을 확인
+        const refreshToken = document.cookie
+            .split('; ')
+            .find(row => row.startsWith('refreshToken='))
+            ?.split('=')[1];
+
+        // refreshToken이 존재할 때만 requestAccessToken 실행
+        if (refreshToken) {
+            requestAccessToken();
+        }
     }, []);
 
     return (
