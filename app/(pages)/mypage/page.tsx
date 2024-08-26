@@ -18,7 +18,6 @@ export default function Page() {
     const [isAuthenticated, setAuthenticated] = useState<boolean>(false);
     const [userInfo, setUserInfo] = useState<{ nickname: string; email: string } | null>(null);
 
-    // Move the checkAuth function inside the component
     const checkAuth = async () => {
         const token = localStorage.getItem('AccessToken');
         setAuthenticated(!!token);
@@ -40,6 +39,7 @@ export default function Page() {
     }, []);
 
     const handleLogout = () => {
+        document.cookie = "refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
         localStorage.removeItem('AccessToken');
         router.push('/login');
         message.success('로그아웃 되었습니다');
@@ -58,7 +58,7 @@ export default function Page() {
                     </div>
                 </div>
             )}
-
+            
             {isAuthenticated && userInfo && (
                 <div className={styles.userInfoConatiner}>
                     <div className={styles.nickname}>
