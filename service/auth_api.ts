@@ -114,3 +114,31 @@ export const requestUserInfo = async () => {
         return null;
     }
 };
+
+
+//refresh token으로 access token 요청하기
+export const requestAccessToken = async () => {
+    try {
+        const response = await fetch(`${BASE_URL}/auth/refresh`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            const { accessToken } = data;
+
+            localStorage.setItem('AccessToken', accessToken);
+
+            return accessToken;
+        } else {
+            console.error('Failed to refresh access token', response.status);
+            return null;
+        }
+    } catch (error) {
+        console.error('Error refreshing access token:', error);
+        return null;
+    }
+};

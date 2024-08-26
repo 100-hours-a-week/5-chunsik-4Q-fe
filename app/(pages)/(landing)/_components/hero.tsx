@@ -1,5 +1,6 @@
 "use client"
 
+import { useEffect } from 'react';
 import styles from './hero.module.css';
 import bg from '../../../../public/images/hero_bg.svg';
 import Link from "next/link";
@@ -9,8 +10,14 @@ import hero3 from "../../../../public/images/hero/hero3.png";
 
 import Lottie from 'react-lottie-player';
 import arrowLottie from '../../../../public/rotties/hero-arrow.json'
+import { requestAccessToken } from '../../../../service/auth_api';
 
 export default function Hero() {
+    useEffect(() => {
+        // 페이지가 마운트될 때 requestAccessToken 실행
+        requestAccessToken();
+    }, []);
+
     return (
         <div className={styles.container} style={{backgroundImage: `url(${bg.src})`}}>
          <div className={styles.arrowContainer}>
