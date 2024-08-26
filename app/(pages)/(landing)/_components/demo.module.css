@@ -69,8 +69,8 @@
 .mockupImg {
     /*height: 550px;*/
     position: absolute;
-    top: 21%;
-    height: 550px;
+    top: 22%;
+    height: 540px;
     z-index: 2
 }
 
@@ -78,10 +78,10 @@
 .swiper {
     width: 260px;
     /*여기서 세로 크기 조정하기*/
-    height: 535px;
+    height: 525px;
     border-radius: 50px;
     position: absolute;
-    top: -5%;
+    top: -4%;
     background-color: black;
     
 
@@ -95,6 +95,11 @@
     align-items: center;
     background-color: grey;
     height: 600px;
+}
+
+.slideContainer img {
+    height: 590px;
+    padding-bottom: 15px;
 }
 
 .btnContainer {
