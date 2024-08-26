@@ -56,3 +56,5 @@ sketch
 keys.json
 
 # End of https://www.toptal.com/developers/gitignore/api/react,nextjs
+# Sentry Config File
+.env.sentry-build-plugin

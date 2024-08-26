@@ -1,24 +1,15 @@
-// import withAntdLess from 'next-plugin-antd-less';
-//
-// /** @type {import('next').NextConfig} */
-// const nextConfig = withAntdLess({
-//     // lessVarsFilePath: './styles/variables.less',
-//     reactStrictMode: true,
-//     swcMinify: true,
-//     assetPrefix: '',
-//
-// });
-//
-// export default nextConfig;
+import withAntdLess from 'next-plugin-antd-less';
+import { withSentryConfig } from '@sentry/nextjs';
+
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+const nextConfig = withAntdLess({
     reactStrictMode: true,
     swcMinify: true,
     assetPrefix: '',
     experimental: { esmExternals: true },
-    transpilePackages: [ 'antd', '@ant-design', 'rc-util', 'rc-pagination', 'rc-picker', 'rc-notification', 'rc-tooltip' ],
+    transpilePackages: ['antd', '@ant-design', 'rc-util', 'rc-pagination', 'rc-picker', 'rc-notification', 'rc-tooltip'],
     webpack: (config) => {
-        config.infrastructureLogging = { debug: /PackFileCache/ }
+        config.infrastructureLogging = { debug: /PackFileCache/ };
         config.resolve.alias.canvas = false;
         config.cache = false;
         config.module.rules.push({
@@ -28,16 +19,17 @@ const nextConfig = {
 
         return config;
     },
+});
+
+// Sentry configuration
+const sentryConfig = {
+    org: "chulchulhanchunsigi",
+    project: "pq-fe",
+    silent: !process.env.CI,
+    widenClientFileUpload: true,
+    hideSourceMaps: true,
+    disableLogger: true,
+    automaticVercelMonitors: true,
 };
 
-export default nextConfig;
-
-
-// export default nextConfig;
-// const nextConfig = {
-//     reactStrictMode: true,
-//     swcMinify: true,
-//     assetPrefix: '',
-// };
-//
-// export default nextConfig;
+export default withSentryConfig(nextConfig, sentryConfig);
