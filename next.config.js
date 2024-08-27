@@ -7,6 +7,9 @@ const nextConfig = withAntdLess({
     swcMinify: true,
     assetPrefix: '',
     experimental: { esmExternals: true },
+    env: {
+        NEXT_PUBLIC_GA_ID: process.env.NEXT_PUBLIC_GA_ID,
+    },
     transpilePackages: ['antd', '@ant-design', 'rc-util', 'rc-pagination', 'rc-picker', 'rc-notification', 'rc-tooltip'],
     webpack: (config) => {
         config.infrastructureLogging = { debug: /PackFileCache/ };

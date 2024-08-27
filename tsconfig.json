@@ -18,7 +18,8 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "types": [
-      "swiper"
+      "swiper",
+      "@types/gtag.js"
     ],
     "plugins": [
       {

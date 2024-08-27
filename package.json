@@ -20,6 +20,7 @@
     "@ant-design/nextjs-registry": "^1.0.1",
     "@linaria/core": "^6.2.0",
     "@linaria/react": "^6.2.1",
+    "@next/third-parties": "^14.2.6",
     "@sentry/nextjs": "^8",
     "@sentry/react": "^8.26.0",
     "antd": "^5.20.0",
