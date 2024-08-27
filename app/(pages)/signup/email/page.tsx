@@ -8,8 +8,6 @@ import styles from "./page.module.css";
 import { requestEmailVerification, verifyEmailCode, requestRegister } from "../../../../service/auth_api";
 import { useRouter } from 'next/navigation';
 
-// const emailDomains = ["gmail.com", "yahoo.com", "outlook.com", "naver.com", "daum.net"];
-
 export default function Signup() {
     const [email, setEmail] = useState("");
     const [isEmailValid, setIsEmailValid] = useState(false);
@@ -191,16 +189,19 @@ export default function Signup() {
                                 value={verificationCode}
                                 onChange={(e) => setVerificationCode(e.target.value)}
                                 className={styles.inputField}
+                                disabled={buttonText !== "이메일 재전송"} // Disable input field
                             />
                         </div>
                     </Form.Item>
                     <button
                         className={styles.emailValiBtn}
                         style={{
-                            cursor: valiButtonText === "인증 성공" ? "not-allowed" : "pointer"
+                            cursor: valiButtonText === "인증 성공" || buttonText !== "이메일 재전송" ? "not-allowed" : "pointer",
+                            backgroundColor: buttonText !== "이메일 재전송" ? "#e3e3e3" : "var(--primary-color)",
                         }}
                         onClick={handleCodeVerification}
                         type="button"
+                        disabled={buttonText !== "이메일 재전송"} // Disable validation button
                     >
                         {valiButtonText}
                     </button>

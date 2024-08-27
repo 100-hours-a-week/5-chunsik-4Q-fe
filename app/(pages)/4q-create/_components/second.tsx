@@ -155,7 +155,8 @@ export default function Second() {
             <div className={styles.contentContainer}>
                 <div className={styles.sliderContainer} ref={emblaRef}>
                     <div className={styles.emblaContainer}
-                        style={{ justifyContent: imageUrls.length === 1 ? 'center' : 'flex-start' }}>
+                        style={{ justifyContent: imageUrls.length === 1 ? 'center' : 'flex-start'
+                         }}>
                         {imageUrls.map((url, idx) => (
                             <div
                                 key={idx}
