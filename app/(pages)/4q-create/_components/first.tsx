@@ -5,7 +5,7 @@ import { Form, Select, Input, Modal, Tooltip } from "antd";
 import styles from "./first.module.css";
 import type { InputRef } from "antd";
 import TagSelector from "../(modals)/tagSelectModal";
-import tagTranslationMap from '../../../../lib/tagTranslationMap'
+import tagTranslationMap from '../../../../lib/tagTranslationKrEn'
 
 const { Option } = Select;
 

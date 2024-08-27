@@ -25,16 +25,16 @@
 }
 
 .shortenUrlContainer {
-    width: 270px;
+    /* width: 270px; */
     background-color: #EEEEEE;
     display: flex;
     /* justify-content: center; */
     align-items: center;
-    padding: 3px;
+    padding: 3px 6px;
     margin-bottom: 10px;
     border-radius: 4px;
     font-size: 14px;
-    padding-left: 4px;
+    /* padding-left: 4px; */
 }
 
 .shortenUrlContainer p {

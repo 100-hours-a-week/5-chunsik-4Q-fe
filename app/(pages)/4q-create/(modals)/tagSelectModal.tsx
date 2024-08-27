@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Button, Alert } from 'antd';
 import styles from './tagSelectModal.module.css';
 import hot_mark from '../../../../public/images/hot_tag.png';
-import tagTranslationMap from '../../../../lib/tagTranslationMap'
+import tagTranslationMap from '../../../../lib/tagTranslationKrEn'
 import mock from "../../../../public/images/mock_4q.png";
 
 interface TagSelectorProps {
@@ -52,7 +52,7 @@ export default function TagSelector({ selectedTags, onSelect }: TagSelectorProps
     return (
         <div className={styles.container}>
             {showAlert && (
-                <Alert message={`태그는 최대 ${MAX_TAGS}개까지 선택 가능합니다.`} type="warning" showIcon banner/>
+                <Alert message={`태그는 최대 ${MAX_TAGS}개까지 선택 가능합니다.`} type="warning" showIcon  />
             )}
             <div className={styles.tagList}>
                 <div className={styles.tagListTitle}>분위기</div>

@@ -6,7 +6,13 @@ import { FaDice } from "react-icons/fa6";
 import { Button, message } from 'antd';
 import { generatePhotoImg } from '../../../../service/photo_api';
 import { getShortenUrl } from "../../../../service/shorten_api";
-import tagArrow from '../../../../public/images/tag_arrow.png'
+import tagArrow from '../../../../public/images/tag_arrow.png';
+import tagTranslationMap from '../../../../lib/tagTranslationEnKr';
+
+message.config({
+    maxCount: 3,
+  });
+  
 
 interface FormData {
     url: string;
@@ -17,7 +23,7 @@ interface FormData {
     shortenUrlId: number;
     tags: string[];
     category: string;
-  }
+}
 
 export default function Second() {
     const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, skipSnaps: false });
@@ -26,7 +32,7 @@ export default function Second() {
     const [loadings, setLoadings] = useState<boolean[]>([]);
     const [imageUrls, setImageUrls] = useState<string[]>([]);
     const [imageIds, setImageIds] = useState<string[]>([]);
-    const [randomButtonCount, setRandomButtonCount] = useState(3);  
+    const [randomButtonCount, setRandomButtonCount] = useState(3);
 
     useEffect(() => {
         const storedData = sessionStorage.getItem('form_data');
@@ -82,7 +88,6 @@ export default function Second() {
         }
     }, [storedFormData]);
     
-
     const onSelect = useCallback(() => {
         if (!emblaApi) return;
         setSelectedIndex(emblaApi.selectedScrollSnap());
@@ -146,7 +151,7 @@ export default function Second() {
                     <div className={styles.tags}>
                         {storedFormData?.tags.map((tag, index) => (
                             <div key={index} className={styles.tagItem}>
-                                #{tag}
+                                #{tagTranslationMap[tag] || tag} {/* 태그를 한글로 변환 */}
                             </div>
                         ))}
                     </div>
