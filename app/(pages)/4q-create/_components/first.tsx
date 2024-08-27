@@ -15,6 +15,33 @@ interface FirstProps {
   onSubmit: () => void;
 }
 
+const tagTranslationMap: Record<string, string> = {
+  '고전': 'classic',
+  '귀여움': 'cute',
+  '꽃무늬': 'flower',
+  '네온': 'neon',
+  '도시': 'urban',
+  '시골': 'countryside',
+  '밝은': 'bright',
+  '어두운': 'dark',
+  '빈티지': 'vintage',
+  '심플': 'simple',
+  '럭셔리': 'luxury',
+  '자연친화적': 'nature-friendly',
+  '블루': 'blue',
+  '그린': 'green',
+  '레드': 'red',
+  '옐로우': 'yellow',
+  '퍼플': 'purple',
+  '블랙': 'black',
+  '화이트': 'white',
+  '흑백': 'black-and-white',
+  '봄': 'spring',
+  '여름': 'summer',
+  '가을': 'fall',
+  '겨울': 'winter'
+};
+
 export default function First({ formRef, onSubmit }: FirstProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [value, setValue] = useState<string[]>([]);
@@ -53,17 +80,18 @@ export default function First({ formRef, onSubmit }: FirstProps) {
   };
 
   const handleTagSelection = (selectedTags: string[]) => {
-    setValue(selectedTags);
-    formRef.current?.setFieldsValue({ tags: selectedTags }); // 폼의 'tags' 필드에 선택된 태그 업데이트
+    const translatedTags = selectedTags.map(tag => tagTranslationMap[tag] || tag);
+    setValue(translatedTags);
+    formRef.current?.setFieldsValue({ tags: translatedTags });
     const currentValues = formRef.current?.getFieldsValue();
-    updateSessionStorage(selectedTags, currentValues);
+    updateSessionStorage(translatedTags, currentValues);
     handleCloseModal();
   };
 
   const handleTagDeselect = (tag: string) => {
     const updatedTags = value.filter((t) => t !== tag);
     setValue(updatedTags);
-    formRef.current?.setFieldsValue({ tags: updatedTags }); // 폼의 'tags' 필드에 업데이트된 태그 반영
+    formRef.current?.setFieldsValue({ tags: updatedTags });
     const currentValues = formRef.current?.getFieldsValue();
     updateSessionStorage(updatedTags, currentValues);
   };
@@ -142,19 +170,23 @@ export default function First({ formRef, onSubmit }: FirstProps) {
             onClick={handleOpenModal}
             onDeselect={handleTagDeselect}
             onChange={(selectedTags) => {
-              setValue(selectedTags);
-              formRef.current?.setFieldsValue({ tags: selectedTags }); 
+              const translatedTags = selectedTags.map(tag => tagTranslationMap[tag] || tag);
+              setValue(translatedTags);
+              formRef.current?.setFieldsValue({ tags: translatedTags });
             }}
             variant="filled"
             className={styles.field}
             placeholder="태그를 선택해주세요."
             dropdownRender={() => <></>}
           >
-            {value.map((tag) => (
-              <Option key={tag} value={tag}>
-                {tag}
-              </Option>
-            ))}
+            {value.map((tag) => {
+              const koreanTag = Object.keys(tagTranslationMap).find(key => tagTranslationMap[key] === tag) || tag;
+              return (
+                <Option key={tag} value={tag}>
+                  {koreanTag}
+                </Option>
+              );
+            })}
           </Select>
         </Form.Item>
       </Form>

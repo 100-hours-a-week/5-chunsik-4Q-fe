@@ -9,8 +9,35 @@ interface TagSelectorProps {
     onSelect: (selectedTags: string[]) => void;
 }
 
+const tagTranslationMap: Record<string, string> = {
+    '고전': 'classic',
+    '귀여움': 'cute',
+    '꽃무늬': 'flower',
+    '네온': 'neon',
+    '도시': 'urban',
+    '시골': 'countryside',
+    '밝은': 'bright',
+    '어두운': 'dark',
+    '빈티지': 'vintage',
+    '심플': 'simple',
+    '럭셔리': 'luxury',
+    '자연친화적': 'nature-friendly',
+    '블루': 'blue',
+    '그린': 'green',
+    '레드': 'red',
+    '옐로우': 'yellow',
+    '퍼플': 'purple',
+    '블랙': 'black',
+    '화이트': 'white',
+    '흑백': 'black-and-white',
+    '봄': 'spring',
+    '여름': 'summer',
+    '가을': 'fall',
+    '겨울': 'winter'
+};
+
 export default function TagSelector({ selectedTags, onSelect }: TagSelectorProps) {
-    const [localSelectedTags, setLocalSelectedTags] = useState<string[]>(selectedTags);
+    const [localSelectedTags, setLocalSelectedTags] = useState<string[]>(selectedTags.map(tag => tagTranslationMap[tag] || tag));
     const [showAlert, setShowAlert] = useState<boolean>(false);
 
     const MAX_TAGS = 3;
@@ -25,15 +52,18 @@ export default function TagSelector({ selectedTags, onSelect }: TagSelectorProps
     };
 
     useEffect(() => {
-        setLocalSelectedTags(selectedTags);  
+        setLocalSelectedTags(selectedTags.map(tag => tagTranslationMap[tag] || tag));  
     }, [selectedTags]);
 
     const handleTagClick = (tag: string) => {
-        if (localSelectedTags.includes(tag)) {
-            setLocalSelectedTags(localSelectedTags.filter(t => t !== tag));
-            setShowAlert(false); 
+        const translatedTag = tagTranslationMap[tag];
+        if (!translatedTag) return;
+
+        if (localSelectedTags.includes(translatedTag)) {
+            setLocalSelectedTags(localSelectedTags.filter(t => t !== translatedTag));
+            setShowAlert(false);
         } else if (localSelectedTags.length < MAX_TAGS) {
-            setLocalSelectedTags([...localSelectedTags, tag]);
+            setLocalSelectedTags([...localSelectedTags, translatedTag]);
             setShowAlert(false);
         } else {
             setShowAlert(true); // Show alert when the tag limit is reached
@@ -55,7 +85,7 @@ export default function TagSelector({ selectedTags, onSelect }: TagSelectorProps
                     {moodTags.map(tag => (
                         <div
                             key={tag}
-                            className={`${styles.tagItem} ${localSelectedTags.includes(tag) ? styles.selected : ''}`}
+                            className={`${styles.tagItem} ${localSelectedTags.includes(tagTranslationMap[tag]) ? styles.selected : ''}`}
                             onClick={() => handleTagClick(tag)}
                         >
                             {isHotTag(tag) && <img src={hot_mark.src} alt="hot Mark" className={styles.hotMark}/>}
@@ -71,7 +101,7 @@ export default function TagSelector({ selectedTags, onSelect }: TagSelectorProps
                     {colorTags.map(tag => (
                         <div
                             key={tag}
-                            className={`${styles.tagItem} ${localSelectedTags.includes(tag) ? styles.selected : ''}`}
+                            className={`${styles.tagItem} ${localSelectedTags.includes(tagTranslationMap[tag]) ? styles.selected : ''}`}
                             onClick={() => handleTagClick(tag)}
                         >
                             {isHotTag(tag) && <img src={hot_mark.src} alt="hot Mark" className={styles.hotMark}/>}
@@ -87,7 +117,7 @@ export default function TagSelector({ selectedTags, onSelect }: TagSelectorProps
                     {seasonTags.map(tag => (
                         <div
                             key={tag}
-                            className={`${styles.tagItem} ${localSelectedTags.includes(tag) ? styles.selected : ''}`}
+                            className={`${styles.tagItem} ${localSelectedTags.includes(tagTranslationMap[tag]) ? styles.selected : ''}`}
                             onClick={() => handleTagClick(tag)}
                         >
                             {isHotTag(tag) && <img src={hot_mark.src} alt="hot Mark" className={styles.hotMark}/>}
