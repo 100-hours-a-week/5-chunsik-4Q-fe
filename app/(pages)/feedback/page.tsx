@@ -110,6 +110,12 @@ export default function Page() {
             name="starRate"
             label="별점을 선택해주세요"
             initialValue={3}
+            rules={[
+              {
+                required: true,
+                message: '만족도를 선택해주세요',
+              },
+            ]}
           >
             <Rate
               character={({ index = 0 }) => customIcons[index + 1]}
