@@ -63,6 +63,12 @@ export default function Header() {
     }
   };
 
+  const navFeedback = () => {
+    setOpen(false);
+    router.push('/feedback');
+   
+  }
+
   const handleLogout = () => {
     document.cookie =
       "refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
@@ -115,7 +121,15 @@ export default function Header() {
           <div className={styles.dimOverlay} onClick={closeMenu}></div>
         )}
         <div className={`${styles.menu} ${isOpen ? styles.open : ""}`}>
+          <div className={styles.menuTopContainer}>
           <img src={logo_white.src} alt="Logo" />
+          <div className={styles.feedbackBtnContainer}>
+          <Button className={styles.feedbackBtn} size="small" onClick={navFeedback}>
+              피드백
+          </Button>
+          </div>
+          </div>
+         
           <ul>
             <li>
               <Link href="/" data-replace="홈" onClick={closeMenu}>

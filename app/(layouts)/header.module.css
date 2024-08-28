@@ -118,6 +118,23 @@
     z-index: 1;
 }
 
+.menuTopContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+}
+
+.feedbackBtnContainer {
+    position: absolute;
+    right: 82px;
+    top: 18px;
+}
+
+.feedbackBtn {
+    height: 27px !important;
+}
+
 .menu.open {
     top: 0; /* 햄버거 메뉴 아래로 내려오게 합니다 */
     transform: translateY(0);
