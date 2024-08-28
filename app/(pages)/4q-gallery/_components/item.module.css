@@ -1,0 +1,31 @@
+.container {
+    max-width: 430px;
+}
+
+.itemContainer {
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.itemContainer img{
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}
+
+.bottomContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 12px;
+    margin-bottom: 10px;
+    /* background-color: red; */
+}
+
+.heartContainer {
+    /* width: 40px; */
+    /* height: 40px; */
+    /* background-color: rebeccapurple; */
+}

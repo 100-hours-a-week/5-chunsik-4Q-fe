@@ -3,17 +3,28 @@
 import React, { useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import styles from "./page.module.css";
-import { Select } from "antd";
+import { Select, Input, Modal } from "antd";
+import type { GetProps } from 'antd';
 import { LuListFilter } from "react-icons/lu";
 import { ScrollMenu, VisibilityContext } from "react-horizontal-scrolling-menu";
 import "react-horizontal-scrolling-menu/dist/styles.css";
-import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+
+import TagSelector from "../4q-create/(modals)/tagSelectModal";
+import tagTranslationMap from '../../../lib/tagTranslationKrEn';
+import Container from "./_components/container";
+
+type SearchProps = GetProps<typeof Input.Search>;
 
 type Category = {
   id: string;
   name: string;
 };
+
+const { Search } = Input;
+
+
+const onSearch: SearchProps['onSearch'] = (value, _e, info) => console.log(info?.source, value);
 
 const categories: Category[] = [
   { id: "all", name: "전체" },
@@ -25,9 +36,23 @@ const categories: Category[] = [
 ];
 
 export default function Page() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSearchContainerVisible, setIsSearchContainerVisible] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleFilterBtnClick = () => {
+    setIsSearchContainerVisible(!isSearchContainerVisible);
+  };
 
   const handleCategoryClick = (categoryId: string) => {
     setSelectedCategory(categoryId);
@@ -37,7 +62,7 @@ export default function Page() {
 
   const LeftArrow = () => {
     const { isFirstItemVisible, scrollPrev } = React.useContext(VisibilityContext);
-
+    
     return (
       <div
         className={`${styles.arrow} ${isFirstItemVisible ? styles.disabled : ""}`}
@@ -68,21 +93,20 @@ export default function Page() {
           defaultValue="최신순"
           style={{ width: 120 }}
           className={styles.selectBox}
+          onClick={handleOpenModal}
           options={[
             { value: "최신순", label: "최신순" },
             { value: "인기순", label: "인기순" },
           ]}
         />
-        <div className={styles.filterBtn}>
+        <div className={styles.filterBtn} onClick={handleFilterBtnClick}>
           <LuListFilter className={styles.filterIcon} />
           <span>검색</span>
         </div>
-        
       </div>
-      
       <div className={styles.categoryContainer}>
-      <hr />
-        <ScrollMenu  LeftArrow={LeftArrow} RightArrow={RightArrow} itemClassName={styles.scrollMenu}>
+        <hr />
+        <ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow} itemClassName={styles.scrollMenu}>
           {categories.map((category) => (
             <div
               key={category.id}
@@ -96,6 +120,17 @@ export default function Page() {
           ))}
         </ScrollMenu>
       </div>
+      <div className={`${styles.searchContainer} ${isSearchContainerVisible ? styles.visible : ''}`}>
+        <div className={styles.searchFieldContainer}>
+          <p>제목 검색</p>
+          <Search size="large" placeholder="" onSearch={onSearch} style={{ width: '100%' }} />
+        </div>
+        <div className={styles.searchFieldContainer}>
+        <p>태그 검색</p>
+        <Search size="large" placeholder="" onSearch={onSearch} style={{ width: '100%' }} />
+      </div>
+      </div>
+      <Container />
     </div>
   );
 }
