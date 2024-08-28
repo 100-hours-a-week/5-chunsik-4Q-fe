@@ -1,33 +1,119 @@
 .container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 40px;
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 30px;
+  overflow-x: hidden;
 }
 
-.container img {
-    margin-top: 40px;
-    width: 300px;
+.filterContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2px;
 }
 
-.container div {
-    margin-top: 20px;
+.selectBox {
+  margin-right: 10px;
+  border-radius: 7px;
+  /* border: 1px solid #d9d9d9; */
 }
 
-.title {
-    font-size: 18px;
-    color: var(--grey-color);
+.filterBtn {
+  display: flex;
+  align-items: center;
+  width: 90px;
+  height: 33px;
+  justify-content: center;
+  border-radius: 20px;
+  border: 1px solid #d9d9d9;
+  cursor: pointer;
 }
 
-.orange {
-    color: var(--primary-color);
-    font-weight: bold;
-    font-size: 24px;
+.filterBtn:hover,
+.selectBox:hover {
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 }
 
-.subTitle {
-    font-size: 16x;
-    color: rgb(116, 116, 116);
+.filterIcon {
+  font-size: 16px;
+  margin-right: 5px;
+}
+
+.categoryContainer {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  white-space: nowrap;
+  font-size: 15px;
+}
+
+.scrollMenu::-webkit-scrollbar {
+  width: 0; /* 스크롤바의 너비를 0으로 설정 */
+  background-color: transparent; /* 배경색을 투명으로 설정 */
+}
+
+.scrollMenu:hover::-webkit-scrollbar {
+  width: 0; /* 스크롤바의 너비를 8px로 설정 */
+}
+
+.categoryContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.categoryContainer hr {
+  width: 100%;
+  border: 0;
+  height: 1px;
+  background: #f3f3f4;
+  margin: 15px 0px;
+}
+
+.categoryItem {
+  display: inline-block;
+  padding: 10px 20px;
+  margin-right: 10px;
+  cursor: pointer;
+  /* background-color: #f0f0f0; */
+  font-weight: normal;
+  border-radius: 20px;
+  transition: background-color 0.2s ease;
+}
+
+.categoryItem:hover {
+  /* background-color: #e0e0e0; */
+  color: #6e6d7a;
+}
+
+.selectedCategory {
+  background-color: #fff2e6;
+  color: #000;
+}
+
+.arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 10px;
+  user-select: none;
+  color: black;
+  transition: color 0.3s ease;
+}
+
+.arrow.disabled {
+  color: #d3d3d3;
+  cursor: not-allowed;
+}
+
+@media (max-width: 500px) {
+  .categoryContainer {
+    font-size: 12px;
+  }
+  .filterBtn span {
+    font-size: 14px;
+  }
 }

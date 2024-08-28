@@ -95,7 +95,7 @@ export default function First({ formRef, onSubmit }: FirstProps) {
             className={styles.field}
             style={{ height: "50px" }}
           >
-            <Option value="메뉴">메뉴</Option>
+            <Option value="메뉴판">메뉴판</Option>
             <Option value="전시회">전시회</Option>
             <Option value="콘서트">콘서트</Option>
             <Option value="출입증">출입증</Option>

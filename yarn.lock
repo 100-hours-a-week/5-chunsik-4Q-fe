@@ -4531,6 +4531,13 @@ react-dom@^18.3.1:
     loose-envify "^1.1.0"
     scheduler "^0.23.2"
 
+react-horizontal-scrolling-menu@^7.1.4:
+  version "7.1.4"
+  resolved "https://registry.yarnpkg.com/react-horizontal-scrolling-menu/-/react-horizontal-scrolling-menu-7.1.4.tgz#a13775ca9d74de2d813a735db4ca1582c5509b38"
+  integrity sha512-5QbYJbEeOh6pcMX7mXfI5NYdETZNrqyb8WyHUZAoJA8AfQoNF7+kB+pZvYmpupNl8UgLf9eqoZWX1WKlJyaiEw==
+  dependencies:
+    smooth-scroll-into-view-if-needed "^2.0.2"
+
 react-html-attributes@^1.4.6:
   version "1.4.6"
   resolved "https://registry.yarnpkg.com/react-html-attributes/-/react-html-attributes-1.4.6.tgz#9558b56bb81c60f6cee9ae7d5e97434a59c086ff"
@@ -4903,6 +4910,13 @@ slick-carousel@^1.8.1:
   version "1.8.1"
   resolved "https://registry.yarnpkg.com/slick-carousel/-/slick-carousel-1.8.1.tgz#a4bfb29014887bb66ce528b90bd0cda262cc8f8d"
   integrity sha512-XB9Ftrf2EEKfzoQXt3Nitrt/IPbT+f1fgqBdoxO3W/+JYvtEOW6EgxnWfr9GH6nmULv7Y2tPmEX3koxThVmebA==
+
+smooth-scroll-into-view-if-needed@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/smooth-scroll-into-view-if-needed/-/smooth-scroll-into-view-if-needed-2.0.2.tgz#5bd4ebef668474d6618ce8704650082e93068371"
+  integrity sha512-z54WzUSlM+xHHvJu3lMIsh+1d1kA4vaakcAtQvqzeGJ5Ffau7EKjpRrMHh1/OBo5zyU2h30ZYEt77vWmPHqg7Q==
+  dependencies:
+    scroll-into-view-if-needed "^3.1.0"
 
 snake-case@^3.0.4:
   version "3.0.4"
