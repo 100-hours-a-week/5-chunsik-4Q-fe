@@ -1,6 +1,6 @@
 ---
 name: "\b버그리포트 구조"
-about: "CommitMate의 \b버그리포트 기본 구조입니다."
+about: "4Q의 \b버그리포트 기본 구조입니다."
 title: "[Bug Report] 안건에 대한 간단한 설명"
 labels: [bug]
 assignees: [moolmin]
