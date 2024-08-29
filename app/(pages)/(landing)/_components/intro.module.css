@@ -99,3 +99,43 @@
     justify-content: center;
 
 }
+.stepImg img {
+    width: 355px;  /*요기*/
+}
+
+.rightIcon {
+    position: absolute;
+    width: 60px;
+    top: -20px;
+    right: 2px;
+
+}
+
+
+@media (min-width: 800px) {
+    .container {
+        margin-top: 60px;
+    }
+    .stepItem:hover {
+        width: 75%;
+        /* background-color: rgba(229, 229, 229, 0.65); */
+        /* From https://css.glass */
+background: rgba(255, 255, 255, 0.2);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(5px);
+-webkit-backdrop-filter: blur(5px);
+border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .stepImg img {
+        width: 395px;  /*요기*/
+    }
+    
+}
+
+@media (max-width: 430px) {
+    .stepItem {
+        width: 85%;
+    }
+}

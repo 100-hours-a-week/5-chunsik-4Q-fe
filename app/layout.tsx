@@ -24,7 +24,6 @@ export const metadata: Metadata = {
 const config: ThemeConfig = {
   token: {
     colorPrimary: "#FF5B0F",
-
   },
 };
 
