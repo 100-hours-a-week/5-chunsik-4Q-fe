@@ -19,6 +19,7 @@
 .selectBox {
   margin-right: 10px;
   border-radius: 7px;
+  /* border: 1px solid #d9d9d9; */
 }
 
 .filterBtn {
@@ -38,7 +39,7 @@
 }
 
 .filterIcon {
-  font-size: 16px;
+  font-size: 18px;
   margin-right: 5px;
 }
 
@@ -49,6 +50,7 @@
   white-space: nowrap;
   font-size: 15px;
 }
+
 
 .categoryContainer hr {
   width: 100%;
@@ -63,12 +65,14 @@
   padding: 10px 20px;
   margin-right: 10px;
   cursor: pointer;
+  /* background-color: #f0f0f0; */
   font-weight: normal;
   border-radius: 20px;
   transition: background-color 0.2s ease;
 }
 
 .categoryItem:hover {
+  /* background-color: #e0e0e0; */
   color: #6e6d7a;
 }
 
@@ -103,12 +107,15 @@
   transform: translateY(-15%);
   transition: transform 0.1s linear;
   opacity: 0;
+  /* display: none; */
+  /* background-color: red; */
 }
 
 .searchContainer.visible {
   max-height: 500px; 
   transform: translateY(0);
   opacity: 1;
+  /* display: block; */
 }
 
 
