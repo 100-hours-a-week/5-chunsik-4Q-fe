@@ -5,10 +5,9 @@ import { useRouter, usePathname } from "next/navigation";
 import styles from "./page.module.css";
 import { Select, Input, Modal } from "antd";
 import type { GetProps } from 'antd';
-import { LuListFilter } from "react-icons/lu";
 import { ScrollMenu, VisibilityContext } from "react-horizontal-scrolling-menu";
 import "react-horizontal-scrolling-menu/dist/styles.css";
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import { IoIosArrowBack, IoIosArrowForward, IoIosSearch } from "react-icons/io";
 
 import TagSelector from "../4q-create/(modals)/tagSelectModal";
 import tagTranslationMap from '../../../lib/tagTranslationKrEn';
@@ -100,7 +99,7 @@ export default function Page() {
           ]}
         />
         <div className={styles.filterBtn} onClick={handleFilterBtnClick}>
-          <LuListFilter className={styles.filterIcon} />
+          <IoIosSearch className={styles.filterIcon} />
           <span>검색</span>
         </div>
       </div>

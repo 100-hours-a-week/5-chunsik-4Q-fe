@@ -39,7 +39,7 @@
 }
 
 .filterIcon {
-  font-size: 16px;
+  font-size: 18px;
   margin-right: 5px;
 }
 
@@ -51,18 +51,6 @@
   font-size: 15px;
 }
 
-.scrollMenu::-webkit-scrollbar {
-  width: 0; /* 스크롤바의 너비를 0으로 설정 */
-  background-color: transparent; /* 배경색을 투명으로 설정 */
-}
-
-.scrollMenu:hover::-webkit-scrollbar {
-  width: 0; /* 스크롤바의 너비를 8px로 설정 */
-}
-
-.categoryContainer::-webkit-scrollbar {
-  display: none;
-}
 
 .categoryContainer hr {
   width: 100%;

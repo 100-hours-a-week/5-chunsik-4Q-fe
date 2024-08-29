@@ -6,7 +6,8 @@ import mockup from "../../../../public/images/mock/concert.png";
 import Heart from "@react-sandbox/heart";
 import Detail from './detail'
 import { Button, Drawer, theme } from "antd";
-import { IoMdHeart } from "react-icons/io";
+import { TiHeartFullOutline } from "react-icons/ti";
+
 
 export default function Item() {
   const { token } = theme.useToken();
@@ -47,7 +48,7 @@ export default function Item() {
       <div className={styles.bottomContainer}>
         <span>chen</span>
         <div className={styles.heartCount}>
-          <IoMdHeart />
+          <TiHeartFullOutline className={styles.heartIcon} />
           <span>223</span>
         </div>
       </div>
@@ -61,15 +62,6 @@ export default function Item() {
         getContainer={false}
         // size="large"
         className={styles.drawerContainer}
-        // mask={false}
-        extra={
-          <>
-            {/* <Button onClick={onClose}>Cancel</Button>
-            <Button type="primary" onClick={onClose}>
-              OK
-            </Button> */}
-          </>
-        }
       >
         <div className={styles.detailContainer}>
         <Detail />

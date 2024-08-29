@@ -3,8 +3,6 @@
     
 }
 
-
-
 .itemContainer {
     position: relative;
     padding: 15px;
@@ -29,8 +27,8 @@
 }
 
 .itemContainer img{
-    width: 200px;
-    height: 200px;
+    width: 220px;
+    height: 220px;
     object-fit: cover;
     cursor: pointer;
 }
@@ -54,12 +52,20 @@
     text-align: center;
     /* background-color: var(--grey-color); */
     font-size: 14px;
+    align-items: center;
+    justify-content: center;
+}
+
+.heartIcon {
+    /* padding: 2px; */
 }
 
 .heartCount span {
     font-size: 12px;
     /* margin-bottom: 5px; */
     /* background-color: red; */
+    /* margin-bottom: 2px; */
+    margin: 0;
 }
 
 .drawerContainer {
@@ -71,4 +77,11 @@
     display: flex;
     justify-content: center;
     /* background-color: black; */
+}
+
+@media (max-width: 560px) {
+    .itemContainer img{
+        width: 280px;
+        height: 280px;
+    }
 }
