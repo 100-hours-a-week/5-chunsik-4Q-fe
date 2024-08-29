@@ -8,6 +8,7 @@ import Detail from './detail';
 import { Button, Drawer, theme } from "antd";
 import { IoMdHeart } from "react-icons/io";
 
+
 type Item = {
   imageId: number;
   userName: string;
@@ -63,6 +64,7 @@ export default function ItemCard({ item }: ItemCardProps) {
         <div className={styles.heartCount}>
           <IoMdHeart />
           <span>{item.likeCount}</span>
+
         </div>
       </div>
       <Drawer

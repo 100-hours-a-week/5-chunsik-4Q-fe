@@ -93,6 +93,7 @@ function SearchParamsHandler({
         />
         <div className={styles.filterBtn} onClick={handleFilterBtnClick}>
           {tagParam ? <div className={styles.numberSearch}>1</div> : <IoIosSearch className={styles.filterIcon} />}
+
           <span>검색</span>
         </div>
       </div>
