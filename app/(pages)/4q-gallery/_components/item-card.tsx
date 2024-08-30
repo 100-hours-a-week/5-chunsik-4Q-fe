@@ -74,6 +74,10 @@ export default function ItemCard({ item }: ItemCardProps) {
         height="97%"
         getContainer={false}
         className={styles.drawerContainer}
+<<<<<<< HEAD:app/(pages)/4q-gallery/_components/item-card.tsx
+=======
+      
+>>>>>>> 4cf690e (delete: extra in uitem detail drawer):app/(pages)/4q-gallery/_components/item.tsx
       >
         <div className={styles.detailContainer}>
           {/* Pass item as a prop to the Detail component */}
