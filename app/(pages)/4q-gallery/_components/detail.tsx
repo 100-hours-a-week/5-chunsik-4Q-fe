@@ -48,7 +48,6 @@ export default function Datail() {
           <div className={styles.tag}>자연 친화적</div>
         </div>
         <Button className={styles.generateBtn}>이 이미지로 4Q 생성하기</Button>
-        
        
       </div>
      <Divider style={{width: '450px'}}/>
