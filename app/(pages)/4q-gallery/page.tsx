@@ -57,7 +57,7 @@ function SearchParamsHandler({
       return params.toString();
     },
     [searchParams]
-  );
+  ); 
 
   const handleCategoryClick = (categoryId: string) => {
     setSelectedCategory(categoryId);
