@@ -54,7 +54,7 @@ export default function Page() {
       return params.toString();
     },
     [searchParams]
-  );
+  ); 
 
   // 태그 검색시 쿼리 파라미터로 전송
   const onSearch: SearchProps["onSearch"] = (value) => {

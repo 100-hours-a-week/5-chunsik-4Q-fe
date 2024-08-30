@@ -59,17 +59,8 @@ export default function Item() {
         open={open}
         height="97%"
         getContainer={false}
-        // size="large"
         className={styles.drawerContainer}
-        // mask={false}
-        extra={
-          <>
-            {/* <Button onClick={onClose}>Cancel</Button>
-            <Button type="primary" onClick={onClose}>
-              OK
-            </Button> */}
-          </>
-        }
+      
       >
         <div className={styles.detailContainer}>
         <Detail />
