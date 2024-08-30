@@ -41,6 +41,22 @@ export default function Page() {
   const pathname = usePathname();
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
 
+  const createQueryString = useCallback(
+    (name: string, value?: string) => {
+      const params = new URLSearchParams(searchParams ? searchParams.toString() : "");
+
+      if (value) {
+        params.set(name, value);
+      } else {
+        params.delete(name); // 값이 없으면 해당 파라미터를 삭제
+      }
+
+      return params.toString();
+    },
+    [searchParams]
+  );
+
+
   const handleOpenModal = () => {
     setIsModalOpen(true);
   };
@@ -120,10 +136,6 @@ export default function Page() {
         </ScrollMenu>
       </div>
       <div className={`${styles.searchContainer} ${isSearchContainerVisible ? styles.visible : ''}`}>
-        <div className={styles.searchFieldContainer}>
-          <p>제목 검색</p>
-          <Search size="large" placeholder="" onSearch={onSearch} style={{ width: '100%' }} />
-        </div>
         <div className={styles.searchFieldContainer}>
         <p>태그 검색</p>
         <Search size="large" placeholder="" onSearch={onSearch} style={{ width: '100%' }} />
