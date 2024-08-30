@@ -1,18 +1,31 @@
 "use client";
 
 import React, { useState } from "react";
-import styles from "./item.module.css";
+import styles from "./item-card.module.css";
 import mockup from "../../../../public/images/mock/concert.png";
 import Heart from "@react-sandbox/heart";
-import Detail from './detail'
+import Detail from './detail';
 import { Button, Drawer, theme } from "antd";
 import { IoMdHeart } from "react-icons/io";
 
-export default function Item() {
+type Item = {
+  imageId: number;
+  userName: string;
+  url: string;
+  likeCount: number;
+  tags: string[];
+  categoryName: string;
+  createdAt: string;
+};
+
+type ItemCardProps = {
+  item: Item;
+};
+
+export default function ItemCard({ item }: ItemCardProps) {
   const { token } = theme.useToken();
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(false);
-  
 
   const showDrawer = () => {
     setOpen(true);
@@ -20,6 +33,7 @@ export default function Item() {
 
   const onClose = () => {
     setOpen(false);
+    sessionStorage.setItem('createStep', 'false');
   };
 
   const containerStyle: React.CSSProperties = {
@@ -42,13 +56,13 @@ export default function Item() {
             onClick={() => setActive(!active)}
           />
         </div>
-        <img src={mockup.src} alt="photo QR" onClick={showDrawer} />
+        <img src={item.url} alt="photo QR" onClick={showDrawer} />
       </div>
       <div className={styles.bottomContainer}>
-        <span>chen</span>
+        <span>{item.userName}</span>
         <div className={styles.heartCount}>
           <IoMdHeart />
-          <span>223</span>
+          <span>{item.likeCount}</span>
         </div>
       </div>
       <Drawer
@@ -60,12 +74,15 @@ export default function Item() {
         height="97%"
         getContainer={false}
         className={styles.drawerContainer}
+<<<<<<< HEAD:app/(pages)/4q-gallery/_components/item-card.tsx
+=======
       
+>>>>>>> 4cf690e (delete: extra in uitem detail drawer):app/(pages)/4q-gallery/_components/item.tsx
       >
         <div className={styles.detailContainer}>
-        <Detail />
+          {/* Pass item as a prop to the Detail component */}
+          <Detail item={item} />
         </div>
-      
       </Drawer>
     </div>
   );
