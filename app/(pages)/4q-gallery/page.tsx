@@ -24,20 +24,24 @@ const { Search } = Input;
 
 const categories: Category[] = [
   { id: "all", name: "전체" },
-  { id: "menu", name: "메뉴판" },
-  { id: "exhibition", name: "전시회" },
-  { id: "concert", name: "콘서트" },
-  { id: "entrance", name: "출입증" },
-  { id: "wedding", name: "청첩장" },
+  { id: "메뉴판", name: "메뉴판" },
+  { id: "전시회", name: "전시회" },
+  { id: "콘서트", name: "콘서트" },
+  { id: "출입증", name: "출입증" },
+  { id: "청첩장", name: "청첩장" },
 ];
 
 export default function Page() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSearchContainerVisible, setIsSearchContainerVisible] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
-  const searchParams = useSearchParams(); // useSearchParams 훅을 사용하여 searchParams 정의
+  const searchParams = useSearchParams();
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
+
+  // Fetch query parameters from URL
+  const categoryParam = searchParams?.get("category") || "all";
+  const tagParam = searchParams?.get("tag") || "";
+  const sortParam = searchParams?.get("sort") || "latest";
 
   // createQueryString 함수 정의
   const createQueryString = useCallback(
@@ -55,15 +59,6 @@ export default function Page() {
     [searchParams]
   );
 
-  // 검색 모달 열기
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
-  };
-
-  // 검색 모달 닫기
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
 
   // 필터 버튼 클릭
   const handleFilterBtnClick = () => {
@@ -150,10 +145,11 @@ export default function Page() {
       <div className={`${styles.searchContainer} ${isSearchContainerVisible ? styles.visible : ''}`}>
         <div className={styles.searchFieldContainer}>
           <p>태그 검색</p>
-          <Search size="large" placeholder="" onSearch={onSearch} style={{ width: '100%' }} />
+          <Search size="large" placeholder="" allowClear onSearch={onSearch} style={{ width: '100%' }} />
         </div>
       </div>
-      <Container />
+      {/* Pass query parameters to Container component */}
+      <Container category={categoryParam} tag={tagParam} sort={sortParam} />
     </div>
   );
 }
