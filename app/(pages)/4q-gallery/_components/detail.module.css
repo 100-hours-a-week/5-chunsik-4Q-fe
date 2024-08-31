@@ -14,6 +14,7 @@
 
   text-align: center;
   padding: 20px;
+  overflow-x: hidden;
   /* background-color: rebeccapurple; */
 }
 

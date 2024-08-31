@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
-import { useRouter, usePathname } from "next/navigation";
+import React, { useState, useCallback } from "react";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import styles from "./page.module.css";
 import { Select, Input, Modal } from "antd";
 import type { GetProps } from 'antd';
@@ -11,7 +11,7 @@ import { IoIosArrowBack, IoIosArrowForward, IoIosSearch } from "react-icons/io";
 
 import TagSelector from "../4q-create/(modals)/tagSelectModal";
 import tagTranslationMap from '../../../lib/tagTranslationKrEn';
-import Container from "./_components/container";
+import Container from "./_components/item-container";
 
 type SearchProps = GetProps<typeof Input.Search>;
 
@@ -21,9 +21,6 @@ type Category = {
 };
 
 const { Search } = Input;
-
-
-const onSearch: SearchProps['onSearch'] = (value, _e, info) => console.log(info?.source, value);
 
 const categories: Category[] = [
   { id: "all", name: "전체" },
@@ -39,8 +36,10 @@ export default function Page() {
   const [isSearchContainerVisible, setIsSearchContainerVisible] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
+  const searchParams = useSearchParams(); // useSearchParams 훅을 사용하여 searchParams 정의
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
 
+  // createQueryString 함수 정의
   const createQueryString = useCallback(
     (name: string, value?: string) => {
       const params = new URLSearchParams(searchParams ? searchParams.toString() : "");
@@ -56,23 +55,32 @@ export default function Page() {
     [searchParams]
   );
 
-
+  // 검색 모달 열기
   const handleOpenModal = () => {
     setIsModalOpen(true);
   };
 
+  // 검색 모달 닫기
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
 
+  // 필터 버튼 클릭
   const handleFilterBtnClick = () => {
     setIsSearchContainerVisible(!isSearchContainerVisible);
   };
 
+  // 카테고리 선택 시 쿼리 파라미터 업데이트
   const handleCategoryClick = (categoryId: string) => {
     setSelectedCategory(categoryId);
-    const params = new URLSearchParams({ category: categoryId });
-    router.push(`${pathname}?${params.toString()}`);
+    const newQueryString = createQueryString('category', categoryId !== 'all' ? categoryId : undefined);
+    router.push(`${pathname}?${newQueryString}`);
+  };
+
+  // 태그 검색 시 쿼리 파라미터 업데이트
+  const onSearch: SearchProps['onSearch'] = (value) => {
+    const newQueryString = createQueryString('tag', value.trim() ? value : undefined);
+    router.push(`${pathname}?${newQueryString}`);
   };
 
   const LeftArrow = () => {
@@ -108,7 +116,11 @@ export default function Page() {
           defaultValue="최신순"
           style={{ width: 120 }}
           className={styles.selectBox}
-          onClick={handleOpenModal}
+          onChange={(value) => {
+            const sortValue = value === "최신순" ? "latest" : "popular";
+            const newQueryString = createQueryString('sort', sortValue);
+            router.push(`${pathname}?${newQueryString}`);
+          }}
           options={[
             { value: "최신순", label: "최신순" },
             { value: "인기순", label: "인기순" },
@@ -137,9 +149,9 @@ export default function Page() {
       </div>
       <div className={`${styles.searchContainer} ${isSearchContainerVisible ? styles.visible : ''}`}>
         <div className={styles.searchFieldContainer}>
-        <p>태그 검색</p>
-        <Search size="large" placeholder="" onSearch={onSearch} style={{ width: '100%' }} />
-      </div>
+          <p>태그 검색</p>
+          <Search size="large" placeholder="" onSearch={onSearch} style={{ width: '100%' }} />
+        </div>
       </div>
       <Container />
     </div>
