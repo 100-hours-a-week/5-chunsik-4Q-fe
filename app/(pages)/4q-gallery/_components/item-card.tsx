@@ -33,6 +33,7 @@ export default function ItemCard({ item }: ItemCardProps) {
 
   const onClose = () => {
     setOpen(false);
+    sessionStorage.setItem('createStep', 'false');
   };
 
   const containerStyle: React.CSSProperties = {
