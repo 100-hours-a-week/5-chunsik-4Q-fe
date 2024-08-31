@@ -59,7 +59,6 @@ export default function Page() {
     [searchParams]
   );
 
-
   // 필터 버튼 클릭
   const handleFilterBtnClick = () => {
     setIsSearchContainerVisible(!isSearchContainerVisible);
@@ -122,7 +121,8 @@ export default function Page() {
           ]}
         />
         <div className={styles.filterBtn} onClick={handleFilterBtnClick}>
-          <IoIosSearch className={styles.filterIcon} />
+          
+          {tagParam ? <div className={styles.numberSearch}>1</div> : <IoIosSearch className={styles.filterIcon} />} {/* tag가 있을 때만 numberSearch를 표시 */}
           <span>검색</span>
         </div>
       </div>
