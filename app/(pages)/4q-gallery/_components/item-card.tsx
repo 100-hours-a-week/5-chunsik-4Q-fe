@@ -4,28 +4,29 @@ import React, { useState } from "react";
 import styles from "./item-card.module.css";
 import mockup from "../../../../public/images/mock/concert.png";
 import Heart from "@react-sandbox/heart";
-import Detail from './detail';
+import Detail from './detail'
 import { Button, Drawer, theme } from "antd";
 import { IoMdHeart } from "react-icons/io";
 
 type Item = {
-  imageId: number;
+  imageId: string;
   userName: string;
   url: string;
   likeCount: number;
-  tags: string[];
+  tags: string;
   categoryName: string;
-  createdAt: string;
 };
 
 type ItemCardProps = {
   item: Item;
 };
 
+
 export default function ItemCard({ item }: ItemCardProps) {
   const { token } = theme.useToken();
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(false);
+  
 
   const showDrawer = () => {
     setOpen(true);
@@ -33,7 +34,6 @@ export default function ItemCard({ item }: ItemCardProps) {
 
   const onClose = () => {
     setOpen(false);
-    sessionStorage.setItem('createStep', 'false');
   };
 
   const containerStyle: React.CSSProperties = {
@@ -74,15 +74,12 @@ export default function ItemCard({ item }: ItemCardProps) {
         height="97%"
         getContainer={false}
         className={styles.drawerContainer}
-<<<<<<< HEAD:app/(pages)/4q-gallery/_components/item-card.tsx
-=======
       
->>>>>>> 4cf690e (delete: extra in uitem detail drawer):app/(pages)/4q-gallery/_components/item.tsx
       >
         <div className={styles.detailContainer}>
-          {/* Pass item as a prop to the Detail component */}
-          <Detail item={item} />
+        <Detail />
         </div>
+      
       </Drawer>
     </div>
   );
