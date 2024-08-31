@@ -1,0 +1,40 @@
+.container {
+    padding: 20px 5px;
+    overflow: hidden;
+}
+
+.field {
+    width: 100% !important;
+    height: 50px;
+    font-size: 16px !important;
+    /*border-radius: 50px;*/
+    text-align: left;
+    /*padding-left: 10px;*/
+    transform: scale(0.9);
+    transform-origin: center top;
+}
+
+.cate_field {
+    width: 90% !important;
+    height: 45px !important;
+    text-align: left;
+
+}
+
+.formItem .ant-form-item-explain {
+    text-align: left !important;
+}
+
+.field {
+    width: 100%;
+}
+
+.urlHelperMessage {
+/* background-color: rebeccapurple; */
+height: 20px;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 11px;
+color: black;
+}
