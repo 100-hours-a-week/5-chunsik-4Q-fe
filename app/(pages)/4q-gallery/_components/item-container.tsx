@@ -10,7 +10,7 @@ export default function Container() {
             "userName": "chen",
             "categoryName": "전시회",
             "url": "https://dnpn8qxgya4tw.cloudfront.net/img/goods/202151/1640338945_2.jpg",
-            "tags": ["밝은", "꽃"]
+            "tags": ["밝은", "꽃", "네온"]
         },
         {
             "createdAt": "2024/08/30",
