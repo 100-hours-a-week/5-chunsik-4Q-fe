@@ -28,7 +28,13 @@ const categories: Category[] = [
   { id: "청첩장", name: "청첩장" },
 ];
 
-function SearchParamsHandler() {
+function SearchParamsHandler({
+  isSearchContainerVisible,
+  setIsSearchContainerVisible,
+}: {
+  isSearchContainerVisible: boolean;
+  setIsSearchContainerVisible: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -64,64 +70,8 @@ function SearchParamsHandler() {
     router.push(`${pathname}?${newQueryString}`);
   };
 
-  return {
-    selectedCategory,
-    setSelectedCategory,
-    categoryParam,
-    tagParam,
-    sortParam,
-    handleCategoryClick,
-    onSearch,
-    createQueryString,
-    pathname,
-    router,
-  };
-}
-
-export default function Page() {
-  const [isSearchContainerVisible, setIsSearchContainerVisible] = useState(false);
-
-  const {
-    selectedCategory,
-    setSelectedCategory,
-    categoryParam,
-    tagParam,
-    sortParam,
-    handleCategoryClick,
-    onSearch,
-    createQueryString,
-    pathname,
-    router,
-  } = React.useContext(Suspense, <SearchParamsHandler />);
-
   const handleFilterBtnClick = () => {
-    setIsSearchContainerVisible(!isSearchContainerVisible);
-  };
-
-  const LeftArrow = () => {
-    const { isFirstItemVisible, scrollPrev } = React.useContext(VisibilityContext);
-
-    return (
-      <div
-        className={`${styles.arrow} ${isFirstItemVisible ? styles.disabled : ""}`}
-        onClick={() => scrollPrev()}
-      >
-        <IoIosArrowBack />
-      </div>
-    );
-  };
-
-  const RightArrow = () => {
-    const { isLastItemVisible, scrollNext } = React.useContext(VisibilityContext);
-
-    return (
-      <div
-        className={`${styles.arrow} ${isLastItemVisible ? styles.disabled : ""}`}
-        onClick={() => scrollNext()}
-      >
-        <IoIosArrowForward />
-      </div>
-    );
+    setIsSearchContainerVisible((prev) => !prev);
   };
 
   return (
@@ -175,3 +125,41 @@ export default function Page() {
   );
 }
 
+export default function Page() {
+  const [isSearchContainerVisible, setIsSearchContainerVisible] = useState(false);
+
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <SearchParamsHandler
+        isSearchContainerVisible={isSearchContainerVisible}
+        setIsSearchContainerVisible={setIsSearchContainerVisible}
+      />
+    </Suspense>
+  );
+}
+
+const LeftArrow = () => {
+  const { isFirstItemVisible, scrollPrev } = React.useContext(VisibilityContext);
+
+  return (
+    <div
+      className={`${styles.arrow} ${isFirstItemVisible ? styles.disabled : ""}`}
+      onClick={() => scrollPrev()}
+    >
+      <IoIosArrowBack />
+    </div>
+  );
+};
+
+const RightArrow = () => {
+  const { isLastItemVisible, scrollNext } = React.useContext(VisibilityContext);
+
+  return (
+    <div
+      className={`${styles.arrow} ${isLastItemVisible ? styles.disabled : ""}`}
+      onClick={() => scrollNext()}
+    >
+      <IoIosArrowForward />
+    </div>
+  );
+};
