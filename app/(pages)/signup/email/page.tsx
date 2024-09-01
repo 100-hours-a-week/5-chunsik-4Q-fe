@@ -207,15 +207,22 @@ export default function Signup() {
                     </button>
                 </div>
                 <Form.Item
-                    label="비밀번호"
-                    name="password"
-                    rules={[{ required: true, message: "비밀번호를 입력해주세요." }]}
-                >
-                    <Input.Password
-                        placeholder="영문/숫자/특수문자 혼합 8~20자"
-                        className={styles.inputField}
-                    />
-                </Form.Item>
+    label="비밀번호"
+    name="password"
+    rules={[
+        { required: true, message: "비밀번호를 입력해주세요." },
+        {
+            pattern: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,20}$/,
+            message: "영문/숫자/특수문자 혼합 8~20자로 입력해주세요.",
+        },
+    ]}
+>
+    <Input.Password
+        placeholder="영문/숫자/특수문자 혼합 8~20자"
+        className={styles.inputField}
+    />
+</Form.Item>
+
 
                 <Form.Item
                     label="비밀번호 확인"
