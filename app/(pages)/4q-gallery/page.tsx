@@ -28,8 +28,7 @@ const categories: Category[] = [
   { id: "청첩장", name: "청첩장" },
 ];
 
-export default function Page() {
-  const [isSearchContainerVisible, setIsSearchContainerVisible] = useState(false);
+function SearchParamsHandler() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -54,10 +53,6 @@ export default function Page() {
     [searchParams]
   );
 
-  const handleFilterBtnClick = () => {
-    setIsSearchContainerVisible(!isSearchContainerVisible);
-  };
-
   const handleCategoryClick = (categoryId: string) => {
     setSelectedCategory(categoryId);
     const newQueryString = createQueryString('category', categoryId !== 'all' ? categoryId : undefined);
@@ -69,9 +64,43 @@ export default function Page() {
     router.push(`${pathname}?${newQueryString}`);
   };
 
+  return {
+    selectedCategory,
+    setSelectedCategory,
+    categoryParam,
+    tagParam,
+    sortParam,
+    handleCategoryClick,
+    onSearch,
+    createQueryString,
+    pathname,
+    router,
+  };
+}
+
+export default function Page() {
+  const [isSearchContainerVisible, setIsSearchContainerVisible] = useState(false);
+
+  const {
+    selectedCategory,
+    setSelectedCategory,
+    categoryParam,
+    tagParam,
+    sortParam,
+    handleCategoryClick,
+    onSearch,
+    createQueryString,
+    pathname,
+    router,
+  } = React.useContext(Suspense, <SearchParamsHandler />);
+
+  const handleFilterBtnClick = () => {
+    setIsSearchContainerVisible(!isSearchContainerVisible);
+  };
+
   const LeftArrow = () => {
     const { isFirstItemVisible, scrollPrev } = React.useContext(VisibilityContext);
-    
+
     return (
       <div
         className={`${styles.arrow} ${isFirstItemVisible ? styles.disabled : ""}`}
@@ -145,3 +174,4 @@ export default function Page() {
     </div>
   );
 }
+
