@@ -16,18 +16,19 @@ const ItemList = ({ item }) => (
                         width={150}
                         height={150}
                         alt="logo"
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtyN6_7UgeHDDEinAuuo0ROVtQp1lUXsqDW4fp5BOJ-7gt7D0S1Ugzq7ENEv2-nfq-km4&usqp=CAU"
+                        src={item.ticketUrl}
+                        style={{backgroundColor: 'grey'}}
                     />
                 </div>
                 <span className={styles.title}>{item.title}</span>
             </div>
             <div className={styles.infoConatiner}>
                 <div className={styles.categoryGroup}>
-                    <span>{item.category}</span>
+                    <span>{item.categoryName}</span>
                 </div>
                 <div className={styles.dateGroup}>
                     <IoIosCalendar />
-                    <span>{item.createdAt}</span>
+                    <span>{item.formattedDate}</span>
                 </div>
             </div>
         </div>
