@@ -9,7 +9,7 @@ import { ScrollMenu, VisibilityContext } from "react-horizontal-scrolling-menu";
 import "react-horizontal-scrolling-menu/dist/styles.css";
 import { IoIosArrowBack, IoIosArrowForward, IoIosSearch } from "react-icons/io";
 import Container from "./_components/item-container";
-
+import { likeImage } from '../../../service/photo_api'
 
 type SearchProps = GetProps<typeof Input.Search>;
 

@@ -98,3 +98,55 @@ export const getMyTicket = async() => {
         throw error;
     }
 };
+
+export const likeImage = async (imageId: string) => {
+    const token = localStorage.getItem('AccessToken'); 
+  
+    if (!token) {
+      throw new Error('Access token is missing.');
+    }
+  
+    try {
+      const response = await fetch(`${BASE_URL}/gallery/${imageId}/like`, {
+        method: 'POST',
+        headers: {
+          "Authorization": `Bearer ${token}`, 
+          "Content-Type": "application/json", 
+        },
+      });
+  
+      if (response.ok) {
+        const data = await response.json(); 
+        return data;
+      } else {
+        throw new Error('Failed to like the image.');
+      }
+    } catch (error) {
+      console.error('Error liking the image:', error);
+      throw error;
+    }
+  };
+  
+
+//   갤러리 목데이터 api
+export const getGalleryData = async () => {
+    try {
+      const response = await fetch(`http://localhost:3000/api/gallery`, {
+        method: 'GET',
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        return data;
+      } else {
+        throw new Error('Failed to fetch gallery data.');
+      }
+    } catch (error) {
+      console.error('Error fetching gallery data:', error);
+      throw error;
+    }
+  };
+  
