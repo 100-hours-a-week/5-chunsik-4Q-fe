@@ -5,7 +5,7 @@ import styles from "./item-card.module.css";
 import mockup from "../../../../public/images/mock/concert.png";
 import Heart from "@react-sandbox/heart";
 import Detail from './detail';
-import { Button, Drawer, theme } from "antd";
+import { Drawer, theme } from "antd";
 import { IoMdHeart } from "react-icons/io";
 
 type Item = {
