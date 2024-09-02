@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useCallback, Suspense } from "react";
+import React, { useState, useCallback, Suspense, useEffect } from "react";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import styles from "./page.module.css";
 import { Select, Input } from "antd";
@@ -9,6 +9,7 @@ import { ScrollMenu, VisibilityContext } from "react-horizontal-scrolling-menu";
 import "react-horizontal-scrolling-menu/dist/styles.css";
 import { IoIosArrowBack, IoIosArrowForward, IoIosSearch } from "react-icons/io";
 import Container from "./_components/item-container";
+import { likeImage } from '../../../service/photo_api'
 
 type SearchProps = GetProps<typeof Input.Search>;
 
@@ -58,28 +59,6 @@ function SearchParamsHandler({
     },
     [searchParams]
   ); 
-<<<<<<< HEAD
-=======
-
-  // 태그 검색시 쿼리 파라미터로 전송
-  const onSearch: SearchProps["onSearch"] = (value) => {
-    const newQueryString = createQueryString("tag", value);
-    router.push(`${pathname}?${newQueryString}`);
-    console.log(value);
-  };
-
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
-
-  const handleFilterBtnClick = () => {
-    setIsSearchContainerVisible(!isSearchContainerVisible);
-  };
->>>>>>> 4cf690e (delete: extra in uitem detail drawer)
 
   const handleCategoryClick = (categoryId: string) => {
     setSelectedCategory(categoryId);
@@ -115,6 +94,7 @@ function SearchParamsHandler({
         />
         <div className={styles.filterBtn} onClick={handleFilterBtnClick}>
           {tagParam ? <div className={styles.numberSearch}>1</div> : <IoIosSearch className={styles.filterIcon} />}
+
           <span>검색</span>
         </div>
       </div>
@@ -148,6 +128,8 @@ function SearchParamsHandler({
 }
 
 export default function Page() {
+
+
   const [isSearchContainerVisible, setIsSearchContainerVisible] = useState(false);
 
   return (

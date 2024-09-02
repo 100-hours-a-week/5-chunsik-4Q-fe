@@ -76,3 +76,77 @@ export const getTicketInfo = async (ticketId: number) => {
         throw error;
     }
 };
+
+
+export const getMyTicket = async() => {
+    const token = localStorage.getItem('AccessToken');
+    try {
+        const response = await fetch(`${BASE_URL}/myPQ`, {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+        });
+        if (response.ok) {
+            const data = await response.json();
+            return data;
+        } else {
+            throw new Error("티켓 정보를 가져오는데 실패했습니다.");
+        }
+    } catch (error) {
+        throw error;
+    }
+};
+
+export const likeImage = async (imageId: string) => {
+    const token = localStorage.getItem('AccessToken'); 
+  
+    if (!token) {
+      throw new Error('Access token is missing.');
+    }
+  
+    try {
+      const response = await fetch(`${BASE_URL}/gallery/${imageId}/like`, {
+        method: 'POST',
+        headers: {
+          "Authorization": `Bearer ${token}`, 
+          "Content-Type": "application/json", 
+        },
+      });
+  
+      if (response.ok) {
+        const data = await response.json(); 
+        return data;
+      } else {
+        throw new Error('Failed to like the image.');
+      }
+    } catch (error) {
+      console.error('Error liking the image:', error);
+      throw error;
+    }
+  };
+  
+
+//   갤러리 목데이터 api
+export const getGalleryData = async () => {
+    try {
+      const response = await fetch(`http://localhost:3000/api/gallery`, {
+        method: 'GET',
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        return data;
+      } else {
+        throw new Error('Failed to fetch gallery data.');
+      }
+    } catch (error) {
+      console.error('Error fetching gallery data:', error);
+      throw error;
+    }
+  };
+  
