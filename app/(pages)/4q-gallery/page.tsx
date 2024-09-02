@@ -58,28 +58,6 @@ function SearchParamsHandler({
     },
     [searchParams]
   ); 
-<<<<<<< HEAD
-=======
-
-  // 태그 검색시 쿼리 파라미터로 전송
-  const onSearch: SearchProps["onSearch"] = (value) => {
-    const newQueryString = createQueryString("tag", value);
-    router.push(`${pathname}?${newQueryString}`);
-    console.log(value);
-  };
-
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
-
-  const handleFilterBtnClick = () => {
-    setIsSearchContainerVisible(!isSearchContainerVisible);
-  };
->>>>>>> 4cf690e (delete: extra in uitem detail drawer)
 
   const handleCategoryClick = (categoryId: string) => {
     setSelectedCategory(categoryId);

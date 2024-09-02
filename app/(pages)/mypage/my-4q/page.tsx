@@ -1,16 +1,38 @@
-import styles from './page.module.css'
-import construction from '../../../../public/images/construction.png'
+"use client"
+
+import React from 'react';
+import styles from './page.module.css';
+import { LikeOutlined, MessageOutlined, StarOutlined } from '@ant-design/icons';
+import { Avatar, List, Space } from 'antd';
+import ItemList from './_components/item-list'; // Import the new ListItem component
+
+// List Data
+const data = Array.from({ length: 6 }).map((_, i) => ({
+  href: 'https://ant.design',
+  title: `ant design part ${i}`,
+  avatar: `https://api.dicebear.com/7.x/miniavs/svg?seed=${i}`,
+  createdAt: "2024/01/01",
+  category: "메뉴판"
+}));
 
 export default function Page() {
-    return (
-        <div className={styles.container}>
-            <img src={construction.src} alt="construction"/>
-            <div className={styles.title}>
-               현재 페이지는 <span className={styles.orange}>공사중</span>입니다.
-            </div>
-            <div className={styles.subTitle}>
-                "빠른 시일 내에 오픈하도록 노력하겠습니다."
-            </div>
-        </div>
-    );
+  return (
+    <div className={styles.container}>
+      {/* Ant Design List Component */}
+      <List
+        itemLayout="vertical"
+        size="large"
+        pagination={{
+          onChange: (page) => {
+            console.log(page);
+          },
+          pageSize: 3,
+          position: 'bottom', 
+          style: { textAlign: 'center' }, 
+        }}
+        dataSource={data}
+        renderItem={(item) => <ItemList item={item} />} // Use the new ListItem component
+      />
+    </div>
+  );
 }
