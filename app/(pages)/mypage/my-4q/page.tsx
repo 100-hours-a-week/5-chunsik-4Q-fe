@@ -1,21 +1,30 @@
-"use client"
+"use client";
 
-import React from 'react';
+import { useEffect, useState } from 'react';
 import styles from './page.module.css';
-import { LikeOutlined, MessageOutlined, StarOutlined } from '@ant-design/icons';
-import { Avatar, List, Space } from 'antd';
-import ItemList from './_components/item-list'; // Import the new ListItem component
+import { List } from 'antd';
+import ItemList from './_components/item-list'; 
+import { getMyTicket } from '../../../../service/photo_api';
 
-// List Data
-const data = Array.from({ length: 6 }).map((_, i) => ({
-  href: 'https://ant.design',
-  title: `ant design part ${i}`,
-  avatar: `https://api.dicebear.com/7.x/miniavs/svg?seed=${i}`,
-  createdAt: "2024/01/01",
-  category: "메뉴판"
-}));
-
+// Page Component
 export default function Page() {
+  // State to store ticket data
+  const [tickets, setTickets] = useState([]);
+
+  // Fetch tickets when component mounts
+  useEffect(() => {
+    const fetchTickets = async () => {
+      try {
+        const data = await getMyTicket(); // Call the API to fetch ticket data
+        setTickets(data); // Update the state with the fetched data
+      } catch (error) {
+        console.error('Error fetching tickets:', error);
+      }
+    };
+
+    fetchTickets(); // Invoke the async function to fetch data
+  }, []);
+
   return (
     <div className={styles.container}>
       {/* Ant Design List Component */}
@@ -30,7 +39,7 @@ export default function Page() {
           position: 'bottom', 
           style: { textAlign: 'center' }, 
         }}
-        dataSource={data}
+        dataSource={tickets} // Use the fetched data as dataSource
         renderItem={(item) => <ItemList item={item} />} // Use the new ListItem component
       />
     </div>

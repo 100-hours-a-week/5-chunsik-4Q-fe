@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useCallback, Suspense } from "react";
+import React, { useState, useCallback, Suspense, useEffect } from "react";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import styles from "./page.module.css";
 import { Select, Input } from "antd";
@@ -9,6 +9,7 @@ import { ScrollMenu, VisibilityContext } from "react-horizontal-scrolling-menu";
 import "react-horizontal-scrolling-menu/dist/styles.css";
 import { IoIosArrowBack, IoIosArrowForward, IoIosSearch } from "react-icons/io";
 import Container from "./_components/item-container";
+
 
 type SearchProps = GetProps<typeof Input.Search>;
 
@@ -126,6 +127,8 @@ function SearchParamsHandler({
 }
 
 export default function Page() {
+
+
   const [isSearchContainerVisible, setIsSearchContainerVisible] = useState(false);
 
   return (
