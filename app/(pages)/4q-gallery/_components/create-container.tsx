@@ -47,6 +47,8 @@ export default function Page() {
     setStoredFormData(formData);
   }, []);
 
+
+
   const next = () => {
     setCurrent(current + 1);
   };
