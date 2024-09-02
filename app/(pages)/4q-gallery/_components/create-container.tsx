@@ -48,7 +48,6 @@ export default function Page() {
   }, []);
 
 
-
   const next = () => {
     setCurrent(current + 1);
   };
