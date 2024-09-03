@@ -137,15 +137,18 @@ export const likeImage = async (imageId: string) => {
   
   
 // 갤러리 이미지 요청
-export const getGalleryData = async () => {
+export const getGalleryData = async (page) => {
   const token = localStorage.getItem('AccessToken');
 
+  // Construct the URL with an optional page query parameter
+  const url = `${BASE_URL}/gallery?page=${page}`;
+
   try {
-    const response = await fetch(`${BASE_URL}/gallery`, {
+    const response = await fetch(url, {
       method: 'GET',
       headers: {
         "Content-Type": "application/json",
-        ...(token ? { "Authorization": `Bearer ${token}` } : {})
+        ...(token ? { "Authorization": `Bearer ${token}` } : {}),
       },
     });
 

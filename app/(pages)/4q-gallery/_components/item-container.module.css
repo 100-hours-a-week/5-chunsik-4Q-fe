@@ -8,3 +8,13 @@
     justify-content: space-around;
     align-content: space-around;
 }
+
+.moreBtnContainer {
+    margin-top: 20px;
+    width: 100%;
+    /* background-color: red; */
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    text-align: center;
+}

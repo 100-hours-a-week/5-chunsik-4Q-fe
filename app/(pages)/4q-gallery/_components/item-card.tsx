@@ -39,11 +39,11 @@ export default function ItemCard({ item }: ItemCardProps) {
   };
 
   const clickHeart = async () => {
-    const accessToken = localStorage.getItem('AccessToken'); // Check for token in localStorage
-
+    const accessToken = localStorage.getItem('AccessToken');
+    
     if (!accessToken) {
-      message.error("로그인이 필요합니다."); // Display error message if token is missing
-      return; // Stop further execution
+      message.error("로그인이 필요한 기능입니다.");
+      return; 
     }
 
     try {
@@ -99,7 +99,7 @@ export default function ItemCard({ item }: ItemCardProps) {
         <span>{item.userName}</span>
         <div className={styles.heartCount}>
           <IoMdHeart />
-          <span>{likeCount}</span> {/* Update like count in real-time */}
+          <span>{likeCount}</span> 
         </div>
       </div>
       <Drawer
@@ -113,7 +113,6 @@ export default function ItemCard({ item }: ItemCardProps) {
         className={styles.drawerContainer}
       >
         <div className={styles.detailContainer}>
-          {/* Pass item as a prop to the Detail component */}
           <Detail item={item} />
         </div>
       </Drawer>
