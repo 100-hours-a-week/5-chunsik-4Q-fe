@@ -16,7 +16,7 @@ export async function GET() {
             "likeCount": 0,
             "userName": null,
             "categoryName": "전시회",
-            "url": "https://chunsik-dev.s3.ap-northeast-2.amazonaws.com/generate/d36ca595-3e4d-40cc-89f3-1e2cfdb5e7f0.jpg",
+            "url": "https://dnpn8qxgya4tw.cloudfront.net/img/goods/202151/1640338945_2.jpg",
             "tags": []
         },
         {

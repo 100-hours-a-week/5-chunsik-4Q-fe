@@ -56,7 +56,9 @@ export default function ItemCard({ item }: ItemCardProps) {
             onClick={() => setActive(!active)}
           />
         </div>
-        <img src={item.url} alt="photo QR" onClick={showDrawer} />
+        <div className={styles.imgContainer}>
+          <img width={200} height={200} src={item.url} alt="photo QR" onClick={showDrawer} />
+        </div>
       </div>
       <div className={styles.bottomContainer}>
         <span>{item.userName}</span>

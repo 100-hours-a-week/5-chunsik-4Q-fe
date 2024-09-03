@@ -8,10 +8,19 @@
 }
 
 .imgContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 13px;
     background-color: #fff;
     border-radius: 12px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.categoryGroup {
+    /* width: 150px; */
+    /* height: 150px; */
+    background-color: grey;
 }
 
 .infoConatiner {
@@ -32,7 +41,12 @@
 }
 
 .categoryGroup {
-    padding: 5px 0;
+    width: 48px;
+    height: 26px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* padding: 5px 0; */
     background-color: rgb(228, 228, 228);
     text-align: center;
     border-radius: 5px;
