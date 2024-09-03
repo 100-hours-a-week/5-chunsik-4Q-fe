@@ -26,9 +26,15 @@
     z-index: 4;
 }
 
+.imgContainer {
+    width: 200px;
+    height: 200px;
+    background-color: rgb(174, 174, 174);
+}
+
 .itemContainer img{
-    width: 220px;
-    height: 220px;
+    width: 200px;
+    height: 200px;
     object-fit: cover;
     cursor: pointer;
 }
@@ -84,4 +90,10 @@
         width: 280px;
         height: 280px;
     }
+
+    .imgContainer {
+        width: 280px;
+        height: 280px;
+    }
+    
 }
