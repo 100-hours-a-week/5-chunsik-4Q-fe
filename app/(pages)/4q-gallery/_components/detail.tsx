@@ -89,13 +89,13 @@ export default function Detail({ item }: DetailProps) {
                 </div>
               ))}
             </div>
-            <Button
+            {/* <Button
               className={styles.generateBtn}
               onClick={generateBtnClick}
               size="large"
             >
               이 이미지로 4Q 생성하기
-            </Button>
+            </Button> */}
           </div>
           <Divider style={{ width: "450px" }} />
         </>

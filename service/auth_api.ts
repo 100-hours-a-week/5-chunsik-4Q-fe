@@ -90,6 +90,37 @@ export const requestLogin = async (email: string, password: string) => {
     }
 };
 
+export const requestLogout = async () => {
+    const token = localStorage.getItem('AccessToken');
+  
+    if (!token) {
+      throw new Error('No access token found. You are not logged in.');
+    }
+  
+    try {
+      const response = await fetch(`${BASE_URL}/users/logout`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+        credentials: 'include',
+      });
+  
+      if (response.ok) {
+        localStorage.removeItem('AccessToken');
+        return { success: true };
+      } else {
+        throw new Error("로그아웃에 실패했습니다.");
+      }
+    } catch (error) {
+      console.error("Error in logout:", error);
+      throw error;
+    }
+  };
+  
+
+
 export const requestUserInfo = async () => {
     try {
         const token = localStorage.getItem('AccessToken');

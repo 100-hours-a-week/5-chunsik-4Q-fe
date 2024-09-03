@@ -10,6 +10,7 @@ import { useRouter, usePathname } from "next/navigation";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoLogOutOutline } from "react-icons/io5";
 import { Button, message, Modal } from "antd";
+import { requestLogout } from "../../service/auth_api"
 
 export default function Header() {
   const [isOpen, setOpen] = useState<boolean>(false);
@@ -69,12 +70,18 @@ export default function Header() {
    
   }
 
-  const handleLogout = () => {
-    document.cookie =
-      "refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    localStorage.removeItem("AccessToken");
-    router.push("/login");
-    message.success("로그아웃 되었습니다");
+  const handleLogout = async () => {
+    try {
+      await requestLogout(); // Call requestLogout to handle backend logout
+      // document.cookie =
+      //   "refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      localStorage.removeItem("AccessToken");
+      router.push("/login");
+      message.success("로그아웃 되었습니다");
+    } catch (error) {
+      console.error("Logout failed:", error);
+      message.error("로그아웃에 실패했습니다. 다시 시도해주세요.");
+    }
   };
 
   const checkAuth = () => {
