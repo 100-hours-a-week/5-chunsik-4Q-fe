@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import styles from "./item-card.module.css";
 import Heart from "@react-sandbox/heart";
 import Detail from "./detail";
-import { Drawer, theme } from "antd";
+import { Drawer, theme, message } from "antd";
 import { IoMdHeart } from "react-icons/io";
 import { likeImage, unlikeImage } from "../../../../service/photo_api";
 
@@ -26,8 +26,8 @@ type ItemCardProps = {
 export default function ItemCard({ item }: ItemCardProps) {
   const { token } = theme.useToken();
   const [open, setOpen] = useState(false);
-  const [active, setActive] = useState(item.liked); // Initialize based on item.liked
-  const [likeCount, setLikeCount] = useState(item.likeCount); // Initialize like count
+  const [active, setActive] = useState(item.liked); 
+  const [likeCount, setLikeCount] = useState(item.likeCount); 
 
   const showDrawer = () => {
     setOpen(true);
@@ -39,25 +39,29 @@ export default function ItemCard({ item }: ItemCardProps) {
   };
 
   const clickHeart = async () => {
+    const accessToken = localStorage.getItem('AccessToken'); // Check for token in localStorage
+
+    if (!accessToken) {
+      message.error("로그인이 필요합니다."); // Display error message if token is missing
+      return; // Stop further execution
+    }
+
     try {
       if (active) {
-        // If currently liked, unlike it
         const response = await unlikeImage(item.imageId.toString());
         if (response) {
-          setActive(false); // Set to unliked
-          setLikeCount(likeCount - 1); // Decrease like count
+          setActive(false);
+          setLikeCount(likeCount - 1); 
         }
       } else {
-        // If currently not liked, like it
         const response = await likeImage(item.imageId.toString());
         if (response) {
-          setActive(true); // Set to liked
-          setLikeCount(likeCount + 1); // Increase like count
+          setActive(true);
+          setLikeCount(likeCount + 1); 
         }
       }
     } catch (error) {
       console.error("Failed to toggle like status:", error);
-      // Optionally, show some error feedback to the user
     }
   };
 
@@ -78,7 +82,7 @@ export default function ItemCard({ item }: ItemCardProps) {
             width={25}
             height={25}
             active={active}
-            onClick={clickHeart} // Use clickHeart function to handle state change
+            onClick={clickHeart}  
           />
         </div>
         <div className={styles.imgContainer}>

@@ -136,30 +136,31 @@ export const likeImage = async (imageId: string) => {
   };
   
   
-
-//   갤러리 목데이터 api
+// 갤러리 이미지 요청
 export const getGalleryData = async () => {
   const token = localStorage.getItem('AccessToken');
-    try {
-      const response = await fetch(`${BASE_URL}/gallery`, {
-        method: 'GET',
-        headers: {
-          "Authorization": `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      });
-  
-      if (response.ok) {
-        const data = await response.json();
-        return data;
-      } else {
-        throw new Error('Failed to fetch gallery data.');
-      }
-    } catch (error) {
-      console.error('Error fetching gallery data:', error);
-      throw error;
+
+  try {
+    const response = await fetch(`${BASE_URL}/gallery`, {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json",
+        ...(token ? { "Authorization": `Bearer ${token}` } : {})
+      },
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      return data;
+    } else {
+      throw new Error('Failed to fetch gallery data.');
     }
-  };
+  } catch (error) {
+    console.error('Error fetching gallery data:', error);
+    throw error;
+  }
+};
+
   
 // 내 이미지 목데이터
   export const getMyTicket = async() => {
