@@ -44,6 +44,8 @@
 
 .prevBtnContainer {
     position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     bottom: -80px;
     /* background-color: red; */
     /* height: 30px; */

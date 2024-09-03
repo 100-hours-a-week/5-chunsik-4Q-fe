@@ -77,9 +77,7 @@ export const getTicketInfo = async (ticketId: number) => {
     }
 };
 
-
-
-
+// 좋아요 추가
 export const likeImage = async (imageId: string) => {
     const token = localStorage.getItem('AccessToken'); 
   
@@ -107,14 +105,46 @@ export const likeImage = async (imageId: string) => {
       throw error;
     }
   };
+
+  // 좋아요 삭제
+  export const unlikeImage = async (imageId: string) => {
+    const token = localStorage.getItem('AccessToken');
+  
+    if (!token) {
+      throw new Error('Access token is missing.');
+    }
+  
+    try {
+      const response = await fetch(`${BASE_URL}/gallery/${imageId}/like`, {
+        method: 'DELETE', // Changed to DELETE for unliking the image
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        return data;
+      } else {
+        throw new Error('Failed to unlike the image.');
+      }
+    } catch (error) {
+      console.error('Error unliking the image:', error);
+      throw error;
+    }
+  };
+  
   
 
 //   갤러리 목데이터 api
 export const getGalleryData = async () => {
+  const token = localStorage.getItem('AccessToken');
     try {
-      const response = await fetch(`http://localhost:3000/api/gallery`, {
+      const response = await fetch(`${BASE_URL}/gallery`, {
         method: 'GET',
         headers: {
+          "Authorization": `Bearer ${token}`,
           "Content-Type": "application/json",
         },
       });
@@ -133,12 +163,12 @@ export const getGalleryData = async () => {
   
 // 내 이미지 목데이터
   export const getMyTicket = async() => {
-    // const token = localStorage.getItem('AccessToken');
+    const token = localStorage.getItem('AccessToken');
     try {
-        const response = await fetch(`http://localhost:3000/api/myPQ`, {
+        const response = await fetch(`${BASE_URL}/myPQ`, {
             method: "GET",
             headers: {
-                // "Authorization": `Bearer ${token}`,
+                "Authorization": `Bearer ${token}`,
                 "Content-Type": "application/json",
             },
         });

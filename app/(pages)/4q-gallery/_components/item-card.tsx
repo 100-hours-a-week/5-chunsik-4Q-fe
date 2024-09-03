@@ -2,11 +2,11 @@
 
 import React, { useState } from "react";
 import styles from "./item-card.module.css";
-import mockup from "../../../../public/images/mock/concert.png";
 import Heart from "@react-sandbox/heart";
-import Detail from './detail';
+import Detail from "./detail";
 import { Drawer, theme } from "antd";
 import { IoMdHeart } from "react-icons/io";
+import { likeImage, unlikeImage } from "../../../../service/photo_api";
 
 type Item = {
   imageId: number;
@@ -16,6 +16,7 @@ type Item = {
   tags: string[];
   categoryName: string;
   createdAt: string;
+  liked: boolean;
 };
 
 type ItemCardProps = {
@@ -25,7 +26,8 @@ type ItemCardProps = {
 export default function ItemCard({ item }: ItemCardProps) {
   const { token } = theme.useToken();
   const [open, setOpen] = useState(false);
-  const [active, setActive] = useState(false);
+  const [active, setActive] = useState(item.liked); // Initialize based on item.liked
+  const [likeCount, setLikeCount] = useState(item.likeCount); // Initialize like count
 
   const showDrawer = () => {
     setOpen(true);
@@ -33,7 +35,30 @@ export default function ItemCard({ item }: ItemCardProps) {
 
   const onClose = () => {
     setOpen(false);
-    sessionStorage.setItem('createStep', 'false');
+    sessionStorage.setItem("createStep", "false");
+  };
+
+  const clickHeart = async () => {
+    try {
+      if (active) {
+        // If currently liked, unlike it
+        const response = await unlikeImage(item.imageId.toString());
+        if (response) {
+          setActive(false); // Set to unliked
+          setLikeCount(likeCount - 1); // Decrease like count
+        }
+      } else {
+        // If currently not liked, like it
+        const response = await likeImage(item.imageId.toString());
+        if (response) {
+          setActive(true); // Set to liked
+          setLikeCount(likeCount + 1); // Increase like count
+        }
+      }
+    } catch (error) {
+      console.error("Failed to toggle like status:", error);
+      // Optionally, show some error feedback to the user
+    }
   };
 
   const containerStyle: React.CSSProperties = {
@@ -53,18 +78,24 @@ export default function ItemCard({ item }: ItemCardProps) {
             width={25}
             height={25}
             active={active}
-            onClick={() => setActive(!active)}
+            onClick={clickHeart} // Use clickHeart function to handle state change
           />
         </div>
         <div className={styles.imgContainer}>
-          <img width={200} height={200} src={item.url} alt="photo QR" onClick={showDrawer} />
+          <img
+            width={200}
+            height={200}
+            src={item.url}
+            alt="photo QR"
+            onClick={showDrawer}
+          />
         </div>
       </div>
       <div className={styles.bottomContainer}>
         <span>{item.userName}</span>
         <div className={styles.heartCount}>
           <IoMdHeart />
-          <span>{item.likeCount}</span>
+          <span>{likeCount}</span> {/* Update like count in real-time */}
         </div>
       </div>
       <Drawer

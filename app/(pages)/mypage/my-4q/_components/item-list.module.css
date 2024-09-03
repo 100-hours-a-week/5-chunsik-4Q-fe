@@ -20,12 +20,14 @@
 .categoryGroup {
     /* width: 150px; */
     /* height: 150px; */
-    background-color: grey;
+    /* background-color: grey; */
 }
 
 .infoConatiner {
+    width: 100%;
     /* background-color: red; */
     padding: 12px;
+    position: relative;
 }
 
 .dateGroup {
@@ -61,4 +63,9 @@
     font-size: 14px;
     font-weight: 600;
     padding-left: 5px;
+}
+
+.downloadBtnContainer {
+    position: absolute;
+    bottom: 30px;
 }

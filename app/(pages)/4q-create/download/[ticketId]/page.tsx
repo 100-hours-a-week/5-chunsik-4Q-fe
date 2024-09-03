@@ -90,9 +90,9 @@ export default function Page() {
                 <Button type="primary" icon={<LuDownload />} size="large" className={styles.downloadBtn} onClick={handleDownload}>
                     다운로드
                 </Button>
-                <Button onClick={showModal} type="primary" icon={<BiSolidShareAlt />} size="large" className={styles.shareBtn}>
+                {/* <Button onClick={showModal} type="primary" icon={<BiSolidShareAlt />} size="large" className={styles.shareBtn}>
                     공유하기
-                </Button>
+                </Button> */}
             </div>
             <Button
                 type="text"

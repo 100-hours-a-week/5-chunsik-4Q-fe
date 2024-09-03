@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-// import Link from 'next/link';
 import styles from "./detail.module.css";
 import Heart from "@react-sandbox/heart";
 import { IoIosCalendar } from "react-icons/io";
@@ -18,6 +17,7 @@ type Item = {
   tags: string[];
   categoryName: string;
   createdAt: string;
+  liked: boolean; // Added liked property
 };
 
 type DetailProps = {
@@ -25,32 +25,29 @@ type DetailProps = {
 };
 
 export default function Detail({ item }: DetailProps) {
-  const [active, setActive] = useState(false);
+  const [active, setActive] = useState(item.liked); // Initialize active state based on item.liked
   const [createStep, setStep] = useState<boolean>(() => {
-    return sessionStorage.getItem('createStep') === 'true';
+    return sessionStorage.getItem("createStep") === "true";
   });
 
   useEffect(() => {
-    sessionStorage.setItem('createStep', createStep.toString());
+    sessionStorage.setItem("createStep", createStep.toString());
   }, [createStep]);
 
   const generateBtnClick = () => {
     setStep(true);
-    
-    // Get existing form_data from session storage
-    const formDataString = sessionStorage.getItem('form_data');
+
+    const formDataString = sessionStorage.getItem("form_data");
     const formData = formDataString ? JSON.parse(formDataString) : {};
-  
-    // Add backgroundImageUrl to the existing form_data
+
     formData.backgroundImageUrl = item.url;
-  
-    // Save the updated form_data back to session storage
-    sessionStorage.setItem('form_data', JSON.stringify(formData));
+
+    sessionStorage.setItem("form_data", JSON.stringify(formData));
   };
 
   const handleReset = () => {
-    setStep(false); 
-    sessionStorage.setItem('createStep', 'false');
+    setStep(false);
+    sessionStorage.setItem("createStep", "false");
   };
 
   return (
@@ -63,14 +60,14 @@ export default function Detail({ item }: DetailProps) {
                 <p className={styles.title}>{item.categoryName}</p>
                 <p className={styles.nickname}>{item.userName}</p>
               </div>
-              <div className={styles.heartContainer}>
+              {/* <div className={styles.heartContainer}>
                 <Heart
                   width={20}
                   height={20}
                   active={active}
                   onClick={() => setActive(!active)}
                 />
-              </div>
+              </div> */}
             </div>
             <div className={styles.imgContainer}>
               <img src={item.url} alt="photo QR" />
@@ -80,10 +77,10 @@ export default function Detail({ item }: DetailProps) {
                 <IoIosCalendar />
                 <p>{item.createdAt}</p>
               </div>
-              <div className={styles.detailBottomGroup}>
+              {/* <div className={styles.detailBottomGroup}>
                 <TiHeartFullOutline />
                 <p>{item.likeCount}</p>
-              </div>
+              </div> */}
             </div>
             <div className={styles.detailTagContainer}>
               {item.tags.map((tag, index) => (
@@ -92,18 +89,22 @@ export default function Detail({ item }: DetailProps) {
                 </div>
               ))}
             </div>
-            <Button className={styles.generateBtn} onClick={generateBtnClick} size="large">
+            <Button
+              className={styles.generateBtn}
+              onClick={generateBtnClick}
+              size="large"
+            >
               이 이미지로 4Q 생성하기
             </Button>
           </div>
-          <Divider style={{ width: '450px' }} />
+          <Divider style={{ width: "450px" }} />
         </>
       ) : (
         <div className={styles.createContainer}>
           <div className={styles.backBtnContainer}>
-          <Button shape="circle" className={styles.backBtn} onClick={handleReset}>
-          <FaArrowLeft />
-          </Button>
+            <Button shape="circle" className={styles.backBtn} onClick={handleReset}>
+              <FaArrowLeft />
+            </Button>
           </div>
           <CreateContainer />
         </div>

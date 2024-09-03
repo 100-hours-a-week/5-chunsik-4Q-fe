@@ -1,5 +1,6 @@
 .container {
     padding: 15px;
+    z-index: 2;
     
 }
 

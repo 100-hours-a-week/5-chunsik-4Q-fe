@@ -1,5 +1,6 @@
 import styles from './item-list.module.css'
-import { List } from 'antd';
+import { List, Button, Tag } from 'antd';
+import { DownloadOutlined } from '@ant-design/icons';
 import { IoIosCalendar } from "react-icons/io";
 
 
@@ -15,20 +16,26 @@ const ItemList = ({ item }) => (
                     <img
                         width={150}
                         height={150}
-                        alt="logo"
+                        alt="my 4q tickets"
                         src={item.ticketUrl}
-                        style={{backgroundColor: 'grey'}}
+                        style={{ backgroundColor: 'grey' }}
                     />
                 </div>
                 <span className={styles.title}>{item.title}</span>
             </div>
             <div className={styles.infoConatiner}>
                 <div className={styles.categoryGroup}>
-                    <span>{item.categoryName}</span>
+                <Tag>{item.categoryName}</Tag>
+                    {/* <span>{item.categoryName}</span> */}
                 </div>
                 <div className={styles.dateGroup}>
                     <IoIosCalendar />
                     <span>{item.formattedDate}</span>
+                </div>
+                <div className={styles.downloadBtnContainer}>
+                    <Button type="primary" shape="round" icon={<DownloadOutlined />} >
+                        다운로드
+                    </Button>
                 </div>
             </div>
         </div>
