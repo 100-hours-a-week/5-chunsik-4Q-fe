@@ -58,7 +58,7 @@ export default function Detail({ item }: DetailProps) {
             <div className={styles.detailTopContainer}>
               <div className={styles.detailInfo}>
                 <p className={styles.title}>{item.categoryName}</p>
-                <p className={styles.nickname}>{item.userName}</p>
+                {/* <p className={styles.nickname}>{item.userName}</p> */}
               </div>
               {/* <div className={styles.heartContainer}>
                 <Heart

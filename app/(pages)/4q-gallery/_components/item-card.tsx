@@ -96,7 +96,7 @@ export default function ItemCard({ item }: ItemCardProps) {
         </div>
       </div>
       <div className={styles.bottomContainer}>
-        <span>{item.userName}</span>
+        {/* <span>{item.userName}</span> */}
         <div className={styles.heartCount}>
           <IoMdHeart />
           <span>{likeCount}</span> 
