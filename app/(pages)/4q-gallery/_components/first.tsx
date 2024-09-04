@@ -1,11 +1,8 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState} from "react";
 import { Form, Select, Input, Modal, Tooltip } from "antd";
 import styles from "./first.module.css";
-import type { InputRef } from "antd";
-import TagSelector from "../../4q-create/(modals)/tagSelectModal";
-import tagTranslationMap from "../../../../lib/tagTranslationKrEn";
 
 const { Option } = Select;
 
@@ -17,17 +14,8 @@ interface FirstProps {
 }
 
 export default function First({ formRef, onSubmit }: FirstProps) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [value, setValue] = useState<string[]>([]);
-  const inputRef = useRef<InputRef>(null);
 
-  useEffect(() => {
-    const savedData = JSON.parse(sessionStorage.getItem(STORAGE_KEY) || "{}");
-    if (savedData) {
-      formRef.current?.setFieldsValue(savedData);
-      setValue(savedData.tags || []);
-    }
-  }, [formRef]);
 
   const updateSessionStorage = (updatedTags: string[], allValues: any) => {
     // 기존 세션 스토리지에서 데이터를 가져오기
@@ -37,7 +25,6 @@ export default function First({ formRef, onSubmit }: FirstProps) {
     const dataToSave = {
       ...existingData,
       ...allValues,
-      tags: updatedTags,
     };
 
     // 병합된 데이터를 세션 스토리지에 저장하기
@@ -52,30 +39,6 @@ export default function First({ formRef, onSubmit }: FirstProps) {
     updateSessionStorage(value, allValues);
   };
 
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
-
-  const handleTagSelection = (selectedTags: string[]) => {
-    const translatedTags = selectedTags.map(tag => tagTranslationMap[tag] || tag);
-    setValue(translatedTags);
-    formRef.current?.setFieldsValue({ tags: translatedTags });
-    const currentValues = formRef.current?.getFieldsValue();
-    updateSessionStorage(translatedTags, currentValues);
-    handleCloseModal();
-  };
-
-  const handleTagDeselect = (tag: string) => {
-    const updatedTags = value.filter((t) => t !== tag);
-    setValue(updatedTags);
-    formRef.current?.setFieldsValue({ tags: updatedTags });
-    const currentValues = formRef.current?.getFieldsValue();
-    updateSessionStorage(updatedTags, currentValues);
-  };
 
   const validateUrl = (_: any, value: string) => {
     if (!value || value.startsWith("http://") || value.startsWith("https://")) {
@@ -92,23 +55,6 @@ export default function First({ formRef, onSubmit }: FirstProps) {
         style={{ maxWidth: 600 }}
         onValuesChange={handleValuesChange}
       >
-        <Form.Item
-          name="category"
-          rules={[{ required: true, message: "카테고리를 선택해주세요!" }]}
-        >
-          <Select
-            placeholder="카테고리 선택"
-            variant="filled"
-            className={styles.field}
-            style={{ height: "50px" }}
-          >
-            <Option value="메뉴판">메뉴판</Option>
-            <Option value="전시회">전시회</Option>
-            <Option value="콘서트">콘서트</Option>
-            <Option value="출입증">출입증</Option>
-            <Option value="청첩장">청첩장</Option>
-          </Select>
-        </Form.Item>
         <Form.Item
           name="title"
           rules={[{ required: true, message: "제목을 입력해주세요!" }]}
@@ -135,51 +81,7 @@ export default function First({ formRef, onSubmit }: FirstProps) {
             />
           </Form.Item>
         </Tooltip>
-        <Form.Item
-          name="tags"
-          rules={[
-            {
-              required: true,
-              message: "태그를 최소 한개 이상 선택해주세요.",
-            },
-          ]}
-        >
-          <Select
-            mode="multiple"
-            value={value}
-            style={{ width: "100%" }}
-            onClick={handleOpenModal}
-            onDeselect={handleTagDeselect}
-            onChange={(selectedTags) => {
-              const translatedTags = selectedTags.map(tag => tagTranslationMap[tag] || tag);
-              setValue(translatedTags);
-              formRef.current?.setFieldsValue({ tags: translatedTags });
-            }}
-            variant="filled"
-            className={styles.field}
-            placeholder="태그를 선택해주세요."
-            dropdownRender={() => <></>}
-          >
-            {value.map((tag) => {
-              const koreanTag = Object.keys(tagTranslationMap).find(key => tagTranslationMap[key] === tag) || tag;
-              return (
-                <Option key={tag} value={tag}>
-                  {koreanTag}
-                </Option>
-              );
-            })}
-          </Select>
-        </Form.Item>
       </Form>
-
-      <Modal
-        title=""
-        open={isModalOpen}
-        onCancel={handleCloseModal}
-        footer={null}
-      >
-        <TagSelector selectedTags={value} onSelect={handleTagSelection} />
-      </Modal>
     </div>
   );
 }

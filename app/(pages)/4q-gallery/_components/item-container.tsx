@@ -13,7 +13,7 @@ type Item = {
   categoryName: string;
   url: string;
   tags: string[];
-  liked: boolean;  // Added 'liked' property
+  liked: boolean;  
 };
 
 type ContainerProps = {
@@ -35,7 +35,6 @@ export default function Container({ category, tag, sort }: ContainerProps) {
         const data = await getGalleryData(page);
         setItems(data.content);
         setHasMore(!data.last);
-        // console.log(hasMore);
       } catch (error) {
         console.error('Error fetching gallery data:', error);
       } finally {
@@ -82,11 +81,8 @@ export default function Container({ category, tag, sort }: ContainerProps) {
       
     </div>
     <div className={styles.moreBtnContainer}>
-    {!hasMore && (<Button type="primary" shape="round" style={{backgroundColor: 'lightGrey'}} size='large' onClick={loadPrev}>
-            이전
-          </Button>)}
     {hasMore && (<Button type="primary" shape="round" style={{backgroundColor: 'lightGrey'}} size='large' onClick={loadNext}>
-            다음
+            더보기
           </Button>)}
     </div>
     </>

@@ -4,7 +4,26 @@ import { DownloadOutlined } from '@ant-design/icons';
 import { IoIosCalendar } from "react-icons/io";
 
 
-
+const handleDownload = async (item) => {
+    if (item.ticketUrl) {
+        try {
+            const response = await fetch(item.ticketUrl, { mode: 'cors' });
+            const blob = await response.blob();
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `photoQR_${item.title}.png`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        } catch (error) {
+            console.error('Failed to download image:', error);
+        }
+    } else {
+        console.error('Image URL is not available for download.');
+    }
+};
 
 
 // ListItem Component
@@ -35,9 +54,9 @@ const ItemList = ({ item }) => (
                     <span>{item.formattedDate}</span>
                 </div>
                 <div className={styles.downloadBtnContainer}>
-                    {/* <Button type="primary" shape="round" icon={<DownloadOutlined />} >
+                    <Button type="primary" shape="round" icon={<DownloadOutlined />} onClick={() => handleDownload(item)}>
                         다운로드
-                    </Button> */}
+                    </Button>
                 </div>
             </div>
         </div>

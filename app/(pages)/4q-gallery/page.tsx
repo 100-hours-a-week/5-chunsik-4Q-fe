@@ -7,10 +7,10 @@ import styles from "./page.module.css";
 import { Select, Input } from "antd";
 import type { GetProps } from 'antd';
 import { ScrollMenu, VisibilityContext } from "react-horizontal-scrolling-menu";
-import "react-horizontal-scrolling-menu/dist/styles.css";
 import { IoIosArrowBack, IoIosArrowForward, IoIosSearch } from "react-icons/io";
 import Container from "./_components/item-container";
 // import { likeImage } from '../../../service/photo_api'
+import "react-horizontal-scrolling-menu/dist/styles.css";
 import Lottie from 'react-lottie-player';
 import loadingLottie from '../../../public/rotties/gallery-loading.json';
 

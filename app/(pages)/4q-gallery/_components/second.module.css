@@ -2,7 +2,7 @@
     text-align: center;
     /*margin: auto;*/
     max-width: 600px;
-    height: 360px;
+    height: 400px;
     /*background-color: red;*/
     display: flex;
     flex-direction: column;
@@ -121,10 +121,12 @@
 
 .btnContainer {
     width: 200px;
+    /* height: 100px; */
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     padding: 15px;
+    /* background-color: red; */
 }
 
 .submitBtnContainer {
