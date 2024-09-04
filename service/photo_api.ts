@@ -1,13 +1,17 @@
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export const generatePhotoImg = async (category: string, tags: string[]) => {
+  const token = localStorage.getItem('AccessToken');
+
     try {
         const response = await fetch(`${BASE_URL}/image`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                ...(token ? { "Authorization": `Bearer ${token}` } : {}),
+
             },
-            body: JSON.stringify({ category, tags })
+            body: JSON.stringify({ category, tags }),
         });
 
         if (response.ok) {
@@ -20,6 +24,7 @@ export const generatePhotoImg = async (category: string, tags: string[]) => {
         throw error;
     }
 };
+
 
 export const generateTicket = async (
     ticketImage: File,
@@ -34,9 +39,14 @@ export const generateTicket = async (
         formData.append("shortenUrlId", shortenUrlId.toString());  
         formData.append("title", title);
 
+        const token = localStorage.getItem('AccessToken');
+        
         const response = await fetch(`${BASE_URL}/ticket`, { 
             method: "POST",
             body: formData,
+            headers: {
+              ...(token ? { "Authorization": `Bearer ${token}` } : {}),
+            },
         });
 
         if (response.ok) {
@@ -51,6 +61,7 @@ export const generateTicket = async (
         throw error;
     }
 };
+
 
 
 export const getTicketInfo = async (ticketId: number) => {
