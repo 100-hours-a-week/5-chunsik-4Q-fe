@@ -26,13 +26,13 @@ export default function Container({ category, tag, sort }: ContainerProps) {
   const [items, setItems] = useState<Item[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [hasMore, setHasMore] = useState<boolean>(true);
-  const [page, setPage] = useState<number>(0);  
+  const [page, setPage] = useState<number>(0);
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const data = await getGalleryData(page);
+        const data = await getGalleryData(page, category, tag, sort); // Pass parameters here
         setItems(data.content);
         setHasMore(!data.last);
       } catch (error) {
@@ -43,48 +43,27 @@ export default function Container({ category, tag, sort }: ContainerProps) {
     };
 
     fetchData();
-  }, [page]);
-
-  const filteredItems = items.filter((item) => {
-    const matchesCategory = category === 'all' || item.categoryName === category;
-    const matchesTag = !tag || item.tags.includes(tag);
-    return matchesCategory && matchesTag;
-  });
-
-  const sortedItems = [...filteredItems].sort((a, b) => {
-    if (sort === 'latest') {
-      return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
-    } else if (sort === 'popular') {
-      return b.likeCount - a.likeCount;
-    }
-    return 0;
-  });
+  }, [page, category, tag, sort]); // Add category, tag, and sort as dependencies
 
   if (loading) {
     return <div>Loading...</div>;
   }
 
   const loadNext = () => {
-    setPage(page+1);
+    setPage(prevPage => prevPage + 1);
   }
 
   const loadPrev = () => {
-    setPage(page-1);
+    if (page > 0) {
+      setPage(prevPage => prevPage - 1);
+    }
   }
 
   return (
-    <>
-    <div className={styles.container}>
-      {sortedItems.map((item) => (
-        <ItemCard key={item.imageId} item={item} />
-      ))}
-      
-    </div>
-    <div className={styles.moreBtnContainer}>
-    {hasMore && (<Button type="primary" shape="round" style={{backgroundColor: 'lightGrey'}} size='large' onClick={loadNext}>
-            더보기
-          </Button>)}
-    </div>
-    </>
+      <div className={styles.container}>
+        {items.map((item) => (
+          <ItemCard key={item.imageId} item={item} />
+        ))}
+      </div>
   );
 }

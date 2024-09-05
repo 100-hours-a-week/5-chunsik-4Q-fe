@@ -148,14 +148,18 @@ export const likeImage = async (imageId: string) => {
   
   
 // 갤러리 이미지 요청
-export const getGalleryData = async (page) => {
+export const getGalleryData = async (page: number, category: string, tag: string, sort: string) => {
   const token = localStorage.getItem('AccessToken');
 
-  // Construct the URL with an optional page query parameter
-  const url = `${BASE_URL}/gallery?page=${page}`;
+  // Construct the URL with optional query parameters
+  const url = new URL(`${BASE_URL}/gallery`);
+  url.searchParams.append('page', page.toString());
+  if (category && category !== 'all') url.searchParams.append('categoryName', category);
+  if (tag) url.searchParams.append('tagName', tag);
+  if (sort) url.searchParams.append('sort', sort);
 
   try {
-    const response = await fetch(url, {
+    const response = await fetch(url.toString(), {
       method: 'GET',
       headers: {
         "Content-Type": "application/json",
