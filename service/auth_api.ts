@@ -83,7 +83,7 @@ export const requestLogin = async (email: string, password: string) => {
         } else {
             throw new Error("로그인에 실패했습니다.");
         }
-        return response.json();
+        // return response.json();
     } catch (error) {
         console.error("Error in login:", error);
         throw error;

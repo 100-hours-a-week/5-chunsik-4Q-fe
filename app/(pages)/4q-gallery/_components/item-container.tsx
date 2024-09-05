@@ -2,8 +2,7 @@ import { useEffect, useState } from 'react';
 import styles from './item-container.module.css';
 import ItemCard from './item-card';
 import { getGalleryData } from '../../../../service/photo_api';
-import { Button, Pagination } from "antd"
-import type { PaginationProps } from 'antd';
+import { Button } from "antd";
 
 type Item = {
   createdAt: string;
@@ -32,8 +31,8 @@ export default function Container({ category, tag, sort }: ContainerProps) {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const data = await getGalleryData(page, category, tag, sort); // Pass parameters here
-        setItems(data.content);
+        const data = await getGalleryData(page, category, tag, sort);
+        setItems(prevItems => (page === 0 ? data.content : [...prevItems, ...data.content])); // Reset items if page is 0, otherwise append
         setHasMore(!data.last);
       } catch (error) {
         console.error('Error fetching gallery data:', error);
@@ -43,27 +42,33 @@ export default function Container({ category, tag, sort }: ContainerProps) {
     };
 
     fetchData();
-  }, [page, category, tag, sort]); // Add category, tag, and sort as dependencies
+  }, [page, category, tag, sort]);
 
-  if (loading) {
+  useEffect(() => {
+    // Reset page to 0 whenever filters change
+    setPage(0);
+  }, [category, tag, sort]);
+
+  if (loading && items.length === 0) {
     return <div>Loading...</div>;
   }
 
-  const loadNext = () => {
+  const loadMore = () => {
     setPage(prevPage => prevPage + 1);
-  }
-
-  const loadPrev = () => {
-    if (page > 0) {
-      setPage(prevPage => prevPage - 1);
-    }
-  }
+  };
 
   return (
-      <div className={styles.container}>
-        {items.map((item) => (
-          <ItemCard key={item.imageId} item={item} />
-        ))}
-      </div>
+    <div className={styles.container}>
+      {items.map((item) => (
+        <ItemCard key={item.imageId} item={item} />
+      ))}
+      {hasMore && (
+        <div className={styles.moreBtnContainer}>
+          <Button onClick={loadMore} loading={loading} className={styles.moreBtn}>
+            더보기
+          </Button>
+        </div>
+      )}
+    </div>
   );
 }
