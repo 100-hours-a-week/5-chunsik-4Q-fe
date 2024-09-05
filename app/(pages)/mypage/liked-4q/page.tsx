@@ -1,16 +1,45 @@
-import styles from './page.module.css'
-import construction from '../../../../public/images/construction.png'
+"use client";
+
+import { useEffect, useState } from 'react';
+import styles from './page.module.css';
+import { List } from 'antd';
+import ItemList from './_components/item-list'; 
+import { getLikedTicket } from '../../../../service/photo_api';
+
 
 export default function Page() {
-    return (
-        <div className={styles.container}>
-            <img src={construction.src} alt="construction"/>
-            <div className={styles.title}>
-               현재 페이지는 <span className={styles.orange}>공사중</span>입니다.
-            </div>
-            <div className={styles.subTitle}>
-                "빠른 시일 내에 오픈하도록 노력하겠습니다."
-            </div>
-        </div>
-    );
+  const [tickets, setTickets] = useState([]);
+
+
+  useEffect(() => {
+    const fetchTickets = async () => {
+      try {
+        const data = await getLikedTicket(); 
+        setTickets(data);
+      } catch (error) {
+        console.error('Error fetching tickets:', error);
+      }
+    };
+
+    fetchTickets(); 
+  }, []);
+
+  return (
+    <div className={styles.container}>
+      <List
+        itemLayout="vertical"
+        size="large"
+        pagination={{
+          onChange: (page) => {
+            console.log(page);
+          },
+          pageSize: 3,
+          position: 'bottom', 
+          style: { textAlign: 'center' }, 
+        }}
+        dataSource={tickets} 
+        renderItem={(item) => <ItemList item={item} />} 
+      />
+    </div>
+  );
 }

@@ -11,6 +11,7 @@ import { IoIosArrowBack } from "react-icons/io";
 import { IoLogOutOutline } from "react-icons/io5";
 import { Button, message, Modal } from "antd";
 import { requestLogout } from "../../service/auth_api"
+import { requestAccessToken } from '../../service/auth_api';
 
 export default function Header() {
   const [isOpen, setOpen] = useState<boolean>(false);
@@ -31,7 +32,7 @@ export default function Header() {
     { path: "/help-faq", title: "도움말/FAQ" },
     { path: "/mypage", title: "마이페이지" },
     { path: "/mypage/my-4q", title: "나의 4Q" },
-    { path: "/mypage/liked-4q", title: "좋아요한 4Q" },
+    { path: "/mypage/liked-4q", title: "좋아요한 배경" },
     { path: "/feedback", title: "피드백" },
   ];
 
@@ -92,6 +93,10 @@ export default function Header() {
     sessionStorage.removeItem('form_data');
     router.back();
   };
+
+  useEffect(() => {
+    requestAccessToken();
+}, []);
 
   useEffect(() => {
     checkLogo();
