@@ -184,7 +184,7 @@ export const getGalleryData = async (page: number, category: string, tag: string
   export const getMyTicket = async() => {
     const token = localStorage.getItem('AccessToken');
     try {
-        const response = await fetch(`${BASE_URL}/myPQ`, {
+        const response = await fetch(`${BASE_URL}/mypq`, {
             method: "GET",
             headers: {
                 "Authorization": `Bearer ${token}`,
