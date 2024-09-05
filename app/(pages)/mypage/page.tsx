@@ -80,7 +80,7 @@ export default function Page() {
                 <div className={styles.linkList}>
                     <div className={styles.linkText}>
                         <img src={likedIcon.src} alt="my_4q_icon" className={styles.icon} />
-                        <span>좋아요한 4Q</span>
+                        <span>좋아요한 배경</span>
                     </div>
                     <Link href="/mypage/liked-4q" className={styles.arrowContainer}><IoIosArrowDropright className={styles.arrowIcon} /></Link>
                 </div>

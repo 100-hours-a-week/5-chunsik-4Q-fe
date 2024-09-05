@@ -10,13 +10,8 @@ import hero3 from "../../../../public/images/hero/hero3.png";
 
 import Lottie from 'react-lottie-player';
 import arrowLottie from '../../../../public/rotties/hero-arrow.json'
-import { requestAccessToken } from '../../../../service/auth_api';
 
 export default function Hero() {
-    useEffect(() => {
-            requestAccessToken();
-    }, []);
-
     return (
         <div className={styles.container} style={{backgroundImage: `url(${bg.src})`}}>
          <div className={styles.arrowContainer}>

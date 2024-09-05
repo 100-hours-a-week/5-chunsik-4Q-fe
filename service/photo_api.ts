@@ -180,11 +180,10 @@ export const getGalleryData = async (page: number, category: string, tag: string
 };
 
   
-// 내 이미지 목데이터
   export const getMyTicket = async() => {
     const token = localStorage.getItem('AccessToken');
     try {
-        const response = await fetch(`${BASE_URL}/myPQ`, {
+        const response = await fetch(`${BASE_URL}/mypq`, {
             method: "GET",
             headers: {
                 "Authorization": `Bearer ${token}`,
@@ -200,4 +199,26 @@ export const getGalleryData = async (page: number, category: string, tag: string
     } catch (error) {
         throw error;
     }
+};
+
+// 좋아요한 배경이미지
+export const getLikedTicket = async() => {
+  const token = localStorage.getItem('AccessToken');
+  try {
+      const response = await fetch(`${BASE_URL}/mypq/liked`, {
+          method: "GET",
+          headers: {
+              "Authorization": `Bearer ${token}`,
+              "Content-Type": "application/json",
+          },
+      });
+      if (response.ok) {
+          const data = await response.json();
+          return data;
+      } else {
+          throw new Error("티켓 정보를 가져오는데 실패했습니다.");
+      }
+  } catch (error) {
+      throw error;
+  }
 };
