@@ -7,6 +7,8 @@ import Detail from "./detail";
 import { Drawer, theme, message } from "antd";
 import { IoMdHeart } from "react-icons/io";
 import { likeImage, unlikeImage } from "../../../../service/photo_api";
+import Lottie from 'react-lottie-player';
+import heartLottie from '../../../../public/rotties/heart-lottie.json';
 
 type Item = {
   imageId: number;
@@ -26,8 +28,9 @@ type ItemCardProps = {
 export default function ItemCard({ item }: ItemCardProps) {
   const { token } = theme.useToken();
   const [open, setOpen] = useState(false);
-  const [active, setActive] = useState(item.liked); 
-  const [likeCount, setLikeCount] = useState(item.likeCount); 
+  const [active, setActive] = useState(item.liked);
+  const [likeCount, setLikeCount] = useState(item.likeCount);
+  const [playLottie, setPlayLottie] = useState(false);
 
   const showDrawer = () => {
     setOpen(true);
@@ -40,10 +43,10 @@ export default function ItemCard({ item }: ItemCardProps) {
 
   const clickHeart = async () => {
     const accessToken = localStorage.getItem('AccessToken');
-    
+
     if (!accessToken) {
       message.error("로그인이 필요한 기능입니다.");
-      return; 
+      return; // Ensure we exit the function if no access token is found.
     }
 
     try {
@@ -51,13 +54,19 @@ export default function ItemCard({ item }: ItemCardProps) {
         const response = await unlikeImage(item.imageId.toString());
         if (response) {
           setActive(false);
-          setLikeCount(likeCount - 1); 
+          setLikeCount(likeCount - 1);
         }
       } else {
         const response = await likeImage(item.imageId.toString());
         if (response) {
           setActive(true);
-          setLikeCount(likeCount + 1); 
+          setLikeCount(likeCount + 1);
+
+          // Play Lottie animation when liking the image
+          setPlayLottie(true);
+          setTimeout(() => {
+            setPlayLottie(false);
+          }, 1000); // 1 second duration
         }
       }
     } catch (error) {
@@ -77,12 +86,22 @@ export default function ItemCard({ item }: ItemCardProps) {
   return (
     <div className={styles.container}>
       <div className={styles.itemContainer}>
+        {playLottie && (
+          <div className={styles.heartLottieContainer}>
+            <Lottie
+              animationData={heartLottie}
+              play={playLottie}
+              loop={false}
+              style={{ opacity: 0.9 }}
+            />
+          </div>
+        )}
         <div className={styles.heartCircle}>
           <Heart
             width={25}
             height={25}
             active={active}
-            onClick={clickHeart}  
+            onClick={clickHeart}
           />
         </div>
         <div className={styles.imgContainer}>
@@ -96,10 +115,9 @@ export default function ItemCard({ item }: ItemCardProps) {
         </div>
       </div>
       <div className={styles.bottomContainer}>
-        {/* <span>{item.userName}</span> */}
         <div className={styles.heartCount}>
           <IoMdHeart />
-          <span>{likeCount}</span> 
+          <span>{likeCount}</span>
         </div>
       </div>
       <Drawer
