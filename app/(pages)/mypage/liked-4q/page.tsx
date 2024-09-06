@@ -82,6 +82,7 @@ export default function Page() {
           },
           pageSize: 3,
           position: 'bottom',
+          align: 'center',
           style: { textAlign: 'center' },
         }}
         dataSource={tickets}

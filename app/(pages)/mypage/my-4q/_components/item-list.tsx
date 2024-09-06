@@ -54,9 +54,9 @@ const ItemList = ({ item }) => (
                     <span>{item.formattedDate}</span>
                 </div>
                 <div className={styles.downloadBtnContainer}>
-                    <Button type="primary" shape="round" icon={<DownloadOutlined />} onClick={() => handleDownload(item)}>
+                    {/* <Button type="primary" shape="round" icon={<DownloadOutlined />} onClick={() => handleDownload(item)}>
                         다운로드
-                    </Button>
+                    </Button> */}
                 </div>
             </div>
         </div>
