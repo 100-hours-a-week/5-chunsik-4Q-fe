@@ -1,6 +1,19 @@
 .container {
     max-width: 430px;
+    position: relative;
     
+}
+
+.heartLottieContainer {
+    position: absolute;
+    /* background-color: wheat; */
+    z-index: 2;
+    width: 90%;
+    height: 90%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
 }
 
 .itemContainer {
