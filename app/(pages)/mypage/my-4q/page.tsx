@@ -29,15 +29,15 @@ export default function Page() {
       <List
         itemLayout="vertical"
         size="large"
-        pagination={{
-          onChange: (page) => {
-            console.log(page);
-          },
-          pageSize: 3,
-          position: 'bottom', 
-          align: 'center',
-          style: { textAlign: 'center' }, 
-        }}
+        // pagination={{
+        //   onChange: (page) => {
+        //     console.log(page);
+        //   },
+        //   pageSize: 3,
+        //   position: 'bottom', 
+        //   align: 'center',
+        //   style: { textAlign: 'center' }, 
+        // }}
         dataSource={tickets} 
         renderItem={(item) => <ItemList item={item} />} 
       />
