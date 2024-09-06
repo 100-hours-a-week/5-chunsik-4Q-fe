@@ -66,6 +66,7 @@ export default function Page() {
                         <span className={styles.normal}>님, 안녕하세요!</span>
                     </div>
                     <span className={styles.email}>{userInfo.email}</span>
+                    {/* <div className={styles.} */}
                 </div>
             )}
             <Divider />

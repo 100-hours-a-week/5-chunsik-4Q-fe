@@ -74,15 +74,6 @@ export default function ItemCard({ item }: ItemCardProps) {
     }
   };
 
-  const containerStyle: React.CSSProperties = {
-    height: 200,
-    padding: 48,
-    overflow: "hidden",
-    background: token.colorFillAlter,
-    border: `1px solid ${token.colorBorderSecondary}`,
-    borderRadius: token.borderRadiusLG,
-  };
-
   return (
     <div className={styles.container}>
       <div className={styles.itemContainer}>
@@ -127,7 +118,7 @@ export default function ItemCard({ item }: ItemCardProps) {
         onClose={onClose}
         open={open}
         height="97%"
-        getContainer={false}
+        getContainer={document.body}  
         className={styles.drawerContainer}
       >
         <div className={styles.detailContainer}>
