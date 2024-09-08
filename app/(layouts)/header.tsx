@@ -33,6 +33,7 @@ export default function Header() {
     { path: "/mypage", title: "마이페이지" },
     { path: "/mypage/my-4q", title: "나의 4Q" },
     { path: "/mypage/liked-4q", title: "좋아요한 배경" },
+    { path: "/mypage/profile-edit", title: "회원 정보 수정" },
     { path: "/feedback", title: "피드백" },
   ];
 

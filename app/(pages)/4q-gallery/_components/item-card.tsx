@@ -46,7 +46,7 @@ export default function ItemCard({ item }: ItemCardProps) {
 
     if (!accessToken) {
       message.error("로그인이 필요한 기능입니다.");
-      return; // Ensure we exit the function if no access token is found.
+      return;
     }
 
     try {
@@ -62,11 +62,10 @@ export default function ItemCard({ item }: ItemCardProps) {
           setActive(true);
           setLikeCount(likeCount + 1);
 
-          // Play Lottie animation when liking the image
           setPlayLottie(true);
           setTimeout(() => {
             setPlayLottie(false);
-          }, 1000); // 1 second duration
+          }, 1000); 
         }
       }
     } catch (error) {

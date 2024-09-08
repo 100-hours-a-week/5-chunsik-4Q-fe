@@ -65,6 +65,40 @@ export const requestRegister = async (email: string, password: string, nickname:
     }
 };
 
+//프로필 수정
+export const requestProfileUpdate = async (newNickname: string) => {
+    const token = localStorage.getItem('AccessToken');
+  
+    if (!token) {
+      throw new Error('No access token found. You are not logged in.');
+    }
+  
+    try {
+      const response = await fetch(`${BASE_URL}/users/modify`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          nickname: newNickname,
+        }),
+        credentials: 'include',
+      });
+  
+      if (response.ok) {
+        return { success: true, message: "프로필이 성공적으로 수정되었습니다." };
+      } else {
+        const errorData = await response.json();  
+        throw new Error(errorData.message || "프로필 수정에 실패했습니다.");
+      }
+    } catch (error) {
+      console.error("Error in profile update:", error);
+      throw error;
+    }
+  };
+  
+
 export const requestLogin = async (email: string, password: string) => {
     try {
         const response = await fetch(`${BASE_URL}/users/login`, {
@@ -174,3 +208,4 @@ export const requestAccessToken = async () => {
         return null;
     }
 };
+

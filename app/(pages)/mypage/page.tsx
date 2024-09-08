@@ -66,7 +66,9 @@ export default function Page() {
                         <span className={styles.normal}>님, 안녕하세요!</span>
                     </div>
                     <span className={styles.email}>{userInfo.email}</span>
-                    {/* <div className={styles.} */}
+                    <div className={styles.profileEditBtn}>
+                        <Link href="/mypage/profile-edit">회원 정보 수정</Link>
+                        </div>
                 </div>
             )}
             <Divider />
