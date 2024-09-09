@@ -10,8 +10,8 @@ import { useRouter } from 'next/navigation';
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { requestUserInfo } from '../../../service/auth_api';
 
-import myIcon from '../../../public/images/icon/my_4q_icon.svg';
-import likedIcon from '../../../public/images/icon/liked_4q_icon.svg';
+import myIcon from '../../../../public/images/icon/my_4q_icon.svg';
+import likedIcon from '../../../../public/images/icon/liked_4q_icon.svg';
 
 export default function Page() {
     const router = useRouter();
