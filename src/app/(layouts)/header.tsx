@@ -10,15 +10,15 @@ import { useRouter, usePathname } from "next/navigation";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoLogOutOutline } from "react-icons/io5";
 import { Button, message, Modal } from "antd";
-import { requestLogout } from "../../service/auth_api"
-import { requestAccessToken } from '../../service/auth_api';
+import { requestAccessToken } from '@/service/auth_api';
+import { useUserContext } from "@/context/UserContext";
 
 export default function Header() {
   const [isOpen, setOpen] = useState<boolean>(false);
   const [isLogo, setLogo] = useState<boolean>(false);
   const [title, setTitle] = useState<string>("홈");
-  const [isAuthenticated, setAuthenticated] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const { isLogin, logout, setAccessToken } = useUserContext();  // setAccessToken 가져오기
   const router = useRouter();
   const path = usePathname();
 
@@ -69,20 +69,14 @@ export default function Header() {
   const navFeedback = () => {
     setOpen(false);
     router.push('/feedback');
-   
-  }
-
-  const handleLogout = () => {
-    document.cookie =
-      "refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    localStorage.removeItem("AccessToken");
-    router.push("/login");
-    message.success("로그아웃 되었습니다");
   };
 
-  const checkAuth = () => {
-    const token = localStorage.getItem("AccessToken");
-    setAuthenticated(!!token);
+  const handleLogout = () => {
+    document.cookie = "refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    localStorage.removeItem("AccessToken");
+    logout();  // UserContext의 logout 함수 호출
+    router.push("/login");
+    message.success("로그아웃 되었습니다");
   };
 
   const handleCancel = () => {
@@ -96,13 +90,18 @@ export default function Header() {
   };
 
   useEffect(() => {
-    requestAccessToken();
-}, []);
-
-  useEffect(() => {
     checkLogo();
     getTitleForPath();
-    checkAuth();
+
+    // AccessToken 요청 및 UserContext에 설정
+    const fetchAccessToken = async () => {
+      const token = await requestAccessToken();
+      if (token) {
+        setAccessToken(token);  // UserContext에 AccessToken 저장
+      }
+    };
+
+    fetchAccessToken();
   }, [path]);
 
   return (
@@ -129,21 +128,21 @@ export default function Header() {
         )}
         <div className={`${styles.menu} ${isOpen ? styles.open : ""}`}>
           <div className={styles.menuTopContainer}>
-          <img src={logo_white.src} alt="Logo" />
-          <div className={styles.feedbackBtnContainer}>
-          <Button className={styles.feedbackBtn} size="small" onClick={navFeedback}>
-              피드백
-          </Button>
+            <img src={logo_white.src} alt="Logo" />
+            <div className={styles.feedbackBtnContainer}>
+              <Button className={styles.feedbackBtn} size="small" onClick={navFeedback}>
+                피드백
+              </Button>
+            </div>
           </div>
-          </div>
-         
+
           <ul>
             <li>
               <Link href="/" data-replace="홈" onClick={closeMenu}>
                 <span>홈</span>
               </Link>
             </li>
-            {!isAuthenticated && (
+            {!isLogin && (  
               <li>
                 <Link href="/login" data-replace="로그인" onClick={closeMenu}>
                   <span>로그인</span>
@@ -177,7 +176,7 @@ export default function Header() {
                 <span>마이페이지</span>
               </Link>
             </li>
-            {isAuthenticated && (
+            {isLogin && (  
               <div className={styles.logoutBtnContainer}>
                 <Link href="/login" onClick={closeMenu}>
                   <Button
@@ -200,7 +199,6 @@ export default function Header() {
         open={isModalOpen}
         onCancel={handleCancel}
         centered
-        // width={400}
         footer={[
           <Button key="cancel" onClick={handleCancel}>
             머무르기

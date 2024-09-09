@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Alert } from 'antd';
 import styles from './tagSelectModal.module.css';
-import hot_mark from '../../../../public/images/hot_tag.png';
+import hot_mark from '../../../../../public/images/hot_tag.png';
 import tagTranslationMap from '../../../../lib/tagTranslationKrEn'
-import mock from "../../../../public/images/mock_4q.png";
 
 interface TagSelectorProps {
     selectedTags: string[];  // Pass selected tags from parent
