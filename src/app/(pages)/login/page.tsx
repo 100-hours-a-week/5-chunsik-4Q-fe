@@ -3,8 +3,8 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import styles from './page.module.css';
-import logo from '../../../public/images/login_logo.png';
-import kakao_icon from '../../../public/images/kakao.svg';
+import logo from '../../../../public/images/login_logo.png';
+import kakao_icon from '../../../../public/images/kakao.svg';
 
 export default function Page() {
   const router = useRouter();

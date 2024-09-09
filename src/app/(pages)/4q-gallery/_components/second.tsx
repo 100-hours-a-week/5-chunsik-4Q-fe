@@ -8,7 +8,7 @@ import { PiTextTBold } from "react-icons/pi";
 import { HiTrash } from "react-icons/hi";
 import { generateTicket } from '../../../../service/photo_api'
 import Lottie from 'react-lottie-player';
-import loadingLottie from '../../../../public/rotties/image-loading.json';
+import loadingLottie from '../../../../../public/rotties/image-loading.json';
 import type { Stage as StageType } from 'konva/lib/Stage';
 import { isMobile } from "react-device-detect";
 

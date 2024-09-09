@@ -3,8 +3,8 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import styles from "./header.module.css";
-import logo from "../../public/images/logo.svg";
-import logo_white from "../../public/images/logo_white.svg";
+import logo from "../../../public/images/logo.svg";
+import logo_white from "../../../public/images/logo_white.svg";
 import { Slant as Hamburger } from "hamburger-react";
 import { useRouter, usePathname } from "next/navigation";
 import { IoIosArrowBack } from "react-icons/io";

@@ -6,7 +6,7 @@ import { requestProfileUpdate } from "../../../../service/auth_api";
 import { useRouter } from 'next/navigation';
 
 import styles from './page.module.css';
-import profileIcon from '../../../../public/images/icon/profile_icon.svg';
+import profileIcon from '../../../../../public/images/icon/profile_icon.svg';
 
 export default function ChangeNicknamePage() {
     const [nickname, setNickname] = useState("");

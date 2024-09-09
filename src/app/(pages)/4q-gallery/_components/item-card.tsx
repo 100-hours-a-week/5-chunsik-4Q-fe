@@ -8,7 +8,7 @@ import { Drawer, theme, message } from "antd";
 import { IoMdHeart } from "react-icons/io";
 import { likeImage, unlikeImage } from "../../../../service/photo_api";
 import Lottie from 'react-lottie-player';
-import heartLottie from '../../../../public/rotties/heart-lottie.json';
+import heartLottie from '../../../../../public/rotties/heart-lottie.json';
 
 type Item = {
   imageId: number;
