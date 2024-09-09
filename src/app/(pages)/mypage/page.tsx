@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import styles from './page.module.css';
 import { Button, Divider, message } from 'antd';
 import Link from "next/link";
@@ -8,46 +8,23 @@ import { IoIosArrowDropright } from "react-icons/io";
 import { IoLogOutOutline } from "react-icons/io5";
 import { useRouter } from 'next/navigation';
 import { MdKeyboardArrowRight } from "react-icons/md";
-import { requestUserInfo } from '../../../service/auth_api';
-
+import { useUserContext } from '@/context/UserContext';  // useUserContext를 import
 import myIcon from '../../../../public/images/icon/my_4q_icon.svg';
 import likedIcon from '../../../../public/images/icon/liked_4q_icon.svg';
 
 export default function Page() {
     const router = useRouter();
-    const [isAuthenticated, setAuthenticated] = useState<boolean>(false);
-    const [userInfo, setUserInfo] = useState<{ nickname: string; email: string } | null>(null);
-
-    const checkAuth = async () => {
-        const token = localStorage.getItem('AccessToken');
-        setAuthenticated(!!token);
-        
-        if (token) {
-            try {
-                const data = await requestUserInfo();
-                if (data) {
-                    setUserInfo({ nickname: data.nickname, email: data.email });
-                }
-            } catch (error) {
-                console.error("Failed to fetch user info:", error);
-            }
-        }
-    };
-
-    useEffect(() => {
-        checkAuth();
-    }, []);
+    const { user, isLogin, logout } = useUserContext();  // useUserContext에서 user와 isLogin, logout 가져오기
 
     const handleLogout = () => {
-        document.cookie = "refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-        localStorage.removeItem('AccessToken');
-        router.push('/login');
+        logout();  // UserContext의 logout 함수 호출
         message.success('로그아웃 되었습니다');
+        router.push('/login');
     };
 
     return (
         <div className={styles.container}>
-            {!isAuthenticated && (
+            {!isLogin && (
                 <div className={styles.unauthUserInfoContainer}>
                     <div className={styles.unauthLoginContainer}>
                         <span>로그인하세요</span>
@@ -59,16 +36,16 @@ export default function Page() {
                 </div>
             )}
             
-            {isAuthenticated && userInfo && (
+            {isLogin && user && (
                 <div className={styles.userInfoConatiner}>
                     <div className={styles.nickname}>
-                        <span className={styles.bold}>{userInfo.nickname}</span>
+                        <span className={styles.bold}>{user.nickname}</span>
                         <span className={styles.normal}>님, 안녕하세요!</span>
                     </div>
-                    <span className={styles.email}>{userInfo.email}</span>
+                    <span className={styles.email}>{user.email}</span>
                     <div className={styles.profileEditBtn}>
                         <Link href="/mypage/profile-edit">회원 정보 수정</Link>
-                        </div>
+                    </div>
                 </div>
             )}
             <Divider />
@@ -89,19 +66,19 @@ export default function Page() {
                 </div>
             </div>
             
-            {isAuthenticated && (
+            {isLogin && (
                 <div className={styles.logoutContainer}>
-                <Button
-                    type="primary"
-                    shape="round"
-                    icon={<IoLogOutOutline />}
-                    size="large"
-                    style={{ backgroundColor: "#D4D4D4", color: "#000" }}
-                    onClick={handleLogout}
-                >
-                    로그아웃
-                </Button>
-            </div>
+                    <Button
+                        type="primary"
+                        shape="round"
+                        icon={<IoLogOutOutline />}
+                        size="large"
+                        style={{ backgroundColor: "#D4D4D4", color: "#000" }}
+                        onClick={handleLogout}
+                    >
+                        로그아웃
+                    </Button>
+                </div>
             )}
         </div>
     );

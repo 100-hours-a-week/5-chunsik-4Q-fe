@@ -6,7 +6,7 @@ import { FaDice } from "react-icons/fa6";
 import { Button, message } from 'antd';
 import { generatePhotoImg } from '../../../../service/photo_api';
 import { getShortenUrl } from "../../../../service/shorten_api";
-import tagArrow from '../../../../public/images/tag_arrow.png';
+import tagArrow from '../../../../../public/images/tag_arrow.png';
 import tagTranslationMap from '../../../../lib/tagTranslationEnKr';
 
 message.config({
