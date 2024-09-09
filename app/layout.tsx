@@ -8,6 +8,7 @@ import Header from "./(layouts)/header";
 import styles from "./layout.module.css";
 import GoogleAnalytics from '../lib/GoogleAnalytics';
 import { GoogleTagManager } from '@next/third-parties/google'
+// import { ReactQueryClientProvider } from '@/components/ReactQueryClientProvider'
  
 
 export const metadata: Metadata = {
@@ -33,6 +34,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
+    // <ReactQueryClientProvider>
     <html lang="en">
       <Head>
         <meta
@@ -53,5 +55,6 @@ export default function RootLayout({
         </AntdRegistry>
       </body>
     </html>
+    // </ReactQueryClientProvider>
   );
 }

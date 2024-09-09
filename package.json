@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "postbuild": "next-sitemap",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -24,9 +25,11 @@
     "@react-sandbox/heart": "^1.1.0",
     "@sentry/nextjs": "^8",
     "@sentry/react": "^8.26.0",
+    "@types/react-query": "^1.2.9",
     "antd": "^5.20.0",
     "embla-carousel": "^8.1.8",
     "embla-carousel-react": "^8.1.8",
+    "gsap": "^3.12.5",
     "hamburger-react": "^2.5.1",
     "konva": "^9.3.14",
     "next": "^14.2.5",
@@ -44,6 +47,7 @@
     "react-konva": "^18.2.10",
     "react-konva-utils": "^1.0.6",
     "react-lottie-player": "^2.1.0",
+    "react-query": "^3.39.3",
     "react-router": "^6.26.1",
     "react-slick": "^0.30.2",
     "rotating-text": "^1.0.4",
@@ -61,6 +65,7 @@
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "canvas": "^2.11.2",
+    "next-sitemap": "^4.2.3",
     "typescript": "5.5.4"
   }
 }

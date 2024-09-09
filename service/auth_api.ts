@@ -124,6 +124,32 @@ export const requestLogin = async (email: string, password: string) => {
     }
 };
 
+
+export const requestUserInfo = async () => {
+    try {
+        const token = localStorage.getItem('AccessToken');
+        const response = await fetch(`${BASE_URL}/users/me`, {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            const { nickname, email } = data;
+            return { nickname, email };
+        } else {
+            console.error('Failed to fetch user info', response.status);
+            return null;
+        }
+    } catch (error) {
+        console.error('Error fetching user info:', error);
+        return null;
+    }
+};
+
 export const requestLogout = async () => {
     const token = localStorage.getItem('AccessToken');
   
@@ -155,30 +181,6 @@ export const requestLogout = async () => {
   
 
 
-export const requestUserInfo = async () => {
-    try {
-        const token = localStorage.getItem('AccessToken');
-        const response = await fetch(`${BASE_URL}/users/me`, {
-            method: "GET",
-            headers: {
-                "Authorization": `Bearer ${token}`,
-                "Content-Type": "application/json",
-            },
-        });
-
-        if (response.ok) {
-            const data = await response.json();
-            const { nickname, email } = data;
-            return { nickname, email };
-        } else {
-            console.error('Failed to fetch user info', response.status);
-            return null;
-        }
-    } catch (error) {
-        console.error('Error fetching user info:', error);
-        return null;
-    }
-};
 
 
 //refresh token으로 access token 요청하기

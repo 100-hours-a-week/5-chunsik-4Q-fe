@@ -8,6 +8,7 @@ const handleDownload = async (item) => {
     if (item.ticketUrl) {
         try {
             const response = await fetch(item.ticketUrl, { mode: 'cors' });
+            // const response = await fetch("https://cdn.qqqq.world/test.png", { mode: 'same-origin' });
             const blob = await response.blob();
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
@@ -54,9 +55,9 @@ const ItemList = ({ item }) => (
                     <span>{item.formattedDate}</span>
                 </div>
                 <div className={styles.downloadBtnContainer}>
-                    {/* <Button type="primary" shape="round" icon={<DownloadOutlined />} onClick={() => handleDownload(item)}>
+                    <Button type="primary" shape="round" icon={<DownloadOutlined />} onClick={() => handleDownload(item)}>
                         다운로드
-                    </Button> */}
+                    </Button>
                 </div>
             </div>
         </div>
