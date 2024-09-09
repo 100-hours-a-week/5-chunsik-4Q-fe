@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React,{ createContext, useContext } from 'react';
 import { Button, Checkbox, Form, Input, message } from 'antd';
 import type { FormProps } from 'antd';
 import styles from './page.module.css';
@@ -8,11 +8,24 @@ import Link from "next/link";
 import { requestLogin } from "../../../../service/auth_api"
 import { useRouter } from 'next/navigation';
 
+interface User {
+    nickname: string;
+    email: string;
+  }
+
+  interface UserContextType {
+    user: User | null;
+    login: (email: string, password: string) => Promise<void>;
+  }
+  
+
 type FieldType = {
     email?: string;
     password?: string;
     remember?: boolean;
 };
+
+const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export default function Page() {
     const router = useRouter(); 

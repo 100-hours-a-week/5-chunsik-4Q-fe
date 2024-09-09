@@ -2,12 +2,12 @@
 
 import { useEffect, useState } from 'react';
 import styles from './page.module.css';
-import { List, message } from 'antd';  // Correct import for 'message'
+import { List, message } from 'antd';
 import ItemList from './_components/item-list';
 import { getLikedTicket, likeImage, unlikeImage } from '../../../../service/photo_api';
 
-// Define the Ticket type
-type Ticket = {
+// Extend Ticket type to include additional properties
+type ExtendedTicket = {
   imageId: number;
   title: string;
   url: string;
@@ -15,15 +15,17 @@ type Ticket = {
   createdAt: string;
   liked: boolean;
   likeCount: number;
+  userName: string;  // Add missing properties
+  tags: string[];    // Add missing properties
 };
 
 export default function Page() {
-  const [tickets, setTickets] = useState<Ticket[]>([]);  // Correctly typed state
+  const [tickets, setTickets] = useState<ExtendedTicket[]>([]);  // Correctly typed state
 
   useEffect(() => {
     const fetchTickets = async () => {
       try {
-        const data = await getLikedTicket();
+        const data: ExtendedTicket[] = await getLikedTicket();  // Ensure data is correctly typed
         setTickets(data);
       } catch (error) {
         console.error('Error fetching tickets:', error);
@@ -33,7 +35,6 @@ export default function Page() {
     fetchTickets();
   }, []);
 
-  // Handle like/unlike functionality in the parent component
   const toggleLike = async (imageId: number, isLiked: boolean) => {  // Type parameters
     const accessToken = localStorage.getItem('AccessToken');
 
@@ -76,15 +77,6 @@ export default function Page() {
       <List
         itemLayout="vertical"
         size="large"
-        // pagination={{
-        //   onChange: (page) => {
-        //     console.log(page);
-        //   },
-        //   pageSize: 3,
-        //   position: 'bottom',
-        //   align: 'center',
-        //   style: { textAlign: 'center' },
-        // }}
         dataSource={tickets}
         renderItem={(item) => (
           <ItemList item={item} onToggleLike={toggleLike} />  // Pass the function down to the child
