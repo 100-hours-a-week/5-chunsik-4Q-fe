@@ -34,7 +34,7 @@ export default function Hero() {
         }
 
         fetchAndSetUser();
-    }, [login, setAccessToken]);
+    }, []);
 
     return (
         <div className={styles.container} style={{ backgroundImage: `url(${bg.src})` }}>
