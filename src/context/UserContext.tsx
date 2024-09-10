@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useState, useContext, ReactNode, useEffect } from 'react';
+import { requestLogout } from '@/service/auth_api';
 
 type User = {
   email: string;
@@ -48,9 +49,11 @@ export function UserProvider({ children }: { children: ReactNode }) {
   const logout = () => {
     setUser(null);
     setLogin(false);
-    setAccessToken(null);  // 로그아웃 시 AccessToken 제거
+    setAccessToken(null);  
+    requestLogout();
     localStorage.removeItem('user');
     localStorage.removeItem('AccessToken');
+    document.cookie = "refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
   };
 
   return (

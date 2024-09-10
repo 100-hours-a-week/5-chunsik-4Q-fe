@@ -169,6 +169,7 @@ export const requestLogout = async () => {
   
       if (response.ok) {
         localStorage.removeItem('AccessToken');
+        console.log('로그아웃 완료');
         return { success: true };
       } else {
         throw new Error("로그아웃에 실패했습니다.");
