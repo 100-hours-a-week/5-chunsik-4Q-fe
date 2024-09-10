@@ -1,29 +1,29 @@
 import styles from './item-list.module.css';
 import { List, Button, Tag, message } from 'antd';
-// import { DownloadOutlined } from '@ant-design/icons';
+import { DownloadOutlined } from '@ant-design/icons';
 import { IoIosCalendar } from "react-icons/io";
 import { RxClipboardCopy } from "react-icons/rx";
 
-// const handleDownload = async (item) => {
-//     if (item.ticketUrl) {
-//         try {
-//             const response = await fetch(item.ticketUrl, { mode: 'cors' });
-//             const blob = await response.blob();
-//             const url = window.URL.createObjectURL(blob);
-//             const a = document.createElement('a');
-//             a.href = url;
-//             a.download = `photoQR_${item.title}.png`;
-//             document.body.appendChild(a);
-//             a.click();
-//             document.body.removeChild(a);
-//             window.URL.revokeObjectURL(url);
-//         } catch (error) {
-//             console.error('Failed to download image:', error);
-//         }
-//     } else {
-//         console.error('Image URL is not available for download.');
-//     }
-// };
+const handleDownload = async (item) => {
+    if (item.ticketUrl) {
+        try {
+            const response = await fetch(item.ticketUrl, { mode: 'cors' });
+            const blob = await response.blob();
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `photoQR_${item.title}.png`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        } catch (error) {
+            console.error('Failed to download image:', error);
+        }
+    } else {
+        console.error('Image URL is not available for download.');
+    }
+};
 
 const handleCopyToClipboard = (item) => {
     if (item.ticketUrl) {
@@ -62,9 +62,9 @@ const ItemList = ({ item }) => (
                     <Button type="primary" icon={<RxClipboardCopy />} size="small" onClick={() => handleCopyToClipboard(item)}>
                         이미지 링크
                     </Button>
-                    {/* <Button type="primary" icon={<DownloadOutlined />} size="small" onClick={() => handleDownload(item)}>
+                    <Button type="primary" icon={<DownloadOutlined />} size="small" onClick={() => handleDownload(item)} style={{backgroundColor: 'white', boxShadow: 'transparent'}} className={styles.downloadButton}>
                         다운로드
-                    </Button> */}
+                    </Button>
                 </div>
             </div>
         </div>
