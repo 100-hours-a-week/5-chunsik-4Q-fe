@@ -1,12 +1,10 @@
 "use client";
 
-import { useEffect } from 'react';
 import styles from './page.module.css';
-import { Button, Divider, message } from 'antd';
+import { Button, Divider } from 'antd';
 import Link from "next/link";
 import { IoIosArrowDropright } from "react-icons/io";
 import { IoLogOutOutline } from "react-icons/io5";
-import { useRouter } from 'next/navigation';
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { requestLogout } from "@/service/auth_api";
 import { useUserContext } from '@/context/UserContext';  // useUserContext를 import
@@ -14,14 +12,11 @@ import myIcon from '../../../../public/images/icon/my_4q_icon.svg';
 import likedIcon from '../../../../public/images/icon/liked_4q_icon.svg';
 
 export default function Page() {
-    const router = useRouter();
-    const { user, isLogin, logout } = useUserContext();  // useUserContext에서 user와 isLogin, logout 가져오기
+    const { user, isLogin, logout } = useUserContext();  
 
     const handleLogout = () => {
         requestLogout();
-        logout();  
-        message.success('로그아웃 되었습니다');
-        router.push('/login');
+        logout();
     };
 
     return (

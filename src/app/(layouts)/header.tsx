@@ -65,12 +65,7 @@ export default function Header() {
 
   const handleLogout = () => {
     requestLogout();
-    localStorage.removeItem("AccessToken");
-    const token = localStorage.getItem('AccessToken');
-    console.log('token', token)
     logout();
-    router.push("/login");
-    message.success("로그아웃 되었습니다");
   };
 
   const handleCancel = () => {

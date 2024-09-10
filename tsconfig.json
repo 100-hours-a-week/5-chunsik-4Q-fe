@@ -39,7 +39,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-, "app/api/mockData.ts"  ],
+, "app/api/mockData.ts", "src/middleware.js"  ],
   "exclude": [
     "node_modules"
   ]

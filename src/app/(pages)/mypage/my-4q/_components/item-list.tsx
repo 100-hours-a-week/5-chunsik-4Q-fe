@@ -59,11 +59,11 @@ const ItemList = ({ item }) => (
                     <span>{item.formattedDate}</span>
                 </div>
                 <div className={styles.BtnContainer}>
-                    <Button type="primary" icon={<RxClipboardCopy />} size="small" onClick={() => handleCopyToClipboard(item)}>
-                        이미지 링크
+                    <Button type="primary" icon={<RxClipboardCopy />} size="large" onClick={() => handleCopyToClipboard(item)}>
+                        {/* 이미지 링크 */}
                     </Button>
-                    <Button type="primary" icon={<DownloadOutlined />} size="small" onClick={() => handleDownload(item)} style={{backgroundColor: 'white', boxShadow: 'transparent'}} className={styles.downloadButton}>
-                        다운로드
+                    <Button type="primary" icon={<DownloadOutlined />} size="large" onClick={() => handleDownload(item)} className={styles.downloadButton}>
+                        {/* 다운로드 */}
                     </Button>
                 </div>
             </div>
