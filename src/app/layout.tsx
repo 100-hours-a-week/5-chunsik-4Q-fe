@@ -44,6 +44,7 @@ export default function RootLayout({
           content="width=device-width, initial-scale=1, maximum-scale=1.0, 
           user-scalable=0"
         />
+        <meta name="google-site-verification" content="KFttRlDkuToG6aJCc_N29w2ksid-21rcB4YumaCXYVg" />
       </Head>
       <GoogleTagManager gtmId="GTM-PG8QW8F5" />
       <GoogleAnalytics gaId="G-NX6HMP5K6H" />
