@@ -50,7 +50,6 @@ export function UserProvider({ children }: { children: ReactNode }) {
     setUser(null);
     setLogin(false);
     setAccessToken(null);  
-    requestLogout();
     localStorage.removeItem('user');
     localStorage.removeItem('AccessToken');
     document.cookie = "refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";

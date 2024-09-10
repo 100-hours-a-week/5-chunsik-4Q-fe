@@ -10,7 +10,7 @@ import { useRouter, usePathname } from "next/navigation";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoLogOutOutline } from "react-icons/io5";
 import { Button, message, Modal } from "antd";
-import { requestAccessToken, requestUserInfo, requestLogout } from "@/service/auth_api";
+import { requestLogout } from "@/service/auth_api";
 import { useUserContext } from "@/context/UserContext";
 
 export default function Header() {
@@ -64,8 +64,10 @@ export default function Header() {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("AccessToken");
     requestLogout();
+    localStorage.removeItem("AccessToken");
+    const token = localStorage.getItem('AccessToken');
+    console.log('token', token)
     logout();
     router.push("/login");
     message.success("로그아웃 되었습니다");
