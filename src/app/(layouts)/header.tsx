@@ -10,7 +10,7 @@ import { useRouter, usePathname } from "next/navigation";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoLogOutOutline } from "react-icons/io5";
 import { Button, message, Modal } from "antd";
-import { requestAccessToken, requestUserInfo } from '@/service/auth_api'; // Import requestUserInfo
+import { requestAccessToken, requestUserInfo, requestLogout } from "@/service/auth_api";
 import { useUserContext } from "@/context/UserContext";
 
 export default function Header() {
@@ -18,7 +18,7 @@ export default function Header() {
   const [isLogo, setLogo] = useState<boolean>(false);
   const [title, setTitle] = useState<string>("홈");
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const { isLogin, logout, setAccessToken, setLogin, login } = useUserContext();  // Include `login` to update user info
+  const { isLogin, logout, setAccessToken, setLogin, login } = useUserContext();
   const router = useRouter();
   const path = usePathname();
 
@@ -60,12 +60,12 @@ export default function Header() {
 
   const navFeedback = () => {
     setOpen(false);
-    router.push('/feedback');
+    router.push("/feedback");
   };
 
   const handleLogout = () => {
-    document.cookie = "refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     localStorage.removeItem("AccessToken");
+    requestLogout();
     logout();
     router.push("/login");
     message.success("로그아웃 되었습니다");
@@ -77,47 +77,14 @@ export default function Header() {
 
   const handleConfirmBack = () => {
     setIsModalOpen(false);
-    sessionStorage.removeItem('form_data');
+    sessionStorage.removeItem("form_data");
     router.back();
   };
 
   useEffect(() => {
     checkLogo();
     getTitleForPath();
-
-    const fetchAccessToken = async () => {
-      const token = await requestAccessToken();
-      if (token) {
-        setAccessToken(token);
-        setLogin(true);
-      }
-    };
-
-    fetchAccessToken();
   }, [path]);
-
-  // Effect to watch for AccessToken changes in localStorage
-  useEffect(() => {
-    const handleStorageChange = async (event: StorageEvent) => {
-      if (event.key === "AccessToken" && event.newValue) {
-        try {
-          const userInfo = await requestUserInfo(); // Fetch user info when AccessToken changes
-          if (userInfo) {
-            login(userInfo);  // Update context with user info
-            console.log("유저 정보가 업데이트되었습니다.");
-          }
-        } catch (error) {
-          console.error("Failed to fetch user info on AccessToken change:", error);
-        }
-      }
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-
-    return () => {
-      window.removeEventListener("storage", handleStorageChange);
-    };
-  }, [login]);
 
   return (
     <>
