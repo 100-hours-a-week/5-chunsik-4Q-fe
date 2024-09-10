@@ -10,7 +10,7 @@ import { useRouter, usePathname } from "next/navigation";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoLogOutOutline } from "react-icons/io5";
 import { Button, message, Modal } from "antd";
-import { requestAccessToken } from '@/service/auth_api';
+import { requestAccessToken, requestUserInfo } from '@/service/auth_api'; // Import requestUserInfo
 import { useUserContext } from "@/context/UserContext";
 
 export default function Header() {
@@ -18,7 +18,7 @@ export default function Header() {
   const [isLogo, setLogo] = useState<boolean>(false);
   const [title, setTitle] = useState<string>("홈");
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const { isLogin, logout, setAccessToken } = useUserContext();  // setAccessToken 가져오기
+  const { isLogin, logout, setAccessToken, setLogin, login } = useUserContext();  // Include `login` to update user info
   const router = useRouter();
   const path = usePathname();
 
@@ -50,20 +50,12 @@ export default function Header() {
   };
 
   const checkLogo = () => {
-    if (path === "/") {
-      setLogo(true);
-    } else {
-      setLogo(false);
-    }
+    setLogo(path === "/");
   };
 
   const getTitleForPath = () => {
     const matchedTitle = titles.find((item) => item.path === path);
-    if (matchedTitle) {
-      setTitle(matchedTitle.title);
-    } else {
-      setTitle("");
-    }
+    setTitle(matchedTitle ? matchedTitle.title : "");
   };
 
   const navFeedback = () => {
@@ -74,7 +66,7 @@ export default function Header() {
   const handleLogout = () => {
     document.cookie = "refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     localStorage.removeItem("AccessToken");
-    logout();  // UserContext의 logout 함수 호출
+    logout();
     router.push("/login");
     message.success("로그아웃 되었습니다");
   };
@@ -93,16 +85,39 @@ export default function Header() {
     checkLogo();
     getTitleForPath();
 
-    // AccessToken 요청 및 UserContext에 설정
     const fetchAccessToken = async () => {
       const token = await requestAccessToken();
       if (token) {
-        setAccessToken(token);  // UserContext에 AccessToken 저장
+        setAccessToken(token);
+        setLogin(true);
       }
     };
 
     fetchAccessToken();
   }, [path]);
+
+  // Effect to watch for AccessToken changes in localStorage
+  useEffect(() => {
+    const handleStorageChange = async (event: StorageEvent) => {
+      if (event.key === "AccessToken" && event.newValue) {
+        try {
+          const userInfo = await requestUserInfo(); // Fetch user info when AccessToken changes
+          if (userInfo) {
+            login(userInfo);  // Update context with user info
+            console.log("유저 정보가 업데이트되었습니다.");
+          }
+        } catch (error) {
+          console.error("Failed to fetch user info on AccessToken change:", error);
+        }
+      }
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
+  }, [login]);
 
   return (
     <>
@@ -142,7 +157,7 @@ export default function Header() {
                 <span>홈</span>
               </Link>
             </li>
-            {!isLogin && (  
+            {!isLogin && (
               <li>
                 <Link href="/login" data-replace="로그인" onClick={closeMenu}>
                   <span>로그인</span>
@@ -176,7 +191,7 @@ export default function Header() {
                 <span>마이페이지</span>
               </Link>
             </li>
-            {isLogin && (  
+            {isLogin && (
               <div className={styles.logoutBtnContainer}>
                 <Link href="/login" onClick={closeMenu}>
                   <Button

@@ -8,7 +8,8 @@ export default function Page() {
     <div>
       <Head>
         <title>Sentry Onboarding</title>
-        <meta name="description" content="Test Sentry for your Next.js app!" />
+        {/* <meta name="description" content="Test Sentry for your Next.js app!" /> */}
+        <meta name="google-site-verification" content="KFttRlDkuToG6aJCc_N29w2ksid-21rcB4YumaCXYVg" />
       </Head>
 
       <main

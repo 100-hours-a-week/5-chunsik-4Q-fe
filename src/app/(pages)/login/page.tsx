@@ -1,21 +1,11 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
 import styles from './page.module.css';
 import logo from '../../../../public/images/login_logo.png';
 import kakao_icon from '../../../../public/images/kakao.svg';
 
 export default function Page() {
-  const router = useRouter();
-
   const kakaoOauth = "https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=a8a84270703466b91728cc7df1b03fbb&redirect_uri=https://api.qqqq.world/auth/kakao/callback"
-
-  useEffect(() => {
-    if (window.location.search.includes('refresh=true')) {
-      router.refresh();
-    }
-  }, [router]);
 
   return (
     <div className={styles.container}>

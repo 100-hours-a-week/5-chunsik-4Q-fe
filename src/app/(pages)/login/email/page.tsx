@@ -32,6 +32,7 @@ export default function Page() {
         const userInfo = await requestUserInfo();
         if (userInfo) {
           login(userInfo); 
+          console.log(userInfo);
           router.push('/');
         } else {
           message.error("유저 정보를 가져오는 데 실패했습니다.");

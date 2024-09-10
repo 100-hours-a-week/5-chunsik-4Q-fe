@@ -14,6 +14,7 @@ type UserContextType = {
   login: (user: User) => void;
   logout: () => void;
   setAccessToken: (token: string | null) => void;  // AccessToken 설정 함수 추가
+  setLogin: (isLogin: boolean) => void;
 };
 
 // UserContext 생성
@@ -53,7 +54,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <UserContext.Provider value={{ user, isLogin, accessToken, login, logout, setAccessToken }}>
+    <UserContext.Provider value={{ user, isLogin, accessToken, login, logout, setAccessToken, setLogin }}>
       {children}
     </UserContext.Provider>
   );
