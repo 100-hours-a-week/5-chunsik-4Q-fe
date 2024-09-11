@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-
+import dynamic from 'next/dynamic';
 import "./global.css";
 import "antd/dist/reset.css";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
@@ -14,6 +14,7 @@ import { GoogleTagManager } from "@next/third-parties/google";
 import { UserProvider } from '@/context/UserContext'
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://qqqq.world'),
   openGraph: {
     images: [
       {
@@ -40,6 +41,7 @@ const config: ThemeConfig = {
 
 
 export default function RootLayout({
+
   children,
 }: {
   children: ReactNode;
@@ -56,6 +58,7 @@ export default function RootLayout({
         <meta property="og:image" content="/images/logo.png" />
         <meta property="og:title" content="4Q | 쉽고 빠른 포토큐알 생성" />
         <meta name="google-site-verification" content="KFttRlDkuToG6aJCc_N29w2ksid-21rcB4YumaCXYVg" />
+        <meta name="naver-site-verification" content="5f9af6b8b6bc643bb05b00139fef63e75e62d67c" />
 
         {/* 캐시 비활성화 메타 태그 추가 */}
         <meta httpEquiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0" />

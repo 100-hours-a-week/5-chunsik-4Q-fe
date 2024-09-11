@@ -1,7 +1,7 @@
 "use client";
 
 import styles from './page.module.css';
-import { Button, Divider } from 'antd';
+import { Button, Divider, message } from 'antd';
 import Link from "next/link";
 import { IoIosArrowDropright } from "react-icons/io";
 import { IoLogOutOutline } from "react-icons/io5";
@@ -17,6 +17,13 @@ export default function Page() {
     const handleLogout = () => {
         requestLogout();
         logout();
+    };
+
+    const handleProtectedLinkClick = (e) => {
+        if (!isLogin) {
+            e.preventDefault();
+            message.error('로그인이 필요한 기능입니다.');
+        }
     };
 
     return (
@@ -52,14 +59,20 @@ export default function Page() {
                         <img src={myIcon.src} alt="my_4q_icon" className={styles.icon} />
                         <span>나의 4Q</span>
                     </div>
-                    <Link href="/mypage/my-4q" className={styles.arrowContainer}><IoIosArrowDropright className={styles.arrowIcon} /></Link>
+                    {/* Added onClick handler to prevent navigation if not logged in */}
+                    <Link href="/mypage/my-4q" className={styles.arrowContainer} onClick={handleProtectedLinkClick}>
+                        <IoIosArrowDropright className={styles.arrowIcon} />
+                    </Link>
                 </div>
                 <div className={styles.linkList}>
                     <div className={styles.linkText}>
                         <img src={likedIcon.src} alt="my_4q_icon" className={styles.icon} />
                         <span>좋아요한 배경</span>
                     </div>
-                    <Link href="/mypage/liked-4q" className={styles.arrowContainer}><IoIosArrowDropright className={styles.arrowIcon} /></Link>
+                    {/* Added onClick handler to prevent navigation if not logged in */}
+                    <Link href="/mypage/liked-4q" className={styles.arrowContainer} onClick={handleProtectedLinkClick}>
+                        <IoIosArrowDropright className={styles.arrowIcon} />
+                    </Link>
                 </div>
             </div>
             
