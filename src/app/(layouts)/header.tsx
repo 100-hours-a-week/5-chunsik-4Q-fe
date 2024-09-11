@@ -9,16 +9,16 @@ import { Slant as Hamburger } from "hamburger-react";
 import { useRouter, usePathname } from "next/navigation";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoLogOutOutline } from "react-icons/io5";
-import { Button, message, Modal } from "antd";
-import { requestAccessToken } from '@/service/auth_api';
+import { Button, Modal } from "antd";
 import { useUserContext } from "@/context/UserContext";
+import { requestAccessToken } from "@/service/auth_api";
 
 export default function Header() {
   const [isOpen, setOpen] = useState<boolean>(false);
   const [isLogo, setLogo] = useState<boolean>(false);
   const [title, setTitle] = useState<string>("홈");
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const { isLogin, logout, setAccessToken } = useUserContext();  // setAccessToken 가져오기
+  const { isLogin, logout, setAccessToken, setLogin, login } = useUserContext();
   const router = useRouter();
   const path = usePathname();
 
@@ -50,33 +50,21 @@ export default function Header() {
   };
 
   const checkLogo = () => {
-    if (path === "/") {
-      setLogo(true);
-    } else {
-      setLogo(false);
-    }
+    setLogo(path === "/");
   };
 
   const getTitleForPath = () => {
     const matchedTitle = titles.find((item) => item.path === path);
-    if (matchedTitle) {
-      setTitle(matchedTitle.title);
-    } else {
-      setTitle("");
-    }
+    setTitle(matchedTitle ? matchedTitle.title : "");
   };
 
   const navFeedback = () => {
     setOpen(false);
-    router.push('/feedback');
+    router.push("/feedback");
   };
 
   const handleLogout = () => {
-    document.cookie = "refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    localStorage.removeItem("AccessToken");
-    logout();  // UserContext의 logout 함수 호출
-    router.push("/login");
-    message.success("로그아웃 되었습니다");
+    logout();
   };
 
   const handleCancel = () => {
@@ -85,23 +73,34 @@ export default function Header() {
 
   const handleConfirmBack = () => {
     setIsModalOpen(false);
-    sessionStorage.removeItem('form_data');
+    sessionStorage.removeItem("form_data");
     router.back();
+  };
+
+  const checkAndRefreshToken = async () => {
+    const expiration = localStorage.getItem("TokenExpiration");
+    console.log('토큰 체크중');
+    if (expiration && Number(expiration) < Date.now()) {
+      try {
+        const newAccessToken = await requestAccessToken();
+        if (newAccessToken) {
+          console.log('토큰 만료');
+          setAccessToken(newAccessToken);
+          setLogin(true); 
+        } else {
+          logout(); 
+        }
+      } catch (error) {
+        console.error("Failed to refresh access token:", error);
+        logout();
+      }
+    }
   };
 
   useEffect(() => {
     checkLogo();
     getTitleForPath();
-
-    // AccessToken 요청 및 UserContext에 설정
-    const fetchAccessToken = async () => {
-      const token = await requestAccessToken();
-      if (token) {
-        setAccessToken(token);  // UserContext에 AccessToken 저장
-      }
-    };
-
-    fetchAccessToken();
+    checkAndRefreshToken(); 
   }, [path]);
 
   return (
@@ -142,7 +141,7 @@ export default function Header() {
                 <span>홈</span>
               </Link>
             </li>
-            {!isLogin && (  
+            {!isLogin && (
               <li>
                 <Link href="/login" data-replace="로그인" onClick={closeMenu}>
                   <span>로그인</span>
@@ -176,7 +175,7 @@ export default function Header() {
                 <span>마이페이지</span>
               </Link>
             </li>
-            {isLogin && (  
+            {isLogin && (
               <div className={styles.logoutBtnContainer}>
                 <Link href="/login" onClick={closeMenu}>
                   <Button

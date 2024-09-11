@@ -112,7 +112,9 @@ export const requestLogin = async (email: string, password: string) => {
         if (response.ok) {
             const data = await response.json();
             const token = data.accessToken;  
+            const expiration = data.expiration
             localStorage.setItem('AccessToken', token); 
+            localStorage.setItem('TokenExpiration', expiration); 
             return { success: true };  
         } else {
             throw new Error("로그인에 실패했습니다.");
@@ -151,14 +153,10 @@ export const requestUserInfo = async () => {
 };
 
 export const requestLogout = async () => {
-    const token = localStorage.getItem('AccessToken');
-  
-    if (!token) {
-      throw new Error('No access token found. You are not logged in.');
-    }
-  
     try {
-      const response = await fetch(`${BASE_URL}/users/logout`, {
+        const token = localStorage.getItem('AccessToken');
+        const response = await fetch(`${BASE_URL}/users/logout`, {
+
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -179,10 +177,6 @@ export const requestLogout = async () => {
     }
   };
   
-
-
-
-
 //refresh token으로 access token 요청하기
 export const requestAccessToken = async () => {
     try {

@@ -5,6 +5,7 @@ export const generatePhotoImg = async (category: string, tags: string[]) => {
 
     try {
         const response = await fetch(`${BASE_URL}/image`, {
+          cache: 'no-store',
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -42,6 +43,7 @@ export const generateTicket = async (
         const token = localStorage.getItem('AccessToken');
         
         const response = await fetch(`${BASE_URL}/ticket`, { 
+          cache: 'no-store',
             method: "POST",
             body: formData,
             headers: {
@@ -67,6 +69,7 @@ export const generateTicket = async (
 export const getTicketInfo = async (ticketId: number) => {
     try {
         const response = await fetch(`${BASE_URL}/ticket/${ticketId}`, {
+          cache: 'no-store',
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -98,6 +101,7 @@ export const likeImage = async (imageId: string) => {
   
     try {
       const response = await fetch(`${BASE_URL}/gallery/${imageId}/like`, {
+        cache: 'no-store',
         method: 'POST',
         headers: {
           "Authorization": `Bearer ${token}`, 
@@ -160,6 +164,7 @@ export const getGalleryData = async (page: number, category: string, tag: string
 
   try {
     const response = await fetch(url.toString(), {
+      cache: 'no-store',
       method: 'GET',
       headers: {
         "Content-Type": "application/json",
@@ -184,6 +189,7 @@ export const getGalleryData = async (page: number, category: string, tag: string
     const token = localStorage.getItem('AccessToken');
     try {
         const response = await fetch(`${BASE_URL}/mypq`, {
+          cache: 'no-store',
             method: "GET",
             headers: {
                 "Authorization": `Bearer ${token}`,

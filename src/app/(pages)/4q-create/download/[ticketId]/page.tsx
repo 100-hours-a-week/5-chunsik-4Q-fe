@@ -5,9 +5,8 @@ import { useParams } from 'next/navigation';
 import styles from './page.module.css';
 import { Image, Button, Typography } from 'antd';
 import { LuDownload } from "react-icons/lu";
-import { BiSolidShareAlt } from "react-icons/bi";
 import ShareModal from '../../(modals)/shareModal';
-import { getTicketInfo } from '../../../../../service/photo_api';
+import { getTicketInfo } from '@/service/photo_api';
 
 const { Paragraph } = Typography;
 
