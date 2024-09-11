@@ -3,6 +3,7 @@
 import { createContext, useState, useContext, ReactNode, useEffect } from 'react';
 import { message} from "antd";
 import { useRouter } from "next/navigation";
+import { requestLogout } from "@/service/auth_api";
 
 type User = {
   email: string;
@@ -49,6 +50,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
   };
 
   const logout = () => {
+    requestLogout();
     setUser(null);
     setLogin(false);
     setAccessToken(null);  

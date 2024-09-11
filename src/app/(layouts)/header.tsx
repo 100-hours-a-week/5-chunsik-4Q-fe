@@ -64,7 +64,7 @@ export default function Header() {
   };
 
   const handleLogout = () => {
-    requestLogout();
+    // requestLogout();
     logout();
   };
 
