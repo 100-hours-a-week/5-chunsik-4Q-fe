@@ -9,9 +9,9 @@ import { Slant as Hamburger } from "hamburger-react";
 import { useRouter, usePathname } from "next/navigation";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoLogOutOutline } from "react-icons/io5";
-import { Button, message, Modal } from "antd";
-import { requestLogout } from "@/service/auth_api";
+import { Button, Modal } from "antd";
 import { useUserContext } from "@/context/UserContext";
+import { requestAccessToken } from "@/service/auth_api";
 
 export default function Header() {
   const [isOpen, setOpen] = useState<boolean>(false);
@@ -64,7 +64,6 @@ export default function Header() {
   };
 
   const handleLogout = () => {
-    // requestLogout();
     logout();
   };
 
@@ -78,9 +77,28 @@ export default function Header() {
     router.back();
   };
 
+  const checkAndRefreshToken = async () => {
+    const expiration = localStorage.getItem("TokenExpiration");
+    if (expiration && Number(expiration) < Date.now()) {
+      try {
+        const newAccessToken = await requestAccessToken();
+        if (newAccessToken) {
+          setAccessToken(newAccessToken);
+          setLogin(true); 
+        } else {
+          logout(); 
+        }
+      } catch (error) {
+        console.error("Failed to refresh access token:", error);
+        logout();
+      }
+    }
+  };
+
   useEffect(() => {
     checkLogo();
     getTitleForPath();
+    checkAndRefreshToken(); 
   }, [path]);
 
   return (

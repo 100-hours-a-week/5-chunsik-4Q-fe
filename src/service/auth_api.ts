@@ -112,7 +112,9 @@ export const requestLogin = async (email: string, password: string) => {
         if (response.ok) {
             const data = await response.json();
             const token = data.accessToken;  
+            const expiration = data.expiration
             localStorage.setItem('AccessToken', token); 
+            localStorage.setItem('TokenExpiration', expiration); 
             return { success: true };  
         } else {
             throw new Error("로그인에 실패했습니다.");
