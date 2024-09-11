@@ -14,6 +14,14 @@ import { GoogleTagManager } from "@next/third-parties/google";
 import { UserProvider } from '@/context/UserContext'
 
 export const metadata: Metadata = {
+  openGraph: {
+    images: [
+      {
+        url: '/images/logo.png',
+        alt: '4Q',
+      },
+    ],
+  },
   title: {
     template: "4Q | %s",
     default: "4Q | 쉽고 빠른 포토큐알 생성",
@@ -44,6 +52,9 @@ export default function RootLayout({
           content="width=device-width, initial-scale=1, maximum-scale=1.0, 
           user-scalable=0"
         />
+        <meta property="og:site_name" content="4Q"></meta>
+        <meta property="og:image" content="/images/logo.png" /> 
+        <meta property="og:title" content="4Q | 쉽고 빠른 포토큐알 생성"/> 
         <meta name="google-site-verification" content="KFttRlDkuToG6aJCc_N29w2ksid-21rcB4YumaCXYVg" />
       </Head>
       <GoogleTagManager gtmId="GTM-PG8QW8F5" />
