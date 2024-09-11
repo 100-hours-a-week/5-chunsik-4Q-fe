@@ -61,6 +61,7 @@ export default function RootLayout({
         <meta httpEquiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0" />
         <meta httpEquiv="Pragma" content="no-cache" />
         <meta httpEquiv="Expires" content="0" />
+
       </Head>
       <GoogleTagManager gtmId="GTM-PG8QW8F5" />
       <GoogleAnalytics gaId="G-NX6HMP5K6H" />
