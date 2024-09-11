@@ -29,7 +29,7 @@ export default function Hero() {
                     }
                 }
             } catch (error) {
-                console.error("Failed to fetch user information:", error);
+                console.error("유저 정보 불러오기 실패:", error);
             }
         }
 
