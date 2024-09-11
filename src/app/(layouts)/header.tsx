@@ -79,10 +79,12 @@ export default function Header() {
 
   const checkAndRefreshToken = async () => {
     const expiration = localStorage.getItem("TokenExpiration");
+    console.log('토큰 체크중');
     if (expiration && Number(expiration) < Date.now()) {
       try {
         const newAccessToken = await requestAccessToken();
         if (newAccessToken) {
+          console.log('토큰 만료');
           setAccessToken(newAccessToken);
           setLogin(true); 
         } else {
