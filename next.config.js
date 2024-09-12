@@ -7,8 +7,12 @@ const nextConfig = withAntdLess({
     swcMinify: true,
     assetPrefix: '',
     experimental: { esmExternals: true },
+    images: {
+        domains: ['api.qqqq.world'], 
+      },
     env: {
         NEXT_PUBLIC_GA_ID: process.env.NEXT_PUBLIC_GA_ID,
+        NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
     },
     transpilePackages: ['antd', '@ant-design', 'rc-util', 'rc-pagination', 'rc-picker', 'rc-notification', 'rc-tooltip'],
     webpack: (config) => {
@@ -27,7 +31,7 @@ const nextConfig = withAntdLess({
 // Sentry configuration
 const sentryConfig = {
     org: "chulchulhanchunsigi",
-    project: "pq-fe",
+    project: "pq-fe", 
     silent: !process.env.CI,
     widenClientFileUpload: true,
     hideSourceMaps: true,

@@ -1,0 +1,11 @@
+.container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20x;
+    overflow-x: hidden;
+    /* background-color: rebeccapurple; */
+
+}
