@@ -8,6 +8,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "build:dev": "env-cmd -f .env.development next build",
+    "start:dev": "env-cmd -f .env.development next start -p 6600",
+    "build:prod": "env-cmd -f .env.production next build",
+    "start:prod": "env-cmd -f .env.production next start -p 6600",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -29,6 +33,7 @@
     "antd": "^5.20.0",
     "embla-carousel": "^8.1.8",
     "embla-carousel-react": "^8.1.8",
+    "env-cmd": "^10.1.0",
     "gsap": "^3.12.5",
     "hamburger-react": "^2.5.1",
     "konva": "^9.3.14",

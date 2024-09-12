@@ -1,7 +1,7 @@
 // page.tsx
 "use client";
-
-import React, { useState, useCallback, Suspense, useEffect } from "react";
+export const dynamic = "force-dynamic";
+import React, { useState, useCallback, Suspense } from "react";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import styles from "./page.module.css";
 import { Select, Input } from "antd";
@@ -9,7 +9,6 @@ import type { GetProps } from 'antd';
 import { ScrollMenu, VisibilityContext } from "react-horizontal-scrolling-menu";
 import { IoIosArrowBack, IoIosArrowForward, IoIosSearch } from "react-icons/io";
 import Container from "./_components/item-container";
-// import { likeImage } from '../../../service/photo_api'
 import "react-horizontal-scrolling-menu/dist/styles.css";
 import Lottie from 'react-lottie-player';
 import loadingLottie from '../../../../public/rotties/gallery-loading.json';

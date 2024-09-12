@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from 'next/image';
 import styles from "./item-card.module.css";
 import Heart from "@react-sandbox/heart";
 import Detail from "./detail";
@@ -95,13 +96,21 @@ export default function ItemCard({ item }: ItemCardProps) {
           />
         </div>
         <div className={styles.imgContainer}>
-          <img
+          <Image 
+          width={200}
+          height={200}
+          src={item.url}
+          alt="photo QR"
+          onClick={showDrawer}
+          />
+          
+          {/* <img
             width={200}
             height={200}
             src={item.url}
             alt="photo QR"
             onClick={showDrawer}
-          />
+          /> */}
         </div>
       </div>
       <div className={styles.bottomContainer}>

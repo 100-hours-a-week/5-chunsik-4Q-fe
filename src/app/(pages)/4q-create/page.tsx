@@ -1,5 +1,5 @@
 "use client"
-
+export const dynamic = "force-dynamic";
 import React, { useRef, useState } from 'react';
 import { Button, Steps, message, theme, Modal } from 'antd';
 import { useRouter } from 'next/navigation';
