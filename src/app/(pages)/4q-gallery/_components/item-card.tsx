@@ -34,6 +34,7 @@ export default function ItemCard({ item }: ItemCardProps) {
   const [playLottie, setPlayLottie] = useState(false);
 
   const showDrawer = () => {
+    console.log(item.url);
     setOpen(true);
   };
 
@@ -101,8 +102,8 @@ export default function ItemCard({ item }: ItemCardProps) {
           height={200}
           src={item.url}
           alt="photo QR"
-          onClick={showDrawer}
-          />
+          placeholder="blur"
+          onClick={showDrawer}/>
           
           {/* <img
             width={200}
