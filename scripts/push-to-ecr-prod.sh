@@ -16,8 +16,8 @@ else
     exit 1
 fi
 
-echo "Step 2: Building Docker image for platform linux/arm64 with tag chunsik/dev/fe"
-docker build --platform linux/arm64 -t chunsik/dev/fe ..
+echo "Step 2: Building Docker image for platform linux/arm64 with tag chunsik/prod/fe"
+docker build --platform linux/arm64 -t chunsik/prod/fe ..
 if [ $? -eq 0 ]; then
     echo -e "${GREEN}Docker image built successfully.${NC}"
 else
@@ -26,7 +26,7 @@ else
 fi
 
 echo "Step 3: Tagging Docker image with ECR URL $ECR_URL"
-docker tag chunsik/dev/fe:latest $ECR_URL/chunsik/dev/fe:latest
+docker tag chunsik/prod/fe:latest $ECR_URL/chunsik/prod/fe:latest
 if [ $? -eq 0 ]; then
     echo -e "${GREEN}Docker image tagged successfully.${NC}"
 else
@@ -35,7 +35,7 @@ else
 fi
 
 echo "Step 4: Pushing Docker image to ECR repository $ECR_URL"
-docker push $ECR_URL/chunsik/dev/fe:latest
+docker push $ECR_URL/chunsik/prod/fe:latest
 if [ $? -eq 0 ]; then
     echo -e "${GREEN}Docker image pushed to ECR successfully.${NC}"
 else

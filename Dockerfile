@@ -27,6 +27,14 @@ RUN apk update && apk add --no-cache curl
 
 ENV NODE_ENV production
 
+# Build arguments for secrets
+ARG NEXT_PUBLIC_API_URL
+ARG NEXT_PUBLIC_GA_ID
+
+# Set environment variables using the build arguments
+ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
+ENV NEXT_PUBLIC_GA_ID=$NEXT_PUBLIC_GA_ID
+
 # Copy built assets from builder stage
 COPY --from=builder /app/next.config.js ./
 COPY --from=builder /app/public ./public
