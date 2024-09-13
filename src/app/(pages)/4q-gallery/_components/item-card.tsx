@@ -34,7 +34,7 @@ export default function ItemCard({ item }: ItemCardProps) {
   const [playLottie, setPlayLottie] = useState(false);
 
   const showDrawer = () => {
-    console.log(item.url);
+    // console.log(item.url);
     setOpen(true);
   };
 

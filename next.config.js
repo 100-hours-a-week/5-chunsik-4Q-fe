@@ -7,9 +7,6 @@ const nextConfig = withAntdLess({
     swcMinify: true,
     assetPrefix: '',
     experimental: { esmExternals: true },
-    images: {
-        domains: ['api.qqqq.world'], 
-      },
     env: {
         NEXT_PUBLIC_GA_ID: process.env.NEXT_PUBLIC_GA_ID,
         NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,

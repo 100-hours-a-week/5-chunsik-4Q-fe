@@ -1,0 +1,4 @@
+User-Agent: *
+Allow: /
+Disallow: /login
+Sitemap: https://www.qqqq.world/sitemap.xml

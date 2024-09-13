@@ -14,6 +14,7 @@ import { GoogleTagManager } from "@next/third-parties/google";
 import { UserProvider } from '@/context/UserContext'
 
 export const metadata: Metadata = {
+  robots: {index: true, follow: true},
   metadataBase: new URL('https://qqqq.world'),
   openGraph: {
     images: [
@@ -30,6 +31,9 @@ export const metadata: Metadata = {
   description: "포토 큐알 자동 생성 서비스",
   icons: {
     icon: "/favicon.png",
+  },
+  other: {
+    "google-site-verification": "KFttRlDkuToG6aJCc_N29w2ksid-21rcB4YumaCXYVg",
   },
 };
 
