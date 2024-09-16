@@ -7,6 +7,7 @@ import Heart from "@react-sandbox/heart";
 import Detail from "./detail";
 import { Drawer, theme, message } from "antd";
 import { IoMdHeart } from "react-icons/io";
+import { IoPerson } from "react-icons/io5";
 import { likeImage, unlikeImage } from "../../../../service/photo_api";
 import Lottie from 'react-lottie-player';
 import heartLottie from '../../../../../public/rotties/heart-lottie.json';
@@ -34,7 +35,6 @@ export default function ItemCard({ item }: ItemCardProps) {
   const [playLottie, setPlayLottie] = useState(false);
 
   const showDrawer = () => {
-    // console.log(item.url);
     setOpen(true);
   };
 
@@ -115,6 +115,10 @@ export default function ItemCard({ item }: ItemCardProps) {
         </div>
       </div>
       <div className={styles.bottomContainer}>
+        <div className={styles.author}>
+          <IoPerson />
+          <span>{item.userName ? item.userName : '비로그인 회원'}</span>
+        </div>
         <div className={styles.heartCount}>
           <IoMdHeart />
           <span>{likeCount}</span>

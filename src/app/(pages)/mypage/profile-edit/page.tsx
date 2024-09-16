@@ -2,13 +2,15 @@
 
 import { useState } from "react";
 import { Form, Input, Button, message } from "antd";
-import { requestProfileUpdate } from "../../../../service/auth_api";  
+import { requestProfileUpdate } from "@/service/auth_api";  
 import { useRouter } from 'next/navigation';
+import { useUserContext } from '@/context/UserContext'
 
 import styles from './page.module.css';
 import profileIcon from '../../../../../public/images/icon/profile_icon.svg';
 
 export default function ChangeNicknamePage() {
+    const { user, updateUserNickname } = useUserContext();
     const [nickname, setNickname] = useState("");
     const router = useRouter();
 
@@ -20,8 +22,9 @@ export default function ChangeNicknamePage() {
         try {
             const response = await requestProfileUpdate(values.nickname);  
             if (response.success) {
+                updateUserNickname(values.nickname);
                 message.success("닉네임이 성공적으로 변경되었습니다.");
-                router.push('/profile'); 
+                router.push('/mypage'); 
             }
         } catch (error: any) {
             message.error(error.message || "닉네임 변경에 실패했습니다.");  
@@ -54,7 +57,7 @@ export default function ChangeNicknamePage() {
                     name="nickname"
                     rules={[
                         { required: true, message: "닉네임을 입력해주세요." },
-                        { max: 10, message: "1~10자 이내로 입력해주세요." },
+                        { min:2, max: 10, message: "2~10자 이내로 입력해주세요." },
                     ]}
                 >
                     <Input

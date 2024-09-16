@@ -18,6 +18,7 @@ type UserContextType = {
   logout: () => void;
   setAccessToken: (token: string | null) => void;  
   setLogin: (isLogin: boolean) => void;
+  updateUserNickname: (nickname: string) => void;
 };
 
 // UserContext 생성
@@ -60,8 +61,16 @@ export function UserProvider({ children }: { children: ReactNode }) {
     message.success("로그아웃 되었습니다");
   };
 
+  const updateUserNickname = (nickname: string) => {  // New method
+    if (user) {
+      const updatedUser = { ...user, nickname };
+      setUser(updatedUser);
+      localStorage.setItem('user', JSON.stringify(updatedUser));  // Update localStorage
+    }
+  };
+
   return (
-    <UserContext.Provider value={{ user, isLogin, accessToken, login, logout, setAccessToken, setLogin }}>
+    <UserContext.Provider value={{ user, isLogin, accessToken, login, logout, setAccessToken, setLogin, updateUserNickname }}>
       {children}
     </UserContext.Provider>
   );
