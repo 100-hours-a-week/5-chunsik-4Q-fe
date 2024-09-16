@@ -1,5 +1,9 @@
-{
-  "version": 0.0,
-  "Resources": [],
-  "Hooks": []
-}
+version: 0.0
+Resources:
+  - TargetService:
+      Type: AWS::ECS::Service
+      Properties:
+        TaskDefinition: "arn:aws:ecs:ap-northeast-2:202533511551:task/ChunsikDevCluster/c8ee01484acd41d2a61c98d754b007d1:3"
+        LoadBalancerInfo:
+          ContainerName: "dev-fe-container"
+          ContainerPort: 3000
