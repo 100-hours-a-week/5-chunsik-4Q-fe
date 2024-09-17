@@ -95,7 +95,6 @@ jobs:
           image: ${{ steps.build-image.outputs.image }}
 
       - name: Register new ECS task definition with CodeDeploy
-        uses: aws-actions/aws-cli-action@v1
         run: |
           aws ecs update-service \
             --cluster ${{ env.ECS_CLUSTER }} \
