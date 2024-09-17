@@ -79,6 +79,7 @@ jobs:
           # push it to ECR so that it can
           # be deployed to ECS.
           docker build \
+            --platform linux/arm64 \
             -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG \
             --build-arg NEXT_PUBLIC_API_URL=${{ vars.NEXT_PUBLIC_API_URL_PROD }} \
             --build-arg NEXT_PUBLIC_GA_ID=${{ vars.NEXT_PUBLIC_GA_ID_PROD }} \
