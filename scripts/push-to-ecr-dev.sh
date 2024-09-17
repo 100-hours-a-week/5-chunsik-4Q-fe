@@ -17,7 +17,7 @@ else
 fi
 
 echo "Step 2: Building Docker image for platform linux/arm64 with tag chunsik/dev/fe"
-docker build --platform linux/arm64 -t chunsik/dev/fe --target dev ..
+docker build --platform linux/arm64 -t chunsik/dev/fe ..
 if [ $? -eq 0 ]; then
     echo -e "${GREEN}Docker image built successfully.${NC}"
 else
