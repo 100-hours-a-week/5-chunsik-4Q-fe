@@ -19,7 +19,7 @@ COPY --from=deps /app/node_modules ./node_modules
 RUN yarn build
 
 # 3. Production image, copy all the files you need to run the app
-FROM node:18-alpine AS runner
+FROM --platform=linux/amd64 node:18-alpine AS runner
 WORKDIR /app
 
 # Install curl for health check
