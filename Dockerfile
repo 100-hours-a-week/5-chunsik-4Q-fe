@@ -1,18 +1,18 @@
-FROM node:18 AS pre
+FROM --platform=linux/amd64 node:18 AS pre
 WORKDIR /app
 RUN apt-get update && \
     apt-get install -y python3 make g++ build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev && \
     apt-get clean
 
 # 1. Install dependencies only when needed
-FROM pre AS deps
+FROM --platform=linux/amd64 pre AS deps
 WORKDIR /app
 RUN npm install -g node-gyp
 COPY package.json yarn.lock* ./
 RUN yarn install --frozen-lockfile
 
 # 2. Rebuild the source code only when needed
-FROM pre AS builder
+FROM --platform=linux/amd64 pre AS builder
 WORKDIR /app
 COPY . .
 COPY --from=deps /app/node_modules ./node_modules
