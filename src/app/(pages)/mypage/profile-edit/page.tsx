@@ -47,8 +47,9 @@ export default function ChangeNicknamePage() {
                 labelCol={{ span: 24 }}
                 wrapperCol={{ span: 24 }}
                 style={{ width: "100%" }}
-                initialValues={{ remember: true }}
+                // initialValues={{ remember: true }}
                 onFinish={onFinish}  
+                initialValues={{ nickname: user?.nickname }} 
                 onFinishFailed={onFinishFailed}
                 autoComplete="off"
                 layout="vertical"
