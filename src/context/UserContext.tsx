@@ -57,6 +57,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
     setAccessToken(null);  
     localStorage.removeItem('user');
     localStorage.removeItem('AccessToken');
+    localStorage.removeItem('TokenExpiration');
     router.push("/login");
     message.success("로그아웃 되었습니다");
   };
