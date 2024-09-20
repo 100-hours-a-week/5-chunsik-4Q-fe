@@ -183,9 +183,6 @@ export const requestAccessToken = async () => {
     try {
         const response = await fetch(`${BASE_URL}/auth/refresh`, {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
             credentials: 'include'
         });
 

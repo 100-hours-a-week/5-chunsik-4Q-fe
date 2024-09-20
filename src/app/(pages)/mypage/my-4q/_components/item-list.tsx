@@ -1,8 +1,11 @@
 import styles from './item-list.module.css';
-import { List, Button, Tag, message } from 'antd';
+import { deleteTicket } from '@/service/photo_api';
+import { List, Button, Tag, message, Modal } from 'antd';
 import { DownloadOutlined } from '@ant-design/icons';
 import { IoIosCalendar } from "react-icons/io";
 import { RxClipboardCopy } from "react-icons/rx";
+import { HiOutlineTrash } from "react-icons/hi2";
+import { useState } from 'react';
 
 const handleDownload = async (item) => {
     if (item.ticketUrl) {
@@ -29,47 +32,72 @@ const handleCopyToClipboard = (item) => {
     if (item.ticketUrl) {
         navigator.clipboard.writeText(item.ticketUrl)
             .then(() => {
-                message.success('이미지 링크가 복사되었습니다.')
+                message.success('이미지 링크가 복사되었습니다.');
             })
     }
 };
 
 // ListItem Component
-const ItemList = ({ item }) => (
-    <List.Item key={item.title}>
-        <div className={styles.container}>
-            <div className={styles.leftContainer}>
-                <div className={styles.imgContainer}>
-                    <img
-                        width={150}
-                        height={150}
-                        alt="my 4q tickets"
-                        src={item.ticketUrl}
-                        style={{ backgroundColor: 'grey' }}
-                    />
+const ItemList = ({ item }) => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    
+    const showDeleteModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const handleOk = async () => {
+        await deleteTicket(item.id);
+        message.success('티켓이 삭제되었습니다.');
+        setIsModalOpen(false);
+    };
+
+    const handleCancel = () => {
+        setIsModalOpen(false);
+    };
+
+    return (
+        <List.Item key={item.title}>
+            <div className={styles.container}>
+                <div className={styles.leftContainer}>
+                    <div className={styles.imgContainer}>
+                        <img
+                            width={150}
+                            height={150}
+                            alt="my 4q tickets"
+                            src={item.ticketUrl}
+                            style={{ backgroundColor: 'grey' }}
+                        />
+                    </div>
+                    <span className={styles.title}>{item.title}</span>
                 </div>
-                <span className={styles.title}>{item.title}</span>
+                <div className={styles.infoConatiner}>
+                    <div className={styles.categoryGroup}>
+                        <Tag>{item.categoryName}</Tag>
+                    </div>
+                    <div className={styles.dateGroup}>
+                        <IoIosCalendar />
+                        <span>{item.formattedDate}</span>
+                    </div>
+                    <div className={styles.BtnContainer}>
+                        <Button type="primary" icon={<RxClipboardCopy />} onClick={() => handleCopyToClipboard(item)} />
+                        <Button type="primary" icon={<DownloadOutlined />} onClick={() => handleDownload(item)} className={styles.downloadButton} />
+                        <Button type="primary" icon={<HiOutlineTrash />} onClick={showDeleteModal} className={styles.deleteButton} />
+                    </div>
+                </div>
             </div>
-            <div className={styles.infoConatiner}>
-                <div className={styles.categoryGroup}>
-                    <Tag>{item.categoryName}</Tag>
-                </div>
-                <div className={styles.dateGroup}>
-                    <IoIosCalendar />
-                    <span>{item.formattedDate}</span>
-                </div>
-                <div className={styles.BtnContainer}>
-                    <Button type="primary" icon={<RxClipboardCopy />} size="large" onClick={() => handleCopyToClipboard(item)}>
-                        {/* 이미지 링크 */}
-                    </Button>
-                    <Button type="primary" icon={<DownloadOutlined />} size="large" onClick={() => handleDownload(item)} className={styles.downloadButton}>
-                        {/* 다운로드 */}
-                    </Button>
-                </div>
-            </div>
-        </div>
-    </List.Item>
-);
+            <Modal
+                title="티켓 삭제 확인"
+                style={{maxWidth: '600px'}}
+                open={isModalOpen}
+                onOk={handleOk}
+                onCancel={handleCancel}
+                okText="삭제"
+                cancelText="취소"
+            >
+                <p>정말로 티켓을 삭제하시겠습니까?</p>
+            </Modal>
+        </List.Item>
+    );
+};
 
 export default ItemList;
-

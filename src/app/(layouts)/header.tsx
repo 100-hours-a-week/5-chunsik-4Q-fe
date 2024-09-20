@@ -81,9 +81,12 @@ export default function Header() {
     const expiration = localStorage.getItem("TokenExpiration");
     if (expiration && Number(expiration) < Date.now()) {
       try {
-        const newAccessToken = await requestAccessToken();
-        if (newAccessToken) {
-          setAccessToken(newAccessToken);
+        const { accessToken, tokenExpiration } = await requestAccessToken();
+        if (accessToken && tokenExpiration) {
+          localStorage.setItem("AccessToken", accessToken);
+          localStorage.setItem("TokenExpiration", tokenExpiration.toString());
+  
+          setAccessToken(accessToken);
           setLogin(true); 
         } else {
           logout(); 
@@ -98,8 +101,11 @@ export default function Header() {
   useEffect(() => {
     checkLogo();
     getTitleForPath();
-    checkAndRefreshToken(); 
   }, [path]);
+
+  useEffect(() => {
+    checkAndRefreshToken(); 
+  }, []);
 
   return (
     <>

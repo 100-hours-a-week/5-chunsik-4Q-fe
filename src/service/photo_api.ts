@@ -228,3 +228,18 @@ export const getLikedTicket = async() => {
       throw error;
   }
 };
+
+export const deleteTicket = async(ticketId: number) => {
+  const token = localStorage.getItem('AccessToken');
+  try {
+    const response = await fetch(`${BASE_URL}/ticket/${ticketId}`, {
+        method: "DELETE",
+        headers: {
+            "Authorization": `Bearer ${token}`,
+            "Content-Type": "application/json",
+        },
+    });
+} catch (error) {
+    throw error;
+}
+};
