@@ -9,7 +9,7 @@ FROM --platform=linux/arm64 pre AS deps
 WORKDIR /app
 RUN npm install -g node-gyp
 COPY package.json yarn.lock* ./
-RUN yarn install --frozen-lockfile
+RUN yarn install
 
 # 2. Rebuild the source code only when needed
 FROM --platform=linux/arm64 pre AS builder
