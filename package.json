@@ -41,6 +41,7 @@
     "react-konva": "^18.2.10",
     "react-konva-utils": "^1.0.6",
     "react-lottie-player": "^2.1.0",
+    "sharp": "^0.33.5",
     "swiper": "^11.1.9"
   },
   "devDependencies": {
