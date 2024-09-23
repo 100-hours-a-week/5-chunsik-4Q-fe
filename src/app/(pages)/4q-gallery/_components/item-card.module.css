@@ -63,16 +63,30 @@
 
 .bottomContainer span {
     font-size: 14px;
-    margin-right: 3px;
+    margin-left: 3px;
 }
 
 .heartCount {
+    display: flex;
     justify-content: center;
     text-align: center;
     /* background-color: var(--grey-color); */
-    font-size: 14px;
+    font-size: 12px;
     align-items: center;
     justify-content: center;
+}
+
+
+
+.author {
+    display: flex;
+    font-size: 12px;
+    align-items: center;
+    justify-content: center;
+}
+
+.author span {
+    margin-left: 3px;
 }
 
 .heartIcon {

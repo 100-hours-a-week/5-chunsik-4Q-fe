@@ -1,10 +1,18 @@
 .container {
+    position: relative;
     width: 100%;
     /* background-color: red; */
     display: flex;
     flex-direction: row;
     padding: 2px 50px;
     /* background-color: rebeccapurple; */
+}
+
+.deleteBtn{
+    position: absolute;
+    right: 18px;
+    top: 14px;
+    font-size: 22px;
 }
 
 .imgContainer {
@@ -69,12 +77,19 @@
 .BtnContainer {
     position: absolute;
     bottom: 50px;
+    /* background-color: red; */
+    width: 130px;
 }
 
 .downloadButton {
     /* margin-top: 8px; */
-    margin-left: 8px;
+    margin-left: 10px;
     /* box-shadow: 0 2px 0 rgba(255, 255, 255, 0.1) !important; */
+}
+
+.deleteButton {
+    margin-left: 10px;
+
 }
 
 .downloadBtnContainer {

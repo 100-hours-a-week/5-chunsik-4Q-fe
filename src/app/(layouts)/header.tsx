@@ -79,13 +79,14 @@ export default function Header() {
 
   const checkAndRefreshToken = async () => {
     const expiration = localStorage.getItem("TokenExpiration");
-    // console.log('토큰 체크중');
     if (expiration && Number(expiration) < Date.now()) {
       try {
-        const newAccessToken = await requestAccessToken();
-        if (newAccessToken) {
-          // console.log('토큰 만료');
-          setAccessToken(newAccessToken);
+        const { accessToken, tokenExpiration } = await requestAccessToken();
+        if (accessToken && tokenExpiration) {
+          localStorage.setItem("AccessToken", accessToken);
+          localStorage.setItem("TokenExpiration", tokenExpiration.toString());
+  
+          setAccessToken(accessToken);
           setLogin(true); 
         } else {
           logout(); 
@@ -100,8 +101,11 @@ export default function Header() {
   useEffect(() => {
     checkLogo();
     getTitleForPath();
-    checkAndRefreshToken(); 
   }, [path]);
+
+  useEffect(() => {
+    checkAndRefreshToken(); 
+  }, []);
 
   return (
     <>

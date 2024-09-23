@@ -90,6 +90,7 @@ export const requestProfileUpdate = async (newNickname: string) => {
         return { success: true, message: "프로필이 성공적으로 수정되었습니다." };
       } else {
         const errorData = await response.json();  
+        console.log('수정 완료');
         throw new Error(errorData.message || "프로필 수정에 실패했습니다.");
       }
     } catch (error) {
@@ -182,9 +183,6 @@ export const requestAccessToken = async () => {
     try {
         const response = await fetch(`${BASE_URL}/auth/refresh`, {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
             credentials: 'include'
         });
 

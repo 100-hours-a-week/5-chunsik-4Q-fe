@@ -114,7 +114,7 @@ export default function Third() {
         x: 50,
         y: 50,
         fontSize: 20,
-        isEditing: false,
+        isEditing: true,
         color: selectedColor,
       };
       setTextNodes([...textNodes, newText]);
@@ -245,6 +245,7 @@ export default function Third() {
                       ref={transformerRef}
                       rotateEnabled={false}
                       keepRatio={true}
+                      flipEnabled={false}
                       boundBoxFunc={(oldBox, newBox) => {
                         const boxSize = Math.max(newBox.width, newBox.height);
                         return {

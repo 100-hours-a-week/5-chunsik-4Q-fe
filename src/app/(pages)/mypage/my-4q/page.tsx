@@ -15,6 +15,7 @@ export default function Page() {
     const fetchTickets = async () => {
       try {
         const data = await getMyTicket(); 
+        // console.log(data);
         setTickets(data);
       } catch (error) {
         console.error('Error fetching tickets:', error);
