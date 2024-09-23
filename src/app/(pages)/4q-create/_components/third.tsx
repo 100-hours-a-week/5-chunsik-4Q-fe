@@ -6,10 +6,10 @@ import styles from "./third.module.css";
 import Konva from "konva";
 import { PiTextTBold } from "react-icons/pi";
 import { HiTrash } from "react-icons/hi";
-import { generateTicket } from '@/service/photo_api';
-import Lottie from 'react-lottie-player';
-import loadingLottie from '../../../../../public/rotties/image-loading.json';
-import type { Stage as StageType } from 'konva/lib/Stage';
+import { generateTicket } from "@/service/photo_api";
+import Lottie from "react-lottie-player";
+import loadingLottie from "../../../../../public/rotties/image-loading.json";
+import type { Stage as StageType } from "konva/lib/Stage";
 
 interface TextNode {
   id: number;
@@ -26,7 +26,7 @@ interface FormData {
   shortenUrl: string;
   title: string;
   backgroundImageUrl: string;
-  backgroundImageId: number;  
+  backgroundImageId: number;
   shortenUrlId: number;
   tags: string;
   category: string;
@@ -56,8 +56,8 @@ export default function Third() {
   const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const storedFormDataString = sessionStorage.getItem('form_data');
+    if (typeof window !== "undefined") {
+      const storedFormDataString = sessionStorage.getItem("form_data");
       if (storedFormDataString) {
         const parsedFormData = JSON.parse(storedFormDataString);
         setStoredFormData(parsedFormData);
@@ -83,9 +83,11 @@ export default function Third() {
     }
   };
 
-  const [backgroundImage] = useImage(storedFormData.backgroundImageUrl, 'anonymous');
-  const [qrImage] = useImage(qrImageUrl, 'anonymous');
-
+  const [backgroundImage] = useImage(
+    storedFormData.backgroundImageUrl,
+    "anonymous"
+  );
+  const [qrImage] = useImage(qrImageUrl, "anonymous");
 
   const handleDragEnd = (e: Konva.KonvaEventObject<DragEvent>) => {
     setQrPosition({
@@ -148,26 +150,27 @@ export default function Third() {
     }
   }, [qrImage, isSelected]);
 
-
   const handleSubmit = async () => {
     setLoading(true);
     try {
       if (stageRef.current) {
         const dataURL = stageRef.current.toDataURL({ pixelRatio: 3 });
         const ticketImage = await fetch(dataURL)
-          .then(res => res.blob())
-          .then(blob => new File([blob], "ticket.png", { type: "image/png" }));
+          .then((res) => res.blob())
+          .then(
+            (blob) => new File([blob], "ticket.png", { type: "image/png" })
+          );
 
         const responseMessage = await generateTicket(
           ticketImage,
           storedFormData.backgroundImageId,
           storedFormData.shortenUrlId,
-          storedFormData.title,
+          storedFormData.title
         );
         if (responseMessage?.ticketId) {
           setTimeout(() => {
             setLoading(false);
-          }, 4000); 
+          }, 4000);
           // console.log('id:', responseMessage?.ticketId);
           window.location.href = `/4q-create/download/${responseMessage.ticketId}`;
         } else {
@@ -179,7 +182,7 @@ export default function Third() {
     } finally {
       setTimeout(() => {
         setLoading(false);
-      }, 8000); 
+      }, 8000);
     }
   };
 
@@ -300,17 +303,18 @@ export default function Third() {
                 />
               </Tooltip>
             </div>
-            <QRCode
-              id="myqrcode"
-              value={shortenUrl}
-              bgColor="#fff"
-              style={{ margin: 16, display: 'none' }}
-            />
+            <div id="myqrcode">
+              <QRCode
+                value={shortenUrl}
+                bgColor="#fff"
+                style={{ margin: 16, display: "none" }}
+              />
+            </div>
           </div>
           <div className={styles.submitBtnContainer}>
             <Button
               className={styles.submitBtn}
-              style={{ height: '40px', width: '140px' }}
+              style={{ height: "40px", width: "140px" }}
               onClick={handleSubmit}
             >
               생성하기
