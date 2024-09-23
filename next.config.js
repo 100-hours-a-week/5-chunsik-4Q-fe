@@ -4,7 +4,7 @@ import { withSentryConfig } from '@sentry/nextjs';
 /** @type {import('next').NextConfig} */
 const nextConfig = withAntdLess({
     reactStrictMode: true,
-    swcMinify: true,
+    swcMinify: false,
     assetPrefix: '',
     experimental: { esmExternals: true },
     images: {
@@ -19,6 +19,11 @@ const nextConfig = withAntdLess({
         config.infrastructureLogging = { debug: /PackFileCache/ };
         config.resolve.alias.canvas = false;
         config.cache = false;
+
+        if (!dev && !process.env.GENERATE_SOURCEMAP) {
+            config.devtool = false; 
+        }
+        
         config.module.rules.push({
             test: /\.node$/,
             use: 'raw-loader',
@@ -26,9 +31,9 @@ const nextConfig = withAntdLess({
 
         return config;
     },
+    productionBrowserSourceMaps: process.env.GENERATE_SOURCEMAP !== 'false',
 });
 
-// Sentry configuration
 const sentryConfig = {
     org: "chulchulhanchunsigi",
     project: "pq-fe", 
