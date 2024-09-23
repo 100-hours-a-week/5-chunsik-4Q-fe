@@ -1,21 +1,21 @@
-import withAntdLess from 'next-plugin-antd-less';
+// import withAntdLess from 'next-plugin-antd-less';
 import { withSentryConfig } from '@sentry/nextjs';
 
 /** @type {import('next').NextConfig} */
-const nextConfig = withAntdLess({
+const nextConfig = ({
     reactStrictMode: true,
-    swcMinify: false,
+    swcMinify: true,
     assetPrefix: '',
     experimental: { esmExternals: true },
     images: {
         domains: ['api.qqqq.world'], 
       },
-    env: {
+    env: { 
         NEXT_PUBLIC_GA_ID: process.env.NEXT_PUBLIC_GA_ID,
         NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
     },
     transpilePackages: ['antd', '@ant-design', 'rc-util', 'rc-pagination', 'rc-picker', 'rc-notification', 'rc-tooltip'],
-    webpack: (config) => {
+    webpack: (config, { dev, isServer }) => {
         config.infrastructureLogging = { debug: /PackFileCache/ };
         config.resolve.alias.canvas = false;
         config.cache = false;
