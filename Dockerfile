@@ -10,9 +10,13 @@ FROM --platform=linux/arm64 pre AS deps
 WORKDIR /app
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
 RUN \
-    if [ -f yarn.lock ]; then yarn install --immutable; \
-    elif [ -f package-lock.json ]; then npm ci; \
-    elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm install --frozen-lockfile; \
+    if [ -f yarn.lock ]; then \
+    yarn cache clean && \
+    yarn install --immutable --network-timeout 600000; \
+    elif [ -f package-lock.json ]; then \
+    npm ci; \
+    elif [ -f pnpm-lock.yaml ]; then \
+    corepack enable pnpm && pnpm install --frozen-lockfile; \
     else echo "Lockfile not found." && exit 1; \
     fi
 
