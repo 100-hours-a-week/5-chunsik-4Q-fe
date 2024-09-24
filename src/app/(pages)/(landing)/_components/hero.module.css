@@ -165,16 +165,6 @@
   top: 180px;
 }
 
-/*.buttonContainer button {*/
-/*    width: 150px;*/
-/*    height: 50px;*/
-/*    color: white;*/
-/*    background-color: black;*/
-/*    font-size: 18px;*/
-/*    border-radius: 8px;*/
-
-/*}*/
-
 .tryBtn {
   width: 128px;
   height: 38px;
@@ -189,12 +179,6 @@
   margin-top: 10px;
   z-index: 10;
   background: rgb(0, 0, 0);
-  /* background: linear-gradient(
-    0deg,
-    rgba(0, 0, 0, 1) 13%,
-    rgba(89, 89, 89, 1) 100%
-  );
-  border: 1px solid #000; */
 }
 
 .tryBtn:hover {
@@ -248,15 +232,11 @@
 }
 
 .img3 img {
-  /*width: 200px;*/
   width: calc(4rem + 4vw);
   height: auto;
 }
 
 @media (max-width: 600px) {
-  /* .arrow {
-    top: 110%;
-  } */
   .arrowLottie  {
     bottom: 160px;
   }
@@ -264,9 +244,6 @@
 
 
 @media (min-width: 800px) {
-  /* .arrow {
-    top: 110%;
-  } */
   .arrowLottie  {
     bottom: 40px;
   }

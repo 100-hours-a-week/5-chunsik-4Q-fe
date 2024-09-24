@@ -6,10 +6,10 @@ import styles from "./second.module.css";
 import Konva from "konva";
 import { PiTextTBold } from "react-icons/pi";
 import { HiTrash } from "react-icons/hi";
-import { generateTicket } from '../../../../service/photo_api'
-import Lottie from 'react-lottie-player';
-import loadingLottie from '../../../../../public/rotties/image-loading.json';
-import type { Stage as StageType } from 'konva/lib/Stage';
+import { generateTicket } from "../../../../service/photo_api";
+import Lottie from "react-lottie-player";
+import loadingLottie from "../../../../../public/rotties/image-loading.json";
+import type { Stage as StageType } from "konva/lib/Stage";
 import { isMobile } from "react-device-detect";
 
 interface TextNode {
@@ -27,7 +27,7 @@ interface FormData {
   shortenUrl: string;
   title: string;
   backgroundImageUrl: string;
-  backgroundImageId: number;  
+  backgroundImageId: number;
   shortenUrlId: number;
   tags: string;
   category: string;
@@ -56,12 +56,12 @@ export default function Third() {
   const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
-    sessionStorage.setItem('createStep', 'second');
+    sessionStorage.setItem("createStep", "second");
   }, []);
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const storedFormDataString = sessionStorage.getItem('form_data');
+    if (typeof window !== "undefined") {
+      const storedFormDataString = sessionStorage.getItem("form_data");
       if (storedFormDataString) {
         const parsedFormData = JSON.parse(storedFormDataString);
         setStoredFormData(parsedFormData);
@@ -87,9 +87,11 @@ export default function Third() {
     }
   };
 
-  const [backgroundImage] = useImage(storedFormData.backgroundImageUrl, 'anonymous');
-  const [qrImage] = useImage(qrImageUrl, 'anonymous');
-
+  const [backgroundImage] = useImage(
+    storedFormData.backgroundImageUrl,
+    "anonymous"
+  );
+  const [qrImage] = useImage(qrImageUrl, "anonymous");
 
   const handleDragEnd = (e: Konva.KonvaEventObject<DragEvent>) => {
     setQrPosition({
@@ -152,19 +154,21 @@ export default function Third() {
       if (stageRef.current) {
         const dataURL = stageRef.current.toDataURL({ pixelRatio: 3 });
         const ticketImage = await fetch(dataURL)
-          .then(res => res.blob())
-          .then(blob => new File([blob], "ticket.png", { type: "image/png" }));
+          .then((res) => res.blob())
+          .then(
+            (blob) => new File([blob], "ticket.png", { type: "image/png" })
+          );
 
         const responseMessage = await generateTicket(
           ticketImage,
           storedFormData.backgroundImageId,
           storedFormData.shortenUrlId,
-          storedFormData.title,
+          storedFormData.title
         );
         if (responseMessage?.ticketId) {
           setTimeout(() => {
             setLoading(false);
-          }, 4000); 
+          }, 4000);
           window.location.href = `/4q-create/download/${responseMessage.ticketId}`;
         } else {
           alert("티켓 생성에 실패했습니다.");
@@ -175,7 +179,7 @@ export default function Third() {
     } finally {
       setTimeout(() => {
         setLoading(false);
-      }, 8000); 
+      }, 8000);
     }
   };
 
@@ -247,45 +251,46 @@ export default function Third() {
                 </Layer>
               </Stage>
             </div>
-            { !isMobile ? 
-            <div className={styles.btnContainer}>
-              <Tooltip title="title 추가">
-                <Button
-                  onClick={addText}
-                  type="primary"
-                  icon={<PiTextTBold />}
-                  size="small"
-                />
-              </Tooltip>
-              <Tooltip title="텍스트를 더블클릭하고 삭제버튼 활성화">
-                <Button
-                  onClick={deleteText}
-                  type="primary"
-                  icon={<HiTrash />}
-                  size="small"
-                  disabled={selectedId === null}
-                />
-              </Tooltip>
-              <Tooltip title="텍스트를 더블클릭하고 색상 변경">
-                <ColorPicker
-                  value={selectedColor}
-                  onChange={(color) => handleColorChange(color.toHexString())}
-                  size="small"
-                />
-              </Tooltip>
+            {!isMobile ? (
+              <div className={styles.btnContainer}>
+                <Tooltip title="title 추가">
+                  <Button
+                    onClick={addText}
+                    type="primary"
+                    icon={<PiTextTBold />}
+                    size="small"
+                  />
+                </Tooltip>
+                <Tooltip title="텍스트를 더블클릭하고 삭제버튼 활성화">
+                  <Button
+                    onClick={deleteText}
+                    type="primary"
+                    icon={<HiTrash />}
+                    size="small"
+                    disabled={selectedId === null}
+                  />
+                </Tooltip>
+                <Tooltip title="텍스트를 더블클릭하고 색상 변경">
+                  <ColorPicker
+                    value={selectedColor}
+                    onChange={(color) => handleColorChange(color.toHexString())}
+                    size="small"
+                  />
+                </Tooltip>
+              </div>
+            ) : null}
+            <div id="myqrcode">
+              <QRCode
+                value={shortenUrl}
+                bgColor="#fff"
+                style={{ margin: 16, display: "none" }}
+              />
             </div>
-            : null }
-            <QRCode
-              id="myqrcode"
-              value={shortenUrl}
-              bgColor="#fff"
-              style={{ margin: 16, display: 'none' }}
-            />
           </div>
           <div className={styles.submitBtnContainer}>
             <Button
               className={styles.submitBtn}
-              style={{ height: '40px', width: '140px' }}
+              style={{ height: "40px", width: "140px" }}
               onClick={handleSubmit}
             >
               생성하기

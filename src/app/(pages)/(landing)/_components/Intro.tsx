@@ -12,7 +12,6 @@ import Link from 'next/link';
 
 
 export default function Intro() {
-
     return (
         <div className={styles.container}>
             <div className={styles.title}>

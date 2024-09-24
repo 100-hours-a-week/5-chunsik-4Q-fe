@@ -81,11 +81,9 @@ export default function Second() {
                 }
     
             } catch (error) {
-                // console.error('Error fetching images:', error);
                 message.error('이미지 생성에 실패했습니다. 다시 시도해주세요.');
             }
         } else {
-            // console.log('No form data found in sessionStorage');
             message.error('이미지 생성에 실패했습니다. 다시 시도해주세요.');
         }
     }, [storedFormData]);

@@ -5,7 +5,6 @@
   padding: 16px 0;
   align-items: center;
   width: 100%;
-  /* background-color: red; */
 }
 
 .title {
@@ -32,12 +31,6 @@
   align-items: center;
   justify-content: center;
   margin-top: 20px;
-  /* background: linear-gradient(
-    0deg,
-    rgba(0, 0, 0, 1) 13%,
-    rgba(89, 89, 89, 1) 100%
-  );
-  border: 1px solid #000; */
 }
 
 .stepsContainer {
@@ -49,11 +42,9 @@
 }
 
 .stepItem {
-  width: 70%; /*요기*/
-  /*padding: 0 60px;*/
+  width: 70%;
   background-color: rgba(229, 229, 229, 0.65);
   border-radius: 10px;
-  /*border: 1px solid grey;*/
   padding: 20px;
   position: relative;
   margin-bottom: 30px;
@@ -84,7 +75,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  /* border: 1px solid black; */
 }
 
 .stepImg {
@@ -98,7 +88,7 @@
   justify-content: center;
 }
 .stepImg img {
-  width: 355px; /*요기*/
+  width: 355px; 
 }
 
 .rightIcon {
@@ -114,8 +104,6 @@
   }
   .stepItem:hover {
     width: 75%;
-    /* background-color: rgba(229, 229, 229, 0.65); */
-    /* From https://css.glass */
     background: rgba(255, 255, 255, 0.2);
     border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -125,7 +113,7 @@
   }
 
   .stepImg img {
-    width: 395px; /*요기*/
+    width: 395px; 
   }
 }
 
