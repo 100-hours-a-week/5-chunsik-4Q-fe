@@ -1,7 +1,7 @@
 FROM --platform=linux/arm64 node:18 AS pre
 WORKDIR /app
 RUN apt-get update && \
-    apt-get install -y python3 make g++ build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev && \
+    apt-get install -y python3 make g++ build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev next && \
     apt-get clean
 
 # 1. Install dependencies only when needed
@@ -23,7 +23,7 @@ RUN echo "NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL" >> .env.production
 ARG NEXT_PUBLIC_GA_ID
 RUN echo "NEXT_PUBLIC_GA_ID=$NEXT_PUBLIC_GA_ID" >> .env.production
 
-RUN yarn build
+RUN yarn run build
 
 # 3. Production image, copy all the files you need to run the app
 FROM --platform=linux/arm64 node:18-alpine AS runner
