@@ -7,7 +7,13 @@
 <img src="https://img.shields.io/badge/amazonaws-232F3E?style=flat-square&logo=amazonaws&logoColor=white"> 
 </div>
 
+
 ## 📖 Description
+![006](https://github.com/user-attachments/assets/677ee570-bf2c-4651-bb32-f50f7eff5817)
+![007](https://github.com/user-attachments/assets/a6690087-fbbf-47a0-bd7d-e4b75a0a2337)
+![008](https://github.com/user-attachments/assets/0a24484c-82f8-42d5-abb6-1e77d01b416a)
+
+
 쉽고 빠른 QR 티켓 생성 서비스 <br />
 포토 + QR = 4Q 입니다 !<br /><br />
 
@@ -16,12 +22,18 @@
 * [FE 레포지토리](https://github.com/100-hours-a-week/5-chunsik-4Q-fe)
 * [BE 레포지토리](https://github.com/100-hours-a-week/5-chunsik-4Q-be)
 
+
+
 ## 🕹️ Main Feature
 * 4Q 생성하기
 * 4Q 갤러리
+* 마이페이지
 
 ## 🖇️ ERD 설계
 ![erd](https://github.com/user-attachments/assets/79f77503-8209-4bc3-be1c-f87358c77ca7)
+
+## 🌐 Architecture
+![image](https://github.com/user-attachments/assets/2e67a882-f63d-46d3-9298-5f26e0d40143)
 
 
 ## 🛋️ Developers
@@ -29,4 +41,4 @@
 * **김대건** ([kimdaegeon0918](https://github.com/kimdaegeon0918)): BE
 * **박흥영** ([HeungY](https://github.com/HeungY)): BE
 * **최환용** ([HuttTheJAVA](https://github.com/HuttTheJAVA)): BE
-* **박재현** ([moolmin](https://github.com/ZZ3n)): DebOps
+* **박재현** ([moolmin](https://github.com/ZZ3n)): DevOps
