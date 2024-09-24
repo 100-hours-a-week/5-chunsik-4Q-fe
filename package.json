@@ -12,7 +12,8 @@
     "start:dev": "env-cmd -f .env.development next start -p 6600",
     "build:prod": "env-cmd -f .env.production next build",
     "start:prod": "env-cmd -f .env.production next start -p 6600",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sitemap": "next-sitemap --config next-sitemap.config.cjs"
   },
   "keywords": [],
   "author": "",
