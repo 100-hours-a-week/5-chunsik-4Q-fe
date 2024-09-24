@@ -1,27 +1,28 @@
+# Stage 1: Install base dependencies
 FROM --platform=linux/arm64 node:18 AS pre
 WORKDIR /app
 RUN apt-get update && \
     apt-get install -y python3 make g++ build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev && \
     apt-get clean
 
-# 1. Install dependencies only when needed
+# Stage 2: Install project dependencies based on the lockfile
 FROM --platform=linux/arm64 pre AS deps
 WORKDIR /app
-# RUN npm install -g node-gyp
-COPY package.json ./
+COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
 RUN \
     if [ -f yarn.lock ]; then yarn install --immutable; \
     elif [ -f package-lock.json ]; then npm ci; \
-    elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm i --frozen-lockfile; \
+    elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm install --frozen-lockfile; \
     else echo "Lockfile not found." && exit 1; \
     fi
-# 2. Rebuild the source code only when needed
+
+# Stage 3: Build the project
 FROM --platform=linux/arm64 pre AS builder
 WORKDIR /app
 COPY . .
 COPY --from=deps /app/node_modules ./node_modules
 
-# Set dotenv using the build arguments
+# Set environment variables using build arguments
 ARG NEXT_PUBLIC_API_URL
 RUN echo "NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL" >> .env.production
 ARG NEXT_PUBLIC_GA_ID
@@ -29,7 +30,7 @@ RUN echo "NEXT_PUBLIC_GA_ID=$NEXT_PUBLIC_GA_ID" >> .env.production
 
 RUN yarn build
 
-# 3. Production image, copy all the files you need to run the app
+# Stage 4: Final production image
 FROM --platform=linux/arm64 node:18-alpine AS runner
 WORKDIR /app
 
