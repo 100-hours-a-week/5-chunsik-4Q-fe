@@ -25,7 +25,6 @@
     "@next/third-parties": "^14.2.6",
     "@react-sandbox/heart": "^1.1.0",
     "@sentry/nextjs": "^8",
-    "@types/react-query": "^1.2.9",
     "antd": "5.17.4",
     "embla-carousel-react": "^8.1.8",
     "env-cmd": "^10.1.0",
