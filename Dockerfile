@@ -7,7 +7,7 @@ RUN apt-get update && \
     apt-get clean
 
 # Copy project files required for dependency installation
-COPY package.json yarn.lock ./
+COPY package.json ./
 
 # 2. Install dependencies only when needed
 FROM base AS deps
