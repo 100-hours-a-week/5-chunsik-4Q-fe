@@ -9,8 +9,12 @@ FROM --platform=linux/arm64 pre AS deps
 WORKDIR /app
 # RUN npm install -g node-gyp
 COPY package.json ./
-RUN yarn install --immutable
-
+RUN \
+    if [ -f yarn.lock ]; then yarn install --immutable; \
+    elif [ -f package-lock.json ]; then npm ci; \
+    elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm i --frozen-lockfile; \
+    else echo "Lockfile not found." && exit 1; \
+    fi
 # 2. Rebuild the source code only when needed
 FROM --platform=linux/arm64 pre AS builder
 WORKDIR /app
