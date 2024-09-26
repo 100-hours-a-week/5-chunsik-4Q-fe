@@ -36,6 +36,10 @@
 ![image](https://github.com/user-attachments/assets/2e67a882-f63d-46d3-9298-5f26e0d40143)
 
 
+## 🌐 Architecture
+![image](https://github.com/user-attachments/assets/b7967a63-dc5e-45af-9219-8478d192c1cb)
+
+
 ## 🛋️ Developers
 * **김수민** ([moolmin](https://github.com/moolmin)): FE
 * **김대건** ([kimdaegeon0918](https://github.com/kimdaegeon0918)): BE
