@@ -6,7 +6,7 @@ import bg from '../../../../../public/images/hero_bg.svg';
 import Link from "next/link";
 import hero1 from "../../../../../public/images/hero/hero1.png";
 import hero2 from "../../../../../public/images/hero/hero2.png";
-import hero3 from "../../../../../public/images/hero/hero3.png";
+import Image from 'next/image'
 import { useUserContext } from '@/context/UserContext';
 import { requestAccessToken, requestUserInfo } from "@/service/auth_api";
 
@@ -58,13 +58,13 @@ export default function Hero() {
                 <Link href="/4q-create" className={styles.tryBtn}>지금 체험하기</Link>
             </div>
             <div className={`${styles.imgContainer} ${styles.img1}`}>
-                <img src={hero1.src} alt="menuExample" className={styles.heroImg} />
+                <Image src={hero1.src} alt="menuExample" className={styles.heroImg} width={180} height={180}/>
             </div>
-            <div className={`${styles.imgContainer} ${styles.img2}`}>
+            {/* <div className={`${styles.imgContainer} ${styles.img2}`}>
                 <img src={hero2.src} alt="concertExample" className={styles.heroImg} />
-            </div>
-            <div className={`${styles.imgContainer} ${styles.img3}`}>
-                <img src={hero3.src} alt="concertExample" className={styles.heroImg} />
+            </div> */}
+            <div className={`${styles.imgContainer} ${styles.img2}`}>
+                <Image src={hero2.src} alt="concertExample" className={styles.heroImg} width={260} height={260}/>
             </div>
         </div>
     );

@@ -197,49 +197,37 @@
 .img1 {
   padding: 12px;
   position: absolute;
-  top: 16%;
+  top: 20%;
   right: 8%;
   z-index: 1;
   border-radius: 16px;
-}
-
-.img1 img {
-  /*width: 160px;*/
-  width: calc(5rem + 6.2vw);
 }
 
 /*콘서트 ===========>*/
 .img2 {
   padding: 15px;
   position: absolute;
-  top: 30%;
-  left: 30%;
+  top: 35%;
+  left: 13%;
   border-radius: 16px;
 }
 
-.img2 img {
-  /*width: 200px;*/
-  width: calc(10rem + 7vw);
-  height: auto;
-}
-
-/*청첩장 =============>*/
-.img3 {
-  padding: 10px;
-  position: absolute;
-  top: 44%;
-  left: 12%;
-}
-
-.img3 img {
-  width: calc(4rem + 4vw);
-  height: auto;
-}
 
 @media (max-width: 600px) {
   .arrowLottie  {
     bottom: 160px;
   }
+
+  .img1 {
+    top: 16%;
+    right: 8%;
+  }
+
+  .img2 {
+    top: 30%;
+    left: 13%;
+  }
+  
 }
 
 
