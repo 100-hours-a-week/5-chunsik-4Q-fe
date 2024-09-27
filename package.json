@@ -31,6 +31,7 @@
     "@sentry/react": "^8.26.0",
     "@types/react-query": "^1.2.9",
     "antd": "^5.20.0",
+    "basic-loading": "^2.0.2",
     "embla-carousel": "^8.1.8",
     "embla-carousel-react": "^8.1.8",
     "env-cmd": "^10.1.0",

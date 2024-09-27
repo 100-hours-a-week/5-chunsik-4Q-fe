@@ -10,22 +10,7 @@ import { ScrollMenu, VisibilityContext } from "react-horizontal-scrolling-menu";
 import { IoIosArrowBack, IoIosArrowForward, IoIosSearch } from "react-icons/io";
 import Container from "./_components/item-container";
 import "react-horizontal-scrolling-menu/dist/styles.css";
-import Lottie from 'react-lottie-player';
-import loadingLottie from '../../../../public/rotties/gallery-loading.json';
 
-const Loading = () => {
-  return (
-    <div className={styles.lottieLoadingContainer}>
-      <Lottie
-        loop
-        animationData={loadingLottie}
-        play
-        style={{ width: 200, height: 200 }}
-      />
-      f
-    </div>
-  );
-};
 
 type SearchProps = GetProps<typeof Input.Search>;
 
@@ -135,9 +120,7 @@ function SearchParamsHandler({
           <Search size="large" placeholder="" allowClear onSearch={onSearch} style={{ width: '100%' }} />
         </div>
       </div>
-      <Suspense fallback={<Loading />}>
         <Container category={categoryParam} tag={tagParam} sort={sortParam} />
-      </Suspense>
     </div>
   );
 }
@@ -146,12 +129,10 @@ export default function Page() {
   const [isSearchContainerVisible, setIsSearchContainerVisible] = useState(false);
 
   return (
-    <Suspense fallback={<Loading />}>
       <SearchParamsHandler
         isSearchContainerVisible={isSearchContainerVisible}
         setIsSearchContainerVisible={setIsSearchContainerVisible}
       />
-    </Suspense>
   );
 }
 

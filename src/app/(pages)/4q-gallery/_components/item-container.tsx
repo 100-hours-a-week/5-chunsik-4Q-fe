@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
-import styles from './item-container.module.css';
-import ItemCard from './item-card';
-import { getGalleryData } from '../../../../service/photo_api';
+import { useEffect, useState } from "react";
+import styles from "./item-container.module.css";
+import ItemCard from "./item-card";
+import { getGalleryData } from "../../../../service/photo_api";
 import { Button } from "antd";
+import { BounceDot } from "basic-loading";
 
 type Item = {
   createdAt: string;
@@ -12,7 +13,7 @@ type Item = {
   categoryName: string;
   url: string;
   tags: string[];
-  liked: boolean;  
+  liked: boolean;
 };
 
 type ContainerProps = {
@@ -22,6 +23,11 @@ type ContainerProps = {
 };
 
 export default function Container({ category, tag, sort }: ContainerProps) {
+  const loadingOption = {
+    size: 12,
+    color: "#FE5B10",
+  };
+
   const [items, setItems] = useState<Item[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [hasMore, setHasMore] = useState<boolean>(true);
@@ -32,10 +38,12 @@ export default function Container({ category, tag, sort }: ContainerProps) {
       setLoading(true);
       try {
         const data = await getGalleryData(page, category, tag, sort);
-        setItems(prevItems => (page === 0 ? data.content : [...prevItems, ...data.content])); // Reset items if page is 0, otherwise append
+        setItems((prevItems) =>
+          page === 0 ? data.content : [...prevItems, ...data.content]
+        ); // Reset items if page is 0, otherwise append
         setHasMore(!data.last);
       } catch (error) {
-        console.error('Error fetching gallery data:', error);
+        console.error("Error fetching gallery data:", error);
       } finally {
         setLoading(false);
       }
@@ -50,11 +58,11 @@ export default function Container({ category, tag, sort }: ContainerProps) {
   }, [category, tag, sort]);
 
   if (loading && items.length === 0) {
-    return <div>Loading...</div>;
+    return <BounceDot option={loadingOption} />;
   }
 
   const loadMore = () => {
-    setPage(prevPage => prevPage + 1);
+    setPage((prevPage) => prevPage + 1);
   };
 
   return (
@@ -64,7 +72,11 @@ export default function Container({ category, tag, sort }: ContainerProps) {
       ))}
       {hasMore && (
         <div className={styles.moreBtnContainer}>
-          <Button onClick={loadMore} loading={loading} className={styles.moreBtn}>
+          <Button
+            onClick={loadMore}
+            loading={loading}
+            className={styles.moreBtn}
+          >
             더보기
           </Button>
         </div>
