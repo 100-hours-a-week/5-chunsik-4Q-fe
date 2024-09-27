@@ -1,15 +1,31 @@
+// page.tsx
 "use client";
-
 export const dynamic = "force-dynamic";
 import React, { useState, useCallback, Suspense } from "react";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import styles from "./page.module.css";
 import { Select, Input } from "antd";
-import type { GetProps } from "antd";
+import type { GetProps } from 'antd';
 import { ScrollMenu, VisibilityContext } from "react-horizontal-scrolling-menu";
 import { IoIosArrowBack, IoIosArrowForward, IoIosSearch } from "react-icons/io";
 import Container from "./_components/item-container";
 import "react-horizontal-scrolling-menu/dist/styles.css";
+import Lottie from 'react-lottie-player';
+import loadingLottie from '../../../../public/rotties/gallery-loading.json';
+
+const Loading = () => {
+  return (
+    <div className={styles.lottieLoadingContainer}>
+      <Lottie
+        loop
+        animationData={loadingLottie}
+        play
+        style={{ width: 200, height: 200 }}
+      />
+      f
+    </div>
+  );
+};
 
 type SearchProps = GetProps<typeof Input.Search>;
 
@@ -47,9 +63,7 @@ function SearchParamsHandler({
 
   const createQueryString = useCallback(
     (name: string, value?: string) => {
-      const params = new URLSearchParams(
-        searchParams ? searchParams.toString() : ""
-      );
+      const params = new URLSearchParams(searchParams ? searchParams.toString() : "");
 
       if (value) {
         params.set(name, value);
@@ -60,22 +74,16 @@ function SearchParamsHandler({
       return params.toString();
     },
     [searchParams]
-  );
+  ); 
 
   const handleCategoryClick = (categoryId: string) => {
     setSelectedCategory(categoryId);
-    const newQueryString = createQueryString(
-      "category",
-      categoryId !== "all" ? categoryId : undefined
-    );
+    const newQueryString = createQueryString('category', categoryId !== 'all' ? categoryId : undefined);
     router.push(`${pathname}?${newQueryString}`);
   };
 
-  const onSearch: SearchProps["onSearch"] = (value) => {
-    const newQueryString = createQueryString(
-      "tag",
-      value.trim() ? value : undefined
-    );
+  const onSearch: SearchProps['onSearch'] = (value) => {
+    const newQueryString = createQueryString('tag', value.trim() ? value : undefined);
     router.push(`${pathname}?${newQueryString}`);
   };
 
@@ -92,7 +100,7 @@ function SearchParamsHandler({
           className={styles.selectBox}
           onChange={(value) => {
             const sortValue = value === "최신순" ? "latest" : "popular";
-            const newQueryString = createQueryString("sort", sortValue);
+            const newQueryString = createQueryString('sort', sortValue);
             router.push(`${pathname}?${newQueryString}`);
           }}
           options={[
@@ -101,21 +109,13 @@ function SearchParamsHandler({
           ]}
         />
         <div className={styles.filterBtn} onClick={handleFilterBtnClick}>
-          {tagParam ? (
-            <div className={styles.numberSearch}>1</div>
-          ) : (
-            <IoIosSearch className={styles.filterIcon} />
-          )}
+          {tagParam ? <div className={styles.numberSearch}>1</div> : <IoIosSearch className={styles.filterIcon} />}
           <span>검색</span>
         </div>
       </div>
       <div className={styles.categoryContainer}>
         <hr />
-        <ScrollMenu
-          LeftArrow={LeftArrow}
-          RightArrow={RightArrow}
-          itemClassName={styles.scrollMenu}
-        >
+        <ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow} itemClassName={styles.scrollMenu}>
           {categories.map((category) => (
             <div
               key={category.id}
@@ -129,33 +129,24 @@ function SearchParamsHandler({
           ))}
         </ScrollMenu>
       </div>
-      <div
-        className={`${styles.searchContainer} ${
-          isSearchContainerVisible ? styles.visible : ""
-        }`}
-      >
+      <div className={`${styles.searchContainer} ${isSearchContainerVisible ? styles.visible : ''}`}>
         <div className={styles.searchFieldContainer}>
           <p>태그 검색</p>
-          <Search
-            size="large"
-            placeholder=""
-            allowClear
-            onSearch={onSearch}
-            style={{ width: "100%" }}
-          />
+          <Search size="large" placeholder="" allowClear onSearch={onSearch} style={{ width: '100%' }} />
         </div>
       </div>
-      <Container category={categoryParam} tag={tagParam} sort={sortParam} />
+      <Suspense fallback={<Loading />}>
+        <Container category={categoryParam} tag={tagParam} sort={sortParam} />
+      </Suspense>
     </div>
   );
 }
 
 export default function Page() {
-  const [isSearchContainerVisible, setIsSearchContainerVisible] =
-    useState(false);
+  const [isSearchContainerVisible, setIsSearchContainerVisible] = useState(false);
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<Loading />}>
       <SearchParamsHandler
         isSearchContainerVisible={isSearchContainerVisible}
         setIsSearchContainerVisible={setIsSearchContainerVisible}
@@ -165,8 +156,7 @@ export default function Page() {
 }
 
 const LeftArrow = () => {
-  const { isFirstItemVisible, scrollPrev } =
-    React.useContext(VisibilityContext);
+  const { isFirstItemVisible, scrollPrev } = React.useContext(VisibilityContext);
 
   return (
     <div
