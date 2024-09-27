@@ -11,6 +11,16 @@ const nextConfig = withAntdLess({
         NEXT_PUBLIC_GA_ID: process.env.NEXT_PUBLIC_GA_ID,
         NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
     },
+    images: {
+        remotePatterns: [
+          {
+            protocol: 'https',
+            hostname: 'chunsik-dev.s3.ap-northeast-2.amazonaws.com',
+            port: '', // Leave empty if it's the default port (443 for https)
+            pathname: '/**', // Match all paths under the hostname
+          },
+        ],
+      },
     transpilePackages: ['antd', '@ant-design', 'rc-util', 'rc-pagination', 'rc-picker', 'rc-notification', 'rc-tooltip'],
     webpack: (config) => {
         config.infrastructureLogging = { debug: /PackFileCache/ };
