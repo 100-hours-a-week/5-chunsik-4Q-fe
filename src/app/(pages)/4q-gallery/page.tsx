@@ -1,5 +1,5 @@
-// page.tsx
 "use client";
+
 export const dynamic = "force-dynamic";
 import React, { useState, useCallback, Suspense } from "react";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
@@ -10,7 +10,6 @@ import { ScrollMenu, VisibilityContext } from "react-horizontal-scrolling-menu";
 import { IoIosArrowBack, IoIosArrowForward, IoIosSearch } from "react-icons/io";
 import Container from "./_components/item-container";
 import "react-horizontal-scrolling-menu/dist/styles.css";
-
 
 type SearchProps = GetProps<typeof Input.Search>;
 
@@ -129,10 +128,12 @@ export default function Page() {
   const [isSearchContainerVisible, setIsSearchContainerVisible] = useState(false);
 
   return (
+    <Suspense fallback={<div>Loading...</div>}>
       <SearchParamsHandler
         isSearchContainerVisible={isSearchContainerVisible}
         setIsSearchContainerVisible={setIsSearchContainerVisible}
       />
+    </Suspense>
   );
 }
 
