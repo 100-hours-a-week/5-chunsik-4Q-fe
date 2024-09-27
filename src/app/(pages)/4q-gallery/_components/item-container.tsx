@@ -40,7 +40,7 @@ export default function Container({ category, tag, sort }: ContainerProps) {
         const data = await getGalleryData(page, category, tag, sort);
         setItems((prevItems) =>
           page === 0 ? data.content : [...prevItems, ...data.content]
-        ); // Reset items if page is 0, otherwise append
+        );
         setHasMore(!data.last);
       } catch (error) {
         console.error("Error fetching gallery data:", error);
@@ -53,7 +53,6 @@ export default function Container({ category, tag, sort }: ContainerProps) {
   }, [page, category, tag, sort]);
 
   useEffect(() => {
-    // Reset page to 0 whenever filters change
     setPage(0);
   }, [category, tag, sort]);
 

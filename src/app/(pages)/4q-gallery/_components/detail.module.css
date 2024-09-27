@@ -1,8 +1,9 @@
 @font-face {
-    font-family: 'YESMyoungjo-Regular';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_13@1.0/YESMyoungjo-Regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+  font-family: "YESMyoungjo-Regular";
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_13@1.0/YESMyoungjo-Regular.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
 }
 
 .container {
@@ -11,28 +12,23 @@
   height: 650px;
   align-items: center;
   justify-content: center;
-
   text-align: center;
   padding: 8px;
   overflow: hidden;
-  /* background-color: rebeccapurple; */
 }
 
 .detailContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  /* text-align: left; */
 }
 
 .detailTopContainer {
-    display: flex;
-    flex-direction: row;
-    /* background-color: rebeccapurple; */
-    width: 280px;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  width: 280px;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .imgContainer {
@@ -46,7 +42,6 @@
   align-items: center;
   text-align: center;
   margin: 10px 0;
-  /* background-color: rebeccapurple; */
 }
 
 .imgContainer img {
@@ -55,45 +50,39 @@
   object-fit: cover;
 }
 
-
 .detailInfo {
-    display: flex;
-    flex-direction: column;
-  /* width: 100%; */
-  /* margin: 20px; */
-  /* margin-bottom: 20px; */
+  display: flex;
+  flex-direction: column;
   text-align: left;
   display: flex;
   padding-left: 10px;
 }
 
 .heartContainer {
-    background-color: #fff;
-    border: 1px solid #d9d9d9;
-    width: 35px ;
-    height: 35px;
-    border-radius: 50%;
-    justify-content: center;
-    align-items: center;
-    padding-top: 7px;
-    padding-left: 7px;
+  background-color: #fff;
+  border: 1px solid #d9d9d9;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  padding-top: 7px;
+  padding-left: 7px;
 }
 
 .title {
-    font-size: 20px;
-    font-weight: 600;
-    margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
 }
 
 .nickname {
-    font-size: 13px;
-    margin: 5px 0;
+  font-size: 13px;
+  margin: 5px 0;
 }
 
 .date {
-    /* font-family: 'YESMyoungjo-Regular'; */
-    color: var(--grey-color);
-
+  color: var(--grey-color);
 }
 
 .detailBottomContainer {
@@ -113,7 +102,7 @@
   color: var(--grey-color);
 }
 
-.detailBottomGroup p{
+.detailBottomGroup p {
   font-size: 12px;
   margin: 0 0 0 3px;
 }
@@ -121,7 +110,6 @@
 .detailTagContainer {
   width: 100%;
   margin: 12px 0;
-  /* background-color: red; */
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -143,11 +131,8 @@
 
 .backBtnContainer {
   width: 100%;
-  /* background-color: red; */
   align-items: flex-start;
   text-align: left;
-  /* padding-left: 15px; */
   height: 40px;
   margin-bottom: 10px;
-
 }

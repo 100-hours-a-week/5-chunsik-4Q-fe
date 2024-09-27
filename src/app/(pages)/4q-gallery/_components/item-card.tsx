@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-// import Image from 'next/image';
 import styles from "./item-card.module.css";
 import Heart from "@react-sandbox/heart";
 import Detail from "./detail";
@@ -11,6 +10,7 @@ import { IoPerson } from "react-icons/io5";
 import { likeImage, unlikeImage } from "../../../../service/photo_api";
 import Lottie from 'react-lottie-player';
 import heartLottie from '../../../../../public/rotties/heart-lottie.json';
+import Image from "next/image";
 
 type Item = {
   imageId: number;
@@ -97,15 +97,7 @@ export default function ItemCard({ item }: ItemCardProps) {
           />
         </div>
         <div className={styles.imgContainer}>
-          {/* <Image 
-          width={200}
-          height={200}
-          src={item.url}
-          alt="photo QR"
-          placeholder="blur"
-          onClick={showDrawer}/> */}
-          
-          <img
+          <Image
             width={200}
             height={200}
             src={item.url}

@@ -6,13 +6,6 @@
   font-style: normal;
 }
 
-/* @font-face {
-    font-family: 'Handletter';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_05@1.0/Handletter.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-} */
-
 @font-face {
   font-family: "InkLipquid";
   src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/InkLipquid.woff")
@@ -23,28 +16,12 @@
 .container {
   width: 100%;
   height: 100vh;
-  /*background-image: url('../../../assets/hero_bg8.svg');*/
   background-size: 100% 100%;
   background-position: center;
   display: flex;
-  /*justify-content: center;*/
   position: relative;
   align-items: flex-start;
-
   justify-content: flex-start;
-  /* background-color: red; */
-  /* mask: url('../../../../public/images/hero_bg.svg') no-repeat center/contain;
-  -webkit-mask: url('../../../../public/images/hero_bg.svg') no-repeat center/contain; */
-  /*background-color: red;*/
-
-  /* 노이즈 =======> */
-  /* background-image: url('https://i.ibb.co/x3TCktM/645cbb8ec449398255b76326-noise.gif');
-  background-position: 0 0;
-  background-size: auto;
-  pointer-events: none;
-  opacity: 0.05;
-  transition: opacity .2s cubic-bezier(.445, .05, .55, .95); 
-  visibility: visible; */
 }
 
 .noise {
@@ -53,8 +30,6 @@
   left: 0;
   width: 100%;
   height: 100%;
-  /* background-color: red; */
-  /* border: 1px solid black; */
   mask: url("../../../../../public/images/hero_bg.svg") no-repeat center/contain;
   -webkit-mask: url("../../../../../public/images/hero_bg.svg") no-repeat
     center/contain;
@@ -66,10 +41,7 @@
   transition: opacity 0.5s cubic-bezier(0.445, 0.05, 0.55, 0.95);
   visibility: visible;
   z-index: 4;
-  /* position: relative; */
-  /* max-width: 600px; */
 }
-
 
 .arrowContainer {
   position: absolute;
@@ -77,12 +49,9 @@
   left: 0;
   width: 100%;
   height: 100%;
-  /* background-color: red; */
-  /* border: 1px solid black; */
   mask: url("../../../../../public/images/hero_bg.svg") no-repeat center/contain;
   -webkit-mask: url("../../../../../public/images/hero_bg.svg") no-repeat
     center/contain;
-  /* background-color: red; */
   visibility: visible;
   z-index: 4;
 }
@@ -94,16 +63,10 @@
   transform: translateX(-50%);
   width: 150px;
   height: 150px;
-  /* background-color: black; */
-
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
-
-
-
 
 .arrow {
   width: 50px;
@@ -117,10 +80,6 @@
 }
 
 .heading {
-  /*background-color: red;*/
-  /*position: absolute;*/
-  /*left: 40px;*/
-  /*top: 40px;*/
   display: flex;
   flex-direction: column;
   padding: 30px;
@@ -130,7 +89,6 @@
 .introTitle {
   font-family: "InkLipquid";
   font-size: 20px;
-  /* color: rgb(253, 123, 67); */
   color: #ec8d78;
   margin-bottom: 10px;
 }
@@ -185,7 +143,6 @@
   text-decoration: none;
 }
 
-/*hero images =============>*/
 .imgContainer {
   background-color: #fff;
   border-radius: 20px;
@@ -193,7 +150,6 @@
     rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
-/*메뉴판 ===========>*/
 .img1 {
   padding: 12px;
   position: absolute;
@@ -203,7 +159,6 @@
   border-radius: 16px;
 }
 
-/*콘서트 ===========>*/
 .img2 {
   padding: 15px;
   position: absolute;
@@ -212,9 +167,8 @@
   border-radius: 16px;
 }
 
-
 @media (max-width: 600px) {
-  .arrowLottie  {
+  .arrowLottie {
     bottom: 160px;
   }
 
@@ -227,13 +181,10 @@
     top: 30%;
     left: 13%;
   }
-  
 }
 
-
 @media (min-width: 800px) {
-  .arrowLottie  {
+  .arrowLottie {
     bottom: 40px;
   }
 }
-

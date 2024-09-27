@@ -13,18 +13,24 @@ const fetchShortenUrl = async (
   setStoredFormData: (data: any) => void
 ) => {
   try {
-    const result = await getShortenUrl(storedFormData.url); 
+    const result = await getShortenUrl(storedFormData.url);
 
-    if (typeof result === "object" && result.shortenUrl && result.shortenUrlId) {
-      const existingFormData = JSON.parse(sessionStorage.getItem("form_data") || "{}");
+    if (
+      typeof result === "object" &&
+      result.shortenUrl &&
+      result.shortenUrlId
+    ) {
+      const existingFormData = JSON.parse(
+        sessionStorage.getItem("form_data") || "{}"
+      );
 
       const updatedFormData = {
-        ...existingFormData, 
-        shortenUrl: result.shortenUrl, 
-        shortenUrlId: result.shortenUrlId, 
+        ...existingFormData,
+        shortenUrl: result.shortenUrl,
+        shortenUrlId: result.shortenUrlId,
       };
 
-      sessionStorage.setItem("form_data", JSON.stringify(updatedFormData)); 
+      sessionStorage.setItem("form_data", JSON.stringify(updatedFormData));
       setStoredFormData(updatedFormData);
     } else {
       console.error("Unexpected result format:", result);
@@ -46,8 +52,6 @@ export default function Page() {
     const formData = JSON.parse(sessionStorage.getItem("form_data") || "{}");
     setStoredFormData(formData);
   }, []);
-
-
 
   const next = () => {
     setCurrent(current + 1);
@@ -100,7 +104,12 @@ export default function Page() {
   return (
     <>
       <div className={styles.container}>
-        <Steps current={current} items={items} responsive={false} size="small" />
+        <Steps
+          current={current}
+          items={items}
+          responsive={false}
+          size="small"
+        />
         <div style={contentStyle} className={styles.contentContainer}>
           {steps[current].content}
         </div>

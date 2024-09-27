@@ -1,158 +1,151 @@
 .container {
-    text-align: center;
-    max-width: 600px;
-    height: 450px;
-    overflow-y: hidden;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
+  text-align: center;
+  max-width: 600px;
+  height: 450px;
+  overflow-y: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
-
-
 
 .carouselContainer {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
-
 .subTitle {
-    width: 100%;
-    height: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 6px 0;
-    font-size: 15px;
-    color: #000;
-    background-color: red;
-
+  width: 100%;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 6px 0;
+  font-size: 15px;
+  color: #000;
+  background-color: red;
 }
 
 .contentContainer {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .tagContainer {
-    height: 200px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 10px;
-    position: relative;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 10px;
+  position: relative;
 }
 
 .tagArrowImg {
-    position: absolute;
-    width: 200px;
-    bottom: -90px;
+  position: absolute;
+  width: 200px;
+  bottom: -90px;
 }
 
 .tagContainer p {
-    font-size: 12px;
+  font-size: 12px;
 }
 
 .tags {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    column-gap: 12px;
-    margin-top: 20px;
-
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  column-gap: 12px;
+  margin-top: 20px;
 }
 
 .tagItem {
-    background-color: #FFE2D5;
-    padding: 12px 20px;
-    border-radius: 24px;
-    font-size: 20px;
-    color: var(--primary-color);
+  background-color: #ffe2d5;
+  padding: 12px 20px;
+  border-radius: 24px;
+  font-size: 20px;
+  color: var(--primary-color);
 }
 
 .tagContainer p {
-    height: 20px;
-    font-size: 15px;
-    color: #000;
+  height: 20px;
+  font-size: 15px;
+  color: #000;
 }
 
-
 .sliderContainer {
-    position: relative;
-    overflow: hidden;
-    margin-top: 20px;
+  position: relative;
+  overflow: hidden;
+  margin-top: 20px;
 }
 
 .emblaContainer {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
 .emblaSlide {
-    position: relative;
-    opacity: 0.5;
-    transition: opacity 0.3s ease;
-    background-color: #fff;
-    padding: 16px;
-    border-radius: 10px;
-    margin: 15px;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  position: relative;
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+  background-color: #fff;
+  padding: 16px;
+  border-radius: 10px;
+  margin: 15px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
 /* 정사각형으로 바꾸는곳 ============> */
 .emblaSlide img {
-    display: block;
-    width: 300px;
-    height: 300px;
+  display: block;
+  width: 300px;
+  height: 300px;
 }
 
 .activeSlide {
-    opacity: 1;
+  opacity: 1;
 }
 
-.prevButton, .nextButton {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: #fff;
-    opacity: 0.8;
-    color: #000;
-    cursor: pointer;
-    z-index: 1;
-    height: 30px;
-    width: 30px;
-    border-radius: 50%;
-    border: 1px solid #c0c0c0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.prevButton,
+.nextButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #fff;
+  opacity: 0.8;
+  color: #000;
+  cursor: pointer;
+  z-index: 1;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  border: 1px solid #c0c0c0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .prevButton {
-    left: 10px;
+  left: 10px;
 }
 
 .nextButton {
-    right: 10px;
+  right: 10px;
 }
-
 
 /*랜덤버튼 ============>*/
 .randomBtnContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    margin-top: 10px;
-    height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 10px;
+  height: 35px;
 }
 
 .randomBtn {
-    font-size: 16px !important;
-    font-weight: 500 !important;
+  font-size: 16px !important;
+  font-weight: 500 !important;
 }
-
