@@ -28,9 +28,11 @@
 * 4Q 생성하기
 * 4Q 갤러리
 * 마이페이지
+  
 
-## 🖇️ ERD 설계
+## 🖇️ ERD
 ![erd](https://github.com/user-attachments/assets/79f77503-8209-4bc3-be1c-f87358c77ca7)
+
 
 ## 🌐 Architecture
 ![image](https://github.com/user-attachments/assets/2e67a882-f63d-46d3-9298-5f26e0d40143)
@@ -41,4 +43,4 @@
 * **김대건** ([kimdaegeon0918](https://github.com/kimdaegeon0918)): BE
 * **박흥영** ([HeungY](https://github.com/HeungY)): BE
 * **최환용** ([HuttTheJAVA](https://github.com/HuttTheJAVA)): BE
-* **박재현** ([moolmin](https://github.com/ZZ3n)): DevOps
+* **박재현** ([ZZ3n](https://github.com/ZZ3n)): DevOps
