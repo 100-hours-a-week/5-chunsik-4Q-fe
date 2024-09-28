@@ -1,10 +1,8 @@
 "use client";
 
-import React, { useState} from "react";
-import { Form, Select, Input, Modal, Tooltip } from "antd";
+import React, { useState } from "react";
+import { Form, Input, Tooltip } from "antd";
 import styles from "./first.module.css";
-
-const { Option } = Select;
 
 const STORAGE_KEY = "form_data";
 
@@ -16,18 +14,16 @@ interface FirstProps {
 export default function First({ formRef, onSubmit }: FirstProps) {
   const [value, setValue] = useState<string[]>([]);
 
-
   const updateSessionStorage = (updatedTags: string[], allValues: any) => {
-    // 기존 세션 스토리지에서 데이터를 가져오기
-    const existingData = JSON.parse(sessionStorage.getItem(STORAGE_KEY) || "{}");
+    const existingData = JSON.parse(
+      sessionStorage.getItem(STORAGE_KEY) || "{}"
+    );
 
-    // 새로운 데이터를 기존 데이터와 병합하기
     const dataToSave = {
       ...existingData,
       ...allValues,
     };
 
-    // 병합된 데이터를 세션 스토리지에 저장하기
     sessionStorage.setItem(STORAGE_KEY, JSON.stringify(dataToSave));
   };
 
@@ -38,7 +34,6 @@ export default function First({ formRef, onSubmit }: FirstProps) {
   const handleValuesChange = (changedValues: any, allValues: any) => {
     updateSessionStorage(value, allValues);
   };
-
 
   const validateUrl = (_: any, value: string) => {
     if (!value || value.startsWith("http://") || value.startsWith("https://")) {

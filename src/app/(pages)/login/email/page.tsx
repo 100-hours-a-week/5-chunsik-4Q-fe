@@ -51,7 +51,7 @@ export default function Page() {
     <div className={styles.container}>
       <Form
         name="login"
-        style={{ maxWidth: 700, width: '80%' }}
+        style={{ maxWidth: 700, width: '80%', fontSize: '16px'}}
         initialValues={{ remember: true }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
@@ -60,6 +60,7 @@ export default function Page() {
         <Form.Item<FieldType>
           name="email"
           rules={[{ required: true, message: '이메일을 입력해주세요.' }]}
+          style={{ fontSize: '16px'}}
         >
           <Input variant="filled" placeholder="이메일" className={styles.inputField} />
         </Form.Item>

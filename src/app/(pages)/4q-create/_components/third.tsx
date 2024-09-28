@@ -168,7 +168,6 @@ export default function Third() {
           setTimeout(() => {
             setLoading(false);
           }, 4000); 
-          // console.log('id:', responseMessage?.ticketId);
           window.location.href = `/4q-create/download/${responseMessage.ticketId}`;
         } else {
           alert("티켓 생성에 실패했습니다.");
@@ -301,12 +300,13 @@ export default function Third() {
                 />
               </Tooltip>
             </div>
+            <div id="myqrcode">
             <QRCode
-              id="myqrcode"
               value={shortenUrl}
               bgColor="#fff"
               style={{ margin: 16, display: 'none' }}
             />
+          </div>
           </div>
           <div className={styles.submitBtnContainer}>
             <Button

@@ -17,7 +17,7 @@ type Item = {
   tags: string[];
   categoryName: string;
   createdAt: string;
-  liked: boolean; 
+  liked: boolean;
 };
 
 type DetailProps = {
@@ -25,7 +25,7 @@ type DetailProps = {
 };
 
 export default function Detail({ item }: DetailProps) {
-  const [active, setActive] = useState(item.liked); // Initialize active state based on item.liked
+  const [active, setActive] = useState(item.liked);
   const [createStep, setStep] = useState<boolean>(() => {
     return sessionStorage.getItem("createStep") === "true";
   });
@@ -59,16 +59,7 @@ export default function Detail({ item }: DetailProps) {
             <div className={styles.detailTopContainer}>
               <div className={styles.detailInfo}>
                 <p className={styles.title}>{item.categoryName}</p>
-                {/* <p className={styles.nickname}>{item.userName}</p> */}
               </div>
-              {/* <div className={styles.heartContainer}>
-                <Heart
-                  width={20}
-                  height={20}
-                  active={active}
-                  onClick={() => setActive(!active)}
-                />
-              </div> */}
             </div>
             <div className={styles.imgContainer}>
               <img src={item.url} alt="photo QR" />
@@ -78,10 +69,6 @@ export default function Detail({ item }: DetailProps) {
                 <IoIosCalendar />
                 <p>{item.createdAt}</p>
               </div>
-              {/* <div className={styles.detailBottomGroup}>
-                <TiHeartFullOutline />
-                <p>{item.likeCount}</p>
-              </div> */}
             </div>
             <div className={styles.detailTagContainer}>
               {item.tags.map((tag, index) => (
@@ -103,7 +90,11 @@ export default function Detail({ item }: DetailProps) {
       ) : (
         <div className={styles.createContainer}>
           <div className={styles.backBtnContainer}>
-            <Button shape="circle" className={styles.backBtn} onClick={handleReset}>
+            <Button
+              shape="circle"
+              className={styles.backBtn}
+              onClick={handleReset}
+            >
               <FaArrowLeft />
             </Button>
           </div>

@@ -34,7 +34,7 @@
   border-radius: 20px;
   border: 1px solid #d9d9d9;
   cursor: pointer;
-}   
+}
 
 .numberSearch {
   width: 16px;
@@ -62,7 +62,6 @@
 .categoryContainer {
   width: 100%;
   max-width: 100%;
-  /* overflow-x: hidden; */
   white-space: nowrap;
   font-size: 15px;
 }
@@ -123,11 +122,10 @@
 }
 
 .searchContainer.visible {
-  max-height: 500px; 
+  max-height: 500px;
   transform: translateY(0);
   opacity: 1;
 }
-
 
 .searchFieldContainer {
   width: 100%;
@@ -135,12 +133,10 @@
   margin-right: 10px;
 }
 
-.searchFieldContainer p{
+.searchFieldContainer p {
   font-size: 13px;
   margin: 0 0 5px 5px;
 }
-
-
 
 @media (max-width: 500px) {
   .categoryContainer {
