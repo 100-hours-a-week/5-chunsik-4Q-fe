@@ -1,5 +1,4 @@
 import { ReactNode } from "react";
-import dynamic from "next/dynamic";
 import "./global.css";
 import "antd/dist/reset.css";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
