@@ -108,7 +108,7 @@
   width: 100%;
   position: absolute;
   left: 50%;
-  bottom: 20%;
+  bottom: 12%;
   transform: translateX(-50%);
   display: flex;
   align-items: center;
@@ -119,4 +119,5 @@
   background-color: #000 !important;
   color: #fff !important;
   cursor: pointer;
+  margin-top: 40px;
 }
