@@ -4,10 +4,10 @@ import styles from "./second.module.css";
 import { ArrowLeftOutlined, ArrowRightOutlined } from "@ant-design/icons";
 import { FaDice } from "react-icons/fa6";
 import { Button, message } from "antd";
-import { generatePhotoImg } from "../../../../service/photo_api";
-import { getShortenUrl } from "../../../../service/shorten_api";
+import { generatePhotoImg } from "@/service/photo_api";
+import { getShortenUrl } from "@/service/shorten_api";
 import tagArrow from "../../../../../public/images/tag_arrow.png";
-import tagTranslationMap from "../../../../lib/tagTranslationEnKr";
+import tagTranslationMap from "@/lib/tagTranslationEnKr";
 
 message.config({
   maxCount: 3,

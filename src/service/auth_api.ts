@@ -67,7 +67,7 @@ export const requestRegister = async (email: string, password: string, nickname:
 
 //프로필 수정
 export const requestProfileUpdate = async (newNickname: string) => {
-    const token = localStorage.getItem('AccessToken');
+    const token = sessionStorage.getItem('AccessToken');
   
     if (!token) {
       throw new Error('No access token found. You are not logged in.');
@@ -114,8 +114,8 @@ export const requestLogin = async (email: string, password: string) => {
             const data = await response.json();
             const token = data.accessToken;  
             const expiration = data.expiration
-            localStorage.setItem('AccessToken', token); 
-            localStorage.setItem('TokenExpiration', expiration); 
+            sessionStorage.setItem('AccessToken', token); 
+            sessionStorage.setItem('TokenExpiration', expiration); 
             return { success: true };  
         } else {
             throw new Error("로그인에 실패했습니다.");
@@ -130,7 +130,7 @@ export const requestLogin = async (email: string, password: string) => {
 
 export const requestUserInfo = async () => {
     try {
-        const token = localStorage.getItem('AccessToken');
+        const token = sessionStorage.getItem('AccessToken');
         const response = await fetch(`${BASE_URL}/users/me`, {
             method: "GET",
             headers: {
@@ -155,7 +155,7 @@ export const requestUserInfo = async () => {
 
 export const requestLogout = async () => {
     try {
-        const token = localStorage.getItem('AccessToken');
+        const token = sessionStorage.getItem('AccessToken');
         const response = await fetch(`${BASE_URL}/users/logout`, {
 
         method: "POST",
@@ -167,7 +167,7 @@ export const requestLogout = async () => {
       });
   
       if (response.ok) {
-        localStorage.removeItem('AccessToken');
+        sessionStorage.removeItem('AccessToken');
         return { success: true };
       } else {
         throw new Error("로그아웃에 실패했습니다.");
@@ -190,7 +190,7 @@ export const requestAccessToken = async () => {
             const data = await response.json();
             const { accessToken } = data;
 
-            localStorage.setItem('AccessToken', accessToken);
+            sessionStorage.setItem('AccessToken', accessToken);
 
             return accessToken;
         } else {

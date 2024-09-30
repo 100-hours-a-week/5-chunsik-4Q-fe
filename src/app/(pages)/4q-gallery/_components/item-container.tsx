@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "./item-container.module.css";
 import ItemCard from "./item-card";
-import { getGalleryData } from "../../../../service/photo_api";
+import { getGalleryData } from "@/service/photo_api";
 import { Button } from "antd";
 import { BounceDot } from "basic-loading";
 
@@ -57,7 +57,11 @@ export default function Container({ category, tag, sort }: ContainerProps) {
   }, [category, tag, sort]);
 
   if (loading && items.length === 0) {
-    return <BounceDot option={loadingOption} />;
+    return (
+      <div style={{marginTop: '50px'}}>
+        <BounceDot option={loadingOption} />
+      </div>
+    );
   }
 
   const loadMore = () => {

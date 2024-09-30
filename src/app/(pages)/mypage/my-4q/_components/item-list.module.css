@@ -1,11 +1,9 @@
 .container {
     position: relative;
     width: 100%;
-    /* background-color: red; */
     display: flex;
     flex-direction: row;
     padding: 2px 50px;
-    /* background-color: rebeccapurple; */
 }
 
 .deleteBtn{
@@ -25,15 +23,8 @@
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
-.categoryGroup {
-    /* width: 150px; */
-    /* height: 150px; */
-    /* background-color: grey; */
-}
-
 .infoConatiner {
     width: 100%;
-    /* background-color: red; */
     padding: 12px;
     position: relative;
 }
@@ -56,8 +47,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /* padding: 5px 0; */
-    /* background-color: rgb(228, 228, 228); */
     text-align: center;
     border-radius: 5px;
     font-size: 12px;
@@ -73,18 +62,14 @@
     padding-left: 5px;
 }
 
-
 .BtnContainer {
     position: absolute;
     bottom: 50px;
-    /* background-color: red; */
     width: 130px;
 }
 
 .downloadButton {
-    /* margin-top: 8px; */
     margin-left: 10px;
-    /* box-shadow: 0 2px 0 rgba(255, 255, 255, 0.1) !important; */
 }
 
 .deleteButton {
@@ -97,9 +82,3 @@
     bottom: 30px;
 }
 
-/* @media (max-width: 430px) {
-    .container {
-        background-color: red;
-
-    }
-} */

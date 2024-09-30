@@ -32,8 +32,8 @@ export function UserProvider({ children }: { children: ReactNode }) {
   const [accessToken, setAccessToken] = useState<string | null>(null); 
 
   useEffect(() => {
-    const storedUser = localStorage.getItem('user');
-    const storedToken = localStorage.getItem('AccessToken');
+    const storedUser = sessionStorage.getItem('user');
+    const storedToken = sessionStorage.getItem('AccessToken');
     if (storedUser) {
       const parsedUser = JSON.parse(storedUser);
       setUser(parsedUser);
@@ -47,7 +47,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
   const login = (user: User) => {
     setUser(user);
     setLogin(true);
-    localStorage.setItem('user', JSON.stringify(user));
+    sessionStorage.setItem('user', JSON.stringify(user));
   };
 
   const logout = () => {
@@ -55,9 +55,9 @@ export function UserProvider({ children }: { children: ReactNode }) {
     setUser(null);
     setLogin(false);
     setAccessToken(null);  
-    localStorage.removeItem('user');
-    localStorage.removeItem('AccessToken');
-    localStorage.removeItem('TokenExpiration');
+    sessionStorage.removeItem('user');
+    sessionStorage.removeItem('AccessToken');
+    sessionStorage.removeItem('TokenExpiration');
     router.push("/login");
     message.success("로그아웃 되었습니다");
   };
@@ -66,7 +66,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
     if (user) {
       const updatedUser = { ...user, nickname };
       setUser(updatedUser);
-      localStorage.setItem('user', JSON.stringify(updatedUser));  // Update localStorage
+      sessionStorage.setItem('user', JSON.stringify(updatedUser));  // Update sessionStorage
     }
   };
 

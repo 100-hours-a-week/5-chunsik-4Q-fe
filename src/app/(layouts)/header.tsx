@@ -78,13 +78,13 @@ export default function Header() {
   };
 
   const checkAndRefreshToken = async () => {
-    const expiration = localStorage.getItem("TokenExpiration");
+    const expiration = sessionStorage.getItem("TokenExpiration");
     if (expiration && Number(expiration) < Date.now()) {
       try {
         const { accessToken, tokenExpiration } = await requestAccessToken();
         if (accessToken && tokenExpiration) {
-          localStorage.setItem("AccessToken", accessToken);
-          localStorage.setItem("TokenExpiration", tokenExpiration.toString());
+          sessionStorage.setItem("AccessToken", accessToken);
+          sessionStorage.setItem("TokenExpiration", tokenExpiration.toString());
   
           setAccessToken(accessToken);
           setLogin(true); 

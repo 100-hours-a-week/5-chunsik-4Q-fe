@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import styles from "./create-container.module.css";
 import First from "./first";
 import Second from "./second";
-import { getShortenUrl } from "../../../../service/shorten_api";
+import { getShortenUrl } from "@/service/shorten_api";
 
 const fetchShortenUrl = async (
   storedFormData: any,

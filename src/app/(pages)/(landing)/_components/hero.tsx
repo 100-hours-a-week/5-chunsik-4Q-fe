@@ -32,7 +32,6 @@ export default function Hero() {
         console.error("유저 정보 불러오기 실패:", error);
       }
     }
-
     fetchAndSetUser();
   }, []);
 
@@ -61,6 +60,8 @@ export default function Hero() {
         <Link href="/4q-create" className={styles.tryBtn}>
           지금 체험하기
         </Link>
+
+        
       </div>
       <div className={`${styles.imgContainer} ${styles.img1}`}>
         <Image

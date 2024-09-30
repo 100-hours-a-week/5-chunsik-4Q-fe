@@ -7,7 +7,7 @@ import Detail from "./detail";
 import { Drawer, theme, message } from "antd";
 import { IoMdHeart } from "react-icons/io";
 import { IoPerson } from "react-icons/io5";
-import { likeImage, unlikeImage } from "../../../../service/photo_api";
+import { likeImage, unlikeImage } from "@/service/photo_api";
 import Lottie from 'react-lottie-player';
 import heartLottie from '../../../../../public/rotties/heart-lottie.json';
 import Image from "next/image";
@@ -44,7 +44,7 @@ export default function ItemCard({ item }: ItemCardProps) {
   };
 
   const clickHeart = async () => {
-    const accessToken = localStorage.getItem('AccessToken');
+    const accessToken = sessionStorage.getItem('AccessToken');
 
     if (!accessToken) {
       message.error("로그인이 필요한 기능입니다.");

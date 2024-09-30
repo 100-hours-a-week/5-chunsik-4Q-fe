@@ -7,10 +7,9 @@ import { IoIosArrowDropright } from "react-icons/io";
 import { IoLogOutOutline } from "react-icons/io5";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { requestLogout } from "@/service/auth_api";
-import { useUserContext } from "@/context/UserContext"; // useUserContext를 import
+import { useUserContext } from "@/context/UserContext";
 import myIcon from "../../../../public/images/icon/my_4q_icon.svg";
 import likedIcon from "../../../../public/images/icon/liked_4q_icon.svg";
-
 
 export default function Page() {
   const { user, isLogin, logout } = useUserContext();
@@ -62,7 +61,6 @@ export default function Page() {
             <img src={myIcon.src} alt="my_4q_icon" className={styles.icon} />
             <span>나의 4Q</span>
           </div>
-          {/* Added onClick handler to prevent navigation if not logged in */}
           <Link
             href="/mypage/my-4q"
             className={styles.arrowContainer}
@@ -76,7 +74,6 @@ export default function Page() {
             <img src={likedIcon.src} alt="my_4q_icon" className={styles.icon} />
             <span>좋아요한 배경</span>
           </div>
-          {/* Added onClick handler to prevent navigation if not logged in */}
           <Link
             href="/mypage/liked-4q"
             className={styles.arrowContainer}
