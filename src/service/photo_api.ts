@@ -1,7 +1,7 @@
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export const generatePhotoImg = async (category: string, tags: string[]) => {
-  const token = localStorage.getItem('AccessToken');
+  const token = sessionStorage.getItem('AccessToken');
 
     try {
         const response = await fetch(`${BASE_URL}/image`, {
@@ -40,7 +40,7 @@ export const generateTicket = async (
         formData.append("shortenUrlId", shortenUrlId.toString());  
         formData.append("title", title);
 
-        const token = localStorage.getItem('AccessToken');
+        const token = sessionStorage.getItem('AccessToken');
         
         const response = await fetch(`${BASE_URL}/ticket`, { 
           cache: 'no-store',
@@ -93,7 +93,7 @@ export const getTicketInfo = async (ticketId: number) => {
 
 // 좋아요 추가
 export const likeImage = async (imageId: string) => {
-    const token = localStorage.getItem('AccessToken'); 
+    const token = sessionStorage.getItem('AccessToken'); 
   
     if (!token) {
       throw new Error('Access token is missing.');
@@ -123,7 +123,7 @@ export const likeImage = async (imageId: string) => {
 
   // 좋아요 삭제
   export const unlikeImage = async (imageId: string) => {
-    const token = localStorage.getItem('AccessToken');
+    const token = sessionStorage.getItem('AccessToken');
   
     if (!token) {
       throw new Error('Access token is missing.');
@@ -153,7 +153,7 @@ export const likeImage = async (imageId: string) => {
   
 // 갤러리 이미지 요청
 export const getGalleryData = async (page: number, category: string, tag: string, sort: string) => {
-  const token = localStorage.getItem('AccessToken');
+  const token = sessionStorage.getItem('AccessToken');
 
   // Construct the URL with optional query parameters
   const url = new URL(`${BASE_URL}/gallery`);
@@ -186,7 +186,7 @@ export const getGalleryData = async (page: number, category: string, tag: string
 
   
   export const getMyTicket = async() => {
-    const token = localStorage.getItem('AccessToken');
+    const token = sessionStorage.getItem('AccessToken');
     try {
         const response = await fetch(`${BASE_URL}/mypq`, {
           cache: 'no-store',
@@ -209,7 +209,7 @@ export const getGalleryData = async (page: number, category: string, tag: string
 
 // 좋아요한 배경이미지
 export const getLikedTicket = async() => {
-  const token = localStorage.getItem('AccessToken');
+  const token = sessionStorage.getItem('AccessToken');
   try {
       const response = await fetch(`${BASE_URL}/mypq/liked`, {
           method: "GET",
@@ -230,7 +230,7 @@ export const getLikedTicket = async() => {
 };
 
 export const deleteTicket = async(ticketId: number) => {
-  const token = localStorage.getItem('AccessToken');
+  const token = sessionStorage.getItem('AccessToken');
   try {
     const response = await fetch(`${BASE_URL}/ticket/${ticketId}`, {
         method: "DELETE",

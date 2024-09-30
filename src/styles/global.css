@@ -158,8 +158,14 @@ li  {
     list-style-type: none;
 }
 
-.css-1yys5uz .ant-select-single .ant-select-selector {
-    background-color: #f0f0f0;
-    font-size: 20px;
+:where(.css-dev-only-do-not-override-yhwyix).ant-select-outlined:not(.ant-select-customize-input) .ant-select-selector {
+    font-size: 16px !important;
 }
 
+:where(.css-dev-only-do-not-override-yhwyix).ant-select-single .ant-select-selector {
+    font-size: 16px !important;
+}
+
+:where(.css-dev-only-do-not-override-yhwyix).ant-select-single .ant-select-selector {
+    font-size: 16px !important;
+}

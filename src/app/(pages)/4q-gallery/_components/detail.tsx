@@ -2,9 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import styles from "./detail.module.css";
-import Heart from "@react-sandbox/heart";
 import { IoIosCalendar } from "react-icons/io";
-import { TiHeartFullOutline } from "react-icons/ti";
 import { FaArrowLeft } from "react-icons/fa6";
 import { Button, Divider } from "antd";
 import CreateContainer from "./create-container";

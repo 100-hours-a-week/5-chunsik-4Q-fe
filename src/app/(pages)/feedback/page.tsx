@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from 'react';
-import styles from './page.module.css';
+import { useState } from "react";
+import styles from "./page.module.css";
 import {
   FaRegFaceAngry,
   FaRegFaceFrown,
@@ -19,16 +19,17 @@ import {
   Select,
   Radio,
   message,
-} from 'antd';
+} from "antd";
 import Link from "next/link";
-import { feedbackSubmit } from "../../../service/feedback_api";
+import { feedbackSubmit } from "@/service/feedback_api";
 
 const { TextArea } = Input;
 const { Option } = Select;
 
 const modalSubTitle = (
   <p>
-    시간을 내어 의견을 보내주셔서 감사합니다. <br /> 더 나은 4Q 개선을 위해 최선을 다하겠습니다.
+    시간을 내어 의견을 보내주셔서 감사합니다. <br /> 더 나은 4Q 개선을 위해
+    최선을 다하겠습니다.
   </p>
 );
 
@@ -62,24 +63,24 @@ export default function Page() {
       ease: parseInt(values.ease),
       design: parseInt(values.design),
       performance: parseInt(values.performance),
-      feature: Boolean(values.feature), 
-      recommendation: Boolean(values.recommendation), 
-      reuse: Boolean(values.reuse), 
+      feature: Boolean(values.feature),
+      recommendation: Boolean(values.recommendation),
+      reuse: Boolean(values.reuse),
       gender: values.gender,
       ageGroup: parseInt(values.ageGroup),
     };
 
-    console.log('Submitting feedback:', JSON.stringify(feedbackData, null, 2));
+    console.log("Submitting feedback:", JSON.stringify(feedbackData, null, 2));
 
     try {
       const response = await feedbackSubmit(feedbackData);
-      if(response.success) {
+      if (response.success) {
         showModal();
       } else {
         message.error("피드백 작성에 실패했습니다. 다시 시도해주세요.");
       }
     } catch (error) {
-      console.error('Failed to submit feedback: ', error);
+      console.error("Failed to submit feedback: ", error);
     }
   };
 
@@ -104,7 +105,7 @@ export default function Page() {
             gender: "",
             comment: "",
           }}
-          style={{ marginTop: 20, width: '80%' }}
+          style={{ marginTop: 20, width: "80%" }}
         >
           <Form.Item
             name="starRate"
@@ -113,7 +114,7 @@ export default function Page() {
             rules={[
               {
                 required: true,
-                message: '만족도를 선택해주세요',
+                message: "만족도를 선택해주세요",
               },
             ]}
           >
@@ -123,10 +124,7 @@ export default function Page() {
             />
           </Form.Item>
 
-          <Form.Item
-            name="ease"
-            label="제품 사용이 얼마나 쉬웠나요?"
-          >
+          <Form.Item name="ease" label="제품 사용이 얼마나 쉬웠나요?">
             <Select placeholder="선택해 주세요">
               <Option value="5">매우 쉬웠다</Option>
               <Option value="4">쉬웠다</Option>
@@ -162,12 +160,9 @@ export default function Page() {
             </Select>
           </Form.Item>
 
-          <Form.Item
-            name="feature"
-            label="기능들이 제대로 작동했나요?"
-          >
+          <Form.Item name="feature" label="기능들이 제대로 작동했나요?">
             <Radio.Group>
-            <Radio.Button value={true}>네</Radio.Button>
+              <Radio.Button value={true}>네</Radio.Button>
               <Radio.Button value={false}>아니요</Radio.Button>
             </Radio.Group>
           </Form.Item>
@@ -187,15 +182,12 @@ export default function Page() {
             label="향후 이 제품을 계속 사용하실 의향이 있으신가요?"
           >
             <Radio.Group>
-            <Radio.Button value={true}>네</Radio.Button>
+              <Radio.Button value={true}>네</Radio.Button>
               <Radio.Button value={false}>아니요</Radio.Button>
             </Radio.Group>
           </Form.Item>
 
-          <Form.Item
-            name="ageGroup"
-            label="나이대"
-          >
+          <Form.Item name="ageGroup" label="나이대">
             <Select placeholder="선택해 주세요">
               <Option value="20">20대</Option>
               <Option value="30">30대</Option>
@@ -205,10 +197,7 @@ export default function Page() {
             </Select>
           </Form.Item>
 
-          <Form.Item
-            name="gender"
-            label="성별"
-          >
+          <Form.Item name="gender" label="성별">
             <Radio.Group>
               <Radio value="MALE">남성</Radio>
               <Radio value="FEMALE">여성</Radio>
@@ -216,7 +205,7 @@ export default function Page() {
           </Form.Item>
           <div className={styles.label}>
             추가로 하고 싶은 말씀이 있으신가요?
-            </div>
+          </div>
           <Form.Item
             name="comment"
             // label=""
@@ -225,7 +214,12 @@ export default function Page() {
               showCount
               maxLength={200}
               placeholder="추가 의견을 작성해주세요"
-              style={{ height: 120, width: '100%', resize: 'none', marginTop: '10px' }}
+              style={{
+                height: 120,
+                width: "100%",
+                resize: "none",
+                marginTop: "10px",
+              }}
             />
           </Form.Item>
 
@@ -233,7 +227,9 @@ export default function Page() {
             <Button type="primary" htmlType="submit">
               제출하기
             </Button>
-            <Button htmlType="reset" style={{ marginLeft: '10px' }}>초기화</Button>
+            <Button htmlType="reset" style={{ marginLeft: "10px" }}>
+              초기화
+            </Button>
           </div>
         </Form>
         <Link href="/" className={styles.navigateHome}>
@@ -241,13 +237,20 @@ export default function Page() {
         </Link>
       </div>
 
-      <Modal open={isModalOpen} onOk={handleOk} onCancel={handleCancel} footer={null}>
+      <Modal
+        open={isModalOpen}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        footer={null}
+      >
         <Result
           status="success"
           title="피드백이 성공적으로 제출되었습니다!"
           subTitle={modalSubTitle}
           extra={[
-            <Link href="/" className={styles.homeBtn}>홈으로 이동</Link>
+            <Link href="/" className={styles.homeBtn}>
+              홈으로 이동
+            </Link>,
           ]}
         />
       </Modal>

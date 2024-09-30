@@ -1,11 +1,12 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import styles from './page.module.css';
-import logo from '../../../../public/images/login_logo.png';
-import kakao_icon from '../../../../public/images/kakao.svg';
+import Image from "next/image";
+import Link from "next/link";
+import styles from "./page.module.css";
+import logo from "../../../../public/images/login_logo.png";
+import kakao_icon from "../../../../public/images/kakao.svg";
 
 export default function Page() {
-  const kakaoOauth = "https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=a8a84270703466b91728cc7df1b03fbb&redirect_uri=https://api.qqqq.world/auth/kakao/callback"
+  const kakaoOauth =
+    "https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=a8a84270703466b91728cc7df1b03fbb&redirect_uri=https://api.qqqq.world/auth/kakao/callback";
 
   return (
     <div className={styles.container}>
@@ -17,8 +18,15 @@ export default function Page() {
           <div className={styles.fastSignup}>5초만에 빠른 회원가입</div>
           <div className={styles.polygon}></div>
         </div>
-        <Link href={`${kakaoOauth}&state=refresh=true`} className={styles.kakaoButton}>
-          <img src={kakao_icon.src} alt="kakao_logo" className={styles.kakaoIcon} />
+        <Link
+          href={`${kakaoOauth}&state=refresh=true`}
+          className={styles.kakaoButton}
+        >
+          <img
+            src={kakao_icon.src}
+            alt="kakao_logo"
+            className={styles.kakaoIcon}
+          />
           카카오톡으로 시작하기
         </Link>
 
@@ -38,6 +46,3 @@ export default function Page() {
     </div>
   );
 }
-
-
-

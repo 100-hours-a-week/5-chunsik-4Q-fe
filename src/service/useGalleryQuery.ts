@@ -31,7 +31,7 @@ const fetchGalleryData = async ({
   tag,
   sort,
 }: { pageParam?: number } & UseGalleryQueryParams): Promise<GalleryResponse> => {
-  const token = localStorage.getItem('AccessToken');
+  const token = sessionStorage.getItem('AccessToken');
 
   const url = new URL(`${BASE_URL}/gallery`);
   url.searchParams.append('page', pageParam.toString());

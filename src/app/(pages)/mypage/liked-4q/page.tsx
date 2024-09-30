@@ -1,12 +1,15 @@
 "use client";
 
-import { useEffect, useState } from 'react';
-import styles from './page.module.css';
-import { List, message } from 'antd';
-import ItemList from './_components/item-list';
-import { getLikedTicket, likeImage, unlikeImage } from '../../../../service/photo_api';
+import { useEffect, useState } from "react";
+import styles from "./page.module.css";
+import { List, message } from "antd";
+import ItemList from "./_components/item-list";
+import {
+  getLikedTicket,
+  likeImage,
+  unlikeImage,
+} from "../../../../service/photo_api";
 
-// Extend Ticket type to include additional properties
 type ExtendedTicket = {
   imageId: number;
   title: string;
@@ -15,28 +18,28 @@ type ExtendedTicket = {
   createdAt: string;
   liked: boolean;
   likeCount: number;
-  userName: string;  // Add missing properties
-  tags: string[];    // Add missing properties
+  userName: string;
+  tags: string[];
 };
 
 export default function Page() {
-  const [tickets, setTickets] = useState<ExtendedTicket[]>([]);  // Correctly typed state
+  const [tickets, setTickets] = useState<ExtendedTicket[]>([]);
 
   useEffect(() => {
     const fetchTickets = async () => {
       try {
-        const data: ExtendedTicket[] = await getLikedTicket();  // Ensure data is correctly typed
+        const data: ExtendedTicket[] = await getLikedTicket();
         setTickets(data);
       } catch (error) {
-        console.error('Error fetching tickets:', error);
+        console.error("Error fetching tickets:", error);
       }
     };
 
     fetchTickets();
   }, []);
 
-  const toggleLike = async (imageId: number, isLiked: boolean) => {  // Type parameters
-    const accessToken = localStorage.getItem('AccessToken');
+  const toggleLike = async (imageId: number, isLiked: boolean) => {
+    const accessToken = sessionStorage.getItem("AccessToken");
 
     if (!accessToken) {
       message.error("로그인이 필요한 기능입니다.");
@@ -79,7 +82,7 @@ export default function Page() {
         size="large"
         dataSource={tickets}
         renderItem={(item) => (
-          <ItemList item={item} onToggleLike={toggleLike} />  // Pass the function down to the child
+          <ItemList item={item} onToggleLike={toggleLike} />
         )}
       />
     </div>

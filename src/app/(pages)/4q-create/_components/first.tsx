@@ -1,9 +1,8 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Select, Input, Modal, Tooltip } from "antd";
 import styles from "./first.module.css";
-import type { InputRef } from "antd";
 import TagSelector from "../(modals)/tagSelectModal";
 import tagTranslationMap from '../../../../lib/tagTranslationKrEn'
 
@@ -19,7 +18,6 @@ interface FirstProps {
 export default function First({ formRef, onSubmit }: FirstProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [value, setValue] = useState<string[]>([]);
-  const inputRef = useRef<InputRef>(null);
 
   useEffect(() => {
     const savedData = JSON.parse(sessionStorage.getItem(STORAGE_KEY) || "{}");

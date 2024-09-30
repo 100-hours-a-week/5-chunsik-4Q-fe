@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button, Alert } from "antd";
 import styles from "./tagSelectModal.module.css";
 import hot_mark from "../../../../../public/images/hot_tag.png";
-import tagTranslationMap from "../../../../lib/tagTranslationKrEn";
+import tagTranslationMap from "@/lib/tagTranslationKrEn";
 
 interface TagSelectorProps {
   selectedTags: string[];
