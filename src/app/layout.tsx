@@ -7,10 +7,32 @@ import { Metadata } from "next";
 import Head from "next/head";
 import Header from "./(layouts)/header";
 import styles from "./layout.module.css";
-import GoogleAnalytics from "../lib/GoogleAnalytics";
+import GoogleAnalytics from "@/lib/GoogleAnalytics";
 import { GoogleTagManager } from "@next/third-parties/google";
-
+import localFont from 'next/font/local'
 import { UserProvider } from "@/context/UserContext";
+
+const spoqaHanSansNeo = localFont({
+  src: [
+    {
+      path: "../../public/fonts/SpoqaHanSansNeo-Bold.woff2",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/SpoqaHanSansNeo-Medium.woff2",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/SpoqaHanSansNeo-Regular.woff2",
+      weight: "400",
+      style: "normal",
+    },
+  ],
+  variable: "--font-spoqaHanSansNeo",
+});
+
 
 export const metadata: Metadata = {
   robots: { index: true, follow: true },
@@ -44,7 +66,7 @@ const config: ThemeConfig = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="ko" className={spoqaHanSansNeo.className}> {/* 폰트 적용 */}
       <Head>
         <meta
           name="viewport"

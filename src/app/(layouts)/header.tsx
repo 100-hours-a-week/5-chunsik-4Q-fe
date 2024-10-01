@@ -85,11 +85,11 @@ export default function Header() {
         if (accessToken && tokenExpiration) {
           sessionStorage.setItem("AccessToken", accessToken);
           sessionStorage.setItem("TokenExpiration", tokenExpiration.toString());
-  
+
           setAccessToken(accessToken);
-          setLogin(true); 
+          setLogin(true);
         } else {
-          logout(); 
+          logout();
         }
       } catch (error) {
         console.error("Failed to refresh access token:", error);
@@ -104,7 +104,7 @@ export default function Header() {
   }, [path]);
 
   useEffect(() => {
-    checkAndRefreshToken(); 
+    checkAndRefreshToken();
   }, []);
 
   return (
@@ -133,7 +133,11 @@ export default function Header() {
           <div className={styles.menuTopContainer}>
             <img src={logo_white.src} alt="Logo" />
             <div className={styles.feedbackBtnContainer}>
-              <Button className={styles.feedbackBtn} size="small" onClick={navFeedback}>
+              <Button
+                className={styles.feedbackBtn}
+                size="small"
+                onClick={navFeedback}
+              >
                 피드백
               </Button>
             </div>
@@ -201,6 +205,7 @@ export default function Header() {
         title="뒤로가기"
         open={isModalOpen}
         onCancel={handleCancel}
+        width={450}
         centered
         footer={[
           <Button key="cancel" onClick={handleCancel}>

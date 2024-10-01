@@ -118,7 +118,7 @@ export default function Page() {
       <Modal
         open={isModalOpen}
         onCancel={handleCancel}
-        width={400}
+        width={450}
         centered
         footer={
           <div style={{ textAlign: "center" }}>
