@@ -1,15 +1,15 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./item-card.module.css";
 import Heart from "@react-sandbox/heart";
 import Detail from "./detail";
-import { Drawer, theme, message } from "antd";
+import { Drawer, theme, message, Skeleton } from "antd";
 import { IoMdHeart } from "react-icons/io";
 import { IoPerson } from "react-icons/io5";
 import { likeImage, unlikeImage } from "@/service/photo_api";
-import Lottie from 'react-lottie-player';
-import heartLottie from '../../../../../public/rotties/heart-lottie.json';
+import Lottie from "react-lottie-player";
+import heartLottie from "../../../../../public/rotties/heart-lottie.json";
 import Image from "next/image";
 
 type Item = {
@@ -33,6 +33,7 @@ export default function ItemCard({ item }: ItemCardProps) {
   const [active, setActive] = useState(item.liked);
   const [likeCount, setLikeCount] = useState(item.likeCount);
   const [playLottie, setPlayLottie] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   const showDrawer = () => {
     setOpen(true);
@@ -44,7 +45,7 @@ export default function ItemCard({ item }: ItemCardProps) {
   };
 
   const clickHeart = async () => {
-    const accessToken = sessionStorage.getItem('AccessToken');
+    const accessToken = sessionStorage.getItem("AccessToken");
 
     if (!accessToken) {
       message.error("로그인이 필요한 기능입니다.");
@@ -67,7 +68,7 @@ export default function ItemCard({ item }: ItemCardProps) {
           setPlayLottie(true);
           setTimeout(() => {
             setPlayLottie(false);
-          }, 1000); 
+          }, 1000);
         }
       }
     } catch (error) {
@@ -89,27 +90,24 @@ export default function ItemCard({ item }: ItemCardProps) {
           </div>
         )}
         <div className={styles.heartCircle}>
-          <Heart
-            width={25}
-            height={25}
-            active={active}
-            onClick={clickHeart}
-          />
+          <Heart width={25} height={25} active={active} onClick={clickHeart} />
         </div>
         <div className={styles.imgContainer}>
+          {!imageLoaded && <Skeleton.Image active={active} />}
           <Image
             width={200}
             height={200}
             src={item.url}
             alt="photo QR"
             onClick={showDrawer}
+            onLoadingComplete={() => setImageLoaded(true)}
           />
         </div>
       </div>
       <div className={styles.bottomContainer}>
         <div className={styles.author}>
           <IoPerson />
-          <span>{item.userName ? item.userName : '비로그인 회원'}</span>
+          <span>{item.userName ? item.userName : "비로그인 회원"}</span>
         </div>
         <div className={styles.heartCount}>
           <IoMdHeart />
@@ -123,7 +121,7 @@ export default function ItemCard({ item }: ItemCardProps) {
         onClose={onClose}
         open={open}
         height="97%"
-        getContainer={document.body}  
+        getContainer={document.body}
         className={styles.drawerContainer}
       >
         <div className={styles.detailContainer}>

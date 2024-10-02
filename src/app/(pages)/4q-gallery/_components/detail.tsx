@@ -56,7 +56,7 @@ export default function Detail({ item }: DetailProps) {
           <div className={styles.detailContainer}>
             <div className={styles.detailTopContainer}>
               <div className={styles.detailInfo}>
-                <PiFolderOpenDuotone className={styles.folderIcon} />
+              <PiFolderOpenDuotone className={styles.folderIcon}/>
                 <p className={styles.title}>{item.categoryName}</p>
               </div>
             </div>
@@ -65,7 +65,7 @@ export default function Detail({ item }: DetailProps) {
             </div>
             <div className={styles.detailBottomContainer}>
               <div className={styles.detailBottomGroup}>
-                <PiCalendarBlankDuotone />
+              <PiCalendarBlankDuotone />
                 <p>{item.createdAt}</p>
               </div>
             </div>
