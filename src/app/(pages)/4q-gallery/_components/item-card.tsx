@@ -93,7 +93,7 @@ export default function ItemCard({ item }: ItemCardProps) {
           <Heart width={25} height={25} active={active} onClick={clickHeart} />
         </div>
         <div className={styles.imgContainer}>
-          {!imageLoaded && <Skeleton.Image active={active} />}
+          {!imageLoaded && <Skeleton.Image active={active} style={{ width: '100%', height: '100%' }} />}
           <Image
             width={200}
             height={200}
