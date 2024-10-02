@@ -2,10 +2,10 @@
 
 import React, { useState, useEffect } from "react";
 import styles from "./detail.module.css";
-import { IoIosCalendar } from "react-icons/io";
 import { FaArrowLeft } from "react-icons/fa6";
 import { Button, Divider } from "antd";
 import CreateContainer from "./create-container";
+import { PiFolderOpenDuotone, PiCalendarBlankDuotone } from "react-icons/pi";
 
 type Item = {
   imageId: number;
@@ -56,6 +56,7 @@ export default function Detail({ item }: DetailProps) {
           <div className={styles.detailContainer}>
             <div className={styles.detailTopContainer}>
               <div className={styles.detailInfo}>
+                <PiFolderOpenDuotone className={styles.folderIcon} />
                 <p className={styles.title}>{item.categoryName}</p>
               </div>
             </div>
@@ -64,7 +65,7 @@ export default function Detail({ item }: DetailProps) {
             </div>
             <div className={styles.detailBottomContainer}>
               <div className={styles.detailBottomGroup}>
-                <IoIosCalendar />
+                <PiCalendarBlankDuotone />
                 <p>{item.createdAt}</p>
               </div>
             </div>

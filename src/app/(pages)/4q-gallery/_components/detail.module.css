@@ -52,10 +52,15 @@
 
 .detailInfo {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   text-align: left;
   display: flex;
   padding-left: 10px;
+}
+
+.folderIcon {
+  font-size: 22px;
+  margin-right: 3px;
 }
 
 .heartContainer {
