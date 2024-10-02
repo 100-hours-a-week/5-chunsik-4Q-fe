@@ -229,17 +229,22 @@ export const getLikedTicket = async() => {
   }
 };
 
-export const deleteTicket = async(ticketId: number) => {
+// 티켓 삭제
+export const deleteTicket = async (ticketId: number) => {
   const token = sessionStorage.getItem('AccessToken');
   try {
     const response = await fetch(`${BASE_URL}/ticket/${ticketId}`, {
-        method: "DELETE",
-        headers: {
-            "Authorization": `Bearer ${token}`,
-            "Content-Type": "application/json",
-        },
+      method: "DELETE",
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
     });
-} catch (error) {
+
+    if (!response.ok) {
+      throw new Error("Failed to delete ticket");
+    }
+  } catch (error) {
     throw error;
-}
+  }
 };

@@ -45,10 +45,16 @@ const ItemList = ({ item }) => {
   };
 
   const handleOk = async () => {
-    await deleteTicket(item.id);
-    message.success("티켓이 삭제되었습니다.");
-    setIsModalOpen(false);
+    try {
+      await deleteTicket(item.id);
+      message.success("티켓이 삭제되었습니다.");
+      setIsModalOpen(false);
+    } catch (error) {
+      message.error("티켓 삭제에 실패했습니다.");
+      console.error(error);
+    }
   };
+  
 
   const handleCancel = () => {
     setIsModalOpen(false);
