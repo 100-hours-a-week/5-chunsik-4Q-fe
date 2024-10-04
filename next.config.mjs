@@ -16,8 +16,8 @@ const nextConfig = withAntdLess({
           {
             protocol: 'https',
             hostname: 'chunsik-dev.s3.ap-northeast-2.amazonaws.com',
-            port: '', // Leave empty if it's the default port (443 for https)
-            pathname: '/**', // Match all paths under the hostname
+            port: '',
+            pathname: '/**', 
           },
         ],
       },
@@ -35,7 +35,6 @@ const nextConfig = withAntdLess({
     },
 });
 
-// Sentry configuration
 const sentryConfig = {
     org: "chulchulhanchunsigi",
     project: "pq-fe", 
