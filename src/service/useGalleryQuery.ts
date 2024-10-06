@@ -1,6 +1,7 @@
 import { useInfiniteQuery } from 'react-query';
 
 export interface Item {
+  id: string
   createdAt: string;
   imageId: number;
   likeCount: number;

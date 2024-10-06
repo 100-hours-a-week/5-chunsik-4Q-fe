@@ -6,8 +6,18 @@ import { List } from "antd";
 import ItemList from "./_components/item-list";
 import { getMyTicket } from "../../../../service/photo_api";
 
+
+interface Ticket {
+  id: string;
+  title: string;
+  ticketUrl: string;
+  categoryName: string;
+  formattedDate: string;
+}
+
+
 export default function Page() {
-  const [tickets, setTickets] = useState([]);
+  const [tickets, setTickets] = useState<Ticket[]>([])
 
   useEffect(() => {
     const fetchTickets = async () => {
@@ -22,13 +32,17 @@ export default function Page() {
     fetchTickets();
   }, []);
 
+  const handleDelete = (id) => {
+    setTickets((prevTickets) => prevTickets.filter((ticket) => ticket.id !== id));
+  };
+
   return (
     <div className={styles.container}>
       <List
         itemLayout="vertical"
         size="large"
         dataSource={tickets}
-        renderItem={(item) => <ItemList item={item} />}
+        renderItem={(item) => <ItemList item={item} onDelete={handleDelete} />}
       />
     </div>
   );

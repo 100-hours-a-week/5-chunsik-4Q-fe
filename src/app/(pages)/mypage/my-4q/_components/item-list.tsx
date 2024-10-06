@@ -37,7 +37,7 @@ const handleCopyToClipboard = (item) => {
 };
 
 // ListItem Component
-const ItemList = ({ item }) => {
+const ItemList = ({ item, onDelete }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const showDeleteModal = () => {
@@ -49,8 +49,9 @@ const ItemList = ({ item }) => {
       await deleteTicket(item.id);
       message.success("티켓이 삭제되었습니다.");
       setIsModalOpen(false);
+      onDelete(item.id);
     } catch (error) {
-      message.error("티켓 삭제에 실패했습니다.");
+      // message.error("티켓 삭제에 실패했습니다.");
       console.error(error);
     }
   };
