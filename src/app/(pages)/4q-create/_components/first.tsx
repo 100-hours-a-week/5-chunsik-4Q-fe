@@ -10,10 +10,6 @@ const { Option } = Select;
 
 const STORAGE_KEY = "form_data";
 
-interface FirstProps {
-  formRef: React.RefObject<any>;
-  onSubmit: () => void;
-}
 
 export default function First({ formRef, onSubmit }: FirstProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);

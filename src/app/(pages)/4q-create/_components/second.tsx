@@ -13,16 +13,6 @@ message.config({
   maxCount: 3,
 });
 
-interface FormData {
-  url: string;
-  shortenUrl: string;
-  title: string;
-  backgroundImageUrl: string;
-  backgroundImagId: number;
-  shortenUrlId: number;
-  tags: string[];
-  category: string;
-}
 
 export default function Second() {
   const [emblaRef, emblaApi] = useEmblaCarousel({

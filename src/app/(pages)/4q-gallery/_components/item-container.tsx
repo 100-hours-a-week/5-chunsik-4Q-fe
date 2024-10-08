@@ -5,17 +5,6 @@ import { getGalleryData } from "@/service/photo_api";
 import { Button } from "antd";
 import { BounceDot } from "basic-loading";
 
-type Item = {
-  createdAt: string;
-  imageId: number;
-  likeCount: number;
-  userName: string;
-  categoryName: string;
-  url: string;
-  tags: string[];
-  liked: boolean;
-};
-
 type ContainerProps = {
   category: string;
   tag: string;

@@ -8,24 +8,9 @@ import { Drawer, theme, message } from "antd";
 import { IoMdHeart } from "react-icons/io";
 import { IoPerson } from "react-icons/io5";
 import { likeImage, unlikeImage } from "@/service/photo_api";
-import Lottie from 'react-lottie-player';
-import heartLottie from '../../../../../public/rotties/heart-lottie.json';
+import Lottie from "react-lottie-player";
+import heartLottie from "../../../../../public/rotties/heart-lottie.json";
 import Image from "next/image";
-
-type Item = {
-  imageId: number;
-  userName: string;
-  url: string;
-  likeCount: number;
-  tags: string[];
-  categoryName: string;
-  createdAt: string;
-  liked: boolean;
-};
-
-type ItemCardProps = {
-  item: Item;
-};
 
 export default function ItemCard({ item }: ItemCardProps) {
   const { token } = theme.useToken();
@@ -44,7 +29,7 @@ export default function ItemCard({ item }: ItemCardProps) {
   };
 
   const clickHeart = async () => {
-    const accessToken = sessionStorage.getItem('AccessToken');
+    const accessToken = sessionStorage.getItem("AccessToken");
 
     if (!accessToken) {
       message.error("로그인이 필요한 기능입니다.");
@@ -67,7 +52,7 @@ export default function ItemCard({ item }: ItemCardProps) {
           setPlayLottie(true);
           setTimeout(() => {
             setPlayLottie(false);
-          }, 1000); 
+          }, 1000);
         }
       }
     } catch (error) {
@@ -89,12 +74,7 @@ export default function ItemCard({ item }: ItemCardProps) {
           </div>
         )}
         <div className={styles.heartCircle}>
-          <Heart
-            width={25}
-            height={25}
-            active={active}
-            onClick={clickHeart}
-          />
+          <Heart width={25} height={25} active={active} onClick={clickHeart} />
         </div>
         <div className={styles.imgContainer}>
           <Image
@@ -109,7 +89,7 @@ export default function ItemCard({ item }: ItemCardProps) {
       <div className={styles.bottomContainer}>
         <div className={styles.author}>
           <IoPerson />
-          <span>{item.userName ? item.userName : '비로그인 회원'}</span>
+          <span>{item.userName ? item.userName : "비로그인 회원"}</span>
         </div>
         <div className={styles.heartCount}>
           <IoMdHeart />
@@ -123,7 +103,7 @@ export default function ItemCard({ item }: ItemCardProps) {
         onClose={onClose}
         open={open}
         height="97%"
-        getContainer={document.body}  
+        getContainer={document.body}
         className={styles.drawerContainer}
       >
         <div className={styles.detailContainer}>

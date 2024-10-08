@@ -6,11 +6,6 @@ import styles from "./first.module.css";
 
 const STORAGE_KEY = "form_data";
 
-interface FirstProps {
-  formRef: React.RefObject<any>;
-  onSubmit: () => void;
-}
-
 export default function First({ formRef, onSubmit }: FirstProps) {
   const [value, setValue] = useState<string[]>([]);
 

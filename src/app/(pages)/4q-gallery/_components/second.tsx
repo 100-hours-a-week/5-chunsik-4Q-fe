@@ -12,16 +12,6 @@ import loadingLottie from "../../../../../public/rotties/image-loading.json";
 import type { Stage as StageType } from "konva/lib/Stage";
 import { isMobile } from "react-device-detect";
 
-interface TextNode {
-  id: number;
-  text: string;
-  x: number;
-  y: number;
-  fontSize: number;
-  isEditing: boolean;
-  color: string;
-}
-
 interface FormData {
   url: string;
   shortenUrl: string;

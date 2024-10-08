@@ -4,11 +4,6 @@ import styles from "./tagSelectModal.module.css";
 import hot_mark from "../../../../../public/images/hot_tag.png";
 import tagTranslationMap from "@/lib/tagTranslationKrEn";
 
-interface TagSelectorProps {
-  selectedTags: string[];
-  onSelect: (selectedTags: string[]) => void;
-}
-
 export default function TagSelector({
   selectedTags,
   onSelect,
