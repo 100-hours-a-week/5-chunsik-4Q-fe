@@ -4,7 +4,8 @@ import React, { useState, useEffect } from "react";
 import { Form, Select, Input, Modal, Tooltip } from "antd";
 import styles from "./first.module.css";
 import TagSelector from "../(modals)/tagSelectModal";
-import tagTranslationMap from '../../../../lib/tagTranslationKrEn'
+import tagTranslationMap from '@/lib/tagTranslationKrEn'
+import { FirstProps } from '../../../../../next-env'
 
 const { Option } = Select;
 
