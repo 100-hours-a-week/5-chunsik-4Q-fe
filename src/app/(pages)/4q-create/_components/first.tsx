@@ -5,12 +5,15 @@ import { Form, Select, Input, Modal, Tooltip } from "antd";
 import styles from "./first.module.css";
 import TagSelector from "../(modals)/tagSelectModal";
 import tagTranslationMap from '@/lib/tagTranslationKrEn'
-import { FirstProps } from '../../../../../next-env'
 
 const { Option } = Select;
 
 const STORAGE_KEY = "form_data";
 
+interface FirstProps {
+  formRef: React.RefObject<any>;
+  onSubmit: () => void;
+}
 
 export default function First({ formRef, onSubmit }: FirstProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
