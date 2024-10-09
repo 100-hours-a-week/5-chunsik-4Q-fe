@@ -12,6 +12,21 @@ import Lottie from "react-lottie-player";
 import heartLottie from "../../../../../public/rotties/heart-lottie.json";
 import Image from "next/image";
 
+type Item = {
+  imageId: number;
+  userName: string;
+  url: string;
+  likeCount: number;
+  tags: string[];
+  categoryName: string;
+  createdAt: string;
+  liked: boolean;
+};
+
+type ItemCardProps = {
+  item: Item;
+};
+
 export default function ItemCard({ item }: ItemCardProps) {
   const { token } = theme.useToken();
   const [open, setOpen] = useState(false);

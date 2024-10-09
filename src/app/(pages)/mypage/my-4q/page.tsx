@@ -6,6 +6,10 @@ import { List } from "antd";
 import ItemList from "./_components/item-list";
 import { getMyTicket } from "../../../../service/photo_api";
 
+interface Ticket {
+  id: number;
+}
+
 export default function Page() {
   const [tickets, setTickets] = useState<Ticket[]>([]);
 

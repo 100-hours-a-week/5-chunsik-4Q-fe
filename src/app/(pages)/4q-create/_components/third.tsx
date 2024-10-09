@@ -11,6 +11,17 @@ import Lottie from "react-lottie-player";
 import loadingLottie from "../../../../../public/rotties/image-loading.json";
 import type { Stage as StageType } from "konva/lib/Stage";
 
+interface TextNode {
+  id: number;
+  text: string;
+  x: number;
+  y: number;
+  fontSize: number;
+  isEditing: boolean;
+  color: string;
+}
+
+
 interface FormData {
   url: string;
   shortenUrl: string;

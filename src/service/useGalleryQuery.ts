@@ -1,6 +1,28 @@
 import { useInfiniteQuery } from 'react-query';
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL; 
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+
+export interface Item {
+  createdAt: string;
+  imageId: number;
+  likeCount: number;
+  userName: string;
+  categoryName: string;
+  url: string;
+  tags: string[];
+  liked: boolean;
+}
+
+interface GalleryResponse {
+  content: Item[];
+  last: boolean;
+}
+
+interface UseGalleryQueryParams {
+  category: string;
+  tag: string;
+  sort: string;
+}
 
 // API 호출 함수
 const fetchGalleryData = async ({
