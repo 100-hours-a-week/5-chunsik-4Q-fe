@@ -21,7 +21,7 @@ export default function Footer() {
             type="link"
             href={privacyPolicyUrl}
             target="_blank"
-            style={{ color: "#CCCCCC", marginLeft: '10px', padding: 0, fontSize: '12px'}}
+            style={{ color: "#CCCCCC", marginLeft: '10px', padding: 0, fontSize: '12px', textDecoration: 'underline'}}
           >
             개인정보처리방침
           </Button>
@@ -29,7 +29,7 @@ export default function Footer() {
             type="link"
             href={termsOfServiceUrl}
             target="_blank"
-            style={{ color: "#CCCCCC", fontSize: '12px'}}
+            style={{ color: "#CCCCCC", fontSize: '12px', textDecoration: 'underline'}}
           >
             서비스 이용약관
           </Button>
