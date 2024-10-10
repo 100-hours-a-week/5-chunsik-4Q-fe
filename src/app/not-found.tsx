@@ -1,3 +1,12 @@
+import Image from "next/image";
+import styles from './not-found.module.css'
+import notFound from '../../public/images/not_found.png'
+
 export default function NotFound(){
-    return <h1>Not Found!</h1>;
+    return (
+        <div className={styles.container}>
+            <Image src={notFound} alt='not found img' width={400} height={270}/>
+            <h2>요청하신 페이지를 찾을 수 없습니다.</h2>
+        </div>
+    );
 }
