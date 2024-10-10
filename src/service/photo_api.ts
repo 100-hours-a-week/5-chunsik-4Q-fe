@@ -155,7 +155,6 @@ export const likeImage = async (imageId: string) => {
 export const getGalleryData = async (page: number, category: string, tag: string, sort: string) => {
   const token = sessionStorage.getItem('AccessToken');
 
-  // Construct the URL with optional query parameters
   const url = new URL(`${BASE_URL}/gallery`);
   url.searchParams.append('page', page.toString());
   if (category && category !== 'all') url.searchParams.append('categoryName', category);

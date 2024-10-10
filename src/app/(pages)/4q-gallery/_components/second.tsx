@@ -89,7 +89,7 @@ export default function Third() {
 
   const [backgroundImage] = useImage(
     storedFormData.backgroundImageUrl,
-    "anonymous"
+    "use-credentials"
   );
   const [qrImage] = useImage(qrImageUrl, "anonymous");
 
