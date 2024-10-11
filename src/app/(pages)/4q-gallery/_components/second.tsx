@@ -275,6 +275,7 @@ export default function Third() {
                     value={selectedColor}
                     onChange={(color) => handleColorChange(color.toHexString())}
                     size="small"
+                    style={{height: '24px'}}
                   />
                 </Tooltip>
               </div>
