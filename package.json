@@ -29,6 +29,8 @@
     "@react-sandbox/heart": "^1.1.0",
     "@sentry/nextjs": "^8",
     "@sentry/react": "^8.26.0",
+    "@tanstack/react-query": "^5.60.2",
+    "@tanstack/react-query-devtools": "^5.60.2",
     "@types/react-query": "^1.2.9",
     "antd": "^5.20.0",
     "basic-loading": "^2.0.2",
