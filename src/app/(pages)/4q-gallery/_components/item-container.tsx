@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import styles from "./item-container.module.css";
 import ItemCard from "./item-card";
 import { getGalleryData } from "@/service/photo_api";
@@ -13,7 +13,16 @@ type Item = {
   categoryName: string;
   url: string;
   tags: string[];
-  liked: boolean;  
+  liked: boolean;
+};
+
+type GalleryPage = {
+  content: Item[];
+  page: number;
+  number: number;
+  last: boolean;
+  totalPages: number;
+  totalElements: number;
 };
 
 type ContainerProps = {
@@ -27,57 +36,53 @@ export default function Container({ category, tag, sort }: ContainerProps) {
     size: 12,
     color: "#FE5B10",
   };
-
-  const [items, setItems] = useState<Item[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [hasMore, setHasMore] = useState<boolean>(true);
-  const [page, setPage] = useState<number>(0);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const data = await getGalleryData(page, category, tag, sort);
-        setItems((prevItems) =>
-          page === 0 ? data.content : [...prevItems, ...data.content]
-        );
-        setHasMore(!data.last);
-      } catch (error) {
-        console.error("Error fetching gallery data:", error);
-      } finally {
-        setLoading(false);
+  const {
+    data,
+    isLoading,
+    isError,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useInfiniteQuery<GalleryPage>({
+    queryKey: ["galleryData", category, tag, sort],
+    queryFn: ({ pageParam = 0 }) =>
+      getGalleryData({ pageParam, category, tag, sort }),
+    initialPageParam: 0,
+    getNextPageParam: (lastPage) => {
+      if (lastPage && !lastPage.last) {
+        console.log(lastPage);
+        return lastPage.number + 1;
       }
-    };
+      return undefined;
+    },
+    staleTime: 60 * 1000,
+    gcTime: 300 * 1000,
+  });
 
-    fetchData();
-  }, [page, category, tag, sort]);
-
-  useEffect(() => {
-    setPage(0);
-  }, [category, tag, sort]);
-
-  if (loading && items.length === 0) {
+  if (isLoading) {
     return (
-      <div style={{marginTop: '50px'}}>
+      <div style={{ marginTop: "50px" }}>
         <BounceDot option={loadingOption} />
       </div>
     );
   }
 
-  const loadMore = () => {
-    setPage((prevPage) => prevPage + 1);
-  };
+  if (isError) {
+    return <div>Error loading gallery data.</div>;
+  }
+
+  const items = data?.pages.flatMap((page) => page.content) || [];
 
   return (
     <div className={styles.container}>
-      {items.map((item) => (
+      {items.map((item: Item) => (
         <ItemCard key={item.imageId} item={item} />
       ))}
-      {hasMore && (
+      {hasNextPage && (
         <div className={styles.moreBtnContainer}>
           <Button
-            onClick={loadMore}
-            loading={loading}
+            onClick={() => fetchNextPage()}
+            loading={isFetchingNextPage}
             className={styles.moreBtn}
           >
             더보기
