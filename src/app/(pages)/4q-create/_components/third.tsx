@@ -21,7 +21,6 @@ interface TextNode {
   color: string;
 }
 
-
 interface FormData {
   url: string;
   shortenUrl: string;
