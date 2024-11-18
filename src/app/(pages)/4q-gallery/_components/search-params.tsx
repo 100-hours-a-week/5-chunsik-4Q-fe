@@ -1,8 +1,8 @@
-import React, { useState, useCallback, Suspense } from "react";
+import React, { useState, useCallback } from "react";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { IoIosArrowBack, IoIosArrowForward, IoIosSearch } from "react-icons/io";
 import { categories } from "../_lib/categories";
-import { Select, Input } from "antd";
+import { Select, Input, GetProps } from "antd";
 import { ScrollMenu, VisibilityContext } from "react-horizontal-scrolling-menu";
 import styles from "../page.module.css";
 
