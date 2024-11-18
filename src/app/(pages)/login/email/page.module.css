@@ -3,7 +3,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    /*height: 100vh;*/
     position: relative;
     margin-top: 150px;
     overflow-y: hidden;
@@ -23,7 +22,6 @@
 
 .emailLink {
     color: #000;
-    /*margin: 0 25px;*/
     text-decoration: underline;
     text-underline-position: under;
     font-size: 14px;

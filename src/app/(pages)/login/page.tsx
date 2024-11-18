@@ -5,7 +5,7 @@ import logo from "../../../../public/images/login_logo.png";
 import kakao_icon from "../../../../public/images/kakao.svg";
 
 export default function Page() {
-  const kakaoOauth =
+  const kakaoOauthUrl =
     "https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=a8a84270703466b91728cc7df1b03fbb&redirect_uri=https://api.qqqq.world/auth/kakao/callback";
 
   return (
@@ -19,7 +19,7 @@ export default function Page() {
           <div className={styles.polygon}></div>
         </div>
         <Link
-          href={`${kakaoOauth}&state=refresh=true`}
+          href={`${kakaoOauthUrl}&state=refresh=true`}
           className={styles.kakaoButton}
         >
           <img

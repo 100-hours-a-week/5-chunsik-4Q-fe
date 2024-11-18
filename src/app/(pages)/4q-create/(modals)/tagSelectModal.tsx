@@ -22,7 +22,6 @@ export default function TagSelector({
   const MAX_TAGS = 3;
 
   const isHotTag = (tag: string) => {
-    
     return hotTags.includes(tag);
   };
 

@@ -16,7 +16,7 @@ type FieldType = {
 };
 
 export default function Page() {
-  const { login } = useUserContext();  // UserContext의 login 함수 사용
+  const { login } = useUserContext();  
   const router = useRouter();
 
   const onFinish = async (values: FieldType) => {
@@ -24,11 +24,10 @@ export default function Page() {
     const password = values.password ?? "";
 
     try {
-      const response = await requestLogin(email, password);  // 로그인 요청
+      const response = await requestLogin(email, password); 
       if (response.success) {
         message.success("로그인에 성공했습니다.");
-
-        // 로그인 성공 후 유저 정보 요청
+        
         const userInfo = await requestUserInfo();
         if (userInfo) {
           login(userInfo); 

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import styles from "./page.module.css";
 import { List } from "antd";
 import ItemList from "./_components/item-list";
-import { getMyTicket } from "../../../../service/photo_api";
+import { getMyTicket } from "@/service/photo_api";
 
 interface Ticket {
   id: number;

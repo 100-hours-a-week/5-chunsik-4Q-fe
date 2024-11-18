@@ -2,14 +2,13 @@
 
 import { useState, useEffect } from "react";
 import { Form, Input, Button, message, AutoComplete } from "antd";
-import Head from "next/head";
 
 import styles from "./page.module.css";
 import {
   requestEmailVerification,
   verifyEmailCode,
   requestRegister,
-} from "../../../../service/auth_api";
+} from "@/services/auth";
 import { useRouter } from "next/navigation";
 
 export default function Signup() {
@@ -67,7 +66,7 @@ export default function Signup() {
         setTimerCount(180);
       } catch (error) {
         message.error(error.message || "이메일 인증 요청에 실패했습니다.");
-        setIsBtnDisable(false); // 실패 시 다시 버튼 활성화
+        setIsBtnDisable(false); 
       }
     } else {
       message.error("유효한 이메일을 입력해주세요.");
@@ -206,7 +205,7 @@ export default function Signup() {
                 value={verificationCode}
                 onChange={(e) => setVerificationCode(e.target.value)}
                 className={styles.inputField}
-                disabled={buttonText !== "이메일 재전송"} // Disable input field
+                disabled={buttonText !== "이메일 재전송"} 
               />
             </div>
           </Form.Item>
@@ -224,7 +223,7 @@ export default function Signup() {
             }}
             onClick={handleCodeVerification}
             type="button"
-            disabled={buttonText !== "이메일 재전송"} // Disable validation button
+            disabled={buttonText !== "이메일 재전송"} 
           >
             {valiButtonText}
           </button>

@@ -13,7 +13,6 @@ type DetailProps = {
 };
 
 export default function Detail({ item }: DetailProps) {
-  const [active, setActive] = useState(item.liked);
   const [createStep, setStep] = useState<boolean>(() => {
     return sessionStorage.getItem("createStep") === "true";
   });

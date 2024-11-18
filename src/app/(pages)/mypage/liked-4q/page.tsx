@@ -8,18 +8,11 @@ import {
   getLikedTicket,
   likeImage,
   unlikeImage,
-} from "../../../../service/photo_api";
+} from "@/service/photo_api";
+import { Item } from "@/types/item";
 
-type ExtendedTicket = {
-  imageId: number;
+interface ExtendedTicket extends Item {
   title: string;
-  url: string;
-  categoryName: string;
-  createdAt: string;
-  liked: boolean;
-  likeCount: number;
-  userName: string;
-  tags: string[];
 };
 
 export default function Page() {

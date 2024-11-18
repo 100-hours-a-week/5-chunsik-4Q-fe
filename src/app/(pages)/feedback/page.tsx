@@ -206,10 +206,7 @@ export default function Page() {
           <div className={styles.label}>
             추가로 하고 싶은 말씀이 있으신가요?
           </div>
-          <Form.Item
-            name="comment"
-            // label=""
-          >
+          <Form.Item name="comment">
             <TextArea
               showCount
               maxLength={200}

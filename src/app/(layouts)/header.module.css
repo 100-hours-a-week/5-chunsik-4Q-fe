@@ -116,7 +116,7 @@
 }
 
 .menu.open {
-  top: 0; /* 햄버거 메뉴 아래로 내려오게 합니다 */
+  top: 0; 
   transform: translateY(0);
 }
 

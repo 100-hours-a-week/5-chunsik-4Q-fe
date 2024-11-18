@@ -192,7 +192,6 @@ export default function Third() {
         </div>
       ) : (
         <>
-          {/* <div className={styles.subTitle}>QR의 위치를 선택해주세요.</div> */}
           <div className={styles.canvasContainer}>
             <div className={styles.backgroundContainer}>
               <Stage width={280} height={280} ref={stageRef}>

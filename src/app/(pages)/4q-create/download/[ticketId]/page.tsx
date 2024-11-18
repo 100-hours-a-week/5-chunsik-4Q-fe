@@ -96,9 +96,6 @@ export default function Page() {
         >
           다운로드
         </Button>
-        {/* <Button onClick={showModal} type="primary" icon={<BiSolidShareAlt />} size="large" className={styles.shareBtn}>
-                    공유하기
-                </Button> */}
       </div>
       <Button type="text" href="/" className={styles.mainBtn}>
         메인으로 가기
