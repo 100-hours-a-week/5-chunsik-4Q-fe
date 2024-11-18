@@ -11,6 +11,7 @@ import Lottie from "react-lottie-player";
 import loadingLottie from "../../../../../public/rotties/image-loading.json";
 import type { Stage as StageType } from "konva/lib/Stage";
 import { isMobile } from "react-device-detect";
+import { FormData } from "@/types/form-data";
 
 interface TextNode {
   id: number;
@@ -20,17 +21,6 @@ interface TextNode {
   fontSize: number;
   isEditing: boolean;
   color: string;
-}
-
-interface FormData {
-  url: string;
-  shortenUrl: string;
-  title: string;
-  backgroundImageUrl: string;
-  backgroundImageId: number;
-  shortenUrlId: number;
-  tags: string;
-  category: string;
 }
 
 export default function Third() {
@@ -46,7 +36,7 @@ export default function Third() {
     backgroundImageUrl: "",
     backgroundImageId: 0,
     shortenUrlId: 0,
-    tags: "",
+    tags: [],
     category: "",
   });
   const [shortenUrl, setShortenUrl] = useState<string>("");

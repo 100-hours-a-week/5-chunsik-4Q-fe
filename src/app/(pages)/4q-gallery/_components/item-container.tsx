@@ -4,17 +4,7 @@ import ItemCard from "./item-card";
 import { getGalleryData } from "@/service/photo_api";
 import { Button } from "antd";
 import { BounceDot } from "basic-loading";
-
-type Item = {
-  createdAt: string;
-  imageId: number;
-  likeCount: number;
-  userName: string;
-  categoryName: string;
-  url: string;
-  tags: string[];
-  liked: boolean;
-};
+import { Item } from "@/types/item";
 
 type GalleryPage = {
   content: Item[];

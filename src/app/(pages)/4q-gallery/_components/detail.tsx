@@ -6,17 +6,7 @@ import { FaArrowLeft } from "react-icons/fa6";
 import { Button, Divider } from "antd";
 import CreateContainer from "./create-container";
 import { PiFolderOpenDuotone, PiCalendarBlankDuotone } from "react-icons/pi";
-
-type Item = {
-  imageId: number;
-  userName: string;
-  url: string;
-  likeCount: number;
-  tags: string[];
-  categoryName: string;
-  createdAt: string;
-  liked: boolean;
-};
+import { Item } from "@/types/item";
 
 type DetailProps = {
   item: Item;

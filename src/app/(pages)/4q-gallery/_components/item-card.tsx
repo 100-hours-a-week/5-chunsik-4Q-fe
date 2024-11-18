@@ -11,17 +11,7 @@ import { likeImage, unlikeImage } from "@/service/photo_api";
 import Lottie from "react-lottie-player";
 import heartLottie from "../../../../../public/rotties/heart-lottie.json";
 import Image from "next/image";
-
-type Item = {
-  imageId: number;
-  userName: string;
-  url: string;
-  likeCount: number;
-  tags: string[];
-  categoryName: string;
-  createdAt: string;
-  liked: boolean;
-};
+import { Item } from "@/types/item";
 
 type ItemCardProps = {
   item: Item;

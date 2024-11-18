@@ -10,6 +10,7 @@ import { generateTicket } from "@/service/photo_api";
 import Lottie from "react-lottie-player";
 import loadingLottie from "../../../../../public/rotties/image-loading.json";
 import type { Stage as StageType } from "konva/lib/Stage";
+import { FormData } from "@/types/form-data";
 
 interface TextNode {
   id: number;
@@ -21,33 +22,15 @@ interface TextNode {
   color: string;
 }
 
-interface FormData {
-  url: string;
-  shortenUrl: string;
-  title: string;
-  backgroundImageUrl: string;
-  backgroundImageId: number;
-  shortenUrlId: number;
-  tags: string[];
-  category: string;
-}
-
 export default function Third() {
   const [qrPosition, setQrPosition] = useState({ x: 50, y: 50 });
   const [textNodes, setTextNodes] = useState<TextNode[]>([]);
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const [selectedColor, setSelectedColor] = useState<string>("#000000");
   const [qrImageUrl, setQrImageUrl] = useState<string>("");
-  const [storedFormData, setStoredFormData] = useState<FormData>({
-    url: "",
-    title: "",
-    shortenUrl: "",
-    backgroundImageUrl: "",
-    backgroundImageId: 0,
-    shortenUrlId: 0,
-    tags: [],
-    category: "",
-  });
+  const [storedFormData, setStoredFormData] = useState<FormData>(
+    {} as FormData
+  );
   const [shortenUrl, setShortenUrl] = useState<string>("");
   const stageRef = useRef<StageType>(null);
   const qrImageRef = useRef<Konva.Image>(null);

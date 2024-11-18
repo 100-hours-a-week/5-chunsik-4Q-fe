@@ -1,7 +1,7 @@
 // page.tsx
 "use client";
 export const dynamic = "force-dynamic";
-import React, { useState, useCallback, Suspense } from "react";
+import React, { useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Container from "./_components/item-container";
 import "react-horizontal-scrolling-menu/dist/styles.css";

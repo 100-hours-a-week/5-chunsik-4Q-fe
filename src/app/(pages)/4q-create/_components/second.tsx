@@ -8,21 +8,11 @@ import { generatePhotoImg } from "@/service/photo_api";
 import { getShortenUrl } from "@/service/shorten_api";
 import tagArrow from "../../../../../public/images/tag_arrow.png";
 import tagTranslationMap from "@/lib/tagTranslationEnKr";
+import { FormData } from "@/types/form-data";
 
 message.config({
   maxCount: 3,
 });
-
-interface FormData {
-  url: string;
-  shortenUrl: string;
-  title: string;
-  backgroundImageUrl: string;
-  backgroundImagId: number;  
-  shortenUrlId: number;
-  tags: string[];
-  category: string;
-}
 
 
 export default function Second() {
