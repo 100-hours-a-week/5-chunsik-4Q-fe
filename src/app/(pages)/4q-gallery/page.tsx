@@ -9,11 +9,16 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import SearchParamsHandler from "./_components/search-params";
 
 export default function Page() {
+  return (
+    <Suspense>
+      <GalleryContent />
+    </Suspense>
+  );
+}
+
+function GalleryContent() {
   const searchParams = useSearchParams();
-
-  const [isSearchContainerVisible, setIsSearchContainerVisible] =
-    useState(false);
-
+  const [isSearchContainerVisible, setIsSearchContainerVisible] = useState(false);
   const queryClient = new QueryClient();
 
   const categoryParam = searchParams?.get("category") || "all";
