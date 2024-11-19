@@ -8,7 +8,7 @@ import {
   requestEmailVerification,
   verifyEmailCode,
   requestRegister,
-} from "@/services/auth";
+} from "@/service/auth_api";
 import { useRouter } from "next/navigation";
 
 export default function Signup() {

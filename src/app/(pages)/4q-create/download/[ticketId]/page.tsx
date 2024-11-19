@@ -5,7 +5,6 @@ import { useParams } from "next/navigation";
 import styles from "./page.module.css";
 import { Image, Button, Typography } from "antd";
 import { LuDownload } from "react-icons/lu";
-import ShareModal from "../../(modals)/shareModal";
 import { getTicketInfo } from "@/service/photo_api";
 
 const { Paragraph } = Typography;
