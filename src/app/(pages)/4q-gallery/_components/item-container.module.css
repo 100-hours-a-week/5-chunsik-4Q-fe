@@ -15,3 +15,10 @@
   text-align: center;
   column-gap: 10px;
 }
+
+.loadingContainer {
+  margin-top: 50px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}

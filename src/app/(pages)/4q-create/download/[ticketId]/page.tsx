@@ -34,18 +34,6 @@ export default function Page() {
     }
   }, [ticketId]);
 
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
-
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
-
   const handleDownload = async () => {
     if (ticketUrl) {
       try {

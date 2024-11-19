@@ -51,7 +51,7 @@ export default function Container({ category, tag, sort }: ContainerProps) {
 
   if (isLoading) {
     return (
-      <div style={{ marginTop: "50px" }}>
+      <div className={styles.loadingContainer}>
         <BounceDot option={loadingOption} />
       </div>
     );
