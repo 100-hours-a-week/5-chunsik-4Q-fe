@@ -12,7 +12,6 @@ const { Paragraph } = Typography;
 export default function Page() {
   const params = useParams();
   const ticketId = params?.ticketId as string | undefined;
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [ticketUrl, setTicketUrl] = useState<string>("");
   const [title, setTitle] = useState<string>("");
   const [shortenUrl, setShortenUrl] = useState<string>("");
@@ -99,11 +98,6 @@ export default function Page() {
       <Button type="text" href="/" className={styles.mainBtn}>
         메인으로 가기
       </Button>
-      <ShareModal
-        isModalOpen={isModalOpen}
-        handleOk={handleOk}
-        handleCancel={handleCancel}
-      />
     </div>
   );
 }
