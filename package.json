@@ -40,6 +40,7 @@
     "gsap": "^3.12.5",
     "hamburger-react": "^2.5.1",
     "konva": "^9.3.14",
+    "motion": "^11.11.17",
     "next": "^14.2.9",
     "next-plugin-antd-less": "^1.8.0",
     "next-transpile-modules": "^10.0.1",
