@@ -20,9 +20,11 @@ export default function Intro() {
       <motion.div
         initial="hidden"
         whileInView="visible"
-        viewport={{ root: scrollRef, once: true }}
+        viewport={{ root: scrollRef, once: false }}
         variants={{
+          hidden: { opacity: 0 },
           visible: {
+            opacity: 1,
             transition: {
               staggerChildren: 0.2 
             }
@@ -32,7 +34,8 @@ export default function Intro() {
         <motion.div
           variants={{
             hidden: { opacity: 0, y: 50 },
-            visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+            visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+            exit: { opacity: 0, y: 50, transition: { duration: 0.5 } }
           }}
           className={styles.title}
         >
@@ -42,7 +45,8 @@ export default function Intro() {
         <motion.div
           variants={{
             hidden: { opacity: 0, y: 50 },
-            visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+            visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+            exit: { opacity: 0, y: 50, transition: { duration: 0.5 } }
           }}
           className={styles.subTitle}
         >
@@ -53,7 +57,8 @@ export default function Intro() {
         <motion.div
           variants={{
             hidden: { opacity: 0, y: 50 },
-            visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+            visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+            exit: { opacity: 0, y: 50, transition: { duration: 0.5 } }
           }}
           className={styles.tryBtnContainer}
         >
@@ -62,23 +67,26 @@ export default function Intro() {
           </Link>
         </motion.div>
       </motion.div>
-      <div className={styles.stepsContainer}>
         <motion.div
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           variants={{
+            hidden: { opacity: 0 },
             visible: {
+              opacity: 1,
               transition: {
                 staggerChildren: 0.2
               }
             }
           }}
+          className={styles.stepsContainer}
         >
           <motion.div
             variants={{
               hidden: { opacity: 0, y: 50 },
-              visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+              visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+              exit: { opacity: 0, y: 50, transition: { duration: 0.5 } }
             }}
             className={styles.title}
           >
@@ -88,7 +96,8 @@ export default function Intro() {
           <motion.div
             variants={{
               hidden: { opacity: 0, y: 50 },
-              visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+              visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+              exit: { opacity: 0, y: 50, transition: { duration: 0.5 } }
             }}
             className={`${styles.stepItem} stepItem`}
           >
@@ -107,7 +116,8 @@ export default function Intro() {
           <motion.div
             variants={{
               hidden: { opacity: 0, y: 50 },
-              visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+              visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+              exit: { opacity: 0, y: 50, transition: { duration: 0.5 } }
             }}
             className={`${styles.stepItem} stepItem`}
           >
@@ -126,7 +136,8 @@ export default function Intro() {
           <motion.div
             variants={{
               hidden: { opacity: 0, y: 50 },
-              visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+              visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+              exit: { opacity: 0, y: 50, transition: { duration: 0.5 } }
             }}
             className={`${styles.stepItem} stepItem`}
           >
@@ -143,6 +154,5 @@ export default function Intro() {
           </motion.div>
         </motion.div>
       </div>
-    </div>
   );
 }

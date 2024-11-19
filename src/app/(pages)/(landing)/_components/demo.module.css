@@ -34,6 +34,12 @@
   border-radius: 10px;
 }
 
+.allBtnContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 .allBtn {
   width: 140px;
   height: 36px;

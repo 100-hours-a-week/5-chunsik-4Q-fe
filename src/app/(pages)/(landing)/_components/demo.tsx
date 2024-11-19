@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import styles from "./demo.module.css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper";
 import { ArrowLeftOutlined, ArrowRightOutlined } from "@ant-design/icons";
 import Link from "next/link";
+import { motion } from "motion/react";
 
 import { Navigation } from "swiper/modules";
 import "swiper/css";
@@ -20,6 +21,7 @@ import exhibition from "../../../../../public/images/mock/exhibition.png";
 import wedding from "../../../../../public/images/mock/wedding.png";
 
 export default function Demo() {
+  const scrollRef = useRef(null);
   const [swiperIndex, setSwiperIndex] = useState(0);
   const [swiper, setSwiper] = useState<SwiperType>();
 
@@ -40,13 +42,50 @@ export default function Demo() {
   };
   return (
     <div className={styles.container}>
-      <div className={styles.subTitle}>
-        <span>4Q 활용</span>
-        <div className={styles.highliter}>예시</div>
-      </div>
-      <Link href="/4q-gallery" className={styles.allBtn}>
-        전체보기
-      </Link>
+      <motion.div 
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ root: scrollRef, once: false }}
+        variants={{
+          hidden: { opacity: 0 },
+          visible: {
+            opacity: 1,
+            transition: {
+              staggerChildren: 0.2 
+            }
+          }
+        }}
+        className={styles.subTitle}
+      >
+        <motion.span
+          variants={{
+            hidden: { opacity: 0, y: 20 },
+            visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+          }}
+        >
+          4Q 활용
+        </motion.span>
+        <motion.div 
+          variants={{
+            hidden: { opacity: 0, y: 20 },
+            visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+          }}
+          className={styles.highliter}
+        >
+          예시
+        </motion.div>
+      </motion.div>
+      <motion.div
+        variants={{
+          hidden: { opacity: 0, y: 20 },
+          visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+        }}
+        className={styles.allBtnContainer}
+      >
+        <Link href="/4q-gallery" className={styles.allBtn}>
+          전체보기
+        </Link>
+      </motion.div>
 
       <Swiper
         slidesPerView={1}
