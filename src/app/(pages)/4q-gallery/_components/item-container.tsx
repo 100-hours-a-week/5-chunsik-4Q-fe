@@ -40,7 +40,6 @@ export default function Container({ category, tag, sort }: ContainerProps) {
     initialPageParam: 0,
     getNextPageParam: (lastPage) => {
       if (lastPage && !lastPage.last) {
-        console.log(lastPage);
         return lastPage.number + 1;
       }
       return undefined;
