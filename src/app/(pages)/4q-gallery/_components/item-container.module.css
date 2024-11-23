@@ -17,8 +17,13 @@
 }
 
 .loadingContainer {
-  margin-top: 50px;
+  margin-top: 10px;
+  padding: 50px;
   width: 100%;
   display: flex;
   justify-content: center;
+}
+
+.emptyContainer {
+  width: 100%;
 }
