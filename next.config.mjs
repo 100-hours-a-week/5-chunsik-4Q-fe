@@ -26,6 +26,7 @@ const nextConfig = withAntdLess({
             pathname: '/**',
           }
         ],
+        domains: ['cdn.qqqq.world'],
       },
     transpilePackages: ['antd', '@ant-design', 'rc-util', 'rc-pagination', 'rc-picker', 'rc-notification', 'rc-tooltip'],
     webpack: (config) => {

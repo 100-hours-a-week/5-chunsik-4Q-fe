@@ -88,6 +88,7 @@ export default function ItemCard({ item }: ItemCardProps) {
             src={item.url}
             alt="photo QR"
             onClick={showDrawer}
+            unoptimized
           />
         </div>
       </div>

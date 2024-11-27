@@ -88,7 +88,7 @@ export default function Container({ category, tag, sort }: ContainerProps) {
           {isFetchingNextPage ? (
             <BounceDot option={loadingOption} />
           ) : (
-            <span> </span>
+            <span></span>
           )}
         </div>
       )}
