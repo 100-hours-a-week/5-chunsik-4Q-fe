@@ -1,10 +1,7 @@
 import styles from "./footer.module.css";
 import logo from "../../../../../public/images/logo_white.svg";
 import { Button } from "antd";
-
-const privacyPolicyUrl =
-  "https://qqqqworld.notion.site/10a81b02780680a9b219f3be379d8191?pvs=4";
-const termsOfServiceUrl = "https://qqqqworld.notion.site";
+import { privacyPolicyUrl, termsOfServiceUrl } from "@/lib/policyUrl";
 
 export default function Footer() {
   return (
