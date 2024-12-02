@@ -49,11 +49,6 @@
   padding-top: 2px;
 }
 
-.filterBtn:hover,
-.selectBox:hover {
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-}
-
 .filterIcon {
   font-size: 16px;
   margin-right: 5px;
@@ -151,5 +146,13 @@
   }
   .searchFieldContainer {
     margin-right: 0;
+  }
+}
+
+
+@media (min-width: 768px) {
+  .filterBtn:hover,
+  .selectBox:hover {
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
   }
 }

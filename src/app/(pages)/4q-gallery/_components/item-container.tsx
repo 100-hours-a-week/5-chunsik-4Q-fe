@@ -23,7 +23,7 @@ export default function Container({ category, tag, sort }: ContainerProps) {
   };
 
   const { ref, inView } = useInView({
-    threshold: 0.2, 
+    threshold: 1, 
     triggerOnce: false, 
     onChange: (inView) => {
       if (inView && !hasNextPage) {
